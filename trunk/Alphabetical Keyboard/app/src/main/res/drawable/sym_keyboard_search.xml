@@ -18,5 +18,5 @@
 -->
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/sym_keyboard_previous_lxx_dark"/>
+    <item android:drawable="@drawable/sym_keyboard_search_lxx_dark"/>
 </selector>
