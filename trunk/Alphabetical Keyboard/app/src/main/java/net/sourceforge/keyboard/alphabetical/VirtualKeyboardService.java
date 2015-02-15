@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.sourceforge.alphabeticalkeyboard;
+package net.sourceforge.keyboard.alphabetical;
 
 import android.inputmethodservice.InputMethodService;
 import android.inputmethodservice.Keyboard;
