@@ -16,7 +16,6 @@
 package net.sourceforge.keyboard.alphabetical;
 
 import android.inputmethodservice.InputMethodService;
-import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.view.KeyEvent;
 import android.view.View;
@@ -28,7 +27,8 @@ import android.view.inputmethod.EditorInfo;
 public class VirtualKeyboardService extends InputMethodService implements KeyboardView.OnKeyboardActionListener {
 
     private KeyboardView keyboardView;
-    private Keyboard keyboard;
+    private VirtualKeyboard keyboard;
+    private VirtualKeyboard keyboardShowing;
 
     @Override
     public void onCreate() {
@@ -38,7 +38,7 @@ public class VirtualKeyboardService extends InputMethodService implements Keyboa
     @Override
     public void onInitializeInterface() {
         super.onInitializeInterface();
-        keyboard = new Keyboard(this, R.xml.kbd_en);
+        keyboard = new VirtualKeyboard(this, R.xml.kbd_en);
     }
 
     @Override
@@ -52,6 +52,12 @@ public class VirtualKeyboardService extends InputMethodService implements Keyboa
     @Override
     public void onStartInput(EditorInfo attribute, boolean restarting) {
         super.onStartInput(attribute, restarting);
+
+        keyboardShowing = keyboard;
+
+        // Update the label on the enter key, depending on what the application
+        // says it will do.
+        keyboardShowing.setImeOptions(getResources(), attribute.imeOptions);
     }
 
     @Override
@@ -63,7 +69,7 @@ public class VirtualKeyboardService extends InputMethodService implements Keyboa
     public void onStartInputView(EditorInfo info, boolean restarting) {
         super.onStartInputView(info, restarting);
         // Apply the selected keyboard to the input view.
-        keyboardView.setKeyboard(keyboard);
+        keyboardView.setKeyboard(keyboardShowing);
         keyboardView.closing();
     }
 
