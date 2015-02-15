@@ -43,7 +43,6 @@ public class VirtualKeyboard extends Keyboard {
         if (key == null) {
             return;
         }
-        System.out.println("~!@ options& " + Integer.toHexString(options & (EditorInfo.IME_MASK_ACTION | EditorInfo.IME_FLAG_NO_ENTER_ACTION)));
 
         switch (options & EditorInfo.IME_MASK_ACTION) {
             case EditorInfo.IME_ACTION_DONE:
