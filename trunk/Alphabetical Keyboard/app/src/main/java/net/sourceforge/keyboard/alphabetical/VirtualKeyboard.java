@@ -11,6 +11,39 @@ import android.view.inputmethod.EditorInfo;
  */
 public class VirtualKeyboard extends Keyboard {
 
+    /**
+     * Code for a 'Shift'/'Caps Lock' key.
+     */
+    public static final int KEY_SHIFT = -1;
+    /**
+     * Code for a 'show symbols' key.
+     */
+    public static final int KEY_SYMBOLS = -2;
+    /**
+     * Code for 'change language' key.
+     */
+    public static final int KEY_LANGUAGE = -3;
+    /**
+     * Code for a settings/options key.
+     */
+    public static final int KEY_SETTINGS = -4;
+    /**
+     * Code for a 'Backspace'/'Delete' key.
+     */
+    public static final int KEY_BACKSPACE = 8;
+    /**
+     * Code for a 'Tab' key.
+     */
+    public static final int KEY_TAB = '\t';
+    /**
+     * Code for an 'Enter'/action key.
+     */
+    public static final int KEY_ENTER = '\n';
+    /**
+     * Code for an 'Enter'/action key.
+     */
+    public static final int KEY_SPACE = ' ';
+
     private Key enterKey;
 
     public VirtualKeyboard(Context context, int xmlLayoutResId) {
@@ -28,7 +61,7 @@ public class VirtualKeyboard extends Keyboard {
     @Override
     protected Key createKeyFromXml(Resources res, Row parent, int x, int y, XmlResourceParser parser) {
         Key key = super.createKeyFromXml(res, parent, x, y, parser);
-        if (key.codes[0] == '\n') {
+        if (key.codes[0] == KEY_ENTER) {
             enterKey = key;
         }
         return key;
