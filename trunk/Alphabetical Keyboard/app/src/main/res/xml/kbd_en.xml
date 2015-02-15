@@ -17,7 +17,8 @@
  */
 -->
 <Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
-    android:keyWidth="10%p">
+    android:keyWidth="10%p"
+    android:keyHeight="@dimen/key_height">
 
     <Row>
         <Key android:codes="97" android:keyLabel="a" android:keyEdgeFlags="left"/>
