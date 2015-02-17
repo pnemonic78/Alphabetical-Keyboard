@@ -16,6 +16,7 @@
 package net.sourceforge.keyboard.alphabetical;
 
 import android.inputmethodservice.InputMethodService;
+import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.view.KeyEvent;
 import android.view.View;
@@ -26,9 +27,15 @@ import android.view.inputmethod.EditorInfo;
  */
 public class VirtualKeyboardService extends InputMethodService implements KeyboardView.OnKeyboardActionListener {
 
+    private static final int SHIFT_NONE = VirtualKeyboard.SHIFT_NONE;
+    private static final int SHIFT_SHIFT = VirtualKeyboard.SHIFT_SHIFT;
+    private static final int SHIFT_CAPS = VirtualKeyboard.SHIFT_CAPS;
+
     private KeyboardView keyboardView;
     private VirtualKeyboard keyboard;
     private VirtualKeyboard keyboardShowing;
+
+    private int shiftState;
 
     @Override
     public void onCreate() {
@@ -57,7 +64,7 @@ public class VirtualKeyboardService extends InputMethodService implements Keyboa
 
         // Update the label on the enter key, depending on what the application
         // says it will do.
-        keyboardShowing.setImeOptions(getResources(), attribute.imeOptions);
+        keyboardShowing.setImeOptions(attribute.imeOptions);
     }
 
     @Override
@@ -98,6 +105,9 @@ public class VirtualKeyboardService extends InputMethodService implements Keyboa
 
     @Override
     public void onKey(int primaryCode, int[] keyCodes) {
+        if (primaryCode == Keyboard.KEYCODE_SHIFT) {
+            handleShift();
+        }
     }
 
     @Override
@@ -118,5 +128,23 @@ public class VirtualKeyboardService extends InputMethodService implements Keyboa
 
     @Override
     public void swipeUp() {
+    }
+
+    private void handleShift() {
+        if (keyboardView == null) {
+            return;
+        }
+
+        Keyboard currentKeyboard = keyboardView.getKeyboard();
+        if (keyboard == currentKeyboard) {
+            // Alphabet keyboard
+            checkToggleCapsLock();
+            keyboard.setShifted(shiftState);
+            keyboardView.invalidateAllKeys();
+        }
+    }
+
+    private void checkToggleCapsLock() {
+        shiftState = (shiftState + 1) % 3;
     }
 }
