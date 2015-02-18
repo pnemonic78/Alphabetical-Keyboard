@@ -3,6 +3,7 @@ package net.sourceforge.keyboard.alphabetical;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
+import android.graphics.drawable.Drawable;
 import android.inputmethodservice.Keyboard;
 import android.view.inputmethod.EditorInfo;
 
@@ -41,8 +42,7 @@ public class VirtualKeyboard extends Keyboard {
     public static final int SHIFT_CAPS = 2;
 
     protected final Context context;
-    private Key enterKey;
-    private Key shiftKey;
+    private Key doneKey;
 
     public VirtualKeyboard(Context context, int xmlLayoutResId) {
         super(context, xmlLayoutResId);
@@ -63,20 +63,20 @@ public class VirtualKeyboard extends Keyboard {
     protected Key createKeyFromXml(Resources res, Row parent, int x, int y, XmlResourceParser parser) {
         Key key = super.createKeyFromXml(res, parent, x, y, parser);
         int primaryCode = key.codes[0];
-        if (primaryCode == KEYCODE_ENTER) {
-            enterKey = key;
-        } else if (primaryCode == KEYCODE_SHIFT) {
-            shiftKey = key;
+        if (primaryCode == KEYCODE_DONE) {
+            doneKey = key;
         }
         return key;
     }
 
     /**
-     * This looks at the ime options given by the current editor, to set the
+     * This looks at the IME options given by the current editor, to set the
      * appropriate label on the keyboard's enter key (if it has one).
+     *
+     * @param options the IME options.
      */
     public void setImeOptions(int options) {
-        Key key = enterKey;
+        Key key = doneKey;
         if (key == null) {
             return;
         }
@@ -126,7 +126,11 @@ public class VirtualKeyboard extends Keyboard {
         setShifted(shiftState != SHIFT_NONE);
 
         Resources res = context.getResources();
-        shiftKey.icon = (shiftState == SHIFT_CAPS) ? res.getDrawable(R.drawable.sym_keyboard_shift_locked) : res.getDrawable(R.drawable.sym_keyboard_shift);
-
+        Drawable icon = (shiftState == SHIFT_CAPS) ? res.getDrawable(R.drawable.sym_keyboard_shift_locked) : res.getDrawable(R.drawable.sym_keyboard_shift);
+        for (Key key : getModifierKeys()) {
+            if (key.codes[0] == KEYCODE_SHIFT) {
+                key.icon = icon;
+            }
+        }
     }
 }
