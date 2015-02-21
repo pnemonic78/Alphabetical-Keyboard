@@ -17,5 +17,5 @@
  */
 -->
 <resources>
-    <item type="dimen" name="key_height">7%p</item>
+    <item type="dimen" name="key_height">12%p</item>
 </resources>
