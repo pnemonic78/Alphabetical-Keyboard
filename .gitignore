@@ -8,3 +8,4 @@ local.properties
 .gradle
 .DS_Store
 **/build/
+**/.externalNativeBuild/
