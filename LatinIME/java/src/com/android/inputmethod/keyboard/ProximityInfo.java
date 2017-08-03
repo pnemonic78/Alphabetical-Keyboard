@@ -18,7 +18,6 @@ package com.android.inputmethod.keyboard;
 
 import android.graphics.Rect;
 import android.text.TextUtils;
-import android.util.FloatMath;
 
 import com.android.inputmethod.keyboard.Keyboard.Params.TouchPositionCorrection;
 import com.android.inputmethod.latin.JniUtils;
@@ -175,7 +174,7 @@ public class ProximityInfo {
                     final float radius = touchPositionCorrection.mRadii[row];
                     sweetSpotCenterXs[i] = hitBox.exactCenterX() + x * hitBoxWidth;
                     sweetSpotCenterYs[i] = hitBox.exactCenterY() + y * hitBoxHeight;
-                    sweetSpotRadii[i] = radius * FloatMath.sqrt(
+                    sweetSpotRadii[i] = radius * (float) Math.sqrt(
                             hitBoxWidth * hitBoxWidth + hitBoxHeight * hitBoxHeight);
                 }
             }
