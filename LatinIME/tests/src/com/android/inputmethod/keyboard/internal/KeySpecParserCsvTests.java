@@ -16,6 +16,7 @@
 
 package com.android.inputmethod.keyboard.internal;
 
+import android.content.Context;
 import android.test.AndroidTestCase;
 
 import java.lang.reflect.Field;
@@ -26,6 +27,17 @@ import java.util.Locale;
 public class KeySpecParserCsvTests extends AndroidTestCase {
     private final KeyboardTextsSet mTextsSet = new KeyboardTextsSet();
 
+    private Context mTestContext;
+
+    public Context getTestContext() {
+        return mTestContext;
+    }
+
+    public void setTestContext(Context context) {
+        //FIXME super.setTestContext(context);
+        mTestContext = context;
+    }
+
     @Override
     protected void setUp() throws Exception {
         super.setUp();
@@ -33,10 +45,10 @@ public class KeySpecParserCsvTests extends AndroidTestCase {
         mTextsSet.setLanguage(Locale.ENGLISH.getLanguage());
         mTextsSet.loadStringResources(getContext());
         final String[] testResourceNames = getAllResourceIdNames(
-                com.android.inputmethod.latin.tests.R.string.class);
+                com.github.inputmethod.alphabetical.test.R.string.class);
         mTextsSet.loadStringResourcesInternal(getTestContext(),
                 testResourceNames,
-                com.android.inputmethod.latin.tests.R.string.empty_string);
+                com.github.inputmethod.alphabetical.test.R.string.empty_string);
     }
 
     private static String[] getAllResourceIdNames(final Class<?> resourceIdClass) {
