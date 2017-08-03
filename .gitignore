@@ -3,8 +3,8 @@
 .idea/runConfigurations.xml
 .idea/vcs.xml
 .idea/workspace.xml
-*.iml
+**/*.iml
 local.properties
 .gradle
 .DS_Store
-/build
+**/build/
