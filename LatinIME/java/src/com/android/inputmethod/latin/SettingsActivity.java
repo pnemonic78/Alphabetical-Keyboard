@@ -31,4 +31,9 @@ public class SettingsActivity extends PreferenceActivity {
         intent.putExtra(EXTRA_NO_HEADERS, true);
         return intent;
     }
+
+    @Override
+    protected boolean isValidFragment(String fragmentName) {
+        return true;
+    }
 }

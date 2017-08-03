@@ -91,4 +91,9 @@ public abstract class InputMethodSettingsActivity extends PreferenceActivity
         super.onResume();
         mSettings.updateSubtypeEnabler();
     }
+
+    @Override
+    protected boolean isValidFragment(String fragmentName) {
+        return true;
+    }
 }

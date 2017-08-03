@@ -33,4 +33,9 @@ public class DebugSettingsActivity extends PreferenceActivity {
         super.onCreate(savedInstanceState);
         setTitle(R.string.english_ime_debug_settings);
     }
+
+    @Override
+    protected boolean isValidFragment(String fragmentName) {
+        return true;
+    }
 }
