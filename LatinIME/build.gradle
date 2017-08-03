@@ -28,13 +28,19 @@ android {
             java.srcDirs = ['java/src']
             res.srcDirs = ['java/res']
         }
+        androidTest{
+            manifest.srcFile 'java/AndroidManifest.xml'
+            assets.srcDirs = ['tests/data']
+            java.srcDirs = ['java/src', 'tests/src']
+            res.srcDirs = ['java/res', 'tests/res']
+        }
     }
 
-//    externalNativeBuild {
-//        ndkBuild {
-//            path 'native/jni/Android.mk'
-//        }
-//    }
+    externalNativeBuild {
+        ndkBuild {
+            path 'native/jni/Android.mk'
+        }
+    }
 }
 
 dependencies {
