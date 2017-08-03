@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Alphabetical-Keyboard.iml" filepath="$PROJECT_DIR$/.idea/modules/Alphabetical-Keyboard.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/LatinIME/LatinIME.iml" filepath="$PROJECT_DIR$/.idea/modules/LatinIME/LatinIME.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Alphabetical-Keyboard.iml" filepath="$PROJECT_DIR$/Alphabetical-Keyboard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LatinIME/LatinIME.iml" filepath="$PROJECT_DIR$/LatinIME/LatinIME.iml" />
     </modules>
   </component>
 </project>
