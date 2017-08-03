@@ -37,7 +37,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.android.inputmethod.latin.spellcheck.SpellCheckerSettingsActivity"
+        <activity android:name=".spellcheck.SpellCheckerSettingsActivity"
                   android:label="@string/android_spell_checker_settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
