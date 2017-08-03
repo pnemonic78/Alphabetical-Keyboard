@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 21
-    buildToolsVersion '26.0.0'
+    buildToolsVersion '26.0.1'
 
     defaultConfig {
         applicationId "com.github.keyboard.alphabetical"
@@ -15,6 +15,14 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'java/AndroidManifest.xml'
+            java.srcDirs = ['java/src']
+            res.srcDirs = ['java/res']
         }
     }
 }
