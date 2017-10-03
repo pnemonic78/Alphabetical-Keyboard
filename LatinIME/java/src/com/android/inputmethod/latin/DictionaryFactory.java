@@ -33,7 +33,7 @@ public class DictionaryFactory {
     private static final String TAG = DictionaryFactory.class.getSimpleName();
     // This class must be located in the same package as LatinIME.java.
     private static final String RESOURCE_PACKAGE_NAME =
-            DictionaryFactory.class.getPackage().getName();
+            BuildConfig.APPLICATION_ID;
 
     /**
      * Initializes a main dictionary collection from a dictionary pack, with explicit flags.
@@ -196,6 +196,6 @@ public class DictionaryFactory {
     public static int getMainDictionaryResourceId(final Resources res, final Locale locale) {
         int resourceId = getMainDictionaryResourceIdIfAvailableForLocale(res, locale);
         if (0 != resourceId) return resourceId;
-        return res.getIdentifier(DEFAULT_MAIN_DICT, "raw", RESOURCE_PACKAGE_NAME);
+        return R.raw.main;
     }
 }

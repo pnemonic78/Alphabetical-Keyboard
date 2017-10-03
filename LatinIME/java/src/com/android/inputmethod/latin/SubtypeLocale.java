@@ -34,7 +34,7 @@ public class SubtypeLocale {
     static final String TAG = SubtypeLocale.class.getSimpleName();
     // This class must be located in the same package as LatinIME.java.
     private static final String RESOURCE_PACKAGE_NAME =
-            DictionaryFactory.class.getPackage().getName();
+            BuildConfig.APPLICATION_ID;
 
     // Special language code to represent "no language".
     public static final String NO_LANGUAGE = "zz";
