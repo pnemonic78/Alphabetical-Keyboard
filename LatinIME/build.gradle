@@ -41,6 +41,10 @@ android {
             path 'native/jni/Android.mk'
         }
     }
+
+    aaptOptions {
+        noCompress "dict"
+    }
 }
 
 dependencies {
