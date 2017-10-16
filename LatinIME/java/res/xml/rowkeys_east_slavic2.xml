@@ -21,38 +21,41 @@
 <merge
     xmlns:latin="http://schemas.android.com/apk/res-auto"
 >
-    <!-- U+0444: "ф" CYRILLIC SMALL LETTER EF -->
+    <!-- U+043B: "л" CYRILLIC SMALL LETTER EL -->
     <Key
-        latin:keyLabel="&#x0444;" />
+        latin:keyLabel="&#x043B;" />
+    <!-- U+043C: "м" CYRILLIC SMALL LETTER EM -->
     <Key
-        latin:keyLabel="!text/keylabel_for_east_slavic_row2_1"
-        latin:moreKeys="!text/more_keys_for_east_slavic_row2_1" />
-    <!-- U+0432: "в" CYRILLIC SMALL LETTER VE -->
+        latin:keyLabel="&#x043C;" />
+    <!-- U+043D: "н" CYRILLIC SMALL LETTER EN -->
     <Key
-        latin:keyLabel="&#x0432;" />
-    <!-- U+0430: "а" CYRILLIC SMALL LETTER A -->
+        latin:keyLabel="&#x043D;"
+        latin:moreKeys="!text/more_keys_for_cyrillic_en" />
+    <!-- U+043E: "о" CYRILLIC SMALL LETTER O -->
     <Key
-        latin:keyLabel="&#x0430;" />
+        latin:keyLabel="&#x043E;"
+        latin:moreKeys="!text/more_keys_for_cyrillic_o" />
     <!-- U+043F: "п" CYRILLIC SMALL LETTER PE -->
     <Key
         latin:keyLabel="&#x043F;" />
     <!-- U+0440: "р" CYRILLIC SMALL LETTER ER -->
     <Key
         latin:keyLabel="&#x0440;" />
-    <!-- U+043E: "о" CYRILLIC SMALL LETTER O -->
+    <!-- U+0441: "с" CYRILLIC SMALL LETTER ES -->
     <Key
-        latin:keyLabel="&#x043E;"
-        latin:moreKeys="!text/more_keys_for_cyrillic_o" />
-    <!-- U+043B: "л" CYRILLIC SMALL LETTER EL -->
+        latin:keyLabel="&#x0441;" />
+    <!-- U+0442: "т" CYRILLIC SMALL LETTER TE -->
     <Key
-        latin:keyLabel="&#x043B;" />
-    <!-- U+0434: "д" CYRILLIC SMALL LETTER DE -->
+        latin:keyLabel="&#x0442;" />
+    <!-- U+0443: "у" CYRILLIC SMALL LETTER U -->
     <Key
-        latin:keyLabel="&#x0434;" />
-    <!-- U+0436: "ж" CYRILLIC SMALL LETTER ZHE -->
+        latin:keyLabel="&#x0443;"
+        latin:moreKeys="!text/more_keys_for_cyrillic_u" />
+    <!-- U+0444: "ф" CYRILLIC SMALL LETTER EF -->
     <Key
-        latin:keyLabel="&#x0436;" />
-    <!-- U+044D: "э" CYRILLIC SMALL LETTER E -->
+        latin:keyLabel="&#x0444;" />
+    <!-- U+0445: "х" CYRILLIC SMALL LETTER HA -->
     <Key
-        latin:keyLabel="&#x044D;" />
+        latin:keyLabel="&#x0445;"
+        latin:moreKeys="!text/more_keys_for_cyrillic_ha" />
 </merge>
