@@ -16,6 +16,7 @@
 
 package com.android.inputmethod.latin;
 
+import static android.os.Build.VERSION_CODES.JELLY_BEAN;
 import static com.android.inputmethod.latin.Constants.Subtype.ExtraValue.KEYBOARD_LAYOUT_SET;
 import static com.android.inputmethod.latin.Constants.Subtype.ExtraValue.UNTRANSLATABLE_STRING_IN_SUBTYPE_NAME;
 
@@ -124,7 +125,7 @@ public class SubtypeLocale {
     }
 
     public static int getSubtypeNameId(String localeString, String keyboardLayoutName) {
-        if (Build.VERSION.SDK_INT >= /* JELLY_BEAN */ 15 && isExceptionalLocale(localeString)) {
+        if (Build.VERSION.SDK_INT >= JELLY_BEAN && isExceptionalLocale(localeString)) {
             return sExceptionalLocaleToWithLayoutNameIdsMap.get(localeString);
         }
         final String key = localeString.equals(NO_LANGUAGE)
@@ -159,7 +160,7 @@ public class SubtypeLocale {
     //  zz    azerty T  No language (AZERTY)    in system locale
 
     public static String getSubtypeDisplayName(final InputMethodSubtype subtype, Resources res) {
-        final String replacementString = (Build.VERSION.SDK_INT >= /* JELLY_BEAN */ 15
+        final String replacementString = (Build.VERSION.SDK_INT >= JELLY_BEAN
                 && subtype.containsExtraValueKey(UNTRANSLATABLE_STRING_IN_SUBTYPE_NAME))
                 ? subtype.getExtraValueOf(UNTRANSLATABLE_STRING_IN_SUBTYPE_NAME)
                 : getSubtypeLocaleDisplayName(subtype.getLocale());

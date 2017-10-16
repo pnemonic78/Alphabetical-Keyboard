@@ -16,6 +16,7 @@
 
 package com.android.inputmethod.latin;
 
+import static android.os.Build.VERSION_CODES.JELLY_BEAN;
 import static com.android.inputmethod.latin.Constants.Subtype.KEYBOARD_MODE;
 import static com.android.inputmethod.latin.Constants.Subtype.ExtraValue.IS_ADDITIONAL_SUBTYPE;
 import static com.android.inputmethod.latin.Constants.Subtype.ExtraValue.KEYBOARD_LAYOUT_SET;
@@ -45,7 +46,7 @@ public class AdditionalSubtype {
             String localeString, String keyboardLayoutSetName, String extraValue) {
         final String layoutExtraValue = KEYBOARD_LAYOUT_SET + "=" + keyboardLayoutSetName;
         final String layoutDisplayNameExtraValue;
-        if (Build.VERSION.SDK_INT >= /* JELLY_BEAN */ 15
+        if (Build.VERSION.SDK_INT >= JELLY_BEAN
                 && SubtypeLocale.isExceptionalLocale(localeString)) {
             final String layoutDisplayName = SubtypeLocale.getKeyboardLayoutSetDisplayName(
                     keyboardLayoutSetName);
