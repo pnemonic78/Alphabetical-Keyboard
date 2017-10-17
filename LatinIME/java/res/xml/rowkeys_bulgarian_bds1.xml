@@ -65,9 +65,9 @@
          U+045D: "ѝ" CYRILLIC SMALL LETTER I WITH GRAVE -->
     <Key
         latin:keyLabel="&#x0438;"
+        latin:moreKeys="&#x045D;"
         latin:keyHintLabel="9"
-        latin:additionalMoreKeys="9"
-        latin:moreKeys="&#x045D;" />
+        latin:additionalMoreKeys="9" />
     <!-- U+0439: "й" CYRILLIC SMALL LETTER SHORT I -->
     <Key
         latin:keyLabel="&#x0439;"

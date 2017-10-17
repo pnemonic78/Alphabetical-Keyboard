@@ -60,9 +60,9 @@
          U+062B: "ﺙ" ARABIC LETTER THEH -->
     <Key
         latin:keyLabel="&#x062A;"
+        latin:moreKeys="&#x062B;"
         latin:keyHintLabel="7"
-        latin:additionalMoreKeys="7,&#x0667;"
-        latin:moreKeys="&#x062B;" />
+        latin:additionalMoreKeys="7,&#x0667;" />
     <!-- U+0629: "ة" ARABIC LETTER TEH MARBUTA -->
     <Key
         latin:keyLabel="&#x0629;"
@@ -72,9 +72,9 @@
          U+067E: "پ" ARABIC LETTER PEH -->
     <Key
         latin:keyLabel="&#x0628;"
+        latin:moreKeys="&#x067E;"
         latin:keyHintLabel="9"
-        latin:additionalMoreKeys="9,&#x0669;"
-        latin:moreKeys="&#x067E;" />
+        latin:additionalMoreKeys="9,&#x0669;" />
     <!-- U+0627: "ا" ARABIC LETTER ALEF
          U+0621: "ء" ARABIC LETTER HAMZA
          U+0671: "ٱ" ARABIC LETTER ALEF WASLA
@@ -83,7 +83,7 @@
          U+0622: "آ" ARABIC LETTER ALEF WITH MADDA ABOVE -->
     <Key
         latin:keyLabel="&#x0627;"
+        latin:moreKeys="&#x0621;,&#x0671;,&#x0623;,&#x0625;,&#x0622;"
         latin:keyHintLabel="0"
-        latin:additionalMoreKeys="0,&#x0660;"
-        latin:moreKeys="&#x0621;,&#x0671;,&#x0623;,&#x0625;,&#x0622;" />
+        latin:additionalMoreKeys="0,&#x0660;" />
 </merge>
