@@ -33,8 +33,7 @@
         latin:keyWidth="10%p"
     >
         <include
-            latin:keyboardLayout="@xml/rowkeys_georgian2"
-            latin:keyXPos="5%p" />
+            latin:keyboardLayout="@xml/rowkeys_georgian2" />
     </Row>
     <Row
         latin:keyWidth="10%p"
