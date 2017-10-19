@@ -21,6 +21,12 @@
 <merge
     xmlns:latin="http://schemas.android.com/apk/res-auto"
 >
+    <!-- U+05E4: "פ" HEBREW LETTER PE -->
+    <Key
+        latin:keyLabel="&#x05E4;" />
+    <!-- U+05E2: "ע" HEBREW LETTER AYIN -->
+    <Key
+        latin:keyLabel="&#x05E2;" />
     <!-- U+05E1: "ס" HEBREW LETTER SAMEKH -->
     <Key
         latin:keyLabel="&#x05E1;" />
@@ -45,12 +51,4 @@
     <!-- U+05DB: "כ" HEBREW LETTER KAF -->
     <Key
         latin:keyLabel="&#x05DB;" />
-    <!-- U+05D9: "י" HEBREW LETTER YOD
-         U+05F2 U+05B7: "ײַ" HEBREW LIGATURE YIDDISH DOUBLE YOD + HEBREW POINT PATAH -->
-    <Key
-        latin:keyLabel="&#x05D9;"
-        latin:moreKeys="&#x05F2;&#x05B7;" />
-    <!-- U+05D8: "ט" HEBREW LETTER TET -->
-    <Key
-        latin:keyLabel="&#x05D8;" />
 </merge>

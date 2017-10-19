@@ -48,10 +48,4 @@
     <!-- U+05E3: "ף" HEBREW LETTER FINAL PE -->
     <Key
         latin:keyLabel="&#x05E3;" />
-    <!-- U+05E4: "פ" HEBREW LETTER PE -->
-    <Key
-        latin:keyLabel="&#x05E4;" />
-    <!-- U+05E2: "ע" HEBREW LETTER AYIN -->
-    <Key
-        latin:keyLabel="&#x05E2;" />
 </merge>
