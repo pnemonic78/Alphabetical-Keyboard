@@ -25,32 +25,32 @@
         <case
             latin:keyboardLayoutSetElement="alphabetManualShifted|alphabetShiftLocked|alphabetShiftLockShifted"
             >
-            <!-- U+10B4: "ფ" GEORGIAN CAPITAL LETTER PHAR
+            <!-- U+10B4: "Ⴔ" GEORGIAN CAPITAL LETTER PHAR
                  U+10F6: "ჶ" GEORGIAN LETTER FI -->
             <Key
                 latin:keyLabel="&#x10B4;"
                 latin:moreKeys="&#x10F6;" />
-            <!-- U+10B5: "ქ" GEORGIAN CAPITAL LETTER GHAN -->
+            <!-- U+10B5: "Ⴕ" GEORGIAN CAPITAL LETTER GHAN -->
             <Key
                 latin:keyLabel="&#x10B5;" />
-            <!-- U+10B6: "ღ" GEORGIAN CAPITAL LETTER GHAN -->
+            <!-- U+10B6: "Ⴖ" GEORGIAN CAPITAL LETTER GHAN -->
             <Key
                 latin:keyLabel="&#x10B6;" />
-            <!-- U+10B7: "ყ" GEORGIAN CAPITAL LETTER QAR
+            <!-- U+10B7: "Ⴗ" GEORGIAN CAPITAL LETTER QAR
                  U+10F8: "ჸ" GEORGIAN LETTER ELIFI -->
             <Key
                 latin:keyLabel="&#x10B7;"
                 latin:moreKeys="&#x10F8;" />
-            <!-- U+10B8: "შ" GEORGIAN CAPITAL LETTER SHIN -->
+            <!-- U+10B8: "Ⴘ" GEORGIAN CAPITAL LETTER SHIN -->
             <Key
                 latin:keyLabel="&#x10B8;" />
-            <!-- U+10B9: "ჩ" GEORGIAN CAPITAL LETTER CHIN
-                 U+10BD: "ჭ" GEORGIAN CAPITAL LETTER CHAR -->
+            <!-- U+10B9: "Ⴙ" GEORGIAN CAPITAL LETTER CHIN
+                 U+10BD: "Ⴝ" GEORGIAN CAPITAL LETTER CHAR -->
             <Key
                 latin:keyLabel="&#x10B9;"
                 latin:moreKeys="&#x10BD;" />
-            <!-- U+10BA: "ც" GEORGIAN CAPITAL LETTER CAN
-                 U+10BC: "წ" GEORGIAN CAPITAL LETTER CIL -->
+            <!-- U+10BA: "Ⴚ" GEORGIAN CAPITAL LETTER CAN
+                 U+10BC: "Ⴜ" GEORGIAN CAPITAL LETTER CIL -->
             <Key
                 latin:keyLabel="&#x10BA;"
                 latin:moreKeys="&#x10BC;" />

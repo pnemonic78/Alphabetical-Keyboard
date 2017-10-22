@@ -25,66 +25,66 @@
         <case
             latin:keyboardLayoutSetElement="alphabetManualShifted|alphabetShiftLocked|alphabetShiftLockShifted"
             >
-            <!-- U+10A0: "ა" GEORGIAN CAPITAL LETTER AN
+            <!-- U+10A0: "Ⴀ" GEORGIAN CAPITAL LETTER AN
                  U+10FA: "ჺ" GEORGIAN LETTER AIN -->
             <Key
                 latin:keyLabel="&#x10A0;"
                 latin:moreKeys="&#x10FA;"
                 latin:keyHintLabel="1"
                 latin:additionalMoreKeys="1" />
-            <!-- U+10A1: "ბ" GEORGIAN CAPITAL LETTER BAN -->
+            <!-- U+10A1: "Ⴁ" GEORGIAN CAPITAL LETTER BAN -->
             <Key
                 latin:keyLabel="&#x10A1;"
                 latin:keyHintLabel="2"
                 latin:additionalMoreKeys="2" />
-            <!-- U+10A2: "გ" GEORGIAN CAPITAL LETTER GAN
+            <!-- U+10A2: "Ⴂ" GEORGIAN CAPITAL LETTER GAN
                  U+10F9: "ჹ" GEORGIAN LETTER TURNED GAN -->
             <Key
                 latin:keyLabel="&#x10A2;"
                 latin:moreKeys="&#x10F9;"
                 latin:keyHintLabel="3"
                 latin:additionalMoreKeys="3" />
-            <!-- U+10A3: "დ" GEORGIAN CAPITAL LETTER DON -->
+            <!-- U+10A3: "Ⴃ" GEORGIAN CAPITAL LETTER DON -->
             <Key
                 latin:keyLabel="&#x10A3;"
                 latin:keyHintLabel="4"
                 latin:additionalMoreKeys="4" />
-            <!-- U+10A4: "ე" GEORGIAN CAPITAL LETTER EN
-                 U+10C1: "ჱ" GEORGIAN CAPITAL LETTER HE -->
+            <!-- U+10A4: "Ⴄ" GEORGIAN CAPITAL LETTER EN
+                 U+10C1: "Ⴠ" GEORGIAN CAPITAL LETTER HE -->
             <Key
                 latin:keyLabel="&#x10A4;"
                 latin:moreKeys="&#x10C1;"
                 latin:keyHintLabel="5"
                 latin:additionalMoreKeys="5" />
-            <!-- U+10A5: "ვ" GEORGIAN CAPITAL LETTER VIN
-                 U+10C0: "ჰ" GEORGIAN CAPITAL LETTER HAE
-                 U+10C3: "ჳ" GEORGIAN CAPITAL LETTER WE
-                 U+10C5: "ჵ" GEORGIAN CAPITAL LETTER HOE -->
+            <!-- U+10A5: "Ⴅ" GEORGIAN CAPITAL LETTER VIN
+                 U+10C0: "Ⴠ" GEORGIAN CAPITAL LETTER HAE
+                 U+10C3: "Ⴣ" GEORGIAN CAPITAL LETTER WE
+                 U+10C5: "Ⴥ" GEORGIAN CAPITAL LETTER HOE -->
             <Key
                 latin:keyLabel="&#x10A5;"
                 latin:moreKeys="&#x10C0;,&#x10C3;,&#x10C5;"
                 latin:keyHintLabel="6"
                 latin:additionalMoreKeys="6" />
-            <!-- U+10A6: "ზ" GEORGIAN CAPITAL LETTER ZEN -->
+            <!-- U+10A6: "Ⴆ" GEORGIAN CAPITAL LETTER ZEN -->
             <Key
                 latin:keyLabel="&#x10A6;"
                 latin:keyHintLabel="7"
                 latin:additionalMoreKeys="7" />
-            <!-- U+10A7: "თ" GEORGIAN CAPITAL LETTER TAN -->
+            <!-- U+10A7: "Ⴇ" GEORGIAN CAPITAL LETTER TAN -->
             <Key
                 latin:keyLabel="&#x10A7;"
                 latin:keyHintLabel="8"
                 latin:additionalMoreKeys="8" />
-            <!-- U+10A8: "ი" GEORGIAN CAPITAL LETTER IN
-                 U+10C2: "ჲ" GEORGIAN CAPITAL LETTER HIE -->
+            <!-- U+10A8: "Ⴈ" GEORGIAN CAPITAL LETTER IN
+                 U+10C2: "Ⴢ" GEORGIAN CAPITAL LETTER HIE -->
             <Key
                 latin:keyLabel="&#x10A8;"
                 latin:moreKeys="&#x10C2;"
                 latin:keyHintLabel="9"
                 latin:additionalMoreKeys="9" />
-            <!-- U+10A9: "კ" GEORGIAN CAPITAL LETTER KAN
-                 U+10BE: "ხ" GEORGIAN CAPITAL LETTER XAN
-                 U+10C4: "ჴ" GEORGIAN CAPITAL LETTER HAR -->
+            <!-- U+10A9: "Ⴉ" GEORGIAN CAPITAL LETTER KAN
+                 U+10BE: "Ⴞ" GEORGIAN CAPITAL LETTER XAN
+                 U+10C4: "Ⴤ" GEORGIAN CAPITAL LETTER HAR -->
             <Key
                 latin:keyLabel="&#x10A9;"
                 latin:moreKeys="&#x10BE;,&#x10C4;"

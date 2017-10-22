@@ -25,40 +25,40 @@
         <case
             latin:keyboardLayoutSetElement="alphabetManualShifted|alphabetShiftLocked|alphabetShiftLockShifted"
             >
-            <!-- U+10AA: "ლ" GEORGIAN CAPITAL LETTER LAS -->
+            <!-- U+10AA: "Ⴊ" GEORGIAN CAPITAL LETTER LAS -->
             <Key
                 latin:keyLabel="&#x10AA;" />
-            <!-- U+10AB: "მ" GEORGIAN CAPITAL LETTER MAN -->
+            <!-- U+10AB: "Ⴋ" GEORGIAN CAPITAL LETTER MAN -->
             <Key
                 latin:keyLabel="&#x10AB;" />
-            <!-- U+10AC: "ნ" GEORGIAN CAPITAL LETTER NAR
+            <!-- U+10AC: "Ⴌ" GEORGIAN CAPITAL LETTER NAR
                  U+10FC: "ჼ" MODIFIER LETTER GEORGIAN NAR -->
             <Key
                 latin:keyLabel="&#x10AC;"
                 latin:moreKeys="&#x10FC;" />
-            <!-- U+10AD: "ო" GEORGIAN CAPITAL LETTER ON -->
+            <!-- U+10AD: "Ⴍ" GEORGIAN CAPITAL LETTER ON -->
             <Key
                 latin:keyLabel="&#x10AD;" />
-            <!-- U+10AE: "პ" GEORGIAN CAPITAL LETTER PAR -->
+            <!-- U+10AE: "Ⴎ" GEORGIAN CAPITAL LETTER PAR -->
             <Key
                 latin:keyLabel="&#x10AE;" />
-            <!-- U+10AF: "ჟ" GEORGIAN CAPITAL LETTER ZHAR
-                 U+10BB: "ძ" GEORGIAN CAPITAL LETTER JIL
-                 U+10BF: "ჯ" GEORGIAN CAPITAL LETTER JHAN
+            <!-- U+10AF: "Ⴏ" GEORGIAN CAPITAL LETTER ZHAR
+                 U+10BB: "Ⴛ" GEORGIAN CAPITAL LETTER JIL
+                 U+10BF: "Ⴟ" GEORGIAN CAPITAL LETTER JHAN
                  U+10F7: "ჷ" GEORGIAN LETTER YN -->
             <Key
                 latin:keyLabel="&#x10AF;"
                 latin:moreKeys="&#x10BB;,&#x10BF;,&#x10F7;" />
-            <!-- U+10B0: "რ" GEORGIAN CAPITAL LETTER RAE -->
+            <!-- U+10B0: "Ⴐ" GEORGIAN CAPITAL LETTER RAE -->
             <Key
                 latin:keyLabel="&#x10B0;" />
-            <!-- U+10B1: "ს" GEORGIAN CAPITAL LETTER SAN -->
+            <!-- U+10B1: "Ⴑ" GEORGIAN CAPITAL LETTER SAN -->
             <Key
                 latin:keyLabel="&#x10B1;" />
-            <!-- U+10B2: "ტ" GEORGIAN CAPITAL LETTER TAR -->
+            <!-- U+10B2: "Ⴒ" GEORGIAN CAPITAL LETTER TAR -->
             <Key
                 latin:keyLabel="&#x10B2;" />
-            <!-- U+10B3: "უ" GEORGIAN CAPITAL LETTER UN -->
+            <!-- U+10B3: "Ⴓ" GEORGIAN CAPITAL LETTER UN -->
             <Key
                 latin:keyLabel="&#x10B3;" />
         </case>
