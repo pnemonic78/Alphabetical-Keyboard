@@ -2,7 +2,7 @@
           package="net.sourceforge.keyboard.alphabetical">
 
     <application android:label="@string/app_name"
-                 android:icon="@mipmap/ic_launcher"
+                 android:icon="@mipmap/ic_ime_settings"
                  android:theme="@style/Theme.Keyboard">
         <service android:name=".VirtualKeyboardService"
                  android:permission="android.permission.BIND_INPUT_METHOD">
