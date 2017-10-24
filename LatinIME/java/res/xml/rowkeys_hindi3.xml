@@ -25,20 +25,29 @@
         <case
             latin:keyboardLayoutSetElement="alphabetManualShifted|alphabetShiftLocked|alphabetShiftLockShifted"
         >
-            <!-- U+0911: "ऑ" DEVANAGARI LETTER CANDRA O -->
+            <!-- U+0927: "ध" DEVANAGARI LETTER DHA
+                 U+0915/U+094D/U+0937: "क्ष" DEVANAGARI LETTER KA/DEVANAGARI SIGN VIRAMA/DEVANAGARI LETTER SSA
+                 U+0936/U+094D/U+0930: "श्र" DEVANAGARI LETTER SHA/DEVANAGARI SIGN VIRAMA/DEVANAGARI LETTER RA -->
             <Key
-                latin:keyLabel="&#x0911;" />
-            <!-- U+0901: "ँ" DEVANAGARI SIGN CANDRABINDU
-                 U+0945: "ॅ" DEVANAGARI VOWEL SIGN CANDRA E-->
-            <Key
-                latin:keyLabel="&#x0901;"
-                latin:moreKeys="&#x0945;" />
-            <!-- U+0923: "ण" DEVANAGARI LETTER NNA -->
-            <Key
-                latin:keyLabel="&#x0923;" />
+                latin:keyLabel="&#x0927;"
+                latin:moreKeys="&#x0915;&#x094D;&#x0937;,&#x0936;&#x094D;&#x0930;" />
             <!-- U+0929: "ऩ" DEVANAGARI LETTER NNNA -->
             <Key
                 latin:keyLabel="&#x0929;" />
+            <!-- U+092B: "फ" DEVANAGARI LETTER PHA
+                 U+092B/U+093C: "फ़" DEVANAGARI LETTER PHA/DEVANAGARI SIGN NUKTA -->
+            <Key
+                latin:keyLabel="&#x092B;"
+                latin:moreKeys="&#x092B;&#x093C;" />
+            <!-- U+092D: "भ" DEVANAGARI LETTER BHA -->
+            <Key
+                latin:keyLabel="&#x092D;" />
+            <!-- U+0931: "ऱ" DEVANAGARI LETTER RRA
+                 U+094D/U+0930: "्र" DEVANAGARI SIGN VIRAMA/DEVANAGARI LETTER RA
+                 U+0930/U+094D: "र्" DEVANAGARI LETTER RA/DEVANAGARI SIGN VIRAMA -->
+            <Key
+                latin:keyLabel="&#x0931;"
+                latin:moreKeys="&#x094D;&#x0930;,&#x0930;&#x094D;" />
             <!-- U+0933: "ळ" DEVANAGARI LETTER LLA
                  U+0934: "ऴ" DEVANAGARI LETTER LLLA -->
             <Key
@@ -55,9 +64,6 @@
             <Key
                 latin:keyLabel="&#x0943;"
                 latin:moreKeys="&#x0944;" />
-            <!-- U+091E: "ञ" DEVANAGARI LETTER NYA -->
-            <Key
-                latin:keyLabel="&#x091E;" />
         </case>
         <default>
             <!-- U+0940: "ी" DEVANAGARI VOWEL SIGN II
