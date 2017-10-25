@@ -94,7 +94,7 @@
             android:label="@string/subtype_generic"
             android:imeSubtypeLocale="be"
             android:imeSubtypeMode="keyboard"
-            android:imeSubtypeExtraValue="KeyboardLayoutSet=east_slavic"
+            android:imeSubtypeExtraValue="KeyboardLayoutSet=east_slavic_be"
     />
     <subtype android:icon="@drawable/ic_subtype_keyboard"
             android:label="@string/subtype_generic"
@@ -215,7 +215,7 @@
             android:label="@string/subtype_generic"
             android:imeSubtypeLocale="ky"
             android:imeSubtypeMode="keyboard"
-            android:imeSubtypeExtraValue="KeyboardLayoutSet=east_slavic"
+            android:imeSubtypeExtraValue="KeyboardLayoutSet=east_slavic_ky"
     />
     <subtype android:icon="@drawable/ic_subtype_keyboard"
             android:label="@string/subtype_generic"
@@ -317,7 +317,7 @@
             android:label="@string/subtype_generic"
             android:imeSubtypeLocale="uk"
             android:imeSubtypeMode="keyboard"
-            android:imeSubtypeExtraValue="KeyboardLayoutSet=east_slavic"
+            android:imeSubtypeExtraValue="KeyboardLayoutSet=east_slavic_uk"
     />
     <subtype android:icon="@drawable/ic_subtype_keyboard"
             android:label="@string/subtype_generic"
