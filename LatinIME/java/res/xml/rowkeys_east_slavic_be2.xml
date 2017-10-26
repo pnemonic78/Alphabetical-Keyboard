@@ -54,8 +54,9 @@
     <!-- U+0444: "ф" CYRILLIC SMALL LETTER EF -->
     <Key
         latin:keyLabel="&#x0444;" />
-    <!-- U+0445: "х" CYRILLIC SMALL LETTER HA -->
+    <!-- U+0445: "х" CYRILLIC SMALL LETTER HA
+         U+044A: "ъ" CYRILLIC SMALL LETTER HARD SIGN -->
     <Key
         latin:keyLabel="&#x0445;"
-        latin:moreKeys="!text/more_keys_for_cyrillic_ha" />
+        latin:moreKeys="&#x044A;" />
 </merge>
