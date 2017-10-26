@@ -49,8 +49,7 @@
         latin:keyLabel="&#x0442;" />
     <!-- U+0443: "у" CYRILLIC SMALL LETTER U -->
     <Key
-        latin:keyLabel="&#x0443;"
-        latin:moreKeys="!text/more_keys_for_cyrillic_u" />
+        latin:keyLabel="&#x0443;" />
     <!-- U+0444: "ф" CYRILLIC SMALL LETTER EF -->
     <Key
         latin:keyLabel="&#x0444;" />

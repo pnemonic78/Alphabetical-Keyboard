@@ -46,10 +46,11 @@
         latin:keyLabel="&#x0434;"
         latin:keyHintLabel="5"
         latin:additionalMoreKeys="5" />
-    <!-- U+0435: "е" CYRILLIC SMALL LETTER IE -->
+    <!-- U+0435: "е" CYRILLIC SMALL LETTER IE
+         U+0451: "ё" CYRILLIC SMALL LETTER IO -->
     <Key
         latin:keyLabel="&#x0435;"
-        latin:moreKeys="!text/more_keys_for_cyrillic_ye"
+        latin:moreKeys="&#x0451;"
         latin:keyHintLabel="6"
         latin:additionalMoreKeys="6" />
     <!-- U+0436: "ж" CYRILLIC SMALL LETTER ZHE -->
@@ -62,9 +63,10 @@
         latin:keyLabel="&#x0437;"
         latin:keyHintLabel="8"
         latin:additionalMoreKeys="8" />
-    <!-- U+0438 or U+0456 -->
+    <!-- U+0438 or U+0456
+         U+0438: "и" CYRILLIC SMALL LETTER I -->
     <Key
-        latin:keyLabel="!text/keylabel_for_east_slavic_row3_5"
+        latin:keyLabel="&#x0438;"
         latin:keyHintLabel="9"
         latin:additionalMoreKeys="9" />
     <!-- U+0439: "й" CYRILLIC SMALL LETTER SHORT I -->
