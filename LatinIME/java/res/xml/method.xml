@@ -233,7 +233,7 @@
             android:label="@string/subtype_generic"
             android:imeSubtypeLocale="mk"
             android:imeSubtypeMode="keyboard"
-            android:imeSubtypeExtraValue="KeyboardLayoutSet=south_slavic"
+            android:imeSubtypeExtraValue="KeyboardLayoutSet=south_slavic_mk"
     />
     <subtype android:icon="@drawable/ic_subtype_keyboard"
             android:label="@string/subtype_generic"
