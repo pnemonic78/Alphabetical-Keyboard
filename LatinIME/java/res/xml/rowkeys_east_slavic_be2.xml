@@ -29,12 +29,10 @@
         latin:keyLabel="&#x043C;" />
     <!-- U+043D: "н" CYRILLIC SMALL LETTER EN -->
     <Key
-        latin:keyLabel="&#x043D;"
-        latin:moreKeys="!text/more_keys_for_cyrillic_en" />
+        latin:keyLabel="&#x043D;" />
     <!-- U+043E: "о" CYRILLIC SMALL LETTER O -->
     <Key
-        latin:keyLabel="&#x043E;"
-        latin:moreKeys="!text/more_keys_for_cyrillic_o" />
+        latin:keyLabel="&#x043E;" />
     <!-- U+043F: "п" CYRILLIC SMALL LETTER PE -->
     <Key
         latin:keyLabel="&#x043F;" />
