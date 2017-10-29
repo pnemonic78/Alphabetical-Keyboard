@@ -40,7 +40,8 @@
          U+044A: "ъ" CYRILLIC SMALL LETTER HARD SIGN -->
     <Key
         latin:keyLabel="&#x044C;"
-        latin:moreKeys="&#x044A;" />
+        latin:moreKeys="&#x044A;"
+        latin:keyHintLabel="&#x044A;" />
     <!-- U+044D: "э" CYRILLIC SMALL LETTER E -->
     <Key
         latin:keyLabel="&#x044D;" />
