@@ -31,12 +31,14 @@
          U+04A3: "ң" CYRILLIC SMALL LETTER EN WITH DESCENDER -->
     <Key
         latin:keyLabel="&#x043D;"
-        latin:moreKeys="&#x04A3;" />
+        latin:moreKeys="&#x04A3;"
+        latin:keyHintLabel="&#x04A3;" />
     <!-- U+043E: "о" CYRILLIC SMALL LETTER O
          U+04E9: "ө" CYRILLIC SMALL LETTER BARRED O -->
     <Key
         latin:keyLabel="&#x043E;"
-        latin:moreKeys="&#x04E9;" />
+        latin:moreKeys="&#x04E9;"
+        latin:keyHintLabel="&#x04E9;" />
     <!-- U+043F: "п" CYRILLIC SMALL LETTER PE -->
     <Key
         latin:keyLabel="&#x043F;" />
@@ -53,13 +55,12 @@
          U+04AF: "ү" CYRILLIC SMALL LETTER STRAIGHT U -->
     <Key
         latin:keyLabel="&#x0443;"
-        latin:moreKeys="&#x04AF;" />
+        latin:moreKeys="&#x04AF;"
+        latin:keyHintLabel="&#x04AF;" />
     <!-- U+0444: "ф" CYRILLIC SMALL LETTER EF -->
     <Key
         latin:keyLabel="&#x0444;" />
-    <!-- U+0445: "х" CYRILLIC SMALL LETTER HA
-         U+044A: "ъ" CYRILLIC SMALL LETTER HARD SIGN -->
+    <!-- U+0445: "х" CYRILLIC SMALL LETTER HA -->
     <Key
-        latin:keyLabel="&#x0445;"
-        latin:moreKeys="&#x044A;" />
+        latin:keyLabel="&#x0445;" />
 </merge>

@@ -46,9 +46,11 @@
         latin:keyLabel="&#x0434;"
         latin:keyHintLabel="5"
         latin:additionalMoreKeys="5" />
-    <!-- U+0435: "е" CYRILLIC SMALL LETTER IE -->
+    <!-- U+0435: "е" CYRILLIC SMALL LETTER IE
+         U+0451: "ё" CYRILLIC SMALL LETTER IO -->
     <Key
         latin:keyLabel="&#x0435;"
+        latin:moreKeys="&#x0451;"
         latin:keyHintLabel="6"
         latin:additionalMoreKeys="6" />
     <!-- U+0436: "ж" CYRILLIC SMALL LETTER ZHE -->

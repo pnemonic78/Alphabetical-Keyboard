@@ -36,9 +36,11 @@
         latin:keyLabel="&#x0432;"
         latin:keyHintLabel="3"
         latin:additionalMoreKeys="3" />
-    <!-- U+0433: "г" CYRILLIC SMALL LETTER GHE -->
+    <!-- U+0433: "г" CYRILLIC SMALL LETTER GHE
+         U+0491: "ґ" CYRILLIC SMALL LETTER GHE WITH UPTURN -->
     <Key
         latin:keyLabel="&#x0433;"
+        latin:moreKeys="&#x0491;"
         latin:keyHintLabel="4"
         latin:additionalMoreKeys="4" />
     <!-- U+0434: "д" CYRILLIC SMALL LETTER DE -->
@@ -51,27 +53,30 @@
         latin:keyLabel="&#x0435;"
         latin:keyHintLabel="6"
         latin:additionalMoreKeys="6" />
+    <!-- U+0454: "є" CYRILLIC SMALL LETTER UKRAINIAN YE -->
+    <Key
+        latin:keyLabel="&#x0454;"
+        latin:keyHintLabel="7"
+        latin:additionalMoreKeys="7" />
     <!-- U+0436: "ж" CYRILLIC SMALL LETTER ZHE -->
     <Key
         latin:keyLabel="&#x0436;"
-        latin:keyHintLabel="7"
-        latin:additionalMoreKeys="7" />
+        latin:keyHintLabel="8"
+        latin:additionalMoreKeys="8" />
     <!-- U+0437: "з" CYRILLIC SMALL LETTER ZE -->
     <Key
         latin:keyLabel="&#x0437;"
-        latin:keyHintLabel="8"
-        latin:additionalMoreKeys="8" />
+        latin:keyHintLabel="9"
+        latin:additionalMoreKeys="9" />
     <!-- U+0438: "и" CYRILLIC SMALL LETTER I -->
     <Key
         latin:keyLabel="&#x0438;"
-        latin:keyHintLabel="9"
-        latin:additionalMoreKeys="9" />
-    <!-- U+0439: "й" CYRILLIC SMALL LETTER SHORT I -->
-    <Key
-        latin:keyLabel="&#x0439;"
         latin:keyHintLabel="0"
         latin:additionalMoreKeys="0" />
-    <!-- U+043A: "к" CYRILLIC SMALL LETTER KA -->
+    <!-- U+0456: "і" CYRILLIC SMALL LETTER BYELORUSSIAN-UKRAINIAN I
+         U+0457: "ї" CYRILLIC SMALL LETTER YI -->
     <Key
-        latin:keyLabel="&#x043A;" />
+        latin:keyLabel="&#x0456;"
+        latin:moreKeys="&#x0457;"
+        latin:keyHintLabel="&#x0457;" />
 </merge>

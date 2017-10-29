@@ -63,8 +63,7 @@
         latin:keyLabel="&#x0437;"
         latin:keyHintLabel="8"
         latin:additionalMoreKeys="8" />
-    <!-- U+0438 or U+0456
-         U+0438: "и" CYRILLIC SMALL LETTER I -->
+    <!-- U+0438: "и" CYRILLIC SMALL LETTER I -->
     <Key
         latin:keyLabel="&#x0438;"
         latin:keyHintLabel="9"

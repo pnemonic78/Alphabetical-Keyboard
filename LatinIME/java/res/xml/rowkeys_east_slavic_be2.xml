@@ -48,12 +48,10 @@
     <!-- U+0443: "у" CYRILLIC SMALL LETTER U -->
     <Key
         latin:keyLabel="&#x0443;" />
+    <!-- U+045E: "ў" CYRILLIC SMALL LETTER SHORT U -->
+    <Key
+        latin:keyLabel="&#x045E;" />
     <!-- U+0444: "ф" CYRILLIC SMALL LETTER EF -->
     <Key
         latin:keyLabel="&#x0444;" />
-    <!-- U+0445: "х" CYRILLIC SMALL LETTER HA
-         U+044A: "ъ" CYRILLIC SMALL LETTER HARD SIGN -->
-    <Key
-        latin:keyLabel="&#x0445;"
-        latin:moreKeys="&#x044A;" />
 </merge>
