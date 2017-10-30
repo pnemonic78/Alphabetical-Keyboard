@@ -25,36 +25,42 @@
         <case
             latin:keyboardLayoutSetElement="alphabetManualShifted|alphabetShiftLocked|alphabetShiftLockShifted"
         >
-            <!-- U+0E03: "ฃ" THAI CHARACTER KHO KHUAT -->
+            <!-- U+0E17: "ท" THAI CHARACTER THO THAHAN -->
             <Key
-                latin:keyLabel="&#x0E03;" />
-            <!-- U+0E05: "ฅ" THAI CHARACTER KHO KHON -->
+                latin:keyLabel="&#x0E17;" />
+            <!-- U+0E18: "ธ" THAI CHARACTER THO THONG -->
             <Key
-                latin:keyLabel="&#x0E05;" />
-            <!-- U+0E06: "ฆ" THAI CHARACTER KHO RAKHANG -->
+                latin:keyLabel="&#x0E18;" />
+            <!-- U+0E19: "น" THAI CHARACTER NO NU -->
             <Key
-                latin:keyLabel="&#x0E06;" />
-            <!-- U+0E09: "ฉ" THAI CHARACTER CHO CHING -->
+                latin:keyLabel="&#x0E19;" />
+            <!-- U+0E1A: "บ" THAI CHARACTER BO BAIMAI -->
             <Key
-                latin:keyLabel="&#x0E09;" />
-            <!-- U+0E0B: "ซ" THAI CHARACTER SO SO -->
+                latin:keyLabel="&#x0E1A;" />
+            <!-- U+0E1B: "ป" THAI CHARACTER PO PLA -->
             <Key
-                latin:keyLabel="&#x0E0B;" />
-            <!-- U+0E0C: "ฌ" THAI CHARACTER CHO CHOE -->
+                latin:keyLabel="&#x0E1B;" />
+            <!-- U+0E1C: "ผ" THAI CHARACTER PHO PHUNG -->
             <Key
-                latin:keyLabel="&#x0E0C;" />
-            <!-- U+0E0D: "ญ" THAI CHARACTER YO YING -->
+                latin:keyLabel="&#x0E1C;" />
+            <!-- U+0E1D: "ฝ" THAI CHARACTER FO FA -->
             <Key
-                latin:keyLabel="&#x0E0D;" />
-            <!-- U+0E0E: "ฎ" THAI CHARACTER DO CHADA -->
+                latin:keyLabel="&#x0E1D;" />
+            <!-- U+0E1E: "พ" THAI CHARACTER PHO PHAN -->
             <Key
-                latin:keyLabel="&#x0E0E;" />
-            <!-- U+0E0F: "ฏ" THAI CHARACTER TO PATAK -->
+                latin:keyLabel="&#x0E1E;" />
+            <!-- U+0E1F: "ฟ" THAI CHARACTER FO FAN
+                 U+0E2C: "ฬ" THAI CHARACTER LO CHULA -->
             <Key
-                latin:keyLabel="&#x0E0F;" />
-            <!-- U+0E10: "ฐ" THAI CHARACTER THO THAN -->
+                latin:keyLabel="&#x0E1F;"
+                latin:moreKeys="&#x0E2C;"
+                latin:keyHintLabel="&#x0E2C;" />
+            <!-- U+0E20: "ภ" THAI CHARACTER PHO SAMPHAO -->
             <Key
-                latin:keyLabel="&#x0E10;" />
+                latin:keyLabel="&#x0E20;" />
+            <!-- U+0E21: "ม" THAI CHARACTER MO MA -->
+            <Key
+                latin:keyLabel="&#x0E21;" />
         </case>
         <default>
             <!-- U+0E01: "ก" THAI CHARACTER KO KAI -->
@@ -67,46 +73,49 @@
                 latin:keyLabel="&#x0E02;"
                 latin:keyHintLabel="2"
                 latin:additionalMoreKeys="2,&#x0E52;" />
+            <!-- U+0E03: "ฃ" THAI CHARACTER KHO KHUAT -->
+            <Key
+                latin:keyLabel="&#x0E03;"
+                latin:keyHintLabel="3"
+                latin:additionalMoreKeys="3,&#x0E53;" />
             <!-- U+0E04: "ค" THAI CHARACTER KHO KHWAI -->
             <Key
                 latin:keyLabel="&#x0E04;"
-                latin:keyHintLabel="3"
-                latin:additionalMoreKeys="3,&#x0E53;" />
+                latin:keyHintLabel="4"
+                latin:additionalMoreKeys="4,&#x0E54;" />
+            <!-- U+0E05: "ฅ" THAI CHARACTER KHO KHON -->
+            <Key
+                latin:keyLabel="&#x0E05;"
+                latin:keyHintLabel="5"
+                latin:additionalMoreKeys="5,&#x0E55;" />
+            <!-- U+0E06: "ฆ" THAI CHARACTER KHO RAKHANG -->
+            <Key
+                latin:keyLabel="&#x0E06;"
+                latin:keyHintLabel="6"
+                latin:additionalMoreKeys="6,&#x0E56;" />
             <!-- U+0E07: "ง" THAI CHARACTER NGO NGU -->
             <Key
                 latin:keyLabel="&#x0E07;"
-                latin:keyHintLabel="4"
-                latin:additionalMoreKeys="4,&#x0E54;" />
+                latin:keyHintLabel="7"
+                latin:additionalMoreKeys="7,&#x0E57;" />
             <!-- U+0E08: "จ" THAI CHARACTER CHO CHAN -->
             <Key
                 latin:keyLabel="&#x0E08;"
-                latin:keyHintLabel="5"
-                latin:additionalMoreKeys="5,&#x0E55;" />
+                latin:keyHintLabel="8"
+                latin:additionalMoreKeys="8,&#x0E58;" />
+            <!-- U+0E09: "ฉ" THAI CHARACTER CHO CHING -->
+            <Key
+                latin:keyLabel="&#x0E09;"
+                latin:keyHintLabel="9"
+                latin:additionalMoreKeys="9,&#x0E59;" />
             <!-- U+0E0A: "ช" THAI CHARACTER CHO CHANG -->
             <Key
                 latin:keyLabel="&#x0E0A;"
-                latin:keyHintLabel="6"
-                latin:additionalMoreKeys="6,&#x0E56;" />
-            <!-- U+0E14: "ด" THAI CHARACTER DO DEK -->
-            <Key
-                latin:keyLabel="&#x0E14;"
-                latin:keyHintLabel="7"
-                latin:additionalMoreKeys="7,&#x0E57;" />
-            <!-- U+0E15: "ต" THAI CHARACTER TO TAO -->
-            <Key
-                latin:keyLabel="&#x0E15;"
-                latin:keyHintLabel="8"
-                latin:additionalMoreKeys="8,&#x0E58;" />
-            <!-- U+0E16: "ถ" THAI CHARACTER THO THUNG -->
-            <Key
-                latin:keyLabel="&#x0E16;"
-                latin:keyHintLabel="9"
-                latin:additionalMoreKeys="9,&#x0E59;" />
-            <!-- U+0E17: "ท" THAI CHARACTER THO THAHAN -->
-            <Key
-                latin:keyLabel="&#x0E17;"
                 latin:keyHintLabel="0"
                 latin:additionalMoreKeys="0,&#x0E50;" />
+            <!-- U+0E0B: "ซ" THAI CHARACTER SO SO -->
+            <Key
+                latin:keyLabel="&#x0E0B;" />
        </default>
     </switch>
 </merge>
