@@ -21,8 +21,9 @@
 <merge
     xmlns:latin="http://schemas.android.com/apk/res-auto"
 >
+    <!-- U+0455: "ѕ" CYRILLIC SMALL LETTER DZE -->
     <Key
-        latin:keyLabel="!text/keylabel_for_south_slavic_row3_1" />
+        latin:keyLabel="&#x0455;" />
     <!-- U+045F: "џ" CYRILLIC SMALL LETTER DZHE -->
     <Key
         latin:keyLabel="&#x045F;" />
@@ -41,8 +42,9 @@
     <!-- U+043C: "м" CYRILLIC SMALL LETTER EM -->
     <Key
         latin:keyLabel="&#x043C;" />
+    <!-- U+0452: "ђ" CYRILLIC SMALL LETTER DJE -->
     <Key
-        latin:keyLabel="!text/keylabel_for_south_slavic_row3_8" />
+        latin:keyLabel="&#x0452;" />
     <!-- U+0436: "ж" CYRILLIC SMALL LETTER ZHE -->
     <Key
         latin:keyLabel="&#x0436;" />

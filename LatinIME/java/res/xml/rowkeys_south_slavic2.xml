@@ -51,6 +51,7 @@
     <!-- U+0447: "ч" CYRILLIC SMALL LETTER CHE -->
     <Key
         latin:keyLabel="&#x0447;" />
+    <!-- U+045B: "ћ" CYRILLIC SMALL LETTER TSHE -->
     <Key
-        latin:keyLabel="!text/keylabel_for_south_slavic_row2_11" />
+        latin:keyLabel="&#x045B;" />
 </merge>
