@@ -21,61 +21,61 @@
 <merge
     xmlns:latin="http://schemas.android.com/apk/res-auto"
 >
-    <!-- U+0459: "љ" CYRILLIC SMALL LETTER LJE -->
+    <!-- U+0430: "а" CYRILLIC SMALL LETTER A -->
     <Key
-        latin:keyLabel="&#x0459;"
+        latin:keyLabel="&#x0430;"
         latin:keyHintLabel="1"
         latin:additionalMoreKeys="1" />
-    <!-- U+045A: "њ" CYRILLIC SMALL LETTER NJE -->
+    <!-- U+0431: "б" CYRILLIC SMALL LETTER BE -->
     <Key
-        latin:keyLabel="&#x045A;"
+        latin:keyLabel="&#x0431;"
         latin:keyHintLabel="2"
         latin:additionalMoreKeys="2" />
+    <!-- U+0432: "в" CYRILLIC SMALL LETTER VE -->
+    <Key
+        latin:keyLabel="&#x0432;"
+        latin:keyHintLabel="3"
+        latin:additionalMoreKeys="3" />
+    <!-- U+0433: "г" CYRILLIC SMALL LETTER GHE -->
+    <Key
+        latin:keyLabel="&#x0433;"
+        latin:keyHintLabel="4"
+        latin:additionalMoreKeys="4" />
+    <!-- U+0434: "д" CYRILLIC SMALL LETTER DE -->
+    <Key
+        latin:keyLabel="&#x0434;"
+        latin:keyHintLabel="5"
+        latin:additionalMoreKeys="5" />
+    <!-- U+0453: "ѓ" CYRILLIC SMALL LETTER GJE -->
+    <Key
+        latin:keyLabel="&#x0453;"
+        latin:keyHintLabel="6"
+        latin:additionalMoreKeys="6" />
     <!-- U+0435: "е" CYRILLIC SMALL LETTER IE
          U+0450: "ѐ" CYRILLIC SMALL LETTER IE WITH GRAVE -->
     <Key
         latin:keyLabel="&#x0435;"
         latin:moreKeys="&#x0450;"
-        latin:keyHintLabel="3"
-        latin:additionalMoreKeys="3" />
-    <!-- U+0440: "р" CYRILLIC SMALL LETTER ER -->
+        latin:keyHintLabel="7"
+        latin:additionalMoreKeys="7" />
+    <!-- U+0436: "ж" CYRILLIC SMALL LETTER ZHE -->
     <Key
-        latin:keyLabel="&#x0440;"
-        latin:keyHintLabel="4"
-        latin:additionalMoreKeys="4" />
-    <!-- U+0442: "т" CYRILLIC SMALL LETTER TE -->
+        latin:keyLabel="&#x0436;"
+        latin:keyHintLabel="8"
+        latin:additionalMoreKeys="8" />
+    <!-- U+0437: "з" CYRILLIC SMALL LETTER ZE -->
     <Key
-        latin:keyLabel="&#x0442;"
-        latin:keyHintLabel="5"
-        latin:additionalMoreKeys="5" />
+        latin:keyLabel="&#x0437;"
+        latin:keyHintLabel="9"
+        latin:additionalMoreKeys="9" />
     <!-- U+0455: "ѕ" CYRILLIC SMALL LETTER DZE -->
     <Key
         latin:keyLabel="&#x0455;"
-        latin:keyHintLabel="6"
-        latin:additionalMoreKeys="6" />
-    <!-- U+0443: "у" CYRILLIC SMALL LETTER U -->
-    <Key
-        latin:keyLabel="&#x0443;"
-        latin:keyHintLabel="7"
-        latin:additionalMoreKeys="7" />
+        latin:keyHintLabel="0"
+        latin:additionalMoreKeys="0" />
     <!-- U+0438: "и" CYRILLIC SMALL LETTER I
          U+045D: "ѝ" CYRILLIC SMALL LETTER I WITH GRAVE -->
     <Key
         latin:keyLabel="&#x0438;"
-        latin:moreKeys="&#x045D;"
-        latin:keyHintLabel="8"
-        latin:additionalMoreKeys="8" />
-    <!-- U+043E: "о" CYRILLIC SMALL LETTER O -->
-    <Key
-        latin:keyLabel="&#x043E;"
-        latin:keyHintLabel="9"
-        latin:additionalMoreKeys="9" />
-    <!-- U+043F: "п" CYRILLIC SMALL LETTER PE -->
-    <Key
-        latin:keyLabel="&#x043F;"
-        latin:keyHintLabel="0"
-        latin:additionalMoreKeys="0" />
-    <!-- U+0448: "ш" CYRILLIC SMALL LETTER SHA -->
-    <Key
-        latin:keyLabel="&#x0448;" />
+        latin:moreKeys="&#x045D;" />
 </merge>
