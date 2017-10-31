@@ -506,25 +506,6 @@ public final class KeyboardTextsSet {
 
     /* Language be: Belarusian */
     private static final String[] LANGUAGE_be = {
-        /* 0~ */
-        null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-        null, null, null, null, null, null, null, null, null, null,
-        /* ~24 */
-        // U+045E: "ў" CYRILLIC SMALL LETTER SHORT U
-        /* 25 */ "\u045E",
-        // U+044B: "ы" CYRILLIC SMALL LETTER YERU
-        /* 26 */ "\u044B",
-        // U+0456: "і" CYRILLIC SMALL LETTER BYELORUSSIAN-UKRAINIAN I
-        /* 27 */ "\u0456",
-        /* 28~ */
-        null, null, null,
-        /* ~30 */
-        // U+044A: "ъ" CYRILLIC SMALL LETTER HARD SIGN
-        /* 31 */ "\u044A",
-        /* 32 */ null,
-        /* 33 */ null,
-        // U+044A: "ъ" CYRILLIC SMALL LETTER HARD SIGN
-        /* 34 */ "\u044A",
     };
 
     /* Language ca: Catalan */
@@ -704,14 +685,8 @@ public final class KeyboardTextsSet {
         // U+0142: "ł" LATIN SMALL LETTER L WITH STROKE
         /* 14 */ "\u0142",
         /* 15~ */
-        null, null, null, null, null,
-        /* ~19 */
-        // U+00E5: "å" LATIN SMALL LETTER A WITH RING ABOVE
-        /* 20 */ "\u00E5",
-        // U+00E6: "æ" LATIN SMALL LETTER AE
-        /* 21 */ "\u00E6",
-        // U+00F8: "ø" LATIN SMALL LETTER O WITH STROKE
-        /* 22 */ "\u00F8",
+        null, null, null, null, null, null, null, null,
+        /* ~22 */
         // U+00E4: "ä" LATIN SMALL LETTER A WITH DIAERESIS
         /* 23 */ "\u00E4",
         // U+00F6: "ö" LATIN SMALL LETTER O WITH DIAERESIS
@@ -972,14 +947,8 @@ public final class KeyboardTextsSet {
         // U+011F: "ğ" LATIN SMALL LETTER G WITH BREVE
         /* 15 */ "\u0123,\u011F",
         /* 16~ */
-        null, null, null, null,
-        /* ~19 */
-        // U+00FC: "ü" LATIN SMALL LETTER U WITH DIAERESIS
-        /* 20 */ "\u00FC",
-        // U+00F6: "ö" LATIN SMALL LETTER O WITH DIAERESIS
-        /* 21 */ "\u00F6",
-        // U+00E4: "ä" LATIN SMALL LETTER A WITH DIAERESIS
-        /* 22 */ "\u00E4",
+        null, null, null, null, null, null, null,
+        /* ~22 */
         // U+00F5: "õ" LATIN SMALL LETTER O WITH TILDE
         /* 23 */ "\u00F5",
     };
@@ -1146,14 +1115,8 @@ public final class KeyboardTextsSet {
         // U+017C: "ż" LATIN SMALL LETTER Z WITH DOT ABOVE
         /* 12 */ "\u017E,\u017A,\u017C",
         /* 13~ */
-        null, null, null, null, null, null, null,
-        /* ~19 */
-        // U+00E5: "å" LATIN SMALL LETTER A WITH RING ABOVE
-        /* 20 */ "\u00E5",
-        // U+00F6: "ö" LATIN SMALL LETTER O WITH DIAERESIS
-        /* 21 */ "\u00F6",
-        // U+00E4: "ä" LATIN SMALL LETTER A WITH DIAERESIS
-        /* 22 */ "\u00E4",
+        null, null, null, null, null, null, null, null, null, null,
+        /* ~22 */
         // U+00F8: "ø" LATIN SMALL LETTER O WITH STROKE
         /* 23 */ "\u00F8",
         // U+00E6: "æ" LATIN SMALL LETTER AE
@@ -1366,9 +1329,9 @@ public final class KeyboardTextsSet {
         // U+00F9: "ù" LATIN SMALL LETTER U WITH GRAVE
         // U+016B: "ū" LATIN SMALL LETTER U WITH MACRON
         /* 4 */ "\u00FA,\u00FC,\u00FB,\u00F9,\u016B",
-        /* 5~ */
-        null, null, null,
-        /* ~7 */
+        /* 5 */ "c,z",
+        /* 6 */ null,
+        /* 7 */ null,
         // U+00FD: "ý" LATIN SMALL LETTER Y WITH ACUTE
         // U+00FF: "ÿ" LATIN SMALL LETTER Y WITH DIAERESIS
         /* 8 */ "\u00FD,\u00FF",
@@ -1377,15 +1340,11 @@ public final class KeyboardTextsSet {
         /* 10 */ null,
         // U+00FE: "þ" LATIN SMALL LETTER THORN
         /* 11 */ "\u00FE",
-        /* 12~ */
-        null, null, null, null, null, null, null, null,
-        /* ~19 */
-        // U+00F0: "ð" LATIN SMALL LETTER ETH
-        /* 20 */ "\u00F0",
-        // U+00E6: "æ" LATIN SMALL LETTER AE
-        /* 21 */ "\u00E6",
-        // U+00FE: "þ" LATIN SMALL LETTER THORN
-        /* 22 */ "\u00FE",
+        /* 12 */ null,
+        /* 13 */ "q",
+        /* 14 */ null,
+        /* 15 */ null,
+        /* 16 */ "w",
     };
 
     /* Language it: Italian */
@@ -1480,28 +1439,6 @@ public final class KeyboardTextsSet {
 
     /* Language ky: Kirghiz */
     private static final String[] LANGUAGE_ky = {
-        /* 0~ */
-        null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-        null, null, null, null, null, null, null, null, null, null,
-        /* ~24 */
-        // U+0449: "щ" CYRILLIC SMALL LETTER SHCHA
-        /* 25 */ "\u0449",
-        // U+044B: "ы" CYRILLIC SMALL LETTER YERU
-        /* 26 */ "\u044B",
-        // U+0438: "и" CYRILLIC SMALL LETTER I
-        /* 27 */ "\u0438",
-        // U+04AF: "ү" CYRILLIC SMALL LETTER STRAIGHT U
-        /* 28 */ "\u04AF",
-        /* 29 */ null,
-        // U+04A3: "ң" CYRILLIC SMALL LETTER EN WITH DESCENDER
-        /* 30 */ "\u04A3",
-        // U+044A: "ъ" CYRILLIC SMALL LETTER HARD SIGN
-        /* 31 */ "\u044A",
-        /* 32 */ null,
-        // U+04E9: "ө" CYRILLIC SMALL LETTER BARRED O
-        /* 33 */ "\u04E9",
-        // U+044A: "ъ" CYRILLIC SMALL LETTER HARD SIGN
-        /* 34 */ "\u044A",
     };
 
     /* Language lt: Lithuanian */
@@ -1688,21 +1625,8 @@ public final class KeyboardTextsSet {
         /* 0~ */
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-        null, null, null, null, null,
-        /* ~34 */
-        // U+0455: "ѕ" CYRILLIC SMALL LETTER DZE
-        /* 35 */ "\u0455",
-        // U+045C: "ќ" CYRILLIC SMALL LETTER KJE
-        /* 36 */ "\u045C",
-        // U+0437: "з" CYRILLIC SMALL LETTER ZE
-        /* 37 */ "\u0437",
-        // U+0453: "ѓ" CYRILLIC SMALL LETTER GJE
-        /* 38 */ "\u0453",
-        // U+0450: "ѐ" CYRILLIC SMALL LETTER IE WITH GRAVE
-        /* 39 */ "\u0450",
-        // U+045D: "ѝ" CYRILLIC SMALL LETTER I WITH GRAVE
-        /* 40 */ "\u045D",
-        /* 41 */ null,
+        null, null, null, null, null, null, null, null, null, null, null, null,
+        /* ~41 */
         // U+2018: "‘" LEFT SINGLE QUOTATION MARK
         // U+2019: "’" RIGHT SINGLE QUOTATION MARK
         // U+201A: "‚" SINGLE LOW-9 QUOTATION MARK
@@ -1753,13 +1677,8 @@ public final class KeyboardTextsSet {
         /* 4 */ "\u00FC,\u00FB,\u00F9,\u00FA,\u016B",
         /* 5~ */
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-        /* ~19 */
-        // U+00E5: "å" LATIN SMALL LETTER A WITH RING ABOVE
-        /* 20 */ "\u00E5",
-        // U+00F8: "ø" LATIN SMALL LETTER O WITH STROKE
-        /* 21 */ "\u00F8",
-        // U+00E6: "æ" LATIN SMALL LETTER AE
-        /* 22 */ "\u00E6",
+        null, null, null,
+        /* ~22 */
         // U+00F6: "ö" LATIN SMALL LETTER O WITH DIAERESIS
         /* 23 */ "\u00F6",
         // U+00E4: "ä" LATIN SMALL LETTER A WITH DIAERESIS
@@ -1972,26 +1891,6 @@ public final class KeyboardTextsSet {
 
     /* Language ru: Russian */
     private static final String[] LANGUAGE_ru = {
-        /* 0~ */
-        null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-        null, null, null, null, null, null, null, null, null, null,
-        /* ~24 */
-        // U+0449: "щ" CYRILLIC SMALL LETTER SHCHA
-        /* 25 */ "\u0449",
-        // U+044B: "ы" CYRILLIC SMALL LETTER YERU
-        /* 26 */ "\u044B",
-        // U+0438: "и" CYRILLIC SMALL LETTER I
-        /* 27 */ "\u0438",
-        /* 28 */ null,
-        // U+0451: "ё" CYRILLIC SMALL LETTER IO
-        /* 29 */ "\u0451",
-        /* 30 */ null,
-        // U+044A: "ъ" CYRILLIC SMALL LETTER HARD SIGN
-        /* 31 */ "\u044A",
-        /* 32 */ null,
-        /* 33 */ null,
-        // U+044A: "ъ" CYRILLIC SMALL LETTER HARD SIGN
-        /* 34 */ "\u044A",
     };
 
     /* Language sk: Slovak */
@@ -2109,21 +2008,8 @@ public final class KeyboardTextsSet {
         /* 0~ */
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-        null, null, null, null, null,
-        /* ~34 */
-        // U+0437: "з" CYRILLIC SMALL LETTER ZE
-        /* 35 */ "\u0437",
-        // U+045B: "ћ" CYRILLIC SMALL LETTER TSHE
-        /* 36 */ "\u045B",
-        // U+0455: "ѕ" CYRILLIC SMALL LETTER DZE
-        /* 37 */ "\u0455",
-        // U+0452: "ђ" CYRILLIC SMALL LETTER DJE
-        /* 38 */ "\u0452",
-        // U+0450: "ѐ" CYRILLIC SMALL LETTER IE WITH GRAVE
-        /* 39 */ "\u0450",
-        // U+045D: "ѝ" CYRILLIC SMALL LETTER I WITH GRAVE
-        /* 40 */ "\u045D",
-        /* 41 */ null,
+        null, null, null, null, null, null, null, null, null, null, null, null,
+        /* ~41 */
         // U+2018: "‘" LEFT SINGLE QUOTATION MARK
         // U+2019: "’" RIGHT SINGLE QUOTATION MARK
         // U+201A: "‚" SINGLE LOW-9 QUOTATION MARK
@@ -2168,14 +2054,9 @@ public final class KeyboardTextsSet {
         // U+0161: "š" LATIN SMALL LETTER S WITH CARON
         /* 5 */ "\u00DF,\u015B,\u0161",
         /* 6~ */
-        null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-        /* ~19 */
-        // U+00E5: "å" LATIN SMALL LETTER A WITH RING ABOVE
-        /* 20 */ "\u00E5",
-        // U+00F6: "ö" LATIN SMALL LETTER O WITH DIAERESIS
-        /* 21 */ "\u00F6",
-        // U+00E4: "ä" LATIN SMALL LETTER A WITH DIAERESIS
-        /* 22 */ "\u00E4",
+        null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+        null, null,
+        /* ~22 */
         // U+00F8: "ø" LATIN SMALL LETTER O WITH STROKE
         /* 23 */ "\u00F8",
         // U+00E6: "æ" LATIN SMALL LETTER AE
@@ -2229,26 +2110,6 @@ public final class KeyboardTextsSet {
 
     /* Language uk: Ukrainian */
     private static final String[] LANGUAGE_uk = {
-        /* 0~ */
-        null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-        null, null, null, null, null, null, null, null, null, null,
-        /* ~24 */
-        // U+0449: "щ" CYRILLIC SMALL LETTER SHCHA
-        /* 25 */ "\u0449",
-        // U+0456: "і" CYRILLIC SMALL LETTER BYELORUSSIAN-UKRAINIAN I
-        /* 26 */ "\u0456",
-        // U+0438: "и" CYRILLIC SMALL LETTER I
-        /* 27 */ "\u0438",
-        /* 28~ */
-        null, null, null,
-        /* ~30 */
-        // U+044A: "ъ" CYRILLIC SMALL LETTER HARD SIGN
-        /* 31 */ "\u044A",
-        // U+0457: "ї" CYRILLIC SMALL LETTER YI
-        /* 32 */ "\u0457",
-        /* 33 */ null,
-        // U+044A: "ъ" CYRILLIC SMALL LETTER HARD SIGN
-        /* 34 */ "\u044A",
     };
 
     /* Language vi: Vietnamese */
