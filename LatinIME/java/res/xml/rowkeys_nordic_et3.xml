@@ -22,23 +22,28 @@
     xmlns:latin="http://schemas.android.com/apk/res-auto"
 >
     <Key
-        latin:keyLabel="t"
-        latin:moreKeys="!text/more_keys_for_t" />
-    <Key
-        latin:keyLabel="u"
-        latin:moreKeys="!text/more_keys_for_u" />
-    <Key
         latin:keyLabel="v"
         latin:moreKeys="!text/more_keys_for_v" />
     <Key
         latin:keyLabel="w"
         latin:moreKeys="!text/more_keys_for_w" />
+    <!-- U+00F5: "õ" LATIN SMALL LETTER O WITH TILDE -->
+    <Key
+        latin:keyLabel="&#x00F5;" />
+    <!-- U+00E4: "ä" LATIN SMALL LETTER A WITH DIAERESIS -->
+    <Key
+        latin:keyLabel="&#x00E4;"
+        latin:moreKeys="!text/more_keys_for_nordic_row2_11" />
+    <!-- U+00F6: "ö" LATIN SMALL LETTER O WITH DIAERESIS -->
+    <Key
+        latin:keyLabel="&#x00F6;"
+        latin:moreKeys="!text/more_keys_for_nordic_row2_10" />
+    <!-- U+00FC: "ü" LATIN SMALL LETTER U WITH DIAERESIS -->
+    <Key
+        latin:keyLabel="&#x00FC;" />
     <Key
         latin:keyLabel="x" />
     <Key
         latin:keyLabel="y"
         latin:moreKeys="!text/more_keys_for_y" />
-    <Key
-        latin:keyLabel="z"
-        latin:moreKeys="!text/more_keys_for_z" />
 </merge>
