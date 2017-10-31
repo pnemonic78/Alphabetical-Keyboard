@@ -21,9 +21,55 @@
 <merge
     xmlns:latin="http://schemas.android.com/apk/res-auto"
 >
-    <include
-        latin:keyboardLayout="@xml/rowkeys_qwerty1" />
-    <!-- U+00E5: "å" LATIN SMALL LETTER A WITH RING ABOVE -->
     <Key
-        latin:keyLabel="&#x00E5;" />
+        latin:keyLabel="a"
+        latin:keyHintLabel="1"
+        latin:additionalMoreKeys="1"
+        latin:moreKeys="!text/more_keys_for_a" />
+    <Key
+        latin:keyLabel="b"
+        latin:keyHintLabel="2"
+        latin:additionalMoreKeys="2" />
+    <Key
+        latin:keyLabel="c"
+        latin:keyHintLabel="3"
+        latin:additionalMoreKeys="3"
+        latin:moreKeys="!text/more_keys_for_c" />
+    <Key
+        latin:keyLabel="d"
+        latin:keyHintLabel="4"
+        latin:additionalMoreKeys="4"
+        latin:moreKeys="!text/more_keys_for_d" />
+    <Key
+        latin:keyLabel="e"
+        latin:keyHintLabel="5"
+        latin:additionalMoreKeys="5"
+        latin:moreKeys="!text/more_keys_for_e" />
+    <Key
+        latin:keyLabel="f"
+        latin:keyHintLabel="6"
+        latin:additionalMoreKeys="6" />
+    <Key
+        latin:keyLabel="g"
+        latin:keyHintLabel="7"
+        latin:additionalMoreKeys="7"
+        latin:moreKeys="!text/more_keys_for_g" />
+    <Key
+        latin:keyLabel="h"
+        latin:keyHintLabel="8"
+        latin:additionalMoreKeys="8"
+        latin:moreKeys="!text/more_keys_for_h" />
+    <Key
+        latin:keyLabel="i"
+        latin:keyHintLabel="9"
+        latin:additionalMoreKeys="9"
+        latin:moreKeys="!text/more_keys_for_i" />
+    <Key
+        latin:keyLabel="j"
+        latin:keyHintLabel="0"
+        latin:additionalMoreKeys="0"
+        latin:moreKeys="!text/more_keys_for_j" />
+    <Key
+        latin:keyLabel="k"
+        latin:moreKeys="!text/more_keys_for_k" />
 </merge>
