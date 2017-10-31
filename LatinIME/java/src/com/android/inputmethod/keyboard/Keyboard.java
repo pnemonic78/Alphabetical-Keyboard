@@ -31,6 +31,7 @@ import com.android.inputmethod.keyboard.internal.KeyStyles;
 import com.android.inputmethod.keyboard.internal.KeyboardCodesSet;
 import com.android.inputmethod.keyboard.internal.KeyboardIconsSet;
 import com.android.inputmethod.keyboard.internal.KeyboardTextsSet;
+import com.android.inputmethod.latin.BuildConfig;
 import com.android.inputmethod.latin.LatinImeLogger;
 import com.android.inputmethod.latin.LocaleUtils.RunInLocale;
 import com.android.inputmethod.latin.R;
@@ -488,7 +489,7 @@ public class Keyboard {
 
     public static class Builder<KP extends Params> {
         private static final String BUILDER_TAG = "Keyboard.Builder";
-        private static final boolean DEBUG = false;
+        private static final boolean DEBUG = BuildConfig.DEBUG;
 
         // Keyboard XML Tags
         private static final String TAG_KEYBOARD = "Keyboard";
