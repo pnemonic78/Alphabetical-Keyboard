@@ -62,6 +62,9 @@
     <string name="more_keys_for_y">&#x00FD;,&#x00FF;</string>
     <!-- U+00F0: "ð" LATIN SMALL LETTER ETH -->
     <string name="more_keys_for_d">&#x00F0;</string>
+    <string name="more_keys_for_k">q</string>
     <!-- U+00FE: "þ" LATIN SMALL LETTER THORN -->
     <string name="more_keys_for_t">&#x00FE;</string>
+    <string name="more_keys_for_s">c,z</string>
+    <string name="more_keys_for_v">w</string>
 </resources>
