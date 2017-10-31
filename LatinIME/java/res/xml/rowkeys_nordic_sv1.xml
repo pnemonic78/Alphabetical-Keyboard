@@ -23,6 +23,7 @@
 >
     <include
         latin:keyboardLayout="@xml/rowkeys_qwerty1" />
+    <!-- U+00E5: "å" LATIN SMALL LETTER A WITH RING ABOVE -->
     <Key
-        latin:keyLabel="!text/keylabel_for_nordic_row1_11" />
+        latin:keyLabel="&#x00E5;" />
 </merge>

@@ -23,6 +23,7 @@
 >
     <include
         latin:keyboardLayout="@xml/rowkeys_qwerty1" />
+    <!-- U+00F0: "ð" LATIN SMALL LETTER ETH -->
     <Key
-        latin:keyLabel="!text/keylabel_for_nordic_row1_11" />
+        latin:keyLabel="&#x00F0;" />
 </merge>

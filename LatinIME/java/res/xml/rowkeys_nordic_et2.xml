@@ -23,10 +23,12 @@
 >
     <include
         latin:keyboardLayout="@xml/rowkeys_qwerty2" />
+    <!-- U+00F6: "ö" LATIN SMALL LETTER O WITH DIAERESIS -->
     <Key
-        latin:keyLabel="!text/keylabel_for_nordic_row2_10"
+        latin:keyLabel="&#x00F6;"
         latin:moreKeys="!text/more_keys_for_nordic_row2_10" />
+    <!-- U+00E4: "ä" LATIN SMALL LETTER A WITH DIAERESIS -->
     <Key
-        latin:keyLabel="!text/keylabel_for_nordic_row2_11"
+        latin:keyLabel="&#x00E4;"
         latin:moreKeys="!text/more_keys_for_nordic_row2_11" />
 </merge>
