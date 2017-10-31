@@ -9,6 +9,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/LatinIME" />
+            <option value="$PROJECT_DIR$/LatinIME/tools" />
+            <option value="$PROJECT_DIR$/LatinIME/tools/maketext" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

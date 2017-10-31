@@ -27,14 +27,13 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 public class JarUtils {
-    private static final String MANIFEST = "META-INF/MANIFEST.MF";
 
     private JarUtils() {
         // This utility class is not publicly instantiable.
     }
 
-    public static JarFile getJarFile(final ClassLoader loader) {
-        final URL resUrl = loader.getResource(MANIFEST);
+    public static JarFile getJarFile(final Class clazz) {
+        final URL resUrl = clazz.getResource('/' + clazz.getName().replace('.', '/') + ".class");
         if (!resUrl.getProtocol().equals("jar")) {
             throw new RuntimeException("Should run as jar");
         }

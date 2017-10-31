@@ -1,1 +1,2 @@
 include ':LatinIME'
+include ':LatinIME:tools:maketext'
