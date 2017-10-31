@@ -31,7 +31,7 @@
             latin:keyLabelFlags="alignLeft"
             latin:keyWidth="7.969%p" />
         <include
-            latin:keyboardLayout="@xml/rowkeys_nordic1"
+            latin:keyboardLayout="@xml/rowkeys_nordic_da1"
             latin:keyLabelFlags="disableAdditionalMoreKeys|disableKeyHintLabel" />
         <Key
             latin:keyStyle="deleteKeyStyle"
@@ -45,7 +45,7 @@
             latin:keyLabelFlags="alignLeft"
             latin:keyWidth="11.172%p" />
         <include
-            latin:keyboardLayout="@xml/rowkeys_nordic2" />
+            latin:keyboardLayout="@xml/rowkeys_nordic_da2" />
         <Key
             latin:keyStyle="enterKeyStyle"
             latin:keyWidth="fillRight" />

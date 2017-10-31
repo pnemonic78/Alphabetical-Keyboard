@@ -27,13 +27,13 @@
         latin:keyWidth="9.091%p"
     >
         <include
-            latin:keyboardLayout="@xml/rowkeys_nordic1" />
+            latin:keyboardLayout="@xml/rowkeys_nordic_is1" />
     </Row>
     <Row
         latin:keyWidth="9.091%p"
     >
         <include
-            latin:keyboardLayout="@xml/rowkeys_nordic2" />
+            latin:keyboardLayout="@xml/rowkeys_nordic_is2" />
     </Row>
     <Row
         latin:keyWidth="9.2%p"
@@ -45,7 +45,7 @@
         <Spacer
             latin:keyWidth="2.8%p" />
         <include
-            latin:keyboardLayout="@xml/rowkeys_qwerty3" />
+            latin:keyboardLayout="@xml/rowkeys_nordic_is3" />
         <Key
             latin:keyStyle="deleteKeyStyle"
             latin:keyXPos="-15%p"

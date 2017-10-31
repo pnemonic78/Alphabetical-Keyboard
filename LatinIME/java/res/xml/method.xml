@@ -142,7 +142,7 @@
             android:label="@string/subtype_generic"
             android:imeSubtypeLocale="et"
             android:imeSubtypeMode="keyboard"
-            android:imeSubtypeExtraValue="KeyboardLayoutSet=nordic,AsciiCapable"
+            android:imeSubtypeExtraValue="KeyboardLayoutSet=nordic_et,AsciiCapable"
     />
     <subtype android:icon="@drawable/ic_subtype_keyboard"
             android:label="@string/subtype_generic"
@@ -190,7 +190,7 @@
             android:label="@string/subtype_generic"
             android:imeSubtypeLocale="is"
             android:imeSubtypeMode="keyboard"
-            android:imeSubtypeExtraValue="KeyboardLayoutSet=qwerty,AsciiCapable"
+            android:imeSubtypeExtraValue="KeyboardLayoutSet=nordic_is,AsciiCapable"
     />
     <subtype android:icon="@drawable/ic_subtype_keyboard"
             android:label="@string/subtype_generic"
