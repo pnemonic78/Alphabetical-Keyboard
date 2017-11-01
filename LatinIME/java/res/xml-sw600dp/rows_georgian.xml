@@ -27,8 +27,7 @@
         latin:keyWidth="9.0%p"
     >
         <include
-            latin:keyboardLayout="@xml/rowkeys_georgian1"
-            latin:keyLabelFlags="disableAdditionalMoreKeys|disableKeyHintLabel" />
+            latin:keyboardLayout="@xml/rowkeys_georgian1" />
         <Key
             latin:keyStyle="deleteKeyStyle"
             latin:keyWidth="fillRight" />
@@ -37,8 +36,7 @@
         latin:keyWidth="9.0%p"
     >
         <include
-            latin:keyboardLayout="@xml/rowkeys_georgian2"
-            latin:keyXPos="4.5%p" />
+            latin:keyboardLayout="@xml/rowkeys_georgian2" />
         <Key
             latin:keyStyle="enterKeyStyle"
             latin:keyWidth="fillRight" />
@@ -47,8 +45,7 @@
         latin:keyWidth="9.0%p"
     >
         <Key
-            latin:keyStyle="shiftKeyStyle"
-            latin:keyWidth="10.0%p" />
+            latin:keyStyle="shiftKeyStyle" />
         <include
             latin:keyboardLayout="@xml/rowkeys_georgian3" />
         <include
