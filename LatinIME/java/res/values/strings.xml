@@ -19,9 +19,9 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Title for Latin keyboard  -->
-    <string name="english_ime_name">Alphabetical keyboard</string>
+    <string name="english_ime_name">Alphabetical Keyboard</string>
     <!-- Application name for opensource Android keyboard. AOSP(Android Open Source Project) should not be translated. -->
-    <string name="aosp_android_keyboard_ime_name" translatable="false">Alphabetical Keyboard</string>
+    <string name="aosp_android_keyboard_ime_name" translatable="false">@string/english_ime_name</string>
     <!-- Title for Latin keyboard settings activity / dialog -->
     <string name="english_ime_settings">Alphabetical keyboard settings</string>
     <!-- Title for Latin keyboard input options dialog [CHAR LIMIT=25] -->
