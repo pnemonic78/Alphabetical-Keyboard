@@ -20,8 +20,8 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="english_ime_name" msgid="7252517407088836577">"Tastatura Android"</string>
-    <string name="english_ime_settings" msgid="6661589557206947774">"Parameters da la tastatura Android"</string>
+    <string name="english_ime_name" msgid="7252517407088836577">"Tastatura Alfabetică"</string>
+    <string name="english_ime_settings" msgid="6661589557206947774">"Parameters da la tastatura alfabetice"</string>
     <!-- no translation found for english_ime_input_options (3909945612939668554) -->
     <skip />
     <!-- no translation found for spell_checker_service_name (7338064335159755926) -->
