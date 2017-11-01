@@ -46,8 +46,7 @@
         latin:keyWidth="9.0%p"
     >
         <Key
-            latin:keyStyle="shiftKeyStyle"
-            latin:keyWidth="10.0%p" />
+            latin:keyStyle="shiftKeyStyle" />
         <include
             latin:keyboardLayout="@xml/rowkeys_greek3" />
         <include
