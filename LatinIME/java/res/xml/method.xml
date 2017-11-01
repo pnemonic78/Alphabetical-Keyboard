@@ -326,7 +326,7 @@
             android:imeSubtypeExtraValue="KeyboardLayoutSet=qwerty,AsciiCapable"
     />
     <subtype android:icon="@drawable/ic_subtype_keyboard"
-            android:label="@string/subtype_no_language_qwerty"
+            android:label="@string/subtype_no_language"
             android:imeSubtypeLocale="zz"
             android:imeSubtypeMode="keyboard"
             android:imeSubtypeExtraValue="KeyboardLayoutSet=qwerty,AsciiCapable,EnabledWhenDefaultIsNotAsciiCapable"

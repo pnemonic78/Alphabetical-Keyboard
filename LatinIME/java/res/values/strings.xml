@@ -21,7 +21,7 @@
     <!-- Title for Latin keyboard  -->
     <string name="english_ime_name">Alphabetical keyboard</string>
     <!-- Application name for opensource Android keyboard. AOSP(Android Open Source Project) should not be translated. -->
-    <string name="aosp_android_keyboard_ime_name">Alphabetical keyboard (AOSP)</string>
+    <string name="aosp_android_keyboard_ime_name">Alphabetical keyboard</string>
     <!-- Title for Latin keyboard settings activity / dialog -->
     <string name="english_ime_settings">Alphabetical keyboard settings</string>
     <!-- Title for Latin keyboard input options dialog [CHAR LIMIT=25] -->
@@ -272,7 +272,7 @@
     <string name="subtype_no_language_dvorak">No language (Dvorak)</string>
     <!-- Description for language agnostic Colemak keyboard subtype [CHAR LIMIT=25] -->
     <string name="subtype_no_language_colemak">No language (Colemak)</string>
-    <!-- Description for language agnostic PC QWERTY keyboard subtype [CHAR LIMIT=25] -->
+    <!-- Description for language agnostic PC keyboard subtype [CHAR LIMIT=25] -->
     <string name="subtype_no_language_pcqwerty">No language (PC)</string>
 
     <!-- Title of the preference settings for custom input styles (language and keyboard layout pairs) [CHAR LIMIT=35]-->
