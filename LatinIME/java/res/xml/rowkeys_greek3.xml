@@ -21,10 +21,6 @@
 <merge
     xmlns:latin="http://schemas.android.com/apk/res-auto"
 >
-    <!-- U+03C2: "ς" GREEK SMALL LETTER FINAL SIGMA -->
-    <Key
-        latin:keyLabel="&#x03C2;"
-        latin:keyLabelFlags="preserveCase" />
     <!-- U+03C4: "τ" GREEK SMALL LETTER TAU -->
     <Key
         latin:keyLabel="&#x03C4;" />

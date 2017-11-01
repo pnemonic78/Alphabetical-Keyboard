@@ -27,10 +27,7 @@
         latin:keyWidth="9.0%p"
     >
         <include
-            latin:keyboardLayout="@xml/key_greek_semicolon" />
-        <include
-            latin:keyboardLayout="@xml/rowkeys_greek1"
-            latin:keyLabelFlags="disableAdditionalMoreKeys|disableKeyHintLabel" />
+            latin:keyboardLayout="@xml/rowkeys_greek1" />
         <Key
             latin:keyStyle="deleteKeyStyle"
             latin:keyWidth="fillRight" />
@@ -53,6 +50,8 @@
             latin:keyWidth="10.0%p" />
         <include
             latin:keyboardLayout="@xml/rowkeys_greek3" />
+        <include
+            latin:keyboardLayout="@xml/key_greek_semicolon" />
         <include
             latin:keyboardLayout="@xml/keys_comma_period" />
         <Key
