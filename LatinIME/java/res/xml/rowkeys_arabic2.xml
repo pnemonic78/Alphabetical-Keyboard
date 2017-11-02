@@ -66,6 +66,5 @@
          U+0698: "ژ" ARABIC LETTER JEH -->
     <Key
         latin:keyLabel="&#x0632;"
-        latin:moreKeys="&#x0698;"
-        latin:keyWidth="fillRight" />
+        latin:moreKeys="&#x0698;" />
 </merge>

@@ -21,6 +21,9 @@
 <merge
     xmlns:latin="http://schemas.android.com/apk/res-auto"
 >
+    <!-- U+0621: "ء" ARABIC LETTER HAMZA -->
+    <Key
+        latin:keyLabel="&#x0621;" />
     <!-- U+064A: "ي" ARABIC LETTER YEH
          U+0626: "ئ" ARABIC LETTER YEH WITH HAMZA ABOVE
          U+0649: "ى" ARABIC LETTER ALEF MAKSURA -->
