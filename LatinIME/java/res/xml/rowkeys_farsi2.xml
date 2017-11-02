@@ -21,41 +21,25 @@
 <merge
     xmlns:latin="http://schemas.android.com/apk/res-auto"
 >
-    <!-- U+0644: "ل" ARABIC LETTER LAM -->
-    <Key
-        latin:keyLabel="&#x0644;" />
-    <!-- U+06A9: "ک" ARABIC LETTER KEHEH
-         U+0643: "ك" ARABIC LETTER KAF -->
-    <Key
-        latin:keyLabel="&#x06A9;"
-        latin:moreKeys="&#x0643;" />
-    <!-- U+0642: "ق" ARABIC LETTER QAF
-         U+06F2: "۲" EXTENDED ARABIC-INDIC DIGIT TWO -->
-    <Key
-        latin:keyLabel="&#x0642;" />
-    <!-- U+0641: "ف" ARABIC LETTER FEH
-         U+06F3: "۳" EXTENDED ARABIC-INDIC DIGIT THREE -->
-    <Key
-        latin:keyLabel="&#x0641;" />
-    <!-- U+063A: "غ" ARABIC LETTER GHAIN
-         U+06F4: "۴" EXTENDED ARABIC-INDIC DIGIT FOUR -->
+    <!-- U+063A: "غ" ARABIC LETTER GHAIN -->
     <Key
         latin:keyLabel="&#x063A;" />
-    <!-- U+0639: "ع" ARABIC LETTER AIN
-         U+06F5: "۵" EXTENDED ARABIC-INDIC DIGIT FIVE -->
+    <!-- U+0639: "ع" ARABIC LETTER AIN -->
     <Key
         latin:keyLabel="&#x0639;" />
-    <!-- U+0637: "ط" ARABIC LETTER TAH
-         U+0638: "ظ" ARABIC LETTER ZAH -->
+    <!-- U+0638: "ظ" ARABIC LETTER ZAH -->
     <Key
-        latin:keyLabel="&#x0637;"
-        latin:moreKeys="&#x0638;" />
-    <!-- U+0635: "ص" ARABIC LETTER SAD
-         U+0636: "ض" ARABIC LETTER DAD
-         U+06F1: "۱" EXTENDED ARABIC-INDIC DIGIT ONE -->
+        latin:keyLabel="&#x0638;" />
+    <!-- U+0637: "ط" ARABIC LETTER TAH -->
+    <Key
+        latin:keyLabel="&#x0637;" />
+    <!-- U+0636: "ض" ARABIC LETTER DAD -->
+    <Key
+        latin:keyLabel="&#x0636;" />
+    <!-- U+0635: "ص" ARABIC LETTER SAD -->
     <Key
         latin:keyLabel="&#x0635;"
-        latin:moreKeys="&#x0636;,%" />
+        latin:moreKeys="%" />
     <!-- U+0634: "ش" ARABIC LETTER SHEEN -->
     <Key
         latin:keyLabel="&#x0634;" />
@@ -64,4 +48,13 @@
     <Key
         latin:keyLabel="&#x0633;"
         latin:moreKeys="&#x0636;" />
+    <!-- U+0698: "ژ" ARABIC LETTER JEH -->
+    <Key
+        latin:keyLabel="&#x0698;" />
+    <!-- U+0632: "ز" ARABIC LETTER ZAIN -->
+    <Key
+        latin:keyLabel="&#x0632;" />
+    <!-- U+0631: "ر" ARABIC LETTER REH -->
+    <Key
+        latin:keyLabel="&#x0631;" />
 </merge>
