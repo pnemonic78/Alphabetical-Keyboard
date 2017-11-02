@@ -61,22 +61,23 @@
     <string name="more_keys_for_symbols_semicolon">;</string>
     <!-- U+2030: "‰" PER MILLE SIGN -->
     <string name="more_keys_for_symbols_percent">\\%,&#x2030;</string>
-    <!-- U+060C: "،" ARABIC COMMA
-         U+061B: "؛" ARABIC SEMICOLON
-         U+061F: "؟" ARABIC QUESTION MARK
-         U+00AB: "«" LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
-         U+00BB: "»" RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK -->
+    <!-- U+060C: "،" ARABIC COMMA -->
     <string name="keylabel_for_tablet_comma">"&#x060C;"</string>
     <string name="keyhintlabel_for_tablet_comma">"!"</string>
     <string name="more_keys_for_tablet_comma">"!,\\,"</string>
+    <!-- U+061F: "؟" ARABIC QUESTION MARK -->
     <string name="keyhintlabel_for_tablet_period">"&#x061F;"</string>
-    <string name="more_keys_for_tablet_period">"&#x061F;,\?"</string>
-    <string name="keylabel_for_apostrophe">&#x060C;</string>
-    <string name="keyhintlabel_for_apostrophe">&#x061F;</string>
-    <string name="more_keys_for_apostrophe">"!fixedColumnOrder!4,:,!,&#x061F;,&#x061B;,-,/,&#x00AB;|&#x00BB;,&#x00BB;|&#x00AB;"</string>
-    <!-- U+061F: "؟" ARABIC QUESTION MARK
-         U+060C: "،" ARABIC COMMA
-         U+061B: "؛" ARABIC SEMICOLON -->
+    <!-- U+061E: "؞" ARABIC TRIPLE DOT PUNCTUATION MARK
+         U+061F: "؟" ARABIC QUESTION MARK -->
+    <string name="more_keys_for_tablet_period">"&#x061E;,&#x061F;,\?"</string>
+    <string name="keylabel_for_apostrophe">\'</string>
+    <string name="keyhintlabel_for_apostrophe">\"</string>
+    <!-- U+00AB: "«" LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
+         U+00BB: "»" RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK -->
+    <string name="more_keys_for_apostrophe">"\",&#x00AB;|&#x00BB;,&#x00BB;|&#x00AB;"</string>
+    <!-- U+060C: "،" ARABIC COMMA
+         U+061B: "؛" ARABIC SEMICOLON
+         U+061F: "؟" ARABIC QUESTION MARK -->
     <string name="more_keys_for_punctuation">"!fixedColumnOrder!8,\",\',#,-,:,!,&#x060C;,&#x061F;,\@,&amp;,\\%,+,&#x061B;,/,(,)"</string>
     <!-- U+266A: "♪" EIGHTH NOTE -->
     <string name="more_keys_for_bullet">&#x266A;</string>

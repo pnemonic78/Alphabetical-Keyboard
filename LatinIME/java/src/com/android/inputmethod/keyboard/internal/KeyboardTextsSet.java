@@ -969,9 +969,9 @@ public final class KeyboardTextsSet {
         /* 44~ */
         null, null, null, null,
         /* ~47 */
-        // U+061F: "؟" ARABIC QUESTION MARK
         // U+060C: "،" ARABIC COMMA
         // U+061B: "؛" ARABIC SEMICOLON
+        // U+061F: "؟" ARABIC QUESTION MARK
         /* 48 */ "!fixedColumnOrder!8,\",\',#,-,:,!,\u060C,\u061F,@,&,\\%,+,\u061B,/,(,)",
         // U+2605: "★" BLACK STAR
         // U+066D: "٭" ARABIC FIVE POINTED STAR
@@ -1068,18 +1068,19 @@ public final class KeyboardTextsSet {
         // U+2030: "‰" PER MILLE SIGN
         /* 97 */ "\\%,\u2030",
         // U+060C: "،" ARABIC COMMA
-        // U+061B: "؛" ARABIC SEMICOLON
-        // U+061F: "؟" ARABIC QUESTION MARK
-        // U+00AB: "«" LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
-        // U+00BB: "»" RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
         /* 98 */ "\u060C",
         /* 99 */ "!",
         /* 100 */ "!,\\,",
+        // U+061F: "؟" ARABIC QUESTION MARK
         /* 101 */ "\u061F",
-        /* 102 */ "\u061F,?",
-        /* 103 */ "\u060C",
-        /* 104 */ "\u061F",
-        /* 105 */ "!fixedColumnOrder!4,:,!,\u061F,\u061B,-,/,\u00AB|\u00BB,\u00BB|\u00AB",
+        // U+061E: "؞" ARABIC TRIPLE DOT PUNCTUATION MARK
+        // U+061F: "؟" ARABIC QUESTION MARK
+        /* 102 */ "\u061E,\u061F,?",
+        /* 103 */ "\'",
+        /* 104 */ "\"",
+        // U+00AB: "«" LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
+        // U+00BB: "»" RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
+        /* 105 */ "\",\u00AB|\u00BB,\u00BB|\u00AB",
     };
 
     /* Language fi: Finnish */
