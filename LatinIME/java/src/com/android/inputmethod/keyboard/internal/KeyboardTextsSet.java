@@ -1077,10 +1077,8 @@ public final class KeyboardTextsSet {
         // U+061F: "؟" ARABIC QUESTION MARK
         /* 102 */ "\u061E,\u061F,?",
         /* 103 */ "\'",
-        /* 104 */ "\"",
-        // U+00AB: "«" LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
-        // U+00BB: "»" RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
-        /* 105 */ "\",\u00AB|\u00BB,\u00BB|\u00AB",
+        /* 104 */ "!text/keyhintlabel_for_arabic_diacritics",
+        /* 105 */ "!text/more_keys_for_arabic_diacritics",
     };
 
     /* Language fi: Finnish */
