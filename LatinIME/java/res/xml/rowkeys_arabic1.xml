@@ -53,9 +53,9 @@
          U+0660: "٠" ARABIC-INDIC DIGIT ZERO -->
     <Key
         latin:keyLabel="&#x062C;"
+        latin:moreKeys="&#x0686;"
         latin:keyHintLabel="6"
-        latin:additionalMoreKeys="6,&#x0666;"
-        latin:moreKeys="&#x0686;" />
+        latin:additionalMoreKeys="6,&#x0666;" />
     <!-- U+062A: "ت" ARABIC LETTER TEH
          U+062B: "ﺙ" ARABIC LETTER THEH -->
     <Key
