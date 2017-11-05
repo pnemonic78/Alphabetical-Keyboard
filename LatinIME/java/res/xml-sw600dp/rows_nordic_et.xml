@@ -46,14 +46,13 @@
     >
         <Key
             latin:keyStyle="shiftKeyStyle"
-            latin:keyWidth="10.0%p" />
+            latin:keyWidth="12.5%p" />
         <include
             latin:keyboardLayout="@xml/rowkeys_nordic_et3" />
         <include
             latin:keyboardLayout="@xml/keys_comma_period" />
         <Key
             latin:keyStyle="shiftKeyStyle"
-            latin:keyXPos="-10.0%p"
             latin:keyWidth="fillRight" />
     </Row>
     <include
