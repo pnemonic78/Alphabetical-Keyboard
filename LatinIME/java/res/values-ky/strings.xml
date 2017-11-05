@@ -20,7 +20,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="english_ime_name" msgid="7252517407088836577">"Саноо тергич"</string>
+    <string name="english_ime_name" msgid="7252517407088836577">Саноо Тергич</string>
     <string name="english_ime_settings" msgid="6661589557206947774">"Саноо клавиатура орнотуулары"</string>
     <!-- no translation found for english_ime_input_options (3909945612939668554) -->
     <skip />
