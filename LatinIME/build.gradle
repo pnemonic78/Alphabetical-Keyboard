@@ -4,6 +4,15 @@ android {
     compileSdkVersion 26
     buildToolsVersion '26.0.2'
 
+    signingConfigs {
+        release {
+            storeFile file("release.keystore")
+            storePassword project.STORE_PASSWORD_RELEASE
+            keyAlias "release"
+            keyPassword project.KEY_PASSWORD_RELEASE
+        }
+    }
+
     defaultConfig {
         applicationId "com.github.inputmethod.alphabetical"
         minSdkVersion 19
@@ -15,10 +24,12 @@ android {
             abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
         }
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 
