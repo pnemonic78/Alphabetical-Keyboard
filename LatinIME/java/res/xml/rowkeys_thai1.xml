@@ -63,47 +63,56 @@
                 latin:keyLabel="&#x0E21;" />
         </case>
         <default>
-            <!-- U+0E01: "ก" THAI CHARACTER KO KAI -->
+            <!-- U+0E01: "ก" THAI CHARACTER KO KAI
+                 U+0E51: "๑" THAI DIGIT ONE -->
             <Key
                 latin:keyLabel="&#x0E01;"
                 latin:keyHintLabel="1"
                 latin:additionalMoreKeys="1,&#x0E51;" />
-            <!-- U+0E02: "ข" THAI CHARACTER KHO KHAI -->
+            <!-- U+0E02: "ข" THAI CHARACTER KHO KHAI
+                 U+0E52: "๒" THAI DIGIT TWO -->
             <Key
                 latin:keyLabel="&#x0E02;"
                 latin:keyHintLabel="2"
                 latin:additionalMoreKeys="2,&#x0E52;" />
-            <!-- U+0E03: "ฃ" THAI CHARACTER KHO KHUAT -->
+            <!-- U+0E03: "ฃ" THAI CHARACTER KHO KHUAT
+                 U+0E53: "๓" THAI DIGIT THREE -->
             <Key
                 latin:keyLabel="&#x0E03;"
                 latin:keyHintLabel="3"
                 latin:additionalMoreKeys="3,&#x0E53;" />
-            <!-- U+0E04: "ค" THAI CHARACTER KHO KHWAI -->
+            <!-- U+0E04: "ค" THAI CHARACTER KHO KHWAI
+                 U+0E54: "๔" THAI DIGIT FOUR -->
             <Key
                 latin:keyLabel="&#x0E04;"
                 latin:keyHintLabel="4"
                 latin:additionalMoreKeys="4,&#x0E54;" />
-            <!-- U+0E05: "ฅ" THAI CHARACTER KHO KHON -->
+            <!-- U+0E05: "ฅ" THAI CHARACTER KHO KHON
+                 U+0E55: "๕" THAI DIGIT FIVE -->
             <Key
                 latin:keyLabel="&#x0E05;"
                 latin:keyHintLabel="5"
                 latin:additionalMoreKeys="5,&#x0E55;" />
-            <!-- U+0E06: "ฆ" THAI CHARACTER KHO RAKHANG -->
+            <!-- U+0E06: "ฆ" THAI CHARACTER KHO RAKHANG
+                 U+0E56: "๖" THAI DIGIT SIX -->
             <Key
                 latin:keyLabel="&#x0E06;"
                 latin:keyHintLabel="6"
                 latin:additionalMoreKeys="6,&#x0E56;" />
-            <!-- U+0E07: "ง" THAI CHARACTER NGO NGU -->
+            <!-- U+0E07: "ง" THAI CHARACTER NGO NGU
+                 U+0E57: "๗" THAI DIGIT SEVEN -->
             <Key
                 latin:keyLabel="&#x0E07;"
                 latin:keyHintLabel="7"
                 latin:additionalMoreKeys="7,&#x0E57;" />
-            <!-- U+0E08: "จ" THAI CHARACTER CHO CHAN -->
+            <!-- U+0E08: "จ" THAI CHARACTER CHO CHAN
+                 U+0E58: "๘" THAI DIGIT EIGHT -->
             <Key
                 latin:keyLabel="&#x0E08;"
                 latin:keyHintLabel="8"
                 latin:additionalMoreKeys="8,&#x0E58;" />
-            <!-- U+0E09: "ฉ" THAI CHARACTER CHO CHING -->
+            <!-- U+0E09: "ฉ" THAI CHARACTER CHO CHING
+                 U+0E59: "๙" THAI DIGIT NINE -->
             <Key
                 latin:keyLabel="&#x0E09;"
                 latin:keyHintLabel="9"

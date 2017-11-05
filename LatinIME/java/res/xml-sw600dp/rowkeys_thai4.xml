@@ -25,65 +25,62 @@
         <case
             latin:keyboardLayoutSetElement="alphabetManualShifted|alphabetShiftLocked|alphabetShiftLockShifted"
         >
+            <!-- U+0E4B: " ๋" THAI CHARACTER MAI CHATTAWA -->
             <Key
-                latin:keyLabel="(" />
-            <Key
-                latin:keyLabel=")" />
-            <!-- U+0E09: "ฉ" THAI CHARACTER CHO CHING -->
-            <Key
-                latin:keyLabel="&#x0E09;" />
-            <!-- U+0E2E: "ฮ" THAI CHARACTER HO NOKHUK -->
-            <Key
-                latin:keyLabel="&#x0E2E;" />
-            <!-- U+0E3A: " ฺ" THAI CHARACTER PHINTHU -->
-            <Key
-                latin:keyLabel="&#x0E3A;" />
+                latin:keyLabel="&#x0E4B;" />
             <!-- U+0E4C: " ์" THAI CHARACTER THANTHAKHAT -->
             <Key
                 latin:keyLabel="&#x0E4C;" />
+            <!-- U+0E4D: " ํ" THAI CHARACTER NIKHAHIT -->
             <Key
-                latin:keyLabel="\?" />
-            <!-- U+0E12: "ฒ" THAI CHARACTER THO PHUTHAO -->
+                latin:keyLabel="&#x0E4D;" />
+            <!-- U+0E4E: " ๎" THAI CHARACTER YAMAKKAN -->
             <Key
-                latin:keyLabel="&#x0E12;" />
+                latin:keyLabel="&#x0E4E;" />
+            <!-- U+0E4F: "๏" THAI CHARACTER FONGMAN -->
+            <Key
+                latin:keyLabel="&#x0E4F;" />
+            <!-- U+0E5A: "๚" THAI CHARACTER ANGKHANKHU -->
+            <Key
+                latin:keyLabel="&#x0E5A;" />
+            <!-- U+0E5B: "๛" THAI CHARACTER KHOMUT -->
+            <Key
+                latin:keyLabel="&#x0E5B;" />
+            <!-- U+0E3F: "฿" THAI CURRENCY SYMBOL BAHT -->
+            <Key
+                latin:keyLabel="&#x0E3F;" />
+        </case>
+        <default>
+            <!-- U+0E23: "ร" THAI CHARACTER RO RUA -->
+            <Key
+                latin:keyLabel="&#x0E23;" />
+            <!-- U+0E25: "ล" THAI CHARACTER LO LING -->
+            <Key
+                latin:keyLabel="&#x0E25;" />
+            <!-- U+0E27: "ว" THAI CHARACTER WO WAEN -->
+            <Key
+                latin:keyLabel="&#x0E27;" />
+            <!--  U+0E28: "ศ" THAI CHARACTER SO SALA -->
+            <Key
+                latin:keyLabel="&#x0E28;" />
+            <!-- U+0E29: "ษ" THAI CHARACTER SO RUSI -->
+            <Key
+                latin:keyLabel="&#x0E29;" />
+            <!-- U+0E2A: "ส" THAI CHARACTER SO SUA -->
+            <Key
+                latin:keyLabel="&#x0E2A;" />
+            <!-- U+0E2B: "ห" THAI CHARACTER HO HIP -->
+            <Key
+                latin:keyLabel="&#x0E2B;" />
             <!-- U+0E2C: "ฬ" THAI CHARACTER LO CHULA -->
             <Key
                 latin:keyLabel="&#x0E2C;" />
-            <!-- U+0E26: "ฦ" THAI CHARACTER LU -->
-            <Key
-                latin:keyLabel="&#x0E26;" />
-        </case>
-        <default>
-            <!-- U+0E1C: "ผ" THAI CHARACTER PHO PHUNG -->
-            <Key
-                latin:keyLabel="&#x0E1C;" />
-            <!-- U+0E1B: "ป" THAI CHARACTER PO PLA -->
-            <Key
-                latin:keyLabel="&#x0E1B;" />
-            <!-- U+0E41: "แ" THAI CHARACTER SARA AE -->
-            <Key
-                latin:keyLabel="&#x0E41;" />
             <!-- U+0E2D: "อ" THAI CHARACTER O ANG -->
             <Key
                 latin:keyLabel="&#x0E2D;" />
-            <!-- U+0E34: " ิ" THAI CHARACTER SARA I -->
+            <!-- U+0E2E: "ฮ" THAI CHARACTER HO NOKHUK -->
             <Key
-                latin:keyLabel="&#x0E34;" />
-            <!-- U+0E37: " ื" THAI CHARACTER SARA UEE -->
-            <Key
-                latin:keyLabel="&#x0E37;" />
-            <!-- U+0E17: "ท" THAI CHARACTER THO THAHAN -->
-            <Key
-                latin:keyLabel="&#x0E17;" />
-            <!-- U+0E21: "ม" THAI CHARACTER MO MA -->
-            <Key
-                latin:keyLabel="&#x0E21;" />
-            <!-- U+0E43: "ใ" THAI CHARACTER SARA AI MAIMUAN -->
-            <Key
-                latin:keyLabel="&#x0E43;" />
-            <!-- U+0E1D: "ฝ" THAI CHARACTER FO FA -->
-            <Key
-                latin:keyLabel="&#x0E1D;" />
+                latin:keyLabel="&#x0E2E;" />
         </default>
     </switch>
 </merge>
