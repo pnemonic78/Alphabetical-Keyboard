@@ -103,12 +103,6 @@
             android:imeSubtypeExtraValue="KeyboardLayoutSet=bulgarian"
     />
     <subtype android:icon="@drawable/ic_subtype_keyboard"
-            android:label="@string/subtype_bulgarian_bds"
-            android:imeSubtypeLocale="bg"
-            android:imeSubtypeMode="keyboard"
-            android:imeSubtypeExtraValue="KeyboardLayoutSet=bulgarian_bds"
-    />
-    <subtype android:icon="@drawable/ic_subtype_keyboard"
             android:label="@string/subtype_generic"
             android:imeSubtypeLocale="cs"
             android:imeSubtypeMode="keyboard"
