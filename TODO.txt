@@ -1,0 +1,4 @@
+tall screens: separate row of numbers above alphabet
+Amharic
+Korean
+Japanese
