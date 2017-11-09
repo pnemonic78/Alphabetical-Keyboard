@@ -96,6 +96,7 @@
             <key-style
                 latin:styleName="moreCurrency3KeyStyle"
                 latin:keyLabel="$"
+                latin:keyHintLabel="&#x00A2;"
                 latin:moreKeys="&#x00A2;" />
             <key-style
                 latin:styleName="moreCurrency4KeyStyle"
@@ -123,6 +124,7 @@
             <key-style
                 latin:styleName="moreCurrency3KeyStyle"
                 latin:keyLabel="$"
+                latin:keyHintLabel="&#x00A2;"
                 latin:moreKeys="&#x00A2;" />
             <key-style
                 latin:styleName="moreCurrency4KeyStyle"
@@ -149,6 +151,7 @@
             <key-style
                 latin:styleName="moreCurrency3KeyStyle"
                 latin:keyLabel="$"
+                latin:keyHintLabel="&#x00A2;"
                 latin:moreKeys="&#x00A2;" />
             <key-style
                 latin:styleName="moreCurrency4KeyStyle"
