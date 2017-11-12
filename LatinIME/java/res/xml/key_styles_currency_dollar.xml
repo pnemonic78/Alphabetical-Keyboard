@@ -22,10 +22,12 @@
     <!-- U+00A3: "£" POUND SIGN
          U+00A2: "¢" CENT SIGN
          U+20AC: "€" EURO SIGN
+         U+00A4: "¤" CURRENCY SIGN
          U+00A5: "¥" YEN SIGN -->
     <key-style
         latin:styleName="currencyKeyStyle"
         latin:keyLabel="$"
+        latin:keyHintLabel="&#x00A4;"
         latin:moreKeys="!text/more_keys_for_currency_dollar" />
     <key-style
         latin:styleName="moreCurrency1KeyStyle"

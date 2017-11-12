@@ -81,11 +81,13 @@
         >
             <!-- U+20AA: "₪" NEW SHEQEL SIGN
                  U+00A3: "£" POUND SIGN
+                 U+00A4: "¤" CURRENCY SIGN
                  U+20AC: "€" EURO SIGN
                  U+00A2: "¢" CENT SIGN -->
             <key-style
                 latin:styleName="currencyKeyStyle"
                 latin:keyLabel="&#x20AA;"
+                latin:keyHintLabel="&#x00A4;"
                 latin:moreKeys="!text/more_keys_for_currency_general" />
             <key-style
                 latin:styleName="moreCurrency1KeyStyle"
@@ -108,12 +110,14 @@
             <!-- U+FDFC: "﷼" RIAL SIGN
                  U+060B: "؋" AFGHANI SIGN
                  U+00A3: "£" POUND SIGN
+                 U+00A4: "¤" CURRENCY SIGN
                  U+20AC: "€" EURO SIGN
                  U+00A2: "¢" CENT SIGN -->
             <!-- TODO: DroidSansArabic lacks the glyph of U+FCDC: RIAL SIGN -->
             <key-style
                 latin:styleName="currencyKeyStyle"
                 latin:keyLabel="&#xFDFC;"
+                latin:keyHintLabel="&#x00A4;"
                 latin:moreKeys="!text/more_keys_for_currency_general,&#x060B;" />
             <key-style
                 latin:styleName="moreCurrency1KeyStyle"
@@ -135,12 +139,14 @@
             latin:countryCode="GB"
         >
             <!-- U+00A3: "£" POUND SIGN
+                 U+00A4: "¤" CURRENCY SIGN
                  U+20AC: "€" EURO SIGN
                  U+00A5: "¥" YEN SIGN
                  U+00A2: "¢" CENT SIGN -->
             <key-style
                 latin:styleName="currencyKeyStyle"
                 latin:keyLabel="&#x00A3;"
+                latin:keyHintLabel="&#x00A4;"
                 latin:moreKeys="!text/more_keys_for_currency_pound" />
             <key-style
                 latin:styleName="moreCurrency1KeyStyle"
