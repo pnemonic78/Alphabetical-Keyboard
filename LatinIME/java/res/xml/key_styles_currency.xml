@@ -126,6 +126,16 @@
                 latin:keyboardLayout="@xml/key_styles_currency_sheqel" />
         </case>
         <case
+            latin:languageCode="ko">
+            <include
+                latin:keyboardLayout="@xml/key_styles_currency_won" />
+        </case>
+        <case
+            latin:countryCode="KP|KR">
+            <include
+                latin:keyboardLayout="@xml/key_styles_currency_won" />
+        </case>
+        <case
             latin:languageCode="ja|zh">
             <include
                 latin:keyboardLayout="@xml/key_styles_currency_yen" />
