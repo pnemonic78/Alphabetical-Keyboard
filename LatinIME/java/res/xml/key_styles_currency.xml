@@ -91,12 +91,12 @@
                 latin:keyboardLayout="@xml/key_styles_currency_euro" />
         </case>
         <case
-            latin:languageCode="dz|hi|ne">
+            latin:languageCode="bn|dz|hi|ne">
             <include
                 latin:keyboardLayout="@xml/key_styles_currency_indian_rupee" />
         </case>
         <case
-            latin:countryCode="BT|IN|NP">
+            latin:countryCode="BD|BT|IN|NP">
             <include
                 latin:keyboardLayout="@xml/key_styles_currency_indian_rupee" />
         </case>
