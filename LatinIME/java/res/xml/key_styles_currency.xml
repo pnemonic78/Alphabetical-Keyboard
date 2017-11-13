@@ -115,6 +115,18 @@
             <include
                 latin:keyboardLayout="@xml/key_styles_currency_yen" />
         </case>
+        <case
+            latin:languageCode="ka"
+            >
+            <include
+                latin:keyboardLayout="@xml/key_styles_currency_lari" />
+        </case>
+        <case
+            latin:countryCode="GE"
+            >
+            <include
+                latin:keyboardLayout="@xml/key_styles_currency_lari" />
+        </case>
         <default>
             <include
                 latin:keyboardLayout="@xml/key_styles_currency_dollar" />
