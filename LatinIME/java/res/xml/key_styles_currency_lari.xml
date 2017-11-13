@@ -23,12 +23,14 @@
          U+00A2: "¢" CENT SIGN
          U+00A3: "£" POUND SIGN
          U+00A4: "¤" CURRENCY SIGN
-         U+20AC: "€" EURO SIGN -->
+         U+20AC: "€" EURO SIGN
+         U+20BA: "₺" TURKISH LIRA SIGN
+         U+20BD: "₽" RUBLE SIGN -->
     <key-style
         latin:styleName="currencyKeyStyle"
         latin:keyLabel="&#x20BE;"
         latin:keyHintLabel="&#x00A4;"
-        latin:moreKeys="!text/more_keys_for_currency_general" />
+        latin:moreKeys="!text/more_keys_for_currency_general,&#x20BA;,&#x20BD;" />
     <key-style
         latin:styleName="moreCurrency1KeyStyle"
         latin:keyLabel="&#x00A3;" />

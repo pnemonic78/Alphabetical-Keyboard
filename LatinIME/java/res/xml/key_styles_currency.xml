@@ -101,12 +101,12 @@
                 latin:keyboardLayout="@xml/key_styles_currency_indian_rupee" />
         </case>
         <case
-            latin:languageCode="ka">
+            latin:languageCode="az|ka">
             <include
                 latin:keyboardLayout="@xml/key_styles_currency_lari" />
         </case>
         <case
-            latin:countryCode="GE">
+            latin:countryCode="AZ|GE">
             <include
                 latin:keyboardLayout="@xml/key_styles_currency_lari" />
         </case>
@@ -134,6 +134,16 @@
             latin:countryCode="IR|YE">
             <include
                 latin:keyboardLayout="@xml/key_styles_currency_rial" />
+        </case>
+        <case
+            latin:languageCode="ab|be|kk|pl|ru|os|uk">
+            <include
+                latin:keyboardLayout="@xml/key_styles_currency_ruble" />
+        </case>
+        <case
+            latin:countryCode="AB|BY|GE|KZ|PL|RU|UA">
+            <include
+                latin:keyboardLayout="@xml/key_styles_currency_ruble" />
         </case>
         <case
             latin:languageCode="crs|dv|ne|ur|si|ta">
@@ -166,12 +176,12 @@
                 latin:keyboardLayout="@xml/key_styles_currency_won" />
         </case>
         <case
-            latin:languageCode="ja|zh">
+            latin:languageCode="ja|mn|zh">
             <include
                 latin:keyboardLayout="@xml/key_styles_currency_yen" />
         </case>
         <case
-            latin:countryCode="CN|JP">
+            latin:countryCode="CN|MN|JP">
             <include
                 latin:keyboardLayout="@xml/key_styles_currency_yen" />
         </case>
