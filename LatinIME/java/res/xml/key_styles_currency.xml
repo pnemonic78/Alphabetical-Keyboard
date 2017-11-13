@@ -103,6 +103,18 @@
             <include
                 latin:keyboardLayout="@xml/key_styles_currency_pound" />
         </case>
+        <case
+            latin:languageCode="ja|zh"
+            >
+            <include
+                latin:keyboardLayout="@xml/key_styles_currency_yen" />
+        </case>
+        <case
+            latin:countryCode="CN|JP"
+            >
+            <include
+                latin:keyboardLayout="@xml/key_styles_currency_yen" />
+        </case>
         <default>
             <include
                 latin:keyboardLayout="@xml/key_styles_currency_dollar" />
