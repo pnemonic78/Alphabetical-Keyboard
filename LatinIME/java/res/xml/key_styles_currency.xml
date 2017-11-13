@@ -126,7 +126,7 @@
                 latin:keyboardLayout="@xml/key_styles_currency_pound" />
         </case>
         <case
-            latin:languageCode="fa">
+            latin:languageCode="ar|fa">
             <include
                 latin:keyboardLayout="@xml/key_styles_currency_rial" />
         </case>

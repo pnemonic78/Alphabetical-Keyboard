@@ -66,14 +66,6 @@
          U+061F: "؟" ARABIC QUESTION MARK -->
     <string name="keylabel_for_apostrophe">&#x060C;</string>
     <string name="keyhintlabel_for_apostrophe">&#x061F;</string>
-    <!-- U+00A2: "¢" CENT SIGN
-         U+00A3: "£" POUND SIGN
-         U+00A4: "¤" CURRENCY SIGN
-         U+00A5: "¥" YEN SIGN
-         U+060B: "؋" AFGHANI SIGN
-         U+20AC: "€" EURO SIGN
-         U+20B1: "₱" PESO SIGN -->
-    <string name="more_keys_for_currency_dollar">&#x00A2;,&#x00A3;,&#x00A4;,&#x060B;,&#x20AC;,&#x00A5;,&#x20B1;</string>
     <!-- U+061F: "؟" ARABIC QUESTION MARK
          U+060C: "،" ARABIC COMMA
          U+061B: "؛" ARABIC SEMICOLON -->

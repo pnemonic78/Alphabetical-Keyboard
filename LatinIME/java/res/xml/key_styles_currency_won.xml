@@ -20,11 +20,11 @@
 
 <merge xmlns:latin="http://schemas.android.com/apk/res-auto">
     <!-- U+20A9: "₩" WON SIGN
+         U+00A2: "¢" CENT SIGN
          U+00A3: "£" POUND SIGN
          U+00A4: "¤" CURRENCY SIGN
          U+00A5: "¥" YEN SIGN
-         U+20AC: "€" EURO SIGN
-         U+00A2: "¢" CENT SIGN -->
+         U+20AC: "€" EURO SIGN -->
     <key-style
         latin:styleName="currencyKeyStyle"
         latin:keyLabel="&#x20A9;"

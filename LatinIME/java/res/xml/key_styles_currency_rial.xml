@@ -20,11 +20,11 @@
 
 <merge xmlns:latin="http://schemas.android.com/apk/res-auto">
     <!-- U+FDFC: "﷼" RIAL SIGN
-         U+060B: "؋" AFGHANI SIGN
+         U+00A2: "¢" CENT SIGN
          U+00A3: "£" POUND SIGN
          U+00A4: "¤" CURRENCY SIGN
-         U+20AC: "€" EURO SIGN
-         U+00A2: "¢" CENT SIGN -->
+         U+060B: "؋" AFGHANI SIGN
+         U+20AC: "€" EURO SIGN -->
     <!-- TODO: DroidSansArabic lacks the glyph of U+FCDC: RIAL SIGN -->
     <key-style
         latin:styleName="currencyKeyStyle"

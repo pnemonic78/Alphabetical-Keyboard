@@ -393,16 +393,8 @@ public final class KeyboardTextsSet {
         // TODO: Neither DroidSans nor Roboto have the glyph for U+201F DOUBLE HIGH-REVERSED-9 QUOTATION MARK
         // <string name="more_keys_for_tablet_double_quote">!fixedColumnOrder!6,&#x201C;,&#x201D;,&#x201E;,&#x201F;,&#x00AB;|&#x00BB;,&#x00BB|&#x00AB;;,&#x2018;,&#x2019;,&#x201A;,&#x201B;</string>
         /* 43 */ "!fixedColumnOrder!4,\u201C,\u201D,\u00AB|\u00BB,\u00BB|\u00AB,\u2018,\u2019,\u201A,\u201B",
-        // U+00A2: "¢" CENT SIGN
-        // U+00A3: "£" POUND SIGN
-        // U+00A4: "¤" CURRENCY SIGN
-        // U+00A5: "¥" YEN SIGN
-        // U+060B: "؋" AFGHANI SIGN
-        // U+20AC: "€" EURO SIGN
-        // U+20B1: "₱" PESO SIGN
-        /* 44 */ "\u00A2,\u00A3,\u00A4,\u060B,\u20AC,\u00A5,\u20B1",
-        /* 45~ */
-        null, null, null,
+        /* 44~ */
+        null, null, null, null,
         /* ~47 */
         // U+061F: "؟" ARABIC QUESTION MARK
         // U+060C: "،" ARABIC COMMA
