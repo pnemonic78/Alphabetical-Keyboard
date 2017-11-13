@@ -28,6 +28,16 @@
             <include
                 latin:keyboardLayout="@xml/key_styles_currency_dollar" />
         </case>
+        <case
+            latin:languageCode="th">
+            <include
+                latin:keyboardLayout="@xml/key_styles_currency_baht" />
+        </case>
+        <case
+            latin:countryCode="PA|TH">
+            <include
+                latin:keyboardLayout="@xml/key_styles_currency_baht" />
+        </case>
         <!-- Countries using Euro currency, as of 2013. -->
               1. Andorra (ca_AD, ca_ES)
               2. Austria (de_AT)
@@ -71,14 +81,19 @@
                 latin:keyboardLayout="@xml/key_styles_currency_euro" />
         </case>
         <case
-            latin:languageCode="iw">
+            latin:languageCode="ka">
             <include
-                latin:keyboardLayout="@xml/key_styles_currency_sheqel" />
+                latin:keyboardLayout="@xml/key_styles_currency_lari" />
         </case>
         <case
-            latin:countryCode="IL|PS">
+            latin:countryCode="GE">
             <include
-                latin:keyboardLayout="@xml/key_styles_currency_sheqel" />
+                latin:keyboardLayout="@xml/key_styles_currency_lari" />
+        </case>
+        <case
+            latin:countryCode="EG|FK|GB|GG|IM|GI|JE|SH|SS">
+            <include
+                latin:keyboardLayout="@xml/key_styles_currency_pound" />
         </case>
         <case
             latin:languageCode="fa">
@@ -90,11 +105,25 @@
             <include
                 latin:keyboardLayout="@xml/key_styles_currency_rial" />
         </case>
-        <!-- United Kingdom -->
         <case
-            latin:countryCode="EG|FK|GB|GG|IM|GI|JE|SH|SS">
+            latin:languageCode="crs|dv|ne|ur|si|ta">
             <include
-                latin:keyboardLayout="@xml/key_styles_currency_pound" />
+                latin:keyboardLayout="@xml/key_styles_currency_rupee" />
+        </case>
+        <case
+            latin:countryCode="LK|MU|MV|NP|PK|SC">
+            <include
+                latin:keyboardLayout="@xml/key_styles_currency_rupee" />
+        </case>
+        <case
+            latin:languageCode="iw">
+            <include
+                latin:keyboardLayout="@xml/key_styles_currency_sheqel" />
+        </case>
+        <case
+            latin:countryCode="IL|PS">
+            <include
+                latin:keyboardLayout="@xml/key_styles_currency_sheqel" />
         </case>
         <case
             latin:languageCode="ja|zh">
@@ -105,26 +134,6 @@
             latin:countryCode="CN|JP">
             <include
                 latin:keyboardLayout="@xml/key_styles_currency_yen" />
-        </case>
-        <case
-            latin:languageCode="ka">
-            <include
-                latin:keyboardLayout="@xml/key_styles_currency_lari" />
-        </case>
-        <case
-            latin:countryCode="GE">
-            <include
-                latin:keyboardLayout="@xml/key_styles_currency_lari" />
-        </case>
-        <case
-            latin:languageCode="crs|dv|ne|ur|si|ta">
-            <include
-                latin:keyboardLayout="@xml/key_styles_currency_rupee" />
-        </case>
-        <case
-            latin:countryCode="LK|MU|MV|NP|PK|SC">
-            <include
-                latin:keyboardLayout="@xml/key_styles_currency_rupee" />
         </case>
         <default>
             <include
