@@ -61,71 +61,70 @@
         <!-- Note: Some locales may not have country code, and it it supposed to indicate the
              country where the language originally/mainly spoken. -->
         <case
-            latin:localeCode="ca|da|de|es_ES|el|et|fi|fr|ga|it|lb|lt|lv|mt|nl|pt_PT|sk|sl|sla|sv|tr"
-        >
+            latin:localeCode="ca|da|de|es_ES|el|et|fi|fr|ga|it|lb|lt|lv|mt|nl|pt_PT|sk|sl|sla|sv|tr">
             <include
                 latin:keyboardLayout="@xml/key_styles_currency_euro" />
         </case>
          <case
-            latin:countryCode="AD|AT|BE|CY|EE|FI|FR|DE|GR|IE|IT|XK|LT|LV|LU|MT|MC|ME|NL|PT|SM|SK|SI|ES|VA"
-        >
+            latin:countryCode="AD|AT|BE|CY|EE|FI|FR|DE|GR|IE|IT|XK|LT|LV|LU|MT|MC|ME|NL|PT|SM|SK|SI|ES|VA">
             <include
                 latin:keyboardLayout="@xml/key_styles_currency_euro" />
         </case>
         <case
-            latin:languageCode="iw"
-        >
+            latin:languageCode="iw">
             <include
                 latin:keyboardLayout="@xml/key_styles_currency_sheqel" />
         </case>
         <case
-            latin:countryCode="IL|PS"
-        >
+            latin:countryCode="IL|PS">
             <include
                 latin:keyboardLayout="@xml/key_styles_currency_sheqel" />
         </case>
         <case
-            latin:languageCode="fa"
-        >
+            latin:languageCode="fa">
             <include
                 latin:keyboardLayout="@xml/key_styles_currency_rial" />
         </case>
         <case
-            latin:countryCode="IR|YE"
-        >
+            latin:countryCode="IR|YE">
             <include
                 latin:keyboardLayout="@xml/key_styles_currency_rial" />
         </case>
         <!-- United Kingdom -->
         <case
-            latin:countryCode="EG|FK|GB|GG|IM|GI|JE|SH|SS"
-        >
+            latin:countryCode="EG|FK|GB|GG|IM|GI|JE|SH|SS">
             <include
                 latin:keyboardLayout="@xml/key_styles_currency_pound" />
         </case>
         <case
-            latin:languageCode="ja|zh"
-            >
+            latin:languageCode="ja|zh">
             <include
                 latin:keyboardLayout="@xml/key_styles_currency_yen" />
         </case>
         <case
-            latin:countryCode="CN|JP"
-            >
+            latin:countryCode="CN|JP">
             <include
                 latin:keyboardLayout="@xml/key_styles_currency_yen" />
         </case>
         <case
-            latin:languageCode="ka"
-            >
+            latin:languageCode="ka">
             <include
                 latin:keyboardLayout="@xml/key_styles_currency_lari" />
         </case>
         <case
-            latin:countryCode="GE"
-            >
+            latin:countryCode="GE">
             <include
                 latin:keyboardLayout="@xml/key_styles_currency_lari" />
+        </case>
+        <case
+            latin:languageCode="crs|dv|ne|ur|si|ta">
+            <include
+                latin:keyboardLayout="@xml/key_styles_currency_rupee" />
+        </case>
+        <case
+            latin:countryCode="LK|MU|MV|NP|PK|SC">
+            <include
+                latin:keyboardLayout="@xml/key_styles_currency_rupee" />
         </case>
         <default>
             <include
