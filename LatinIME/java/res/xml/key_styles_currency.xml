@@ -38,6 +38,16 @@
             <include
                 latin:keyboardLayout="@xml/key_styles_currency_baht" />
         </case>
+        <case
+            latin:languageCode="vi">
+            <include
+                latin:keyboardLayout="@xml/key_styles_currency_dong" />
+        </case>
+        <case
+            latin:countryCode="VN">
+            <include
+                latin:keyboardLayout="@xml/key_styles_currency_dong" />
+        </case>
         <!-- Countries using Euro currency, as of 2013. -->
               1. Andorra (ca_AD, ca_ES)
               2. Austria (de_AT)
