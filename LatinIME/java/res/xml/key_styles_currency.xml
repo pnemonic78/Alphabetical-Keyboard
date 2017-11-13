@@ -71,7 +71,7 @@
         <!-- Note: Some locales may not have country code, and it it supposed to indicate the
              country where the language originally/mainly spoken. -->
         <case
-            latin:localeCode="ca|da|de|es_ES|el|et|fi|fr|ga|it|lb|lt|lv|mt|nl|pt_PT|sk|sl|sla|sv|tr">
+            latin:localeCode="ca|da|de|es_ES|el|et|fi|fr|ga|it|lb|lt|lv|mt|nl|pt_PT|sk|sl|sla|sv">
             <include
                 latin:keyboardLayout="@xml/key_styles_currency_euro" />
         </case>
@@ -99,6 +99,16 @@
             latin:countryCode="GE">
             <include
                 latin:keyboardLayout="@xml/key_styles_currency_lari" />
+        </case>
+        <case
+            latin:languageCode="tr">
+            <include
+                latin:keyboardLayout="@xml/key_styles_currency_lira" />
+        </case>
+        <case
+            latin:countryCode="CY|TR">
+            <include
+                latin:keyboardLayout="@xml/key_styles_currency_lira" />
         </case>
         <case
             latin:countryCode="EG|FK|GB|GG|IM|GI|JE|SH|SS">
