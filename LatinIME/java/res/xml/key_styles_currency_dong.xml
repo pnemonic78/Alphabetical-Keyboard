@@ -24,6 +24,7 @@
          U+00A4: "¤" CURRENCY SIGN
          U+00A5: "¥" YEN SIGN
          U+0E3F: "฿" THAI CURRENCY SYMBOL BAHT
+         U+17DB: "៛" KHMER CURRENCY SYMBOL RIEL
          U+20A9: "₩" WON SIGN
          U+20AC: "€" EURO SIGN
          U+20AD: "₭" KIP SIGN
@@ -33,7 +34,7 @@
         latin:styleName="currencyKeyStyle"
         latin:keyLabel="&#x20AB;"
         latin:keyHintLabel="&#x00A4;"
-        latin:moreKeys="$,&#x00A2;,&#x00A3;,&#x00A4;,&#x00A5;,&#x0E3F;,&#x20A9;,&#x20AC;,&#x20AD;,&#x20B1;" />
+        latin:moreKeys="$,&#x00A2;,&#x00A3;,&#x00A4;,&#x00A5;,&#x0E3F;,&#x17DB;,&#x20A9;,&#x20AC;,&#x20AD;,&#x20B1;" />
     <key-style
         latin:styleName="moreCurrency1KeyStyle"
         latin:keyLabel="&#x00A3;" />

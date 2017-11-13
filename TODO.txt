@@ -1,4 +1,5 @@
 tall screens: separate row of numbers above alphabet
+Filipino
 Amharic
 Korean
 Japanese

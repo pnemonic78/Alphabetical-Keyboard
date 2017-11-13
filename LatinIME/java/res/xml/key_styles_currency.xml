@@ -29,12 +29,12 @@
                 latin:keyboardLayout="@xml/key_styles_currency_dollar" />
         </case>
         <case
-            latin:languageCode="th">
+            latin:languageCode="fil|km|lo|th|tl">
             <include
                 latin:keyboardLayout="@xml/key_styles_currency_baht" />
         </case>
         <case
-            latin:countryCode="PA|TH">
+            latin:countryCode="KH|LA|PA|PH|TH">
             <include
                 latin:keyboardLayout="@xml/key_styles_currency_baht" />
         </case>
