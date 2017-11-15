@@ -17,10 +17,10 @@ compileJava {
     options.encoding = "UTF-8"
 }
 
-mainClassName = 'com.android.inputmethod.latin.maketext.LabelText'
+mainClassName = 'com.android.inputmethod.latin.makedict.DictionaryMaker'
 
 jar {
-    baseName = "maketext"
+    baseName = "makedict"
     version = "1.0"
     manifest {
         attributes 'Main-Class': mainClassName

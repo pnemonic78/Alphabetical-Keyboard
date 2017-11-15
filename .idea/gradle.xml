@@ -10,7 +10,8 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/LatinIME" />
             <option value="$PROJECT_DIR$/LatinIME/tools" />
-            <option value="$PROJECT_DIR$/LatinIME/tools/maketext" />
+            <option value="$PROJECT_DIR$/LatinIME/tools/make-keyboard-text" />
+            <option value="$PROJECT_DIR$/LatinIME/tools/makedict" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

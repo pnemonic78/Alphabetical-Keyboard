@@ -3,3 +3,4 @@ Filipino
 Amharic
 Korean
 Japanese
+SpellCheckerProximityInfo

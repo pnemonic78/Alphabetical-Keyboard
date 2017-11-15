@@ -64,5 +64,6 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:support-compat:25.4.0'
+    compile project(':LatinIME:tools:makedict')
+    compile 'com.android.support:support-compat:26.1.0'
 }
