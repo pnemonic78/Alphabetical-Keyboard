@@ -16,8 +16,8 @@ android {
         applicationId "com.github.inputmethod.alphabetical"
         minSdkVersion 16
         targetSdkVersion 19
-        versionCode 2
-        versionName "1.1"
+        versionCode 3
+        versionName "1.02"
     }
 
     buildTypes {
