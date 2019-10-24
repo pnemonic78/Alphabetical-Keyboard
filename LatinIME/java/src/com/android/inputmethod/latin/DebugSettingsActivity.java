@@ -36,6 +36,6 @@ public class DebugSettingsActivity extends PreferenceActivity {
 
     @Override
     protected boolean isValidFragment(String fragmentName) {
-        return true;
+        return fragmentName.startsWith("com.android.inputmethod.latin");
     }
 }
