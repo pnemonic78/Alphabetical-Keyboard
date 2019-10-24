@@ -17,10 +17,22 @@
 package com.android.inputmethod.latin;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.preference.PreferenceActivity;
+import android.support.annotation.Nullable;
+
+import com.crashlytics.android.Crashlytics;
+
+import io.fabric.sdk.android.Fabric;
 
 public class SettingsActivity extends PreferenceActivity {
     private static final String DEFAULT_FRAGMENT = Settings.class.getName();
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
+    }
 
     @Override
     public Intent getIntent() {

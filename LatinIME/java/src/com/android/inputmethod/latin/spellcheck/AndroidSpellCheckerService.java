@@ -44,6 +44,7 @@ import com.android.inputmethod.latin.SynchronouslyLoadedUserBinaryDictionary;
 import com.android.inputmethod.latin.SynchronouslyLoadedUserDictionary;
 import com.android.inputmethod.latin.WhitelistDictionary;
 import com.android.inputmethod.latin.WordComposer;
+import com.crashlytics.android.Crashlytics;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -54,6 +55,8 @@ import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
+
+import io.fabric.sdk.android.Fabric;
 
 /**
  * Service for spell checking, using LatinIME's dictionaries and mechanisms.
@@ -121,6 +124,7 @@ public class AndroidSpellCheckerService extends SpellCheckerService
 
     @Override public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
         mSuggestionThreshold =
                 Float.parseFloat(getString(R.string.spellchecker_suggestion_threshold_value));
         mRecommendedThreshold =

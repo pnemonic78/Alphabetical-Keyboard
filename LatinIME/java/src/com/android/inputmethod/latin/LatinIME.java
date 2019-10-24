@@ -73,11 +73,14 @@ import com.android.inputmethod.keyboard.LatinKeyboardView;
 import com.android.inputmethod.latin.LocaleUtils.RunInLocale;
 import com.android.inputmethod.latin.define.ProductionFlag;
 import com.android.inputmethod.latin.suggestions.SuggestionsView;
+import com.crashlytics.android.Crashlytics;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Locale;
+
+import io.fabric.sdk.android.Fabric;
 
 /**
  * Input method implementation for Qwerty'ish keyboard.
@@ -389,6 +392,7 @@ public class LatinIME extends InputMethodService implements KeyboardActionListen
 
     @Override
     public void onCreate() {
+        Fabric.with(this, new Crashlytics());
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         mPrefs = prefs;
         LatinImeLogger.init(this, prefs);
