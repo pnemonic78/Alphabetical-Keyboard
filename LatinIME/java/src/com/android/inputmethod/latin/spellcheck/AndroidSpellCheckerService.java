@@ -143,7 +143,7 @@ public class AndroidSpellCheckerService extends SpellCheckerService
     public void onSharedPreferenceChanged(final SharedPreferences prefs, final String key) {
         if (!PREF_USE_CONTACTS_KEY.equals(key)) return;
         synchronized(mUseContactsLock) {
-            mUseContactsDictionary = prefs.getBoolean(PREF_USE_CONTACTS_KEY, true);
+            mUseContactsDictionary = false;//prefs.getBoolean(PREF_USE_CONTACTS_KEY, true);
             if (mUseContactsDictionary) {
                 startUsingContactsDictionaryLocked();
             } else {

@@ -129,7 +129,7 @@ public class SettingsValues {
         mKeyPreviewPopupDismissDelayRawValue = prefs.getString(
                 Settings.PREF_KEY_PREVIEW_POPUP_DISMISS_DELAY,
                 Integer.toString(res.getInteger(R.integer.config_key_preview_linger_timeout)));
-        //mUseContactsDict = prefs.getBoolean(Settings.PREF_KEY_USE_CONTACTS_DICT, true);
+        mUseContactsDict = false;//prefs.getBoolean(Settings.PREF_KEY_USE_CONTACTS_DICT, true);
         mAutoCorrectEnabled = isAutoCorrectEnabled(res, mAutoCorrectionThresholdRawValue);
         mBigramSuggestionEnabled = mAutoCorrectEnabled
                 && isBigramSuggestionEnabled(prefs, res, mAutoCorrectEnabled);
