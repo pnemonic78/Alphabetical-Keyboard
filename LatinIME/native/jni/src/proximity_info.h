@@ -77,8 +77,8 @@ class ProximityInfo {
     static const int MAX_KEY_COUNT_IN_A_KEYBOARD = 64;
     // The upper limit of the char code in mCodeToKeyIndex
     static const int MAX_CHAR_CODE = 127;
-    static const float NOT_A_DISTANCE_FLOAT = -1.0f;
-    static const int NOT_A_CODE = -1;
+    constexpr static const float NOT_A_DISTANCE_FLOAT = -1.0f;
+    constexpr static const int NOT_A_CODE = -1;
 
     int getStartIndexFromCoordinates(const int x, const int y) const;
     void initializeCodeToKeyIndex();
