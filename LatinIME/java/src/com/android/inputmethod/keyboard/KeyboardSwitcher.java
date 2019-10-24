@@ -61,7 +61,7 @@ public class KeyboardSwitcher implements KeyboardState.SwitchActions {
         new KeyboardTheme("Basic",            0, R.style.KeyboardTheme),
         new KeyboardTheme("HighContrast",     1, R.style.KeyboardTheme_HighContrast),
         new KeyboardTheme("Stone",            6, R.style.KeyboardTheme_Stone),
-        new KeyboardTheme("Stne.Bold",        7, R.style.KeyboardTheme_Stone_Bold),
+        new KeyboardTheme("Stone.Bold",       7, R.style.KeyboardTheme_Stone_Bold),
         new KeyboardTheme("GingerBread",      8, R.style.KeyboardTheme_Gingerbread),
         new KeyboardTheme("IceCreamSandwich", 5, R.style.KeyboardTheme_IceCreamSandwich),
     };
@@ -127,11 +127,9 @@ public class KeyboardSwitcher implements KeyboardState.SwitchActions {
     }
 
     private void setContextThemeWrapper(Context context, KeyboardTheme keyboardTheme) {
-        if (mKeyboardTheme.mThemeId != keyboardTheme.mThemeId) {
-            mKeyboardTheme = keyboardTheme;
-            mThemeContext = new ContextThemeWrapper(context, keyboardTheme.mStyleId);
-            KeyboardLayoutSet.clearKeyboardCache();
-        }
+        mKeyboardTheme = keyboardTheme;
+        mThemeContext = new ContextThemeWrapper(context, keyboardTheme.mStyleId);
+        KeyboardLayoutSet.clearKeyboardCache();
     }
 
     public void loadKeyboard(EditorInfo editorInfo, SettingsValues settingsValues) {
