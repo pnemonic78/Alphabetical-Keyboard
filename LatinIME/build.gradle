@@ -16,11 +16,11 @@ apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 
 android {
-    compileSdkVersion 19
+    compileSdkVersion 27
 
     signingConfigs {
         release {
-            storeFile file("release.keystore")
+            storeFile file("../release.keystore")
             storePassword project.STORE_PASSWORD_RELEASE
             keyAlias "release"
             keyPassword project.KEY_PASSWORD_RELEASE
@@ -30,7 +30,7 @@ android {
     defaultConfig {
         applicationId "com.github.inputmethod.alphabetical"
         minSdkVersion 16
-        targetSdkVersion 19
+        targetSdkVersion 27
         versionCode 3
         versionName "1.02"
     }
@@ -74,7 +74,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:support-compat:25.4.0'
+    implementation 'com.android.support:support-compat:27.1.1'
 
     // Logging
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
