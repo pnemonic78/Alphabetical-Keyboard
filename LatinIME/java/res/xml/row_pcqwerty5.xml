@@ -26,33 +26,11 @@
     >
         <switch>
             <case
-                latin:keyboardLayoutSetElement="symbols|symbolsShifted"
-            >
-                <Key
-                    latin:keyStyle="toAlphaKeyStyle"
-                    latin:keyWidth="11.538%p" />
-            </case>
-            <!-- keyboardLayoutSetElement="alphabet*" -->
-            <default>
-                <Key
-                    latin:keyStyle="toSymbolKeyStyle"
-                    latin:keyIcon="!icon/undefined"
-                    latin:keyLabel="!text/label_to_symbol_key_pcqwerty"
-                    latin:keyWidth="11.538%p" />
-            </default>
-        </switch>
-        <switch>
-            <case
-                latin:shortcutKeyEnabled="true"
-            >
-                <Key
-                    latin:keyStyle="shortcutKeyStyle" />
-            </case>
-            <case
                 latin:clobberSettingsKey="false"
             >
                 <Key
-                    latin:keyStyle="settingsKeyStyle" />
+                    latin:keyStyle="settingsKeyStyle"
+                    latin:keyWidth="11.538%p" />
             </case>
         </switch>
         <switch>
@@ -61,21 +39,23 @@
             >
                 <Key
                     latin:keyStyle="languageSwitchKeyStyle"
-                    latin:keyXPos="19.230%p" />
+                    latin:keyXPos="19.231%p"
+                    latin:keyWidth="11.538%p" />
                 <Key
                     latin:keyStyle="spaceKeyStyle"
-                    latin:keyWidth="53.844%p" />
+                    latin:keyWidth="42.308%p" />
             </case>
             <!-- languageSwitchKeyEnabled="false" -->
             <default>
                 <Key
                     latin:keyStyle="spaceKeyStyle"
-                    latin:keyXPos="19.230%p"
-                    latin:keyWidth="61.536%p" />
+                    latin:keyXPos="26.923%p"
+                    latin:keyWidth="46.154%p" />
             </default>
         </switch>
         <Key
             latin:keyStyle="enterKeyStyle"
+            latin:keyXPos="-19.231%p"
             latin:keyWidth="fillRight" />
     </Row>
 </merge>

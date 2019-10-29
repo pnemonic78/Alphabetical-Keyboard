@@ -23,20 +23,20 @@
 >
     <switch>
         <case
-            latin:keyboardLayoutSetElement="alphabet|alphabetAutomaticShifted"
+            latin:keyboardLayoutSetElement="alphabet|alphabetAutomaticShifted|alphabetShiftLocked"
         >
             <Key
-                latin:keyLabel=","
-                latin:moreKeys="&lt;" />
+                latin:keySpec=","
+                latin:additionalMoreKeys="&lt;" />
             <Key
-                latin:keyLabel="."
-                latin:moreKeys="&gt;" />
-            <!-- U+00BF: "¿" INVERTED QUESTION MARK -->
+                latin:keySpec="."
+                latin:additionalMoreKeys="&gt;" />
             <Key
-                latin:keyLabel="/"
-                latin:moreKeys="\?,&#x00BF;" />
+                latin:keySpec="/"
+                latin:additionalMoreKeys="\?"
+                latin:moreKeys="!text/morekeys_question" />
         </case>
-        <!-- keyboardLayoutSetElement="alphabet*Shifted|symbols*" -->
+        <!-- keyboardLayoutSetElement="alphabetManualShifted|alphabetShiftLocked|alphabetShiftLockShifted" -->
         <default>
             <!-- U+2039: "‹" SINGLE LEFT-POINTING ANGLE QUOTATION MARK
                  U+203A: "›" SINGLE RIGHT-POINTING ANGLE QUOTATION MARK
@@ -45,15 +45,14 @@
                  U+00AB: "«" LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
                  U+00BB: "»" RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK -->
             <Key
-                latin:keyLabel="&lt;"
+                latin:keySpec="&lt;"
                 latin:moreKeys="!fixedColumnOrder!3,&#x2039;,&#x2264;,&#x00AB;" />
             <Key
-                latin:keyLabel="&gt;"
+                latin:keySpec="&gt;"
                 latin:moreKeys="!fixedColumnOrder!3,&#x203A;,&#x2265;,&#x00BB;" />
-            <!-- U+00BF: "¿" INVERTED QUESTION MARK -->
             <Key
-                latin:keyLabel="\?"
-                latin:moreKeys="&#x00BF;" />
+                latin:keySpec="\?"
+                latin:moreKeys="!text/morekeys_question" />
         </default>
     </switch>
 </merge>

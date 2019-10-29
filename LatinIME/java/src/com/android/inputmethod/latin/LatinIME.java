@@ -1,101 +1,142 @@
 /*
  * Copyright (C) 2008 The Android Open Source Project
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.android.inputmethod.latin;
 
-import static com.android.inputmethod.latin.Constants.ImeOption.FORCE_ASCII;
-import static com.android.inputmethod.latin.Constants.ImeOption.NO_MICROPHONE;
-import static com.android.inputmethod.latin.Constants.ImeOption.NO_MICROPHONE_COMPAT;
+import static android.view.Display.INVALID_DISPLAY;
 
+import static com.android.inputmethod.latin.common.Constants.ImeOption.FORCE_ASCII;
+import static com.android.inputmethod.latin.common.Constants.ImeOption.NO_MICROPHONE;
+import static com.android.inputmethod.latin.common.Constants.ImeOption.NO_MICROPHONE_COMPAT;
+
+import android.Manifest.permission;
+import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
-import android.content.pm.ApplicationInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.graphics.Rect;
+import android.graphics.Color;
 import android.inputmethodservice.InputMethodService;
 import android.media.AudioManager;
-import android.net.ConnectivityManager;
+import android.os.Build;
 import android.os.Debug;
 import android.os.IBinder;
 import android.os.Message;
-import android.os.SystemClock;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.text.InputType;
-import android.text.TextUtils;
 import android.util.Log;
 import android.util.PrintWriterPrinter;
 import android.util.Printer;
-import android.view.KeyCharacterMap;
+import android.util.SparseArray;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.view.ViewParent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.CompletionInfo;
-import android.view.inputmethod.CorrectionInfo;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputMethodSubtype;
 
 import com.android.inputmethod.accessibility.AccessibilityUtils;
-import com.android.inputmethod.accessibility.AccessibleKeyboardViewProxy;
-import com.android.inputmethod.compat.CompatUtils;
-import com.android.inputmethod.compat.InputMethodManagerCompatWrapper;
-import com.android.inputmethod.compat.SuggestionSpanUtils;
+import com.android.inputmethod.annotations.UsedForTesting;
+import com.android.inputmethod.compat.BuildCompatUtils;
+import com.android.inputmethod.compat.EditorInfoCompatUtils;
+import com.android.inputmethod.compat.InputMethodServiceCompatUtils;
+import com.android.inputmethod.compat.InputMethodSubtypeCompatUtils;
+import com.android.inputmethod.compat.ViewOutlineProviderCompatUtils;
+import com.android.inputmethod.compat.ViewOutlineProviderCompatUtils.InsetsUpdater;
+import com.android.inputmethod.dictionarypack.DictionaryPackConstants;
+import com.android.inputmethod.event.Event;
+import com.android.inputmethod.event.HardwareEventDecoder;
+import com.android.inputmethod.event.HardwareKeyboardEventDecoder;
+import com.android.inputmethod.event.InputTransaction;
 import com.android.inputmethod.keyboard.Keyboard;
 import com.android.inputmethod.keyboard.KeyboardActionListener;
 import com.android.inputmethod.keyboard.KeyboardId;
 import com.android.inputmethod.keyboard.KeyboardSwitcher;
-import com.android.inputmethod.keyboard.KeyboardView;
-import com.android.inputmethod.keyboard.LatinKeyboardView;
-import com.android.inputmethod.latin.LocaleUtils.RunInLocale;
-import com.android.inputmethod.latin.define.ProductionFlag;
-import com.android.inputmethod.latin.suggestions.SuggestionsView;
+import com.android.inputmethod.keyboard.MainKeyboardView;
+import com.android.inputmethod.latin.Suggest.OnGetSuggestedWordsCallback;
+import com.android.inputmethod.latin.SuggestedWords.SuggestedWordInfo;
+import com.android.inputmethod.latin.common.Constants;
+import com.android.inputmethod.latin.common.CoordinateUtils;
+import com.android.inputmethod.latin.common.InputPointers;
+import com.android.inputmethod.latin.define.DebugFlags;
+import com.android.inputmethod.latin.define.ProductionFlags;
+import com.android.inputmethod.latin.inputlogic.InputLogic;
+import com.android.inputmethod.latin.permissions.PermissionsManager;
+import com.android.inputmethod.latin.personalization.PersonalizationHelper;
+import com.android.inputmethod.latin.settings.Settings;
+import com.android.inputmethod.latin.settings.SettingsActivity;
+import com.android.inputmethod.latin.settings.SettingsValues;
+import com.android.inputmethod.latin.suggestions.SuggestionStripView;
+import com.android.inputmethod.latin.suggestions.SuggestionStripViewAccessor;
+import com.android.inputmethod.latin.touchinputconsumer.GestureConsumer;
+import com.android.inputmethod.latin.utils.ApplicationUtils;
+import com.android.inputmethod.latin.utils.DialogUtils;
+import com.android.inputmethod.latin.utils.ImportantNoticeUtils;
+import com.android.inputmethod.latin.utils.IntentUtils;
+import com.android.inputmethod.latin.utils.JniUtils;
+import com.android.inputmethod.latin.utils.LeakGuardHandlerWrapper;
+import com.android.inputmethod.latin.utils.StatsUtils;
+import com.android.inputmethod.latin.utils.StatsUtilsManager;
+import com.android.inputmethod.latin.utils.SubtypeLocaleUtils;
+import com.android.inputmethod.latin.utils.ViewLayoutUtils;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Input method implementation for Qwerty'ish keyboard.
  */
 public class LatinIME extends InputMethodService implements KeyboardActionListener,
-        SuggestionsView.Listener, TargetApplicationGetter.OnTargetApplicationKnownListener {
-    private static final String TAG = LatinIME.class.getSimpleName();
+        SuggestionStripView.Listener, SuggestionStripViewAccessor,
+        DictionaryFacilitator.DictionaryInitializationListener,
+        PermissionsManager.PermissionsResultCallback {
+    static final String TAG = LatinIME.class.getSimpleName();
     private static final boolean TRACE = false;
-    private static boolean DEBUG;
 
-    private static final int EXTENDED_TOUCHABLE_REGION_HEIGHT = 100;
+    private static final int PERIOD_FOR_AUDIO_AND_HAPTIC_FEEDBACK_IN_KEY_REPEAT = 2;
+    private static final int PENDING_IMS_CALLBACK_DURATION_MILLIS = 800;
+    static final long DELAY_WAIT_FOR_DICTIONARY_LOAD_MILLIS = TimeUnit.SECONDS.toMillis(2);
+    static final long DELAY_DEALLOCATE_MEMORY_MILLIS = TimeUnit.SECONDS.toMillis(10);
 
-    // How many continuous deletes at which to start deleting at a higher speed.
-    private static final int DELETE_ACCELERATE_AT = 20;
-    // Key events coming any faster than this are long-presses.
-    private static final int QUICK_PRESS = 200;
+    /**
+     * A broadcast intent action to hide the software keyboard.
+     */
+    static final String ACTION_HIDE_SOFT_INPUT =
+            "com.android.inputmethod.latin.HIDE_SOFT_INPUT";
 
-    private static final int PENDING_IMS_CALLBACK_DURATION = 800;
+    /**
+     * A custom permission for external apps to send {@link #ACTION_HIDE_SOFT_INPUT}.
+     */
+    static final String PERMISSION_HIDE_SOFT_INPUT =
+            "com.android.inputmethod.latin.HIDE_SOFT_INPUT";
 
     /**
      * The name of the scheme used by the Package Manager to warn of a new package installation,
@@ -103,188 +144,299 @@ public class LatinIME extends InputMethodService implements KeyboardActionListen
      */
     private static final String SCHEME_PACKAGE = "package";
 
-    /** Whether to use the binary version of the contacts dictionary */
-    public static final boolean USE_BINARY_CONTACTS_DICTIONARY = true;
+    final Settings mSettings;
+    private final DictionaryFacilitator mDictionaryFacilitator =
+            DictionaryFacilitatorProvider.getDictionaryFacilitator(
+                    false /* isNeededForSpellChecking */);
+    final InputLogic mInputLogic = new InputLogic(this /* LatinIME */,
+            this /* SuggestionStripViewAccessor */, mDictionaryFacilitator);
+    // We expect to have only one decoder in almost all cases, hence the default capacity of 1.
+    // If it turns out we need several, it will get grown seamlessly.
+    final SparseArray<HardwareEventDecoder> mHardwareEventDecoders = new SparseArray<>(1);
 
-    /** Whether to use the binary version of the user dictionary */
-    public static final boolean USE_BINARY_USER_DICTIONARY = true;
+    // TODO: Move these {@link View}s to {@link KeyboardSwitcher}.
+    private View mInputView;
+    private InsetsUpdater mInsetsUpdater;
+    private SuggestionStripView mSuggestionStripView;
 
-    // TODO: migrate this to SettingsValues
-    private int mSuggestionVisibility;
-    private static final int SUGGESTION_VISIBILILTY_SHOW_VALUE
-            = R.string.prefs_suggestion_visibility_show_value;
-    private static final int SUGGESTION_VISIBILILTY_SHOW_ONLY_PORTRAIT_VALUE
-            = R.string.prefs_suggestion_visibility_show_only_portrait_value;
-    private static final int SUGGESTION_VISIBILILTY_HIDE_VALUE
-            = R.string.prefs_suggestion_visibility_hide_value;
+    private RichInputMethodManager mRichImm;
+    @UsedForTesting final KeyboardSwitcher mKeyboardSwitcher;
+    private final SubtypeState mSubtypeState = new SubtypeState();
+    private EmojiAltPhysicalKeyDetector mEmojiAltPhysicalKeyDetector;
+    private StatsUtilsManager mStatsUtilsManager;
+    // Working variable for {@link #startShowingInputView()} and
+    // {@link #onEvaluateInputViewShown()}.
+    private boolean mIsExecutingStartShowingInputView;
 
-    private static final int[] SUGGESTION_VISIBILITY_VALUE_ARRAY = new int[] {
-        SUGGESTION_VISIBILILTY_SHOW_VALUE,
-        SUGGESTION_VISIBILILTY_SHOW_ONLY_PORTRAIT_VALUE,
-        SUGGESTION_VISIBILILTY_HIDE_VALUE
-    };
-
-    private static final int SPACE_STATE_NONE = 0;
-    // Double space: the state where the user pressed space twice quickly, which LatinIME
-    // resolved as period-space. Undoing this converts the period to a space.
-    private static final int SPACE_STATE_DOUBLE = 1;
-    // Swap punctuation: the state where a weak space and a punctuation from the suggestion strip
-    // have just been swapped. Undoing this swaps them back; the space is still considered weak.
-    private static final int SPACE_STATE_SWAP_PUNCTUATION = 2;
-    // Weak space: a space that should be swapped only by suggestion strip punctuation. Weak
-    // spaces happen when the user presses space, accepting the current suggestion (whether
-    // it's an auto-correction or not).
-    private static final int SPACE_STATE_WEAK = 3;
-    // Phantom space: a not-yet-inserted space that should get inserted on the next input,
-    // character provided it's not a separator. If it's a separator, the phantom space is dropped.
-    // Phantom spaces happen when a user chooses a word from the suggestion strip.
-    private static final int SPACE_STATE_PHANTOM = 4;
-
-    // Current space state of the input method. This can be any of the above constants.
-    private int mSpaceState;
-
-    private SettingsValues mSettingsValues;
-    private InputAttributes mInputAttributes;
-
-    private View mExtractArea;
-    private View mKeyPreviewBackingView;
-    private View mSuggestionsContainer;
-    private SuggestionsView mSuggestionsView;
-    /* package for tests */ Suggest mSuggest;
-    private CompletionInfo[] mApplicationSpecifiedCompletions;
-    private ApplicationInfo mTargetApplicationInfo;
-
-    private InputMethodManagerCompatWrapper mImm;
-    private Resources mResources;
-    private SharedPreferences mPrefs;
-    /* package for tests */ final KeyboardSwitcher mKeyboardSwitcher;
-    private final SubtypeSwitcher mSubtypeSwitcher;
-    private boolean mShouldSwitchToLastSubtype = true;
-
-    private boolean mIsMainDictionaryAvailable;
-    // TODO: revert this back to the concrete class after transition.
-    private Dictionary mUserDictionary;
-    private UserHistoryDictionary mUserHistoryDictionary;
-    private boolean mIsUserDictionaryAvailable;
-
-    private LastComposedWord mLastComposedWord = LastComposedWord.NOT_A_COMPOSED_WORD;
-    private WordComposer mWordComposer = new WordComposer();
-
-    private int mCorrectionMode;
-
-    // Keep track of the last selection range to decide if we need to show word alternatives
-    private static final int NOT_A_CURSOR_POSITION = -1;
-    private int mLastSelectionStart = NOT_A_CURSOR_POSITION;
-    private int mLastSelectionEnd = NOT_A_CURSOR_POSITION;
-
-    // Whether we are expecting an onUpdateSelection event to fire. If it does when we don't
-    // "expect" it, it means the user actually moved the cursor.
-    private boolean mExpectingUpdateSelection;
-    private int mDeleteCount;
-    private long mLastKeyTime;
-
-    private AudioAndHapticFeedbackManager mFeedbackManager;
-
-    // Member variables for remembering the current device orientation.
-    private int mDisplayOrientation;
+    // Used for re-initialize keyboard layout after onConfigurationChange.
+    @Nullable private Context mDisplayContext;
+    private int mCurDisplayId = INVALID_DISPLAY;
 
     // Object for reacting to adding/removing a dictionary pack.
-    private BroadcastReceiver mDictionaryPackInstallReceiver =
+    private final BroadcastReceiver mDictionaryPackInstallReceiver =
             new DictionaryPackInstallBroadcastReceiver(this);
 
-    // Keeps track of most recently inserted text (multi-character key) for reverting
-    private CharSequence mEnteredText;
+    private final BroadcastReceiver mDictionaryDumpBroadcastReceiver =
+            new DictionaryDumpBroadcastReceiver(this);
 
-    private boolean mIsAutoCorrectionIndicatorOn;
+    final static class HideSoftInputReceiver extends BroadcastReceiver {
+        private final InputMethodService mIms;
 
-    private AlertDialog mOptionsDialog;
-
-    public final UIHandler mHandler = new UIHandler(this);
-
-    public static class UIHandler extends StaticInnerHandlerWrapper<LatinIME> {
-        private static final int MSG_UPDATE_SHIFT_STATE = 1;
-        private static final int MSG_SPACE_TYPED = 4;
-        private static final int MSG_SET_BIGRAM_PREDICTIONS = 5;
-        private static final int MSG_PENDING_IMS_CALLBACK = 6;
-        private static final int MSG_UPDATE_SUGGESTIONS = 7;
-
-        private int mDelayUpdateSuggestions;
-        private int mDelayUpdateShiftState;
-        private long mDoubleSpacesTurnIntoPeriodTimeout;
-
-        public UIHandler(LatinIME outerInstance) {
-            super(outerInstance);
-        }
-
-        public void onCreate() {
-            final Resources res = getOuterInstance().getResources();
-            mDelayUpdateSuggestions =
-                    res.getInteger(R.integer.config_delay_update_suggestions);
-            mDelayUpdateShiftState =
-                    res.getInteger(R.integer.config_delay_update_shift_state);
-            mDoubleSpacesTurnIntoPeriodTimeout = res.getInteger(
-                    R.integer.config_double_spaces_turn_into_period_timeout);
+        public HideSoftInputReceiver(InputMethodService ims) {
+            mIms = ims;
         }
 
         @Override
-        public void handleMessage(Message msg) {
-            final LatinIME latinIme = getOuterInstance();
+        public void onReceive(Context context, Intent intent) {
+            final String action = intent.getAction();
+            if (ACTION_HIDE_SOFT_INPUT.equals(action)) {
+                mIms.requestHideSelf(0 /* flags */);
+            } else {
+                Log.e(TAG, "Unexpected intent " + intent);
+            }
+        }
+    }
+    final HideSoftInputReceiver mHideSoftInputReceiver = new HideSoftInputReceiver(this);
+
+    private AlertDialog mOptionsDialog;
+
+    private final boolean mIsHardwareAcceleratedDrawingEnabled;
+
+    private GestureConsumer mGestureConsumer = GestureConsumer.NULL_GESTURE_CONSUMER;
+
+    public final UIHandler mHandler = new UIHandler(this);
+
+    public static final class UIHandler extends LeakGuardHandlerWrapper<LatinIME> {
+        private static final int MSG_UPDATE_SHIFT_STATE = 0;
+        private static final int MSG_PENDING_IMS_CALLBACK = 1;
+        private static final int MSG_UPDATE_SUGGESTION_STRIP = 2;
+        private static final int MSG_SHOW_GESTURE_PREVIEW_AND_SUGGESTION_STRIP = 3;
+        private static final int MSG_RESUME_SUGGESTIONS = 4;
+        private static final int MSG_REOPEN_DICTIONARIES = 5;
+        private static final int MSG_UPDATE_TAIL_BATCH_INPUT_COMPLETED = 6;
+        private static final int MSG_RESET_CACHES = 7;
+        private static final int MSG_WAIT_FOR_DICTIONARY_LOAD = 8;
+        private static final int MSG_DEALLOCATE_MEMORY = 9;
+        private static final int MSG_RESUME_SUGGESTIONS_FOR_START_INPUT = 10;
+        private static final int MSG_SWITCH_LANGUAGE_AUTOMATICALLY = 11;
+        // Update this when adding new messages
+        private static final int MSG_LAST = MSG_SWITCH_LANGUAGE_AUTOMATICALLY;
+
+        private static final int ARG1_NOT_GESTURE_INPUT = 0;
+        private static final int ARG1_DISMISS_GESTURE_FLOATING_PREVIEW_TEXT = 1;
+        private static final int ARG1_SHOW_GESTURE_FLOATING_PREVIEW_TEXT = 2;
+        private static final int ARG2_UNUSED = 0;
+        private static final int ARG1_TRUE = 1;
+
+        private int mDelayInMillisecondsToUpdateSuggestions;
+        private int mDelayInMillisecondsToUpdateShiftState;
+
+        public UIHandler(@Nonnull final LatinIME ownerInstance) {
+            super(ownerInstance);
+        }
+
+        public void onCreate() {
+            final LatinIME latinIme = getOwnerInstance();
+            if (latinIme == null) {
+                return;
+            }
+            final Resources res = latinIme.getResources();
+            mDelayInMillisecondsToUpdateSuggestions = res.getInteger(
+                    R.integer.config_delay_in_milliseconds_to_update_suggestions);
+            mDelayInMillisecondsToUpdateShiftState = res.getInteger(
+                    R.integer.config_delay_in_milliseconds_to_update_shift_state);
+        }
+
+        @Override
+        public void handleMessage(final Message msg) {
+            final LatinIME latinIme = getOwnerInstance();
+            if (latinIme == null) {
+                return;
+            }
             final KeyboardSwitcher switcher = latinIme.mKeyboardSwitcher;
             switch (msg.what) {
-            case MSG_UPDATE_SUGGESTIONS:
-                latinIme.updateSuggestions();
+            case MSG_UPDATE_SUGGESTION_STRIP:
+                cancelUpdateSuggestionStrip();
+                latinIme.mInputLogic.performUpdateSuggestionStripSync(
+                        latinIme.mSettings.getCurrent(), msg.arg1 /* inputStyle */);
                 break;
             case MSG_UPDATE_SHIFT_STATE:
-                switcher.updateShiftState();
+                switcher.requestUpdatingShiftState(latinIme.getCurrentAutoCapsState(),
+                        latinIme.getCurrentRecapitalizeState());
                 break;
-            case MSG_SET_BIGRAM_PREDICTIONS:
-                latinIme.updateBigramPredictions();
+            case MSG_SHOW_GESTURE_PREVIEW_AND_SUGGESTION_STRIP:
+                if (msg.arg1 == ARG1_NOT_GESTURE_INPUT) {
+                    final SuggestedWords suggestedWords = (SuggestedWords) msg.obj;
+                    latinIme.showSuggestionStrip(suggestedWords);
+                } else {
+                    latinIme.showGesturePreviewAndSuggestionStrip((SuggestedWords) msg.obj,
+                            msg.arg1 == ARG1_DISMISS_GESTURE_FLOATING_PREVIEW_TEXT);
+                }
+                break;
+            case MSG_RESUME_SUGGESTIONS:
+                latinIme.mInputLogic.restartSuggestionsOnWordTouchedByCursor(
+                        latinIme.mSettings.getCurrent(), false /* forStartInput */,
+                        latinIme.mKeyboardSwitcher.getCurrentKeyboardScriptId());
+                break;
+            case MSG_RESUME_SUGGESTIONS_FOR_START_INPUT:
+                latinIme.mInputLogic.restartSuggestionsOnWordTouchedByCursor(
+                        latinIme.mSettings.getCurrent(), true /* forStartInput */,
+                        latinIme.mKeyboardSwitcher.getCurrentKeyboardScriptId());
+                break;
+            case MSG_REOPEN_DICTIONARIES:
+                // We need to re-evaluate the currently composing word in case the script has
+                // changed.
+                postWaitForDictionaryLoad();
+                latinIme.resetDictionaryFacilitatorIfNecessary();
+                break;
+            case MSG_UPDATE_TAIL_BATCH_INPUT_COMPLETED:
+                final SuggestedWords suggestedWords = (SuggestedWords) msg.obj;
+                latinIme.mInputLogic.onUpdateTailBatchInputCompleted(
+                        latinIme.mSettings.getCurrent(),
+                        suggestedWords, latinIme.mKeyboardSwitcher);
+                latinIme.onTailBatchInputResultShown(suggestedWords);
+                break;
+            case MSG_RESET_CACHES:
+                final SettingsValues settingsValues = latinIme.mSettings.getCurrent();
+                if (latinIme.mInputLogic.retryResetCachesAndReturnSuccess(
+                        msg.arg1 == ARG1_TRUE /* tryResumeSuggestions */,
+                        msg.arg2 /* remainingTries */, this /* handler */)) {
+                    // If we were able to reset the caches, then we can reload the keyboard.
+                    // Otherwise, we'll do it when we can.
+                    latinIme.mKeyboardSwitcher.loadKeyboard(latinIme.getCurrentInputEditorInfo(),
+                            settingsValues, latinIme.getCurrentAutoCapsState(),
+                            latinIme.getCurrentRecapitalizeState());
+                }
+                break;
+            case MSG_WAIT_FOR_DICTIONARY_LOAD:
+                Log.i(TAG, "Timeout waiting for dictionary load");
+                break;
+            case MSG_DEALLOCATE_MEMORY:
+                latinIme.deallocateMemory();
+                break;
+            case MSG_SWITCH_LANGUAGE_AUTOMATICALLY:
+                latinIme.switchLanguage((InputMethodSubtype)msg.obj);
                 break;
             }
         }
 
-        public void postUpdateSuggestions() {
-            removeMessages(MSG_UPDATE_SUGGESTIONS);
-            sendMessageDelayed(obtainMessage(MSG_UPDATE_SUGGESTIONS), mDelayUpdateSuggestions);
+        public void postUpdateSuggestionStrip(final int inputStyle) {
+            sendMessageDelayed(obtainMessage(MSG_UPDATE_SUGGESTION_STRIP, inputStyle,
+                    0 /* ignored */), mDelayInMillisecondsToUpdateSuggestions);
         }
 
-        public void cancelUpdateSuggestions() {
-            removeMessages(MSG_UPDATE_SUGGESTIONS);
+        public void postReopenDictionaries() {
+            sendMessage(obtainMessage(MSG_REOPEN_DICTIONARIES));
+        }
+
+        private void postResumeSuggestionsInternal(final boolean shouldDelay,
+                final boolean forStartInput) {
+            final LatinIME latinIme = getOwnerInstance();
+            if (latinIme == null) {
+                return;
+            }
+            if (!latinIme.mSettings.getCurrent().isSuggestionsEnabledPerUserSettings()) {
+                return;
+            }
+            removeMessages(MSG_RESUME_SUGGESTIONS);
+            removeMessages(MSG_RESUME_SUGGESTIONS_FOR_START_INPUT);
+            final int message = forStartInput ? MSG_RESUME_SUGGESTIONS_FOR_START_INPUT
+                    : MSG_RESUME_SUGGESTIONS;
+            if (shouldDelay) {
+                sendMessageDelayed(obtainMessage(message),
+                        mDelayInMillisecondsToUpdateSuggestions);
+            } else {
+                sendMessage(obtainMessage(message));
+            }
+        }
+
+        public void postResumeSuggestions(final boolean shouldDelay) {
+            postResumeSuggestionsInternal(shouldDelay, false /* forStartInput */);
+        }
+
+        public void postResumeSuggestionsForStartInput(final boolean shouldDelay) {
+            postResumeSuggestionsInternal(shouldDelay, true /* forStartInput */);
+        }
+
+        public void postResetCaches(final boolean tryResumeSuggestions, final int remainingTries) {
+            removeMessages(MSG_RESET_CACHES);
+            sendMessage(obtainMessage(MSG_RESET_CACHES, tryResumeSuggestions ? 1 : 0,
+                    remainingTries, null));
+        }
+
+        public void postWaitForDictionaryLoad() {
+            sendMessageDelayed(obtainMessage(MSG_WAIT_FOR_DICTIONARY_LOAD),
+                    DELAY_WAIT_FOR_DICTIONARY_LOAD_MILLIS);
+        }
+
+        public void cancelWaitForDictionaryLoad() {
+            removeMessages(MSG_WAIT_FOR_DICTIONARY_LOAD);
+        }
+
+        public boolean hasPendingWaitForDictionaryLoad() {
+            return hasMessages(MSG_WAIT_FOR_DICTIONARY_LOAD);
+        }
+
+        public void cancelUpdateSuggestionStrip() {
+            removeMessages(MSG_UPDATE_SUGGESTION_STRIP);
         }
 
         public boolean hasPendingUpdateSuggestions() {
-            return hasMessages(MSG_UPDATE_SUGGESTIONS);
+            return hasMessages(MSG_UPDATE_SUGGESTION_STRIP);
+        }
+
+        public boolean hasPendingReopenDictionaries() {
+            return hasMessages(MSG_REOPEN_DICTIONARIES);
         }
 
         public void postUpdateShiftState() {
             removeMessages(MSG_UPDATE_SHIFT_STATE);
-            sendMessageDelayed(obtainMessage(MSG_UPDATE_SHIFT_STATE), mDelayUpdateShiftState);
+            sendMessageDelayed(obtainMessage(MSG_UPDATE_SHIFT_STATE),
+                    mDelayInMillisecondsToUpdateShiftState);
         }
 
-        public void cancelUpdateShiftState() {
-            removeMessages(MSG_UPDATE_SHIFT_STATE);
+        public void postDeallocateMemory() {
+            sendMessageDelayed(obtainMessage(MSG_DEALLOCATE_MEMORY),
+                    DELAY_DEALLOCATE_MEMORY_MILLIS);
         }
 
-        public void postUpdateBigramPredictions() {
-            removeMessages(MSG_SET_BIGRAM_PREDICTIONS);
-            sendMessageDelayed(obtainMessage(MSG_SET_BIGRAM_PREDICTIONS), mDelayUpdateSuggestions);
+        public void cancelDeallocateMemory() {
+            removeMessages(MSG_DEALLOCATE_MEMORY);
         }
 
-        public void cancelUpdateBigramPredictions() {
-            removeMessages(MSG_SET_BIGRAM_PREDICTIONS);
+        public boolean hasPendingDeallocateMemory() {
+            return hasMessages(MSG_DEALLOCATE_MEMORY);
         }
 
-        public void startDoubleSpacesTimer() {
-            removeMessages(MSG_SPACE_TYPED);
-            sendMessageDelayed(obtainMessage(MSG_SPACE_TYPED), mDoubleSpacesTurnIntoPeriodTimeout);
+        @UsedForTesting
+        public void removeAllMessages() {
+            for (int i = 0; i <= MSG_LAST; ++i) {
+                removeMessages(i);
+            }
         }
 
-        public void cancelDoubleSpacesTimer() {
-            removeMessages(MSG_SPACE_TYPED);
+        public void showGesturePreviewAndSuggestionStrip(final SuggestedWords suggestedWords,
+                final boolean dismissGestureFloatingPreviewText) {
+            removeMessages(MSG_SHOW_GESTURE_PREVIEW_AND_SUGGESTION_STRIP);
+            final int arg1 = dismissGestureFloatingPreviewText
+                    ? ARG1_DISMISS_GESTURE_FLOATING_PREVIEW_TEXT
+                    : ARG1_SHOW_GESTURE_FLOATING_PREVIEW_TEXT;
+            obtainMessage(MSG_SHOW_GESTURE_PREVIEW_AND_SUGGESTION_STRIP, arg1,
+                    ARG2_UNUSED, suggestedWords).sendToTarget();
         }
 
-        public boolean isAcceptingDoubleSpaces() {
-            return hasMessages(MSG_SPACE_TYPED);
+        public void showSuggestionStrip(final SuggestedWords suggestedWords) {
+            removeMessages(MSG_SHOW_GESTURE_PREVIEW_AND_SUGGESTION_STRIP);
+            obtainMessage(MSG_SHOW_GESTURE_PREVIEW_AND_SUGGESTION_STRIP,
+                    ARG1_NOT_GESTURE_INPUT, ARG2_UNUSED, suggestedWords).sendToTarget();
+        }
+
+        public void showTailBatchInputResult(final SuggestedWords suggestedWords) {
+            obtainMessage(MSG_UPDATE_TAIL_BATCH_INPUT_COMPLETED, suggestedWords).sendToTarget();
+        }
+
+        public void postSwitchLanguage(final InputMethodSubtype subtype) {
+            obtainMessage(MSG_SWITCH_LANGUAGE_AUTOMATICALLY, subtype).sendToTarget();
         }
 
         // Working variables for the following methods.
@@ -299,7 +451,10 @@ public class LatinIME extends InputMethodService implements KeyboardActionListen
             removeMessages(MSG_PENDING_IMS_CALLBACK);
             resetPendingImsCallback();
             mIsOrientationChanging = true;
-            final LatinIME latinIme = getOuterInstance();
+            final LatinIME latinIme = getOwnerInstance();
+            if (latinIme == null) {
+                return;
+            }
             if (latinIme.isInputViewShown()) {
                 latinIme.mKeyboardSwitcher.saveKeyboardState();
             }
@@ -311,18 +466,21 @@ public class LatinIME extends InputMethodService implements KeyboardActionListen
             mHasPendingStartInput = false;
         }
 
-        private void executePendingImsCallback(LatinIME latinIme, EditorInfo editorInfo,
+        private void executePendingImsCallback(final LatinIME latinIme, final EditorInfo editorInfo,
                 boolean restarting) {
-            if (mHasPendingFinishInputView)
+            if (mHasPendingFinishInputView) {
                 latinIme.onFinishInputViewInternal(mHasPendingFinishInput);
-            if (mHasPendingFinishInput)
+            }
+            if (mHasPendingFinishInput) {
                 latinIme.onFinishInputInternal();
-            if (mHasPendingStartInput)
+            }
+            if (mHasPendingStartInput) {
                 latinIme.onStartInputInternal(editorInfo, restarting);
+            }
             resetPendingImsCallback();
         }
 
-        public void onStartInput(EditorInfo editorInfo, boolean restarting) {
+        public void onStartInput(final EditorInfo editorInfo, final boolean restarting) {
             if (hasMessages(MSG_PENDING_IMS_CALLBACK)) {
                 // Typically this is the second onStartInput after orientation changed.
                 mHasPendingStartInput = true;
@@ -332,13 +490,15 @@ public class LatinIME extends InputMethodService implements KeyboardActionListen
                     mIsOrientationChanging = false;
                     mPendingSuccessiveImsCallback = true;
                 }
-                final LatinIME latinIme = getOuterInstance();
-                executePendingImsCallback(latinIme, editorInfo, restarting);
-                latinIme.onStartInputInternal(editorInfo, restarting);
+                final LatinIME latinIme = getOwnerInstance();
+                if (latinIme != null) {
+                    executePendingImsCallback(latinIme, editorInfo, restarting);
+                    latinIme.onStartInputInternal(editorInfo, restarting);
+                }
             }
         }
 
-        public void onStartInputView(EditorInfo editorInfo, boolean restarting) {
+        public void onStartInputView(final EditorInfo editorInfo, final boolean restarting) {
             if (hasMessages(MSG_PENDING_IMS_CALLBACK)
                     && KeyboardId.equivalentEditorInfoForKeyboard(editorInfo, mAppliedEditorInfo)) {
                 // Typically this is the second onStartInputView after orientation changed.
@@ -349,23 +509,31 @@ public class LatinIME extends InputMethodService implements KeyboardActionListen
                     mPendingSuccessiveImsCallback = false;
                     resetPendingImsCallback();
                     sendMessageDelayed(obtainMessage(MSG_PENDING_IMS_CALLBACK),
-                            PENDING_IMS_CALLBACK_DURATION);
+                            PENDING_IMS_CALLBACK_DURATION_MILLIS);
                 }
-                final LatinIME latinIme = getOuterInstance();
-                executePendingImsCallback(latinIme, editorInfo, restarting);
-                latinIme.onStartInputViewInternal(editorInfo, restarting);
-                mAppliedEditorInfo = editorInfo;
+                final LatinIME latinIme = getOwnerInstance();
+                if (latinIme != null) {
+                    executePendingImsCallback(latinIme, editorInfo, restarting);
+                    latinIme.onStartInputViewInternal(editorInfo, restarting);
+                    mAppliedEditorInfo = editorInfo;
+                }
+                cancelDeallocateMemory();
             }
         }
 
-        public void onFinishInputView(boolean finishingInput) {
+        public void onFinishInputView(final boolean finishingInput) {
             if (hasMessages(MSG_PENDING_IMS_CALLBACK)) {
                 // Typically this is the first onFinishInputView after orientation changed.
                 mHasPendingFinishInputView = true;
             } else {
-                final LatinIME latinIme = getOuterInstance();
-                latinIme.onFinishInputViewInternal(finishingInput);
-                mAppliedEditorInfo = null;
+                final LatinIME latinIme = getOwnerInstance();
+                if (latinIme != null) {
+                    latinIme.onFinishInputViewInternal(finishingInput);
+                    mAppliedEditorInfo = null;
+                }
+                if (!hasPendingDeallocateMemory()) {
+                    postDeallocateMemory();
+                }
             }
         }
 
@@ -374,69 +542,86 @@ public class LatinIME extends InputMethodService implements KeyboardActionListen
                 // Typically this is the first onFinishInput after orientation changed.
                 mHasPendingFinishInput = true;
             } else {
-                final LatinIME latinIme = getOuterInstance();
-                executePendingImsCallback(latinIme, null, false);
-                latinIme.onFinishInputInternal();
+                final LatinIME latinIme = getOwnerInstance();
+                if (latinIme != null) {
+                    executePendingImsCallback(latinIme, null, false);
+                    latinIme.onFinishInputInternal();
+                }
             }
         }
+    }
+
+    static final class SubtypeState {
+        private InputMethodSubtype mLastActiveSubtype;
+        private boolean mCurrentSubtypeHasBeenUsed;
+
+        public void setCurrentSubtypeHasBeenUsed() {
+            mCurrentSubtypeHasBeenUsed = true;
+        }
+
+        public void switchSubtype(final IBinder token, final RichInputMethodManager richImm) {
+            final InputMethodSubtype currentSubtype = richImm.getInputMethodManager()
+                    .getCurrentInputMethodSubtype();
+            final InputMethodSubtype lastActiveSubtype = mLastActiveSubtype;
+            final boolean currentSubtypeHasBeenUsed = mCurrentSubtypeHasBeenUsed;
+            if (currentSubtypeHasBeenUsed) {
+                mLastActiveSubtype = currentSubtype;
+                mCurrentSubtypeHasBeenUsed = false;
+            }
+            if (currentSubtypeHasBeenUsed
+                    && richImm.checkIfSubtypeBelongsToThisImeAndEnabled(lastActiveSubtype)
+                    && !currentSubtype.equals(lastActiveSubtype)) {
+                richImm.setInputMethodAndSubtype(token, lastActiveSubtype);
+                return;
+            }
+            richImm.switchToNextInputMethod(token, true /* onlyCurrentIme */);
+        }
+    }
+
+    // Loading the native library eagerly to avoid unexpected UnsatisfiedLinkError at the initial
+    // JNI call as much as possible.
+    static {
+        JniUtils.loadNativeLibrary();
     }
 
     public LatinIME() {
         super();
-        mSubtypeSwitcher = SubtypeSwitcher.getInstance();
+        mSettings = Settings.getInstance();
         mKeyboardSwitcher = KeyboardSwitcher.getInstance();
+        mStatsUtilsManager = StatsUtilsManager.getInstance();
+        mIsHardwareAcceleratedDrawingEnabled =
+                InputMethodServiceCompatUtils.enableHardwareAcceleration(this);
+        Log.i(TAG, "Hardware accelerated drawing: " + mIsHardwareAcceleratedDrawingEnabled);
     }
 
     @Override
     public void onCreate() {
-        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        mPrefs = prefs;
-        LatinImeLogger.init(this, prefs);
-        if (ProductionFlag.IS_EXPERIMENTAL) {
-            ResearchLogger.init(this, prefs);
-        }
-        InputMethodManagerCompatWrapper.init(this);
-        SubtypeSwitcher.init(this);
-        KeyboardSwitcher.init(this, prefs);
+        Settings.init(this);
+        DebugFlags.init(PreferenceManager.getDefaultSharedPreferences(this));
+        RichInputMethodManager.init(this);
+        mRichImm = RichInputMethodManager.getInstance();
+        AudioAndHapticFeedbackManager.init(this);
         AccessibilityUtils.init(this);
-
+        mStatsUtilsManager.onCreate(this /* context */, mDictionaryFacilitator);
+        final WindowManager wm = getSystemService(WindowManager.class);
+        mDisplayContext = createDisplayContext(wm.getDefaultDisplay());
+        mCurDisplayId = wm.getDefaultDisplay().getDisplayId();
+        KeyboardSwitcher.init(this);
         super.onCreate();
 
-        mImm = InputMethodManagerCompatWrapper.getInstance();
         mHandler.onCreate();
-        DEBUG = LatinImeLogger.sDBG;
 
-        final Resources res = getResources();
-        mResources = res;
-
+        // TODO: Resolve mutual dependencies of {@link #loadSettings()} and
+        // {@link #resetDictionaryFacilitatorIfNecessary()}.
         loadSettings();
+        resetDictionaryFacilitatorIfNecessary();
 
-        ImfUtils.setAdditionalInputMethodSubtypes(this, mSettingsValues.getAdditionalSubtypes());
-
-        // TODO: remove the following when it's not needed by updateCorrectionMode() any more
-        mInputAttributes = new InputAttributes(null, false /* isFullscreenMode */);
-        updateCorrectionMode();
-
-        Utils.GCUtils.getInstance().reset();
-        boolean tryGC = true;
-        for (int i = 0; i < Utils.GCUtils.GC_TRY_LOOP_MAX && tryGC; ++i) {
-            try {
-                initSuggest();
-                tryGC = false;
-            } catch (OutOfMemoryError e) {
-                tryGC = Utils.GCUtils.getInstance().tryGCOrWait("InitSuggest", e);
-            }
-        }
-
-        mDisplayOrientation = res.getConfiguration().orientation;
-
-        // Register to receive ringer mode change and network state change.
-        // Also receive installation and removal of a dictionary pack.
+        // Register to receive ringer mode change.
         final IntentFilter filter = new IntentFilter();
-        filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
         filter.addAction(AudioManager.RINGER_MODE_CHANGED_ACTION);
-        registerReceiver(mReceiver, filter);
+        registerReceiver(mRingerModeChangeReceiver, filter);
 
+        // Register to receive installation and removal of a dictionary pack.
         final IntentFilter packageFilter = new IntentFilter();
         packageFilter.addAction(Intent.ACTION_PACKAGE_ADDED);
         packageFilter.addAction(Intent.ACTION_PACKAGE_REMOVED);
@@ -444,179 +629,228 @@ public class LatinIME extends InputMethodService implements KeyboardActionListen
         registerReceiver(mDictionaryPackInstallReceiver, packageFilter);
 
         final IntentFilter newDictFilter = new IntentFilter();
-        newDictFilter.addAction(
-                DictionaryPackInstallBroadcastReceiver.NEW_DICTIONARY_INTENT_ACTION);
+        newDictFilter.addAction(DictionaryPackConstants.NEW_DICTIONARY_INTENT_ACTION);
         registerReceiver(mDictionaryPackInstallReceiver, newDictFilter);
+
+        final IntentFilter dictDumpFilter = new IntentFilter();
+        dictDumpFilter.addAction(DictionaryDumpBroadcastReceiver.DICTIONARY_DUMP_INTENT_ACTION);
+        registerReceiver(mDictionaryDumpBroadcastReceiver, dictDumpFilter);
+
+        final IntentFilter hideSoftInputFilter = new IntentFilter();
+        hideSoftInputFilter.addAction(ACTION_HIDE_SOFT_INPUT);
+        registerReceiver(mHideSoftInputReceiver, hideSoftInputFilter, PERMISSION_HIDE_SOFT_INPUT,
+                null /* scheduler */);
+
+        StatsUtils.onCreate(mSettings.getCurrent(), mRichImm);
     }
 
     // Has to be package-visible for unit tests
-    /* package */ void loadSettings() {
-        // Note that the calling sequence of onCreate() and onCurrentInputMethodSubtypeChanged()
-        // is not guaranteed. It may even be called at the same time on a different thread.
-        if (null == mPrefs) mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        final RunInLocale<SettingsValues> job = new RunInLocale<SettingsValues>() {
-            @Override
-            protected SettingsValues job(Resources res) {
-                return new SettingsValues(mPrefs, LatinIME.this);
-            }
-        };
-        mSettingsValues = job.runInLocale(mResources, mSubtypeSwitcher.getCurrentSubtypeLocale());
-        mFeedbackManager = new AudioAndHapticFeedbackManager(this, mSettingsValues);
-        resetContactsDictionary(null == mSuggest ? null : mSuggest.getContactsDictionary());
+    @UsedForTesting
+    void loadSettings() {
+        final Locale locale = mRichImm.getCurrentSubtypeLocale();
+        final EditorInfo editorInfo = getCurrentInputEditorInfo();
+        final InputAttributes inputAttributes = new InputAttributes(
+                editorInfo, isFullscreenMode(), getPackageName());
+        mSettings.loadSettings(this, locale, inputAttributes);
+        final SettingsValues currentSettingsValues = mSettings.getCurrent();
+        AudioAndHapticFeedbackManager.getInstance().onSettingsChanged(currentSettingsValues);
+        // This method is called on startup and language switch, before the new layout has
+        // been displayed. Opening dictionaries never affects responsivity as dictionaries are
+        // asynchronously loaded.
+        if (!mHandler.hasPendingReopenDictionaries()) {
+            resetDictionaryFacilitator(locale);
+        }
+        refreshPersonalizationDictionarySession(currentSettingsValues);
+        resetDictionaryFacilitatorIfNecessary();
+        mStatsUtilsManager.onLoadSettings(this /* context */, currentSettingsValues);
     }
 
-    private void initSuggest() {
-        final Locale subtypeLocale = mSubtypeSwitcher.getCurrentSubtypeLocale();
-        final String localeStr = subtypeLocale.toString();
+    private void refreshPersonalizationDictionarySession(
+            final SettingsValues currentSettingsValues) {
+        if (!currentSettingsValues.mUsePersonalizedDicts) {
+            // Remove user history dictionaries.
+            PersonalizationHelper.removeAllUserHistoryDictionaries(this);
+            mDictionaryFacilitator.clearUserHistoryDictionary(this);
+        }
+    }
 
-        final Dictionary oldContactsDictionary;
-        if (mSuggest != null) {
-            oldContactsDictionary = mSuggest.getContactsDictionary();
-            mSuggest.close();
+    // Note that this method is called from a non-UI thread.
+    @Override
+    public void onUpdateMainDictionaryAvailability(final boolean isMainDictionaryAvailable) {
+        final MainKeyboardView mainKeyboardView = mKeyboardSwitcher.getMainKeyboardView();
+        if (mainKeyboardView != null) {
+            mainKeyboardView.setMainDictionaryAvailability(isMainDictionaryAvailable);
+        }
+        if (mHandler.hasPendingWaitForDictionaryLoad()) {
+            mHandler.cancelWaitForDictionaryLoad();
+            mHandler.postResumeSuggestions(false /* shouldDelay */);
+        }
+    }
+
+    void resetDictionaryFacilitatorIfNecessary() {
+        final Locale subtypeSwitcherLocale = mRichImm.getCurrentSubtypeLocale();
+        final Locale subtypeLocale;
+        if (subtypeSwitcherLocale == null) {
+            // This happens in very rare corner cases - for example, immediately after a switch
+            // to LatinIME has been requested, about a frame later another switch happens. In this
+            // case, we are about to go down but we still don't know it, however the system tells
+            // us there is no current subtype.
+            Log.e(TAG, "System is reporting no current subtype.");
+            subtypeLocale = getResources().getConfiguration().locale;
         } else {
-            oldContactsDictionary = null;
+            subtypeLocale = subtypeSwitcherLocale;
         }
-        mSuggest = new Suggest(this, subtypeLocale);
-        if (mSettingsValues.mAutoCorrectEnabled) {
-            mSuggest.setAutoCorrectionThreshold(mSettingsValues.mAutoCorrectionThreshold);
+        if (mDictionaryFacilitator.isForLocale(subtypeLocale)
+                && mDictionaryFacilitator.isForAccount(mSettings.getCurrent().mAccount)) {
+            return;
         }
-
-        mIsMainDictionaryAvailable = DictionaryFactory.isDictionaryAvailable(this, subtypeLocale);
-
-        if (USE_BINARY_USER_DICTIONARY) {
-            mUserDictionary = new UserBinaryDictionary(this, localeStr);
-            mIsUserDictionaryAvailable = ((UserBinaryDictionary)mUserDictionary).isEnabled();
-        } else {
-            mUserDictionary = new UserDictionary(this, localeStr);
-            mIsUserDictionaryAvailable = ((UserDictionary)mUserDictionary).isEnabled();
-        }
-        mSuggest.setUserDictionary(mUserDictionary);
-
-        resetContactsDictionary(oldContactsDictionary);
-
-        // Note that the calling sequence of onCreate() and onCurrentInputMethodSubtypeChanged()
-        // is not guaranteed. It may even be called at the same time on a different thread.
-        if (null == mPrefs) mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        mUserHistoryDictionary = UserHistoryDictionary.getInstance(
-                this, localeStr, Suggest.DIC_USER_HISTORY, mPrefs);
-        mSuggest.setUserHistoryDictionary(mUserHistoryDictionary);
+        resetDictionaryFacilitator(subtypeLocale);
     }
 
     /**
-     * Resets the contacts dictionary in mSuggest according to the user settings.
+     * Reset the facilitator by loading dictionaries for the given locale and
+     * the current settings values.
      *
-     * This method takes an optional contacts dictionary to use. Since the contacts dictionary
-     * does not depend on the locale, it can be reused across different instances of Suggest.
-     * The dictionary will also be opened or closed as necessary depending on the settings.
-     *
-     * @param oldContactsDictionary an optional dictionary to use, or null
+     * @param locale the locale
      */
-    private void resetContactsDictionary(final Dictionary oldContactsDictionary) {
-        final boolean shouldSetDictionary = (null != mSuggest && mSettingsValues.mUseContactsDict);
-
-        final Dictionary dictionaryToUse;
-        if (!shouldSetDictionary) {
-            // Make sure the dictionary is closed. If it is already closed, this is a no-op,
-            // so it's safe to call it anyways.
-            if (null != oldContactsDictionary) oldContactsDictionary.close();
-            dictionaryToUse = null;
-        } else if (null != oldContactsDictionary) {
-            // Make sure the old contacts dictionary is opened. If it is already open, this is a
-            // no-op, so it's safe to call it anyways.
-            if (USE_BINARY_CONTACTS_DICTIONARY) {
-                ((ContactsBinaryDictionary)oldContactsDictionary).reopen(this);
-            } else {
-                ((ContactsDictionary)oldContactsDictionary).reopen(this);
-            }
-            dictionaryToUse = oldContactsDictionary;
-        } else {
-            if (USE_BINARY_CONTACTS_DICTIONARY) {
-                dictionaryToUse = new ContactsBinaryDictionary(this, Suggest.DIC_CONTACTS,
-                        mSubtypeSwitcher.getCurrentSubtypeLocale());
-            } else {
-                dictionaryToUse = new ContactsDictionary(this, Suggest.DIC_CONTACTS);
-            }
+    // TODO: make sure the current settings always have the right locales, and read from them.
+    private void resetDictionaryFacilitator(final Locale locale) {
+        final SettingsValues settingsValues = mSettings.getCurrent();
+        mDictionaryFacilitator.resetDictionaries(this /* context */, locale,
+                settingsValues.mUseContactsDict, settingsValues.mUsePersonalizedDicts,
+                false /* forceReloadMainDictionary */,
+                settingsValues.mAccount, "" /* dictNamePrefix */,
+                this /* DictionaryInitializationListener */);
+        if (settingsValues.mAutoCorrectionEnabledPerUserSettings) {
+            mInputLogic.mSuggest.setAutoCorrectionThreshold(
+                    settingsValues.mAutoCorrectionThreshold);
         }
-
-        if (null != mSuggest) {
-            mSuggest.setContactsDictionary(dictionaryToUse);
-        }
+        mInputLogic.mSuggest.setPlausibilityThreshold(settingsValues.mPlausibilityThreshold);
     }
 
+    /**
+     * Reset suggest by loading the main dictionary of the current locale.
+     */
     /* package private */ void resetSuggestMainDict() {
-        final Locale subtypeLocale = mSubtypeSwitcher.getCurrentSubtypeLocale();
-        mSuggest.resetMainDict(this, subtypeLocale);
-        mIsMainDictionaryAvailable = DictionaryFactory.isDictionaryAvailable(this, subtypeLocale);
+        final SettingsValues settingsValues = mSettings.getCurrent();
+        mDictionaryFacilitator.resetDictionaries(this /* context */,
+                mDictionaryFacilitator.getLocale(), settingsValues.mUseContactsDict,
+                settingsValues.mUsePersonalizedDicts,
+                true /* forceReloadMainDictionary */,
+                settingsValues.mAccount, "" /* dictNamePrefix */,
+                this /* DictionaryInitializationListener */);
     }
 
     @Override
     public void onDestroy() {
-        if (mSuggest != null) {
-            mSuggest.close();
-            mSuggest = null;
-        }
-        unregisterReceiver(mReceiver);
+        mDictionaryFacilitator.closeDictionaries();
+        mSettings.onDestroy();
+        unregisterReceiver(mHideSoftInputReceiver);
+        unregisterReceiver(mRingerModeChangeReceiver);
         unregisterReceiver(mDictionaryPackInstallReceiver);
-        LatinImeLogger.commit();
-        LatinImeLogger.onDestroy();
+        unregisterReceiver(mDictionaryDumpBroadcastReceiver);
+        mStatsUtilsManager.onDestroy(this /* context */);
         super.onDestroy();
     }
 
+    @UsedForTesting
+    public void recycle() {
+        unregisterReceiver(mDictionaryPackInstallReceiver);
+        unregisterReceiver(mDictionaryDumpBroadcastReceiver);
+        unregisterReceiver(mRingerModeChangeReceiver);
+        mInputLogic.recycle();
+    }
+
+    private boolean isImeSuppressedByHardwareKeyboard() {
+        final KeyboardSwitcher switcher = KeyboardSwitcher.getInstance();
+        return !onEvaluateInputViewShown() && switcher.isImeSuppressedByHardwareKeyboard(
+                mSettings.getCurrent(), switcher.getKeyboardSwitchState());
+    }
+
     @Override
-    public void onConfigurationChanged(Configuration conf) {
-        mSubtypeSwitcher.onConfigurationChanged(conf);
-        // If orientation changed while predicting, commit the change
-        if (mDisplayOrientation != conf.orientation) {
-            mDisplayOrientation = conf.orientation;
+    public void onConfigurationChanged(final Configuration conf) {
+        SettingsValues settingsValues = mSettings.getCurrent();
+        if (settingsValues.mDisplayOrientation != conf.orientation) {
             mHandler.startOrientationChanging();
-            final InputConnection ic = getCurrentInputConnection();
-            commitTyped(ic, LastComposedWord.NOT_A_SEPARATOR);
-            if (ic != null) ic.finishComposingText(); // For voice input
-            if (isShowingOptionDialog())
-                mOptionsDialog.dismiss();
+            mInputLogic.onOrientationChange(mSettings.getCurrent());
+        }
+        if (settingsValues.mHasHardwareKeyboard != Settings.readHasHardwareKeyboard(conf)) {
+            // If the state of having a hardware keyboard changed, then we want to reload the
+            // settings to adjust for that.
+            // TODO: we should probably do this unconditionally here, rather than only when we
+            // have a change in hardware keyboard configuration.
+            loadSettings();
+            settingsValues = mSettings.getCurrent();
+            if (isImeSuppressedByHardwareKeyboard()) {
+                // We call cleanupInternalStateForFinishInput() because it's the right thing to do;
+                // however, it seems at the moment the framework is passing us a seemingly valid
+                // but actually non-functional InputConnection object. So if this bug ever gets
+                // fixed we'll be able to remove the composition, but until it is this code is
+                // actually not doing much.
+                cleanupInternalStateForFinishInput();
+            }
         }
         super.onConfigurationChanged(conf);
     }
 
     @Override
-    public View onCreateInputView() {
-        return mKeyboardSwitcher.onCreateInputView();
-    }
-
-    @Override
-    public void setInputView(View view) {
-        super.setInputView(view);
-        mExtractArea = getWindow().getWindow().getDecorView()
-                .findViewById(android.R.id.extractArea);
-        mKeyPreviewBackingView = view.findViewById(R.id.key_preview_backing);
-        mSuggestionsContainer = view.findViewById(R.id.suggestions_container);
-        mSuggestionsView = (SuggestionsView) view.findViewById(R.id.suggestions_view);
-        if (mSuggestionsView != null)
-            mSuggestionsView.setListener(this, view);
-        if (LatinImeLogger.sVISUALDEBUG) {
-            mKeyPreviewBackingView.setBackgroundColor(0x10FF0000);
+    public void onInitializeInterface() {
+        // TODO (b/133825283): Non-activity components Resources / DisplayMetrics update when
+        //  moving to external display.
+        // An issue in Q that non-activity components Resources / DisplayMetrics in
+        // Context doesn't well updated when moving to external display.
+        // Currently we do a workaround is to check if IME is moving to new display, if so,
+        // create new display context and re-init keyboard layout with this context.
+        final WindowManager wm = getSystemService(WindowManager.class);
+        final int newDisplayId = wm.getDefaultDisplay().getDisplayId();
+        if (mCurDisplayId != newDisplayId) {
+            mCurDisplayId = newDisplayId;
+            mDisplayContext = createDisplayContext(wm.getDefaultDisplay());
+            mKeyboardSwitcher.updateKeyboardTheme(mDisplayContext);
         }
     }
 
     @Override
-    public void setCandidatesView(View view) {
-        // To ensure that CandidatesView will never be set.
-        return;
+    public View onCreateInputView() {
+        StatsUtils.onCreateInputView();
+        return mKeyboardSwitcher.onCreateInputView(mDisplayContext,
+                mIsHardwareAcceleratedDrawingEnabled);
     }
 
     @Override
-    public void onStartInput(EditorInfo editorInfo, boolean restarting) {
+    public void setInputView(final View view) {
+        super.setInputView(view);
+        mInputView = view;
+        mInsetsUpdater = ViewOutlineProviderCompatUtils.setInsetsOutlineProvider(view);
+        updateSoftInputWindowLayoutParameters();
+        mSuggestionStripView = (SuggestionStripView)view.findViewById(R.id.suggestion_strip_view);
+        if (hasSuggestionStripView()) {
+            mSuggestionStripView.setListener(this, view);
+        }
+    }
+
+    @Override
+    public void setCandidatesView(final View view) {
+        // To ensure that CandidatesView will never be set.
+    }
+
+    @Override
+    public void onStartInput(final EditorInfo editorInfo, final boolean restarting) {
         mHandler.onStartInput(editorInfo, restarting);
     }
 
     @Override
-    public void onStartInputView(EditorInfo editorInfo, boolean restarting) {
+    public void onStartInputView(final EditorInfo editorInfo, final boolean restarting) {
         mHandler.onStartInputView(editorInfo, restarting);
+        mStatsUtilsManager.onStartInputView();
     }
 
     @Override
-    public void onFinishInputView(boolean finishingInput) {
+    public void onFinishInputView(final boolean finishingInput) {
+        StatsUtils.onFinishInputView();
         mHandler.onFinishInputView(finishingInput);
+        mStatsUtilsManager.onFinishInputView();
+        mGestureConsumer = GestureConsumer.NULL_GESTURE_CONSUMER;
     }
 
     @Override
@@ -625,30 +859,58 @@ public class LatinIME extends InputMethodService implements KeyboardActionListen
     }
 
     @Override
-    public void onCurrentInputMethodSubtypeChanged(InputMethodSubtype subtype) {
+    public void onCurrentInputMethodSubtypeChanged(final InputMethodSubtype subtype) {
         // Note that the calling sequence of onCreate() and onCurrentInputMethodSubtypeChanged()
         // is not guaranteed. It may even be called at the same time on a different thread.
-        mSubtypeSwitcher.updateSubtype(subtype);
+        InputMethodSubtype oldSubtype = mRichImm.getCurrentSubtype().getRawSubtype();
+        StatsUtils.onSubtypeChanged(oldSubtype, subtype);
+        mRichImm.onSubtypeChanged(subtype);
+        mInputLogic.onSubtypeChanged(SubtypeLocaleUtils.getCombiningRulesExtraValue(subtype),
+                mSettings.getCurrent());
+        loadKeyboard();
     }
 
-    private void onStartInputInternal(EditorInfo editorInfo, boolean restarting) {
+    void onStartInputInternal(final EditorInfo editorInfo, final boolean restarting) {
         super.onStartInput(editorInfo, restarting);
+
+        // If the primary hint language does not match the current subtype language, then try
+        // to switch to the primary hint language.
+        // TODO: Support all the locales in EditorInfo#hintLocales.
+        final Locale primaryHintLocale = EditorInfoCompatUtils.getPrimaryHintLocale(editorInfo);
+        if (primaryHintLocale == null) {
+            return;
+        }
+        final InputMethodSubtype newSubtype = mRichImm.findSubtypeByLocale(primaryHintLocale);
+        if (newSubtype == null || newSubtype.equals(mRichImm.getCurrentSubtype().getRawSubtype())) {
+            return;
+        }
+        mHandler.postSwitchLanguage(newSubtype);
     }
 
     @SuppressWarnings("deprecation")
-    private void onStartInputViewInternal(EditorInfo editorInfo, boolean restarting) {
+    void onStartInputViewInternal(final EditorInfo editorInfo, final boolean restarting) {
         super.onStartInputView(editorInfo, restarting);
+
+        mDictionaryFacilitator.onStartInput();
+        // Switch to the null consumer to handle cases leading to early exit below, for which we
+        // also wouldn't be consuming gesture data.
+        mGestureConsumer = GestureConsumer.NULL_GESTURE_CONSUMER;
+        mRichImm.refreshSubtypeCaches();
         final KeyboardSwitcher switcher = mKeyboardSwitcher;
-        LatinKeyboardView inputView = switcher.getKeyboardView();
+        switcher.updateKeyboardTheme(mDisplayContext);
+        final MainKeyboardView mainKeyboardView = switcher.getMainKeyboardView();
+        // If we are starting input in a different text field from before, we'll have to reload
+        // settings, so currentSettingsValues can't be final.
+        SettingsValues currentSettingsValues = mSettings.getCurrent();
 
         if (editorInfo == null) {
             Log.e(TAG, "Null EditorInfo in onStartInputView()");
-            if (LatinImeLogger.sDBG) {
+            if (DebugFlags.DEBUG_ENABLED) {
                 throw new NullPointerException("Null EditorInfo in onStartInputView()");
             }
             return;
         }
-        if (DEBUG) {
+        if (DebugFlags.DEBUG_ENABLED) {
             Log.d(TAG, "onStartInputView: editorInfo:"
                     + String.format("inputType=0x%08x imeOptions=0x%08x",
                             editorInfo.inputType, editorInfo.imeOptions));
@@ -659,176 +921,208 @@ public class LatinIME extends InputMethodService implements KeyboardActionListen
                     + ", word caps = "
                     + ((editorInfo.inputType & InputType.TYPE_TEXT_FLAG_CAP_WORDS) != 0));
         }
-        if (ProductionFlag.IS_EXPERIMENTAL) {
-            ResearchLogger.latinIME_onStartInputViewInternal(editorInfo, mPrefs);
-        }
+        Log.i(TAG, "Starting input. Cursor position = "
+                + editorInfo.initialSelStart + "," + editorInfo.initialSelEnd);
+        // TODO: Consolidate these checks with {@link InputAttributes}.
         if (InputAttributes.inPrivateImeOptions(null, NO_MICROPHONE_COMPAT, editorInfo)) {
-            Log.w(TAG, "Deprecated private IME option specified: "
-                    + editorInfo.privateImeOptions);
+            Log.w(TAG, "Deprecated private IME option specified: " + editorInfo.privateImeOptions);
             Log.w(TAG, "Use " + getPackageName() + "." + NO_MICROPHONE + " instead");
         }
         if (InputAttributes.inPrivateImeOptions(getPackageName(), FORCE_ASCII, editorInfo)) {
-            Log.w(TAG, "Deprecated private IME option specified: "
-                    + editorInfo.privateImeOptions);
+            Log.w(TAG, "Deprecated private IME option specified: " + editorInfo.privateImeOptions);
             Log.w(TAG, "Use EditorInfo.IME_FLAG_FORCE_ASCII flag instead");
         }
 
-        mTargetApplicationInfo =
-                TargetApplicationGetter.getCachedApplicationInfo(editorInfo.packageName);
-        if (null == mTargetApplicationInfo) {
-            new TargetApplicationGetter(this /* context */, this /* listener */)
-                    .execute(editorInfo.packageName);
-        }
-
-        LatinImeLogger.onStartInputView(editorInfo);
         // In landscape mode, this method gets called without the input view being created.
-        if (inputView == null) {
+        if (mainKeyboardView == null) {
             return;
         }
+
+        // Update to a gesture consumer with the current editor and IME state.
+        mGestureConsumer = GestureConsumer.newInstance(editorInfo,
+                mInputLogic.getPrivateCommandPerformer(),
+                mRichImm.getCurrentSubtypeLocale(),
+                switcher.getKeyboard());
 
         // Forward this event to the accessibility utilities, if enabled.
         final AccessibilityUtils accessUtils = AccessibilityUtils.getInstance();
         if (accessUtils.isTouchExplorationEnabled()) {
-            accessUtils.onStartInputViewInternal(editorInfo, restarting);
+            accessUtils.onStartInputViewInternal(mainKeyboardView, editorInfo, restarting);
         }
 
-        mSubtypeSwitcher.updateParametersOnStartInputView();
+        final boolean inputTypeChanged = !currentSettingsValues.isSameInputType(editorInfo);
+        final boolean isDifferentTextField = !restarting || inputTypeChanged;
+
+        StatsUtils.onStartInputView(editorInfo.inputType,
+                Settings.getInstance().getCurrent().mDisplayOrientation,
+                !isDifferentTextField);
 
         // The EditorInfo might have a flag that affects fullscreen mode.
         // Note: This call should be done by InputMethodService?
         updateFullscreenMode();
-        mLastSelectionStart = editorInfo.initialSelStart;
-        mLastSelectionEnd = editorInfo.initialSelEnd;
-        mInputAttributes = new InputAttributes(editorInfo, isFullscreenMode());
-        mApplicationSpecifiedCompletions = null;
 
-        inputView.closing();
-        mEnteredText = null;
-        resetComposingState(true /* alsoResetLastComposedWord */);
-        mDeleteCount = 0;
-        mSpaceState = SPACE_STATE_NONE;
+        // ALERT: settings have not been reloaded and there is a chance they may be stale.
+        // In the practice, if it is, we should have gotten onConfigurationChanged so it should
+        // be fine, but this is horribly confusing and must be fixed AS SOON AS POSSIBLE.
 
-        loadSettings();
-        updateCorrectionMode();
-        updateSuggestionVisibility(mResources);
+        // In some cases the input connection has not been reset yet and we can't access it. In
+        // this case we will need to call loadKeyboard() later, when it's accessible, so that we
+        // can go into the correct mode, so we need to do some housekeeping here.
+        final boolean needToCallLoadKeyboardLater;
+        final Suggest suggest = mInputLogic.mSuggest;
+        if (!isImeSuppressedByHardwareKeyboard()) {
+            // The app calling setText() has the effect of clearing the composing
+            // span, so we should reset our state unconditionally, even if restarting is true.
+            // We also tell the input logic about the combining rules for the current subtype, so
+            // it can adjust its combiners if needed.
+            mInputLogic.startInput(mRichImm.getCombiningRulesExtraValueOfCurrentSubtype(),
+                    currentSettingsValues);
 
-        if (mSuggest != null && mSettingsValues.mAutoCorrectEnabled) {
-            mSuggest.setAutoCorrectionThreshold(mSettingsValues.mAutoCorrectionThreshold);
+            resetDictionaryFacilitatorIfNecessary();
+
+            // TODO[IL]: Can the following be moved to InputLogic#startInput?
+            if (!mInputLogic.mConnection.resetCachesUponCursorMoveAndReturnSuccess(
+                    editorInfo.initialSelStart, editorInfo.initialSelEnd,
+                    false /* shouldFinishComposition */)) {
+                // Sometimes, while rotating, for some reason the framework tells the app we are not
+                // connected to it and that means we can't refresh the cache. In this case, schedule
+                // a refresh later.
+                // We try resetting the caches up to 5 times before giving up.
+                mHandler.postResetCaches(isDifferentTextField, 5 /* remainingTries */);
+                // mLastSelection{Start,End} are reset later in this method, no need to do it here
+                needToCallLoadKeyboardLater = true;
+            } else {
+                // When rotating, and when input is starting again in a field from where the focus
+                // didn't move (the keyboard having been closed with the back key),
+                // initialSelStart and initialSelEnd sometimes are lying. Make a best effort to
+                // work around this bug.
+                mInputLogic.mConnection.tryFixLyingCursorPosition();
+                mHandler.postResumeSuggestionsForStartInput(true /* shouldDelay */);
+                needToCallLoadKeyboardLater = false;
+            }
+        } else {
+            // If we have a hardware keyboard we don't need to call loadKeyboard later anyway.
+            needToCallLoadKeyboardLater = false;
         }
 
-        switcher.loadKeyboard(editorInfo, mSettingsValues);
+        if (isDifferentTextField ||
+                !currentSettingsValues.hasSameOrientation(getResources().getConfiguration())) {
+            loadSettings();
+        }
+        if (isDifferentTextField) {
+            mainKeyboardView.closing();
+            currentSettingsValues = mSettings.getCurrent();
 
-        if (mSuggestionsView != null)
-            mSuggestionsView.clear();
-        setSuggestionStripShownInternal(
-                isSuggestionsStripVisible(), /* needsInputViewShown */ false);
-        // Delay updating suggestions because keyboard input view may not be shown at this point.
-        mHandler.postUpdateSuggestions();
-        mHandler.cancelDoubleSpacesTimer();
+            if (currentSettingsValues.mAutoCorrectionEnabledPerUserSettings) {
+                suggest.setAutoCorrectionThreshold(
+                        currentSettingsValues.mAutoCorrectionThreshold);
+            }
+            suggest.setPlausibilityThreshold(currentSettingsValues.mPlausibilityThreshold);
 
-        inputView.setKeyPreviewPopupEnabled(mSettingsValues.mKeyPreviewPopupOn,
-                mSettingsValues.mKeyPreviewPopupDismissDelay);
-        inputView.setProximityCorrectionEnabled(true);
+            switcher.loadKeyboard(editorInfo, currentSettingsValues, getCurrentAutoCapsState(),
+                    getCurrentRecapitalizeState());
+            if (needToCallLoadKeyboardLater) {
+                // If we need to call loadKeyboard again later, we need to save its state now. The
+                // later call will be done in #retryResetCaches.
+                switcher.saveKeyboardState();
+            }
+        } else if (restarting) {
+            // TODO: Come up with a more comprehensive way to reset the keyboard layout when
+            // a keyboard layout set doesn't get reloaded in this method.
+            switcher.resetKeyboardStateToAlphabet(getCurrentAutoCapsState(),
+                    getCurrentRecapitalizeState());
+            // In apps like Talk, we come here when the text is sent and the field gets emptied and
+            // we need to re-evaluate the shift state, but not the whole layout which would be
+            // disruptive.
+            // Space state must be updated before calling updateShiftState
+            switcher.requestUpdatingShiftState(getCurrentAutoCapsState(),
+                    getCurrentRecapitalizeState());
+        }
+        // This will set the punctuation suggestions if next word suggestion is off;
+        // otherwise it will clear the suggestion strip.
+        setNeutralSuggestionStrip();
+
+        mHandler.cancelUpdateSuggestionStrip();
+
+        mainKeyboardView.setMainDictionaryAvailability(
+                mDictionaryFacilitator.hasAtLeastOneInitializedMainDictionary());
+        mainKeyboardView.setKeyPreviewPopupEnabled(currentSettingsValues.mKeyPreviewPopupOn,
+                currentSettingsValues.mKeyPreviewPopupDismissDelay);
+        mainKeyboardView.setSlidingKeyInputPreviewEnabled(
+                currentSettingsValues.mSlidingKeyInputPreviewEnabled);
+        mainKeyboardView.setGestureHandlingEnabledByUser(
+                currentSettingsValues.mGestureInputEnabled,
+                currentSettingsValues.mGestureTrailEnabled,
+                currentSettingsValues.mGestureFloatingPreviewTextEnabled);
 
         if (TRACE) Debug.startMethodTracing("/data/trace/latinime");
     }
 
-    public void onTargetApplicationKnown(final ApplicationInfo info) {
-        mTargetApplicationInfo = info;
+    @Override
+    public void onWindowShown() {
+        super.onWindowShown();
+        setNavigationBarVisibility(isInputViewShown());
     }
 
     @Override
     public void onWindowHidden() {
         super.onWindowHidden();
-        KeyboardView inputView = mKeyboardSwitcher.getKeyboardView();
-        if (inputView != null) inputView.closing();
+        final MainKeyboardView mainKeyboardView = mKeyboardSwitcher.getMainKeyboardView();
+        if (mainKeyboardView != null) {
+            mainKeyboardView.closing();
+        }
+        setNavigationBarVisibility(false);
     }
 
-    private void onFinishInputInternal() {
+    void onFinishInputInternal() {
         super.onFinishInput();
 
-        LatinImeLogger.commit();
-
-        KeyboardView inputView = mKeyboardSwitcher.getKeyboardView();
-        if (inputView != null) inputView.closing();
+        mDictionaryFacilitator.onFinishInput(this);
+        final MainKeyboardView mainKeyboardView = mKeyboardSwitcher.getMainKeyboardView();
+        if (mainKeyboardView != null) {
+            mainKeyboardView.closing();
+        }
     }
 
-    private void onFinishInputViewInternal(boolean finishingInput) {
+    void onFinishInputViewInternal(final boolean finishingInput) {
         super.onFinishInputView(finishingInput);
-        mKeyboardSwitcher.onFinishInputView();
-        KeyboardView inputView = mKeyboardSwitcher.getKeyboardView();
-        if (inputView != null) inputView.cancelAllMessages();
+        cleanupInternalStateForFinishInput();
+    }
+
+    private void cleanupInternalStateForFinishInput() {
         // Remove pending messages related to update suggestions
-        mHandler.cancelUpdateSuggestions();
+        mHandler.cancelUpdateSuggestionStrip();
+        // Should do the following in onFinishInputInternal but until JB MR2 it's not called :(
+        mInputLogic.finishInput();
+    }
+
+    protected void deallocateMemory() {
+        mKeyboardSwitcher.deallocateMemory();
     }
 
     @Override
-    public void onUpdateSelection(int oldSelStart, int oldSelEnd,
-            int newSelStart, int newSelEnd,
-            int composingSpanStart, int composingSpanEnd) {
+    public void onUpdateSelection(final int oldSelStart, final int oldSelEnd,
+            final int newSelStart, final int newSelEnd,
+            final int composingSpanStart, final int composingSpanEnd) {
         super.onUpdateSelection(oldSelStart, oldSelEnd, newSelStart, newSelEnd,
                 composingSpanStart, composingSpanEnd);
-
-        if (DEBUG) {
-            Log.i(TAG, "onUpdateSelection: oss=" + oldSelStart
-                    + ", ose=" + oldSelEnd
-                    + ", lss=" + mLastSelectionStart
-                    + ", lse=" + mLastSelectionEnd
-                    + ", nss=" + newSelStart
-                    + ", nse=" + newSelEnd
-                    + ", cs=" + composingSpanStart
-                    + ", ce=" + composingSpanEnd);
-        }
-        if (ProductionFlag.IS_EXPERIMENTAL) {
-            ResearchLogger.latinIME_onUpdateSelection(mLastSelectionStart, mLastSelectionEnd,
-                    oldSelStart, oldSelEnd, newSelStart, newSelEnd, composingSpanStart,
-                    composingSpanEnd);
+        if (DebugFlags.DEBUG_ENABLED) {
+            Log.i(TAG, "onUpdateSelection: oss=" + oldSelStart + ", ose=" + oldSelEnd
+                    + ", nss=" + newSelStart + ", nse=" + newSelEnd
+                    + ", cs=" + composingSpanStart + ", ce=" + composingSpanEnd);
         }
 
-        // TODO: refactor the following code to be less contrived.
-        // "newSelStart != composingSpanEnd" || "newSelEnd != composingSpanEnd" means
-        // that the cursor is not at the end of the composing span, or there is a selection.
-        // "mLastSelectionStart != newSelStart" means that the cursor is not in the same place
-        // as last time we were called (if there is a selection, it means the start hasn't
-        // changed, so it's the end that did).
-        final boolean selectionChanged = (newSelStart != composingSpanEnd
-                || newSelEnd != composingSpanEnd) && mLastSelectionStart != newSelStart;
-        // if composingSpanStart and composingSpanEnd are -1, it means there is no composing
-        // span in the view - we can use that to narrow down whether the cursor was moved
-        // by us or not. If we are composing a word but there is no composing span, then
-        // we know for sure the cursor moved while we were composing and we should reset
-        // the state.
-        final boolean noComposingSpan = composingSpanStart == -1 && composingSpanEnd == -1;
-        if (!mExpectingUpdateSelection) {
-            // TAKE CARE: there is a race condition when we enter this test even when the user
-            // did not explicitly move the cursor. This happens when typing fast, where two keys
-            // turn this flag on in succession and both onUpdateSelection() calls arrive after
-            // the second one - the first call successfully avoids this test, but the second one
-            // enters. For the moment we rely on noComposingSpan to further reduce the impact.
-
-            // TODO: the following is probably better done in resetEntireInputState().
-            // it should only happen when the cursor moved, and the very purpose of the
-            // test below is to narrow down whether this happened or not. Likewise with
-            // the call to postUpdateShiftState.
-            // We set this to NONE because after a cursor move, we don't want the space
-            // state-related special processing to kick in.
-            mSpaceState = SPACE_STATE_NONE;
-
-            if ((!mWordComposer.isComposingWord()) || selectionChanged || noComposingSpan) {
-                resetEntireInputState();
-            }
-
-            mHandler.postUpdateShiftState();
+        // This call happens whether our view is displayed or not, but if it's not then we should
+        // not attempt recorrection. This is true even with a hardware keyboard connected: if the
+        // view is not displayed we have no means of showing suggestions anyway, and if it is then
+        // we want to show suggestions anyway.
+        final SettingsValues settingsValues = mSettings.getCurrent();
+        if (isInputViewShown()
+                && mInputLogic.onUpdateSelection(oldSelStart, oldSelEnd, newSelStart, newSelEnd,
+                        settingsValues)) {
+            mKeyboardSwitcher.requestUpdatingShiftState(getCurrentAutoCapsState(),
+                    getCurrentRecapitalizeState());
         }
-        mExpectingUpdateSelection = false;
-        // TODO: Decide to call restartSuggestionsOnWordBeforeCursorIfAtEndOfWord() or not
-        // here. It would probably be too expensive to call directly here but we may want to post a
-        // message to delay it. The point would be to unify behavior between backspace to the
-        // end of a word and manually put the pointer at the end of the word.
-
-        // Make a note of the cursor position
-        mLastSelectionStart = newSelStart;
-        mLastSelectionEnd = newSelEnd;
     }
 
     /**
@@ -841,7 +1135,9 @@ public class LatinIME extends InputMethodService implements KeyboardActionListen
      */
     @Override
     public void onExtractedTextClicked() {
-        if (isSuggestionsRequested()) return;
+        if (mSettings.getCurrent().needsToLookupSuggestions()) {
+            return;
+        }
 
         super.onExtractedTextClicked();
     }
@@ -856,19 +1152,20 @@ public class LatinIME extends InputMethodService implements KeyboardActionListen
      * cause the suggestions strip to disappear and re-appear.
      */
     @Override
-    public void onExtractedCursorMovement(int dx, int dy) {
-        if (isSuggestionsRequested()) return;
+    public void onExtractedCursorMovement(final int dx, final int dy) {
+        if (mSettings.getCurrent().needsToLookupSuggestions()) {
+            return;
+        }
 
         super.onExtractedCursorMovement(dx, dy);
     }
 
     @Override
     public void hideWindow() {
-        LatinImeLogger.commit();
         mKeyboardSwitcher.onHideWindow();
 
         if (TRACE) Debug.stopMethodTracing();
-        if (mOptionsDialog != null && mOptionsDialog.isShowing()) {
+        if (isShowingOptionDialog()) {
             mOptionsDialog.dismiss();
             mOptionsDialog = null;
         }
@@ -876,8 +1173,8 @@ public class LatinIME extends InputMethodService implements KeyboardActionListen
     }
 
     @Override
-    public void onDisplayCompletions(CompletionInfo[] applicationSpecifiedCompletions) {
-        if (DEBUG) {
+    public void onDisplayCompletions(final CompletionInfo[] applicationSpecifiedCompletions) {
+        if (DebugFlags.DEBUG_ENABLED) {
             Log.i(TAG, "Received completions:");
             if (applicationSpecifiedCompletions != null) {
                 for (int i = 0; i < applicationSpecifiedCompletions.length; i++) {
@@ -885,298 +1182,202 @@ public class LatinIME extends InputMethodService implements KeyboardActionListen
                 }
             }
         }
-        if (ProductionFlag.IS_EXPERIMENTAL) {
-            ResearchLogger.latinIME_onDisplayCompletions(applicationSpecifiedCompletions);
+        if (!mSettings.getCurrent().isApplicationSpecifiedCompletionsOn()) {
+            return;
         }
-        if (mInputAttributes.mApplicationSpecifiedCompletionOn) {
-            mApplicationSpecifiedCompletions = applicationSpecifiedCompletions;
-            if (applicationSpecifiedCompletions == null) {
-                clearSuggestions();
-                return;
-            }
-
-            final ArrayList<SuggestedWords.SuggestedWordInfo> applicationSuggestedWords =
-                    SuggestedWords.getFromApplicationSpecifiedCompletions(
-                            applicationSpecifiedCompletions);
-            final SuggestedWords suggestedWords = new SuggestedWords(
-                    applicationSuggestedWords,
-                    false /* typedWordValid */,
-                    false /* hasAutoCorrectionCandidate */,
-                    false /* allowsToBeAutoCorrected */,
-                    false /* isPunctuationSuggestions */,
-                    false /* isObsoleteSuggestions */,
-                    false /* isPrediction */);
-            // When in fullscreen mode, show completions generated by the application
-            final boolean isAutoCorrection = false;
-            setSuggestions(suggestedWords, isAutoCorrection);
-            setAutoCorrectionIndicator(isAutoCorrection);
-            // TODO: is this the right thing to do? What should we auto-correct to in
-            // this case? This says to keep whatever the user typed.
-            mWordComposer.setAutoCorrection(mWordComposer.getTypedWord());
-            setSuggestionStripShown(true);
-        }
-    }
-
-    private void setSuggestionStripShownInternal(boolean shown, boolean needsInputViewShown) {
-        // TODO: Modify this if we support suggestions with hard keyboard
-        if (onEvaluateInputViewShown() && mSuggestionsContainer != null) {
-            final LatinKeyboardView keyboardView = mKeyboardSwitcher.getKeyboardView();
-            final boolean inputViewShown = (keyboardView != null) ? keyboardView.isShown() : false;
-            final boolean shouldShowSuggestions = shown
-                    && (needsInputViewShown ? inputViewShown : true);
-            if (isFullscreenMode()) {
-                mSuggestionsContainer.setVisibility(
-                        shouldShowSuggestions ? View.VISIBLE : View.GONE);
-            } else {
-                mSuggestionsContainer.setVisibility(
-                        shouldShowSuggestions ? View.VISIBLE : View.INVISIBLE);
-            }
-        }
-    }
-
-    private void setSuggestionStripShown(boolean shown) {
-        setSuggestionStripShownInternal(shown, /* needsInputViewShown */true);
-    }
-
-    private int getAdjustedBackingViewHeight() {
-        final int currentHeight = mKeyPreviewBackingView.getHeight();
-        if (currentHeight > 0) {
-            return currentHeight;
+        // If we have an update request in flight, we need to cancel it so it does not override
+        // these completions.
+        mHandler.cancelUpdateSuggestionStrip();
+        if (applicationSpecifiedCompletions == null) {
+            setNeutralSuggestionStrip();
+            return;
         }
 
-        final KeyboardView keyboardView = mKeyboardSwitcher.getKeyboardView();
-        if (keyboardView == null) {
-            return 0;
-        }
-        final int keyboardHeight = keyboardView.getHeight();
-        final int suggestionsHeight = mSuggestionsContainer.getHeight();
-        final int displayHeight = mResources.getDisplayMetrics().heightPixels;
-        final Rect rect = new Rect();
-        mKeyPreviewBackingView.getWindowVisibleDisplayFrame(rect);
-        final int notificationBarHeight = rect.top;
-        final int remainingHeight = displayHeight - notificationBarHeight - suggestionsHeight
-                - keyboardHeight;
-
-        final LayoutParams params = mKeyPreviewBackingView.getLayoutParams();
-        params.height = mSuggestionsView.setMoreSuggestionsHeight(remainingHeight);
-        mKeyPreviewBackingView.setLayoutParams(params);
-        return params.height;
+        final ArrayList<SuggestedWords.SuggestedWordInfo> applicationSuggestedWords =
+                SuggestedWords.getFromApplicationSpecifiedCompletions(
+                        applicationSpecifiedCompletions);
+        final SuggestedWords suggestedWords = new SuggestedWords(applicationSuggestedWords,
+                null /* rawSuggestions */,
+                null /* typedWord */,
+                false /* typedWordValid */,
+                false /* willAutoCorrect */,
+                false /* isObsoleteSuggestions */,
+                SuggestedWords.INPUT_STYLE_APPLICATION_SPECIFIED /* inputStyle */,
+                SuggestedWords.NOT_A_SEQUENCE_NUMBER);
+        // When in fullscreen mode, show completions generated by the application forcibly
+        setSuggestedWords(suggestedWords);
     }
 
     @Override
-    public void onComputeInsets(InputMethodService.Insets outInsets) {
+    public void onComputeInsets(final InputMethodService.Insets outInsets) {
         super.onComputeInsets(outInsets);
-        final KeyboardView inputView = mKeyboardSwitcher.getKeyboardView();
-        if (inputView == null || mSuggestionsContainer == null)
+        // This method may be called before {@link #setInputView(View)}.
+        if (mInputView == null) {
             return;
-        final int adjustedBackingHeight = getAdjustedBackingViewHeight();
-        final boolean backingGone = (mKeyPreviewBackingView.getVisibility() == View.GONE);
-        final int backingHeight = backingGone ? 0 : adjustedBackingHeight;
-        // In fullscreen mode, the height of the extract area managed by InputMethodService should
-        // be considered.
-        // See {@link android.inputmethodservice.InputMethodService#onComputeInsets}.
-        final int extractHeight = isFullscreenMode() ? mExtractArea.getHeight() : 0;
-        final int suggestionsHeight = (mSuggestionsContainer.getVisibility() == View.GONE) ? 0
-                : mSuggestionsContainer.getHeight();
-        final int extraHeight = extractHeight + backingHeight + suggestionsHeight;
-        int touchY = extraHeight;
-        // Need to set touchable region only if input view is being shown
-        final LatinKeyboardView keyboardView = mKeyboardSwitcher.getKeyboardView();
-        if (keyboardView != null && keyboardView.isShown()) {
-            if (mSuggestionsContainer.getVisibility() == View.VISIBLE) {
-                touchY -= suggestionsHeight;
-            }
-            final int touchWidth = inputView.getWidth();
-            final int touchHeight = inputView.getHeight() + extraHeight
-                    // Extend touchable region below the keyboard.
-                    + EXTENDED_TOUCHABLE_REGION_HEIGHT;
-            outInsets.touchableInsets = InputMethodService.Insets.TOUCHABLE_INSETS_REGION;
-            outInsets.touchableRegion.set(0, touchY, touchWidth, touchHeight);
         }
-        outInsets.contentTopInsets = touchY;
-        outInsets.visibleTopInsets = touchY;
+        final SettingsValues settingsValues = mSettings.getCurrent();
+        final View visibleKeyboardView = mKeyboardSwitcher.getVisibleKeyboardView();
+        if (visibleKeyboardView == null || !hasSuggestionStripView()) {
+            return;
+        }
+        final int inputHeight = mInputView.getHeight();
+        if (isImeSuppressedByHardwareKeyboard() && !visibleKeyboardView.isShown()) {
+            // If there is a hardware keyboard and a visible software keyboard view has been hidden,
+            // no visual element will be shown on the screen.
+            outInsets.contentTopInsets = inputHeight;
+            outInsets.visibleTopInsets = inputHeight;
+            mInsetsUpdater.setInsets(outInsets);
+            return;
+        }
+        final int suggestionsHeight = (!mKeyboardSwitcher.isShowingEmojiPalettes()
+                && mSuggestionStripView.getVisibility() == View.VISIBLE)
+                ? mSuggestionStripView.getHeight() : 0;
+        final int visibleTopY = inputHeight - visibleKeyboardView.getHeight() - suggestionsHeight;
+        mSuggestionStripView.setMoreSuggestionsHeight(visibleTopY);
+        // Need to set expanded touchable region only if a keyboard view is being shown.
+        if (visibleKeyboardView.isShown()) {
+            final int touchLeft = 0;
+            final int touchTop = mKeyboardSwitcher.isShowingMoreKeysPanel() ? 0 : visibleTopY;
+            final int touchRight = visibleKeyboardView.getWidth();
+            final int touchBottom = inputHeight;
+            outInsets.touchableInsets = InputMethodService.Insets.TOUCHABLE_INSETS_REGION;
+            outInsets.touchableRegion.set(touchLeft, touchTop, touchRight, touchBottom);
+        }
+        outInsets.contentTopInsets = visibleTopY;
+        outInsets.visibleTopInsets = visibleTopY;
+        mInsetsUpdater.setInsets(outInsets);
+    }
+
+    public void startShowingInputView(final boolean needsToLoadKeyboard) {
+        mIsExecutingStartShowingInputView = true;
+        // This {@link #showWindow(boolean)} will eventually call back
+        // {@link #onEvaluateInputViewShown()}.
+        showWindow(true /* showInput */);
+        mIsExecutingStartShowingInputView = false;
+        if (needsToLoadKeyboard) {
+            loadKeyboard();
+        }
+    }
+
+    public void stopShowingInputView() {
+        showWindow(false /* showInput */);
+    }
+
+    @Override
+    public boolean onShowInputRequested(final int flags, final boolean configChange) {
+        if (isImeSuppressedByHardwareKeyboard()) {
+            return true;
+        }
+        return super.onShowInputRequested(flags, configChange);
+    }
+
+    @Override
+    public boolean onEvaluateInputViewShown() {
+        if (mIsExecutingStartShowingInputView) {
+            return true;
+        }
+        return super.onEvaluateInputViewShown();
     }
 
     @Override
     public boolean onEvaluateFullscreenMode() {
-        // Reread resource value here, because this method is called by framework anytime as needed.
-        final boolean isFullscreenModeAllowed =
-                mSettingsValues.isFullscreenModeAllowed(getResources());
-        return super.onEvaluateFullscreenMode() && isFullscreenModeAllowed;
+        final SettingsValues settingsValues = mSettings.getCurrent();
+        if (isImeSuppressedByHardwareKeyboard()) {
+            // If there is a hardware keyboard, disable full screen mode.
+            return false;
+        }
+        // Reread resource value here, because this method is called by the framework as needed.
+        final boolean isFullscreenModeAllowed = Settings.readUseFullscreenMode(getResources());
+        if (super.onEvaluateFullscreenMode() && isFullscreenModeAllowed) {
+            // TODO: Remove this hack. Actually we should not really assume NO_EXTRACT_UI
+            // implies NO_FULLSCREEN. However, the framework mistakenly does.  i.e. NO_EXTRACT_UI
+            // without NO_FULLSCREEN doesn't work as expected. Because of this we need this
+            // hack for now.  Let's get rid of this once the framework gets fixed.
+            final EditorInfo ei = getCurrentInputEditorInfo();
+            return !(ei != null && ((ei.imeOptions & EditorInfo.IME_FLAG_NO_EXTRACT_UI) != 0));
+        }
+        return false;
     }
 
     @Override
     public void updateFullscreenMode() {
         super.updateFullscreenMode();
-
-        if (mKeyPreviewBackingView == null) return;
-        // In fullscreen mode, no need to have extra space to show the key preview.
-        // If not, we should have extra space above the keyboard to show the key preview.
-        mKeyPreviewBackingView.setVisibility(isFullscreenMode() ? View.GONE : View.VISIBLE);
+        updateSoftInputWindowLayoutParameters();
     }
 
-    // This will reset the whole input state to the starting state. It will clear
-    // the composing word, reset the last composed word, tell the inputconnection
-    // and the composingStateManager about it.
-    private void resetEntireInputState() {
-        resetComposingState(true /* alsoResetLastComposedWord */);
-        updateSuggestions();
-        final InputConnection ic = getCurrentInputConnection();
-        if (ic != null) {
-            ic.finishComposingText();
+    private void updateSoftInputWindowLayoutParameters() {
+        // Override layout parameters to expand {@link SoftInputWindow} to the entire screen.
+        // See {@link InputMethodService#setinputView(View)} and
+        // {@link SoftInputWindow#updateWidthHeight(WindowManager.LayoutParams)}.
+        final Window window = getWindow().getWindow();
+        ViewLayoutUtils.updateLayoutHeightOf(window, LayoutParams.MATCH_PARENT);
+        // This method may be called before {@link #setInputView(View)}.
+        if (mInputView != null) {
+            // In non-fullscreen mode, {@link InputView} and its parent inputArea should expand to
+            // the entire screen and be placed at the bottom of {@link SoftInputWindow}.
+            // In fullscreen mode, these shouldn't expand to the entire screen and should be
+            // coexistent with {@link #mExtractedArea} above.
+            // See {@link InputMethodService#setInputView(View) and
+            // com.android.internal.R.layout.input_method.xml.
+            final int layoutHeight = isFullscreenMode()
+                    ? LayoutParams.WRAP_CONTENT : LayoutParams.MATCH_PARENT;
+            final View inputArea = window.findViewById(android.R.id.inputArea);
+            ViewLayoutUtils.updateLayoutHeightOf(inputArea, layoutHeight);
+            ViewLayoutUtils.updateLayoutGravityOf(inputArea, Gravity.BOTTOM);
+            ViewLayoutUtils.updateLayoutHeightOf(mInputView, layoutHeight);
         }
     }
 
-    private void resetComposingState(final boolean alsoResetLastComposedWord) {
-        mWordComposer.reset();
-        if (alsoResetLastComposedWord)
-            mLastComposedWord = LastComposedWord.NOT_A_COMPOSED_WORD;
+    int getCurrentAutoCapsState() {
+        return mInputLogic.getCurrentAutoCapsState(mSettings.getCurrent());
     }
 
-    public void commitTyped(final InputConnection ic, final int separatorCode) {
-        if (!mWordComposer.isComposingWord()) return;
-        final CharSequence typedWord = mWordComposer.getTypedWord();
-        if (typedWord.length() > 0) {
-            if (ic != null) {
-                ic.commitText(typedWord, 1);
-                if (ProductionFlag.IS_EXPERIMENTAL) {
-                    ResearchLogger.latinIME_commitText(typedWord);
-                }
-            }
-            final CharSequence prevWord = addToUserHistoryDictionary(typedWord);
-            mLastComposedWord = mWordComposer.commitWord(
-                    LastComposedWord.COMMIT_TYPE_USER_TYPED_WORD, typedWord.toString(),
-                    separatorCode, prevWord);
+    int getCurrentRecapitalizeState() {
+        return mInputLogic.getCurrentRecapitalizeState();
+    }
+
+    /**
+     * @param codePoints code points to get coordinates for.
+     * @return x,y coordinates for this keyboard, as a flattened array.
+     */
+    public int[] getCoordinatesForCurrentKeyboard(final int[] codePoints) {
+        final Keyboard keyboard = mKeyboardSwitcher.getKeyboard();
+        if (null == keyboard) {
+            return CoordinateUtils.newCoordinateArray(codePoints.length,
+                    Constants.NOT_A_COORDINATE, Constants.NOT_A_COORDINATE);
         }
-        updateSuggestions();
+        return keyboard.getCoordinates(codePoints);
     }
 
-    public int getCurrentAutoCapsState() {
-        if (!mSettingsValues.mAutoCap) return Constants.TextUtils.CAP_MODE_OFF;
-
-        final EditorInfo ei = getCurrentInputEditorInfo();
-        if (ei == null) return Constants.TextUtils.CAP_MODE_OFF;
-
-        final int inputType = ei.inputType;
-        if ((inputType & InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS) != 0) {
-            return TextUtils.CAP_MODE_CHARACTERS;
-        }
-
-        final boolean noNeedToCheckCapsMode = (inputType & (InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
-                | InputType.TYPE_TEXT_FLAG_CAP_WORDS)) == 0;
-        if (noNeedToCheckCapsMode) return Constants.TextUtils.CAP_MODE_OFF;
-
-        // Avoid making heavy round-trip IPC calls of {@link InputConnection#getCursorCapsMode}
-        // unless needed.
-        if (mWordComposer.isComposingWord()) return Constants.TextUtils.CAP_MODE_OFF;
-
-        final InputConnection ic = getCurrentInputConnection();
-        if (ic == null) return Constants.TextUtils.CAP_MODE_OFF;
-        // TODO: This blocking IPC call is heavy. Consider doing this without using IPC calls.
-        // Note: getCursorCapsMode() returns the current capitalization mode that is any
-        // combination of CAP_MODE_CHARACTERS, CAP_MODE_WORDS, and CAP_MODE_SENTENCES. 0 means none
-        // of them.
-        return ic.getCursorCapsMode(inputType);
-    }
-
-    // "ic" may be null
-    private void swapSwapperAndSpaceWhileInBatchEdit(final InputConnection ic) {
-        if (null == ic) return;
-        CharSequence lastTwo = ic.getTextBeforeCursor(2, 0);
-        // It is guaranteed lastTwo.charAt(1) is a swapper - else this method is not called.
-        if (lastTwo != null && lastTwo.length() == 2
-                && lastTwo.charAt(0) == Keyboard.CODE_SPACE) {
-            ic.deleteSurroundingText(2, 0);
-            if (ProductionFlag.IS_EXPERIMENTAL) {
-                ResearchLogger.latinIME_deleteSurroundingText(2);
-            }
-            ic.commitText(lastTwo.charAt(1) + " ", 1);
-            if (ProductionFlag.IS_EXPERIMENTAL) {
-                ResearchLogger.latinIME_swapSwapperAndSpaceWhileInBatchEdit();
-            }
-            mKeyboardSwitcher.updateShiftState();
-        }
-    }
-
-    private boolean maybeDoubleSpaceWhileInBatchEdit(final InputConnection ic) {
-        if (mCorrectionMode == Suggest.CORRECTION_NONE) return false;
-        if (ic == null) return false;
-        final CharSequence lastThree = ic.getTextBeforeCursor(3, 0);
-        if (lastThree != null && lastThree.length() == 3
-                && canBeFollowedByPeriod(lastThree.charAt(0))
-                && lastThree.charAt(1) == Keyboard.CODE_SPACE
-                && lastThree.charAt(2) == Keyboard.CODE_SPACE
-                && mHandler.isAcceptingDoubleSpaces()) {
-            mHandler.cancelDoubleSpacesTimer();
-            ic.deleteSurroundingText(2, 0);
-            ic.commitText(". ", 1);
-            if (ProductionFlag.IS_EXPERIMENTAL) {
-                ResearchLogger.latinIME_doubleSpaceAutoPeriod();
-            }
-            mKeyboardSwitcher.updateShiftState();
-            return true;
-        }
-        return false;
-    }
-
-    private static boolean canBeFollowedByPeriod(final int codePoint) {
-        // TODO: Check again whether there really ain't a better way to check this.
-        // TODO: This should probably be language-dependant...
-        return Character.isLetterOrDigit(codePoint)
-                || codePoint == Keyboard.CODE_SINGLE_QUOTE
-                || codePoint == Keyboard.CODE_DOUBLE_QUOTE
-                || codePoint == Keyboard.CODE_CLOSING_PARENTHESIS
-                || codePoint == Keyboard.CODE_CLOSING_SQUARE_BRACKET
-                || codePoint == Keyboard.CODE_CLOSING_CURLY_BRACKET
-                || codePoint == Keyboard.CODE_CLOSING_ANGLE_BRACKET;
-    }
-
-    // "ic" may be null
-    private static void removeTrailingSpaceWhileInBatchEdit(final InputConnection ic) {
-        if (ic == null) return;
-        final CharSequence lastOne = ic.getTextBeforeCursor(1, 0);
-        if (lastOne != null && lastOne.length() == 1
-                && lastOne.charAt(0) == Keyboard.CODE_SPACE) {
-            ic.deleteSurroundingText(1, 0);
-            if (ProductionFlag.IS_EXPERIMENTAL) {
-                ResearchLogger.latinIME_deleteSurroundingText(1);
-            }
-        }
+    // Callback for the {@link SuggestionStripView}, to call when the important notice strip is
+    // pressed.
+    @Override
+    public void showImportantNoticeContents() {
+        PermissionsManager.get(this).requestPermissions(
+                this /* PermissionsResultCallback */,
+                null /* activity */, permission.READ_CONTACTS);
     }
 
     @Override
-    public boolean addWordToDictionary(String word) {
-        if (USE_BINARY_USER_DICTIONARY) {
-            ((UserBinaryDictionary)mUserDictionary).addWordToUserDictionary(word, 128);
-        } else {
-            ((UserDictionary)mUserDictionary).addWordToUserDictionary(word, 128);
+    public void onRequestPermissionsResult(boolean allGranted) {
+        ImportantNoticeUtils.updateContactsNoticeShown(this /* context */);
+        setNeutralSuggestionStrip();
+    }
+
+    public void displaySettingsDialog() {
+        if (isShowingOptionDialog()) {
+            return;
         }
-        // Suggestion strip should be updated after the operation of adding word to the
-        // user dictionary
-        mHandler.postUpdateSuggestions();
-        return true;
-    }
-
-    private static boolean isAlphabet(int code) {
-        return Character.isLetter(code);
-    }
-
-    private void onSettingsKeyPressed() {
-        if (isShowingOptionDialog()) return;
         showSubtypeSelectorAndSettings();
     }
 
-    // Virtual codes representing custom requests.  These are used in onCustomRequest() below.
-    public static final int CODE_SHOW_INPUT_METHOD_PICKER = 1;
-
     @Override
-    public boolean onCustomRequest(int requestCode) {
+    public boolean onCustomRequest(final int requestCode) {
         if (isShowingOptionDialog()) return false;
         switch (requestCode) {
-        case CODE_SHOW_INPUT_METHOD_PICKER:
-            if (ImfUtils.hasMultipleEnabledIMEsOrSubtypes(
-                    this, true /* include aux subtypes */)) {
-                mImm.showInputMethodPicker();
+        case Constants.CUSTOM_CODE_SHOW_INPUT_METHOD_PICKER:
+            if (mRichImm.hasMultipleEnabledIMEsOrSubtypes(true /* include aux subtypes */)) {
+                mRichImm.getInputMethodManager().showInputMethodPicker();
                 return true;
             }
             return false;
@@ -1188,1267 +1389,501 @@ public class LatinIME extends InputMethodService implements KeyboardActionListen
         return mOptionsDialog != null && mOptionsDialog.isShowing();
     }
 
-    private static int getActionId(Keyboard keyboard) {
-        return keyboard != null ? keyboard.mId.imeActionId() : EditorInfo.IME_ACTION_NONE;
-    }
-
-    private void performEditorAction(int actionId) {
-        final InputConnection ic = getCurrentInputConnection();
-        if (ic != null) {
-            ic.performEditorAction(actionId);
-            if (ProductionFlag.IS_EXPERIMENTAL) {
-                ResearchLogger.latinIME_performEditorAction(actionId);
-            }
-        }
-    }
-
-    private void handleLanguageSwitchKey() {
-        final boolean includesOtherImes = mSettingsValues.mIncludesOtherImesInLanguageSwitchList;
+    public void switchLanguage(final InputMethodSubtype subtype) {
         final IBinder token = getWindow().getWindow().getAttributes().token;
-        if (mShouldSwitchToLastSubtype) {
-            final InputMethodSubtype lastSubtype = mImm.getLastInputMethodSubtype();
-            final boolean lastSubtypeBelongsToThisIme =
-                    ImfUtils.checkIfSubtypeBelongsToThisImeAndEnabled(this, lastSubtype);
-            if ((includesOtherImes || lastSubtypeBelongsToThisIme)
-                    && mImm.switchToLastInputMethod(token)) {
-                mShouldSwitchToLastSubtype = false;
-            } else {
-                mImm.switchToNextInputMethod(token, !includesOtherImes);
-                mShouldSwitchToLastSubtype = true;
-            }
-        } else {
-            mImm.switchToNextInputMethod(token, !includesOtherImes);
-        }
+        mRichImm.setInputMethodAndSubtype(token, subtype);
     }
 
-    static private void sendUpDownEnterOrBackspace(final int code, final InputConnection ic) {
-        final long eventTime = SystemClock.uptimeMillis();
-        ic.sendKeyEvent(new KeyEvent(eventTime, eventTime,
-                KeyEvent.ACTION_DOWN, code, 0, 0, KeyCharacterMap.VIRTUAL_KEYBOARD, 0,
-                KeyEvent.FLAG_SOFT_KEYBOARD | KeyEvent.FLAG_KEEP_TOUCH_MODE));
-        ic.sendKeyEvent(new KeyEvent(SystemClock.uptimeMillis(), eventTime,
-                KeyEvent.ACTION_UP, code, 0, 0, KeyCharacterMap.VIRTUAL_KEYBOARD, 0,
-                KeyEvent.FLAG_SOFT_KEYBOARD | KeyEvent.FLAG_KEEP_TOUCH_MODE));
-    }
-
-    private void sendKeyCodePoint(int code) {
-        // TODO: Remove this special handling of digit letters.
-        // For backward compatibility. See {@link InputMethodService#sendKeyChar(char)}.
-        if (code >= '0' && code <= '9') {
-            super.sendKeyChar((char)code);
+    // TODO: Revise the language switch key behavior to make it much smarter and more reasonable.
+    public void switchToNextSubtype() {
+        final IBinder token = getWindow().getWindow().getAttributes().token;
+        if (shouldSwitchToOtherInputMethods()) {
+            mRichImm.switchToNextInputMethod(token, false /* onlyCurrentIme */);
             return;
         }
+        mSubtypeState.switchSubtype(token, mRichImm);
+    }
 
-        final InputConnection ic = getCurrentInputConnection();
-        if (ic != null) {
-            // 16 is android.os.Build.VERSION_CODES.JELLY_BEAN but we can't write it because
-            // we want to be able to compile against the Ice Cream Sandwich SDK.
-            if (Keyboard.CODE_ENTER == code && mTargetApplicationInfo != null
-                    && mTargetApplicationInfo.targetSdkVersion < 16) {
-                // Backward compatibility mode. Before Jelly bean, the keyboard would simulate
-                // a hardware keyboard event on pressing enter or delete. This is bad for many
-                // reasons (there are race conditions with commits) but some applications are
-                // relying on this behavior so we continue to support it for older apps.
-                sendUpDownEnterOrBackspace(KeyEvent.KEYCODE_ENTER, ic);
-            } else {
-                final String text = new String(new int[] { code }, 0, 1);
-                ic.commitText(text, text.length());
+    // TODO: Instead of checking for alphabetic keyboard here, separate keycodes for
+    // alphabetic shift and shift while in symbol layout and get rid of this method.
+    private int getCodePointForKeyboard(final int codePoint) {
+        if (Constants.CODE_SHIFT == codePoint) {
+            final Keyboard currentKeyboard = mKeyboardSwitcher.getKeyboard();
+            if (null != currentKeyboard && currentKeyboard.mId.isAlphabetKeyboard()) {
+                return codePoint;
             }
-            if (ProductionFlag.IS_EXPERIMENTAL) {
-                ResearchLogger.latinIME_sendKeyCodePoint(code);
-            }
+            return Constants.CODE_SYMBOL_SHIFT;
         }
+        return codePoint;
     }
 
     // Implementation of {@link KeyboardActionListener}.
     @Override
-    public void onCodeInput(int primaryCode, int x, int y) {
-        final long when = SystemClock.uptimeMillis();
-        if (primaryCode != Keyboard.CODE_DELETE || when > mLastKeyTime + QUICK_PRESS) {
-            mDeleteCount = 0;
-        }
-        mLastKeyTime = when;
+    public void onCodeInput(final int codePoint, final int x, final int y,
+            final boolean isKeyRepeat) {
+        // TODO: this processing does not belong inside LatinIME, the caller should be doing this.
+        final MainKeyboardView mainKeyboardView = mKeyboardSwitcher.getMainKeyboardView();
+        // x and y include some padding, but everything down the line (especially native
+        // code) needs the coordinates in the keyboard frame.
+        // TODO: We should reconsider which coordinate system should be used to represent
+        // keyboard event. Also we should pull this up -- LatinIME has no business doing
+        // this transformation, it should be done already before calling onEvent.
+        final int keyX = mainKeyboardView.getKeyX(x);
+        final int keyY = mainKeyboardView.getKeyY(y);
+        final Event event = createSoftwareKeypressEvent(getCodePointForKeyboard(codePoint),
+                keyX, keyY, isKeyRepeat);
+        onEvent(event);
+    }
 
-        if (ProductionFlag.IS_EXPERIMENTAL) {
-            if (ResearchLogger.sIsLogging) {
-                ResearchLogger.getInstance().logKeyEvent(primaryCode, x, y);
-            }
+    // This method is public for testability of LatinIME, but also in the future it should
+    // completely replace #onCodeInput.
+    public void onEvent(@Nonnull final Event event) {
+        if (Constants.CODE_SHORTCUT == event.mKeyCode) {
+            mRichImm.switchToShortcutIme(this);
         }
+        final InputTransaction completeInputTransaction =
+                mInputLogic.onCodeInput(mSettings.getCurrent(), event,
+                        mKeyboardSwitcher.getKeyboardShiftMode(),
+                        mKeyboardSwitcher.getCurrentKeyboardScriptId(), mHandler);
+        updateStateAfterInputTransaction(completeInputTransaction);
+        mKeyboardSwitcher.onEvent(event, getCurrentAutoCapsState(), getCurrentRecapitalizeState());
+    }
 
-        final KeyboardSwitcher switcher = mKeyboardSwitcher;
-        // The space state depends only on the last character pressed and its own previous
-        // state. Here, we revert the space state to neutral if the key is actually modifying
-        // the input contents (any non-shift key), which is what we should do for
-        // all inputs that do not result in a special state. Each character handling is then
-        // free to override the state as they see fit.
-        final int spaceState = mSpaceState;
-        if (!mWordComposer.isComposingWord()) mIsAutoCorrectionIndicatorOn = false;
-
-        // TODO: Consolidate the double space timer, mLastKeyTime, and the space state.
-        if (primaryCode != Keyboard.CODE_SPACE) {
-            mHandler.cancelDoubleSpacesTimer();
+    // A helper method to split the code point and the key code. Ultimately, they should not be
+    // squashed into the same variable, and this method should be removed.
+    // public for testing, as we don't want to copy the same logic into test code
+    @Nonnull
+    public static Event createSoftwareKeypressEvent(final int keyCodeOrCodePoint, final int keyX,
+             final int keyY, final boolean isKeyRepeat) {
+        final int keyCode;
+        final int codePoint;
+        if (keyCodeOrCodePoint <= 0) {
+            keyCode = keyCodeOrCodePoint;
+            codePoint = Event.NOT_A_CODE_POINT;
+        } else {
+            keyCode = Event.NOT_A_KEY_CODE;
+            codePoint = keyCodeOrCodePoint;
         }
+        return Event.createSoftwareKeypressEvent(codePoint, keyCode, keyX, keyY, isKeyRepeat);
+    }
 
-        boolean didAutoCorrect = false;
-        switch (primaryCode) {
-        case Keyboard.CODE_DELETE:
-            mSpaceState = SPACE_STATE_NONE;
-            handleBackspace(spaceState);
-            mDeleteCount++;
-            mExpectingUpdateSelection = true;
-            mShouldSwitchToLastSubtype = true;
-            LatinImeLogger.logOnDelete(x, y);
-            break;
-        case Keyboard.CODE_SHIFT:
-        case Keyboard.CODE_SWITCH_ALPHA_SYMBOL:
-            // Shift and symbol key is handled in onPressKey() and onReleaseKey().
-            break;
-        case Keyboard.CODE_SETTINGS:
-            onSettingsKeyPressed();
-            break;
-        case Keyboard.CODE_SHORTCUT:
-            mSubtypeSwitcher.switchToShortcutIME();
-            break;
-        case Keyboard.CODE_ACTION_ENTER:
-            performEditorAction(getActionId(switcher.getKeyboard()));
-            break;
-        case Keyboard.CODE_ACTION_NEXT:
-            performEditorAction(EditorInfo.IME_ACTION_NEXT);
-            break;
-        case Keyboard.CODE_ACTION_PREVIOUS:
-            performEditorAction(EditorInfo.IME_ACTION_PREVIOUS);
-            break;
-        case Keyboard.CODE_LANGUAGE_SWITCH:
-            handleLanguageSwitchKey();
-            break;
-        default:
-            if (primaryCode == Keyboard.CODE_TAB
-                    && mInputAttributes.mEditorAction == EditorInfo.IME_ACTION_NEXT) {
-                performEditorAction(EditorInfo.IME_ACTION_NEXT);
-                break;
-            }
-            mSpaceState = SPACE_STATE_NONE;
-            if (mSettingsValues.isWordSeparator(primaryCode)) {
-                didAutoCorrect = handleSeparator(primaryCode, x, y, spaceState);
-            } else {
-                final Keyboard keyboard = mKeyboardSwitcher.getKeyboard();
-                if (keyboard != null && keyboard.hasProximityCharsCorrection(primaryCode)) {
-                    handleCharacter(primaryCode, x, y, spaceState);
-                } else {
-                    handleCharacter(primaryCode, NOT_A_TOUCH_COORDINATE, NOT_A_TOUCH_COORDINATE,
-                            spaceState);
-                }
-            }
-            mExpectingUpdateSelection = true;
-            mShouldSwitchToLastSubtype = true;
-            break;
-        }
-        switcher.onCodeInput(primaryCode);
-        // Reset after any single keystroke, except shift and symbol-shift
-        if (!didAutoCorrect && primaryCode != Keyboard.CODE_SHIFT
-                && primaryCode != Keyboard.CODE_SWITCH_ALPHA_SYMBOL)
-            mLastComposedWord.deactivate();
-        mEnteredText = null;
+    // Called from PointerTracker through the KeyboardActionListener interface
+    @Override
+    public void onTextInput(final String rawText) {
+        // TODO: have the keyboard pass the correct key code when we need it.
+        final Event event = Event.createSoftwareTextEvent(rawText, Constants.CODE_OUTPUT_TEXT);
+        final InputTransaction completeInputTransaction =
+                mInputLogic.onTextInput(mSettings.getCurrent(), event,
+                        mKeyboardSwitcher.getKeyboardShiftMode(), mHandler);
+        updateStateAfterInputTransaction(completeInputTransaction);
+        mKeyboardSwitcher.onEvent(event, getCurrentAutoCapsState(), getCurrentRecapitalizeState());
     }
 
     @Override
-    public void onTextInput(CharSequence text) {
-        final InputConnection ic = getCurrentInputConnection();
-        if (ic == null) return;
-        ic.beginBatchEdit();
-        commitTyped(ic, LastComposedWord.NOT_A_SEPARATOR);
-        text = specificTldProcessingOnTextInput(ic, text);
-        if (SPACE_STATE_PHANTOM == mSpaceState) {
-            sendKeyCodePoint(Keyboard.CODE_SPACE);
-        }
-        ic.commitText(text, 1);
-        if (ProductionFlag.IS_EXPERIMENTAL) {
-            ResearchLogger.latinIME_commitText(text);
-        }
-        ic.endBatchEdit();
-        mKeyboardSwitcher.updateShiftState();
-        mKeyboardSwitcher.onCodeInput(Keyboard.CODE_OUTPUT_TEXT);
-        mSpaceState = SPACE_STATE_NONE;
-        mEnteredText = text;
-        resetComposingState(true /* alsoResetLastComposedWord */);
+    public void onStartBatchInput() {
+        mInputLogic.onStartBatchInput(mSettings.getCurrent(), mKeyboardSwitcher, mHandler);
+        mGestureConsumer.onGestureStarted(
+                mRichImm.getCurrentSubtypeLocale(),
+                mKeyboardSwitcher.getKeyboard());
     }
 
-    // ic may not be null
-    private CharSequence specificTldProcessingOnTextInput(final InputConnection ic,
-            final CharSequence text) {
-        if (text.length() <= 1 || text.charAt(0) != Keyboard.CODE_PERIOD
-                || !Character.isLetter(text.charAt(1))) {
-            // Not a tld: do nothing.
-            return text;
-        }
-        // We have a TLD (or something that looks like this): make sure we don't add
-        // a space even if currently in phantom mode.
-        mSpaceState = SPACE_STATE_NONE;
-        final CharSequence lastOne = ic.getTextBeforeCursor(1, 0);
-        if (lastOne != null && lastOne.length() == 1
-                && lastOne.charAt(0) == Keyboard.CODE_PERIOD) {
-            return text.subSequence(1, text.length());
-        } else {
-            return text;
-        }
+    @Override
+    public void onUpdateBatchInput(final InputPointers batchPointers) {
+        mInputLogic.onUpdateBatchInput(batchPointers);
     }
 
+    @Override
+    public void onEndBatchInput(final InputPointers batchPointers) {
+        mInputLogic.onEndBatchInput(batchPointers);
+        mGestureConsumer.onGestureCompleted(batchPointers);
+    }
+
+    @Override
+    public void onCancelBatchInput() {
+        mInputLogic.onCancelBatchInput(mHandler);
+        mGestureConsumer.onGestureCanceled();
+    }
+
+    /**
+     * To be called after the InputLogic has gotten a chance to act on the suggested words by the
+     * IME for the full gesture, possibly updating the TextView to reflect the first suggestion.
+     * <p>
+     * This method must be run on the UI Thread.
+     * @param suggestedWords suggested words by the IME for the full gesture.
+     */
+    public void onTailBatchInputResultShown(final SuggestedWords suggestedWords) {
+        mGestureConsumer.onImeSuggestionsProcessed(suggestedWords,
+                mInputLogic.getComposingStart(), mInputLogic.getComposingLength(),
+                mDictionaryFacilitator);
+    }
+
+    // This method must run on the UI Thread.
+    void showGesturePreviewAndSuggestionStrip(@Nonnull final SuggestedWords suggestedWords,
+            final boolean dismissGestureFloatingPreviewText) {
+        showSuggestionStrip(suggestedWords);
+        final MainKeyboardView mainKeyboardView = mKeyboardSwitcher.getMainKeyboardView();
+        mainKeyboardView.showGestureFloatingPreviewText(suggestedWords,
+                dismissGestureFloatingPreviewText /* dismissDelayed */);
+    }
+
+    // Called from PointerTracker through the KeyboardActionListener interface
+    @Override
+    public void onFinishSlidingInput() {
+        // User finished sliding input.
+        mKeyboardSwitcher.onFinishSlidingInput(getCurrentAutoCapsState(),
+                getCurrentRecapitalizeState());
+    }
+
+    // Called from PointerTracker through the KeyboardActionListener interface
     @Override
     public void onCancelInput() {
         // User released a finger outside any key
-        mKeyboardSwitcher.onCancelInput();
+        // Nothing to do so far.
     }
 
-    private void handleBackspace(final int spaceState) {
-        final InputConnection ic = getCurrentInputConnection();
-        if (ic == null) return;
-        ic.beginBatchEdit();
-        handleBackspaceWhileInBatchEdit(spaceState, ic);
-        ic.endBatchEdit();
+    public boolean hasSuggestionStripView() {
+        return null != mSuggestionStripView;
     }
 
-    // "ic" may not be null.
-    private void handleBackspaceWhileInBatchEdit(final int spaceState, final InputConnection ic) {
-        // In many cases, we may have to put the keyboard in auto-shift state again.
-        mHandler.postUpdateShiftState();
-
-        if (mEnteredText != null && sameAsTextBeforeCursor(ic, mEnteredText)) {
-            // Cancel multi-character input: remove the text we just entered.
-            // This is triggered on backspace after a key that inputs multiple characters,
-            // like the smiley key or the .com key.
-            final int length = mEnteredText.length();
-            ic.deleteSurroundingText(length, 0);
-            if (ProductionFlag.IS_EXPERIMENTAL) {
-                ResearchLogger.latinIME_deleteSurroundingText(length);
-            }
-            // If we have mEnteredText, then we know that mHasUncommittedTypedChars == false.
-            // In addition we know that spaceState is false, and that we should not be
-            // reverting any autocorrect at this point. So we can safely return.
+    private void setSuggestedWords(final SuggestedWords suggestedWords) {
+        final SettingsValues currentSettingsValues = mSettings.getCurrent();
+        mInputLogic.setSuggestedWords(suggestedWords);
+        // TODO: Modify this when we support suggestions with hard keyboard
+        if (!hasSuggestionStripView()) {
+            return;
+        }
+        if (!onEvaluateInputViewShown()) {
             return;
         }
 
-        if (mWordComposer.isComposingWord()) {
-            final int length = mWordComposer.size();
-            if (length > 0) {
-                mWordComposer.deleteLast();
-                ic.setComposingText(getTextWithUnderline(mWordComposer.getTypedWord()), 1);
-                // If we have deleted the last remaining character of a word, then we are not
-                // isComposingWord() any more.
-                if (!mWordComposer.isComposingWord()) {
-                    // Not composing word any more, so we can show bigrams.
-                    mHandler.postUpdateBigramPredictions();
-                } else {
-                    // Still composing a word, so we still have letters to deduce a suggestion from.
-                    mHandler.postUpdateSuggestions();
-                }
-            } else {
-                ic.deleteSurroundingText(1, 0);
-                if (ProductionFlag.IS_EXPERIMENTAL) {
-                    ResearchLogger.latinIME_deleteSurroundingText(1);
-                }
-            }
-        } else {
-            if (mLastComposedWord.canRevertCommit()) {
-                Utils.Stats.onAutoCorrectionCancellation();
-                revertCommit(ic);
+        final boolean shouldShowImportantNotice =
+                ImportantNoticeUtils.shouldShowImportantNotice(this, currentSettingsValues);
+        final boolean shouldShowSuggestionCandidates =
+                currentSettingsValues.mInputAttributes.mShouldShowSuggestions
+                && currentSettingsValues.isSuggestionsEnabledPerUserSettings();
+        final boolean shouldShowSuggestionsStripUnlessPassword = shouldShowImportantNotice
+                || currentSettingsValues.mShowsVoiceInputKey
+                || shouldShowSuggestionCandidates
+                || currentSettingsValues.isApplicationSpecifiedCompletionsOn();
+        final boolean shouldShowSuggestionsStrip = shouldShowSuggestionsStripUnlessPassword
+                && !currentSettingsValues.mInputAttributes.mIsPasswordField;
+        mSuggestionStripView.updateVisibility(shouldShowSuggestionsStrip, isFullscreenMode());
+        if (!shouldShowSuggestionsStrip) {
+            return;
+        }
+
+        final boolean isEmptyApplicationSpecifiedCompletions =
+                currentSettingsValues.isApplicationSpecifiedCompletionsOn()
+                && suggestedWords.isEmpty();
+        final boolean noSuggestionsFromDictionaries = suggestedWords.isEmpty()
+                || suggestedWords.isPunctuationSuggestions()
+                || isEmptyApplicationSpecifiedCompletions;
+        final boolean isBeginningOfSentencePrediction = (suggestedWords.mInputStyle
+                == SuggestedWords.INPUT_STYLE_BEGINNING_OF_SENTENCE_PREDICTION);
+        final boolean noSuggestionsToOverrideImportantNotice = noSuggestionsFromDictionaries
+                || isBeginningOfSentencePrediction;
+        if (shouldShowImportantNotice && noSuggestionsToOverrideImportantNotice) {
+            if (mSuggestionStripView.maybeShowImportantNoticeTitle()) {
                 return;
             }
-            if (SPACE_STATE_DOUBLE == spaceState) {
-                if (revertDoubleSpaceWhileInBatchEdit(ic)) {
-                    // No need to reset mSpaceState, it has already be done (that's why we
-                    // receive it as a parameter)
-                    return;
-                }
-            } else if (SPACE_STATE_SWAP_PUNCTUATION == spaceState) {
-                if (revertSwapPunctuation(ic)) {
-                    // Likewise
-                    return;
-                }
-            }
+        }
 
-            // No cancelling of commit/double space/swap: we have a regular backspace.
-            // We should backspace one char and restart suggestion if at the end of a word.
-            if (mLastSelectionStart != mLastSelectionEnd) {
-                // If there is a selection, remove it.
-                final int lengthToDelete = mLastSelectionEnd - mLastSelectionStart;
-                ic.setSelection(mLastSelectionEnd, mLastSelectionEnd);
-                ic.deleteSurroundingText(lengthToDelete, 0);
-                if (ProductionFlag.IS_EXPERIMENTAL) {
-                    ResearchLogger.latinIME_deleteSurroundingText(lengthToDelete);
-                }
-            } else {
-                // There is no selection, just delete one character.
-                if (NOT_A_CURSOR_POSITION == mLastSelectionEnd) {
-                    // This should never happen.
-                    Log.e(TAG, "Backspace when we don't know the selection position");
-                }
-                // 16 is android.os.Build.VERSION_CODES.JELLY_BEAN but we can't write it because
-                // we want to be able to compile against the Ice Cream Sandwich SDK.
-                if (mTargetApplicationInfo != null
-                        && mTargetApplicationInfo.targetSdkVersion < 16) {
-                    // Backward compatibility mode. Before Jelly bean, the keyboard would simulate
-                    // a hardware keyboard event on pressing enter or delete. This is bad for many
-                    // reasons (there are race conditions with commits) but some applications are
-                    // relying on this behavior so we continue to support it for older apps.
-                    sendUpDownEnterOrBackspace(KeyEvent.KEYCODE_DEL, ic);
-                } else {
-                    ic.deleteSurroundingText(1, 0);
-                }
-                if (ProductionFlag.IS_EXPERIMENTAL) {
-                    ResearchLogger.latinIME_deleteSurroundingText(1);
-                }
-                if (mDeleteCount > DELETE_ACCELERATE_AT) {
-                    ic.deleteSurroundingText(1, 0);
-                    if (ProductionFlag.IS_EXPERIMENTAL) {
-                        ResearchLogger.latinIME_deleteSurroundingText(1);
-                    }
-                }
-            }
-            if (isSuggestionsRequested()) {
-                restartSuggestionsOnWordBeforeCursorIfAtEndOfWord(ic);
-            }
+        if (currentSettingsValues.isSuggestionsEnabledPerUserSettings()
+                || currentSettingsValues.isApplicationSpecifiedCompletionsOn()
+                // We should clear the contextual strip if there is no suggestion from dictionaries.
+                || noSuggestionsFromDictionaries) {
+            mSuggestionStripView.setSuggestions(suggestedWords,
+                    mRichImm.getCurrentSubtype().isRtlSubtype());
         }
     }
 
-    // ic may be null
-    private boolean maybeStripSpaceWhileInBatchEdit(final InputConnection ic, final int code,
-            final int spaceState, final boolean isFromSuggestionStrip) {
-        if (Keyboard.CODE_ENTER == code && SPACE_STATE_SWAP_PUNCTUATION == spaceState) {
-            removeTrailingSpaceWhileInBatchEdit(ic);
-            return false;
-        } else if ((SPACE_STATE_WEAK == spaceState
-                || SPACE_STATE_SWAP_PUNCTUATION == spaceState)
-                && isFromSuggestionStrip) {
-            if (mSettingsValues.isWeakSpaceSwapper(code)) {
-                return true;
-            } else {
-                if (mSettingsValues.isWeakSpaceStripper(code)) {
-                    removeTrailingSpaceWhileInBatchEdit(ic);
-                }
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
-
-    private void handleCharacter(final int primaryCode, final int x,
-            final int y, final int spaceState) {
-        final InputConnection ic = getCurrentInputConnection();
-        if (null != ic) ic.beginBatchEdit();
-        // TODO: if ic is null, does it make any sense to call this?
-        handleCharacterWhileInBatchEdit(primaryCode, x, y, spaceState, ic);
-        if (null != ic) ic.endBatchEdit();
-    }
-
-    // "ic" may be null without this crashing, but the behavior will be really strange
-    private void handleCharacterWhileInBatchEdit(final int primaryCode,
-            final int x, final int y, final int spaceState, final InputConnection ic) {
-        boolean isComposingWord = mWordComposer.isComposingWord();
-
-        if (SPACE_STATE_PHANTOM == spaceState &&
-                !mSettingsValues.isSymbolExcludedFromWordSeparators(primaryCode)) {
-            if (isComposingWord) {
-                // Sanity check
-                throw new RuntimeException("Should not be composing here");
-            }
-            sendKeyCodePoint(Keyboard.CODE_SPACE);
-        }
-
-        // NOTE: isCursorTouchingWord() is a blocking IPC call, so it often takes several
-        // dozen milliseconds. Avoid calling it as much as possible, since we are on the UI
-        // thread here.
-        if (!isComposingWord && (isAlphabet(primaryCode)
-                || mSettingsValues.isSymbolExcludedFromWordSeparators(primaryCode))
-                && isSuggestionsRequested() && !isCursorTouchingWord()) {
-            // Reset entirely the composing state anyway, then start composing a new word unless
-            // the character is a single quote. The idea here is, single quote is not a
-            // separator and it should be treated as a normal character, except in the first
-            // position where it should not start composing a word.
-            isComposingWord = (Keyboard.CODE_SINGLE_QUOTE != primaryCode);
-            // Here we don't need to reset the last composed word. It will be reset
-            // when we commit this one, if we ever do; if on the other hand we backspace
-            // it entirely and resume suggestions on the previous word, we'd like to still
-            // have touch coordinates for it.
-            resetComposingState(false /* alsoResetLastComposedWord */);
-            clearSuggestions();
-        }
-        if (isComposingWord) {
-            mWordComposer.add(
-                    primaryCode, x, y, mKeyboardSwitcher.getKeyboardView().getKeyDetector());
-            if (ic != null) {
-                // If it's the first letter, make note of auto-caps state
-                if (mWordComposer.size() == 1) {
-                    mWordComposer.setAutoCapitalized(
-                            getCurrentAutoCapsState() != Constants.TextUtils.CAP_MODE_OFF);
-                }
-                ic.setComposingText(getTextWithUnderline(mWordComposer.getTypedWord()), 1);
-            }
-            mHandler.postUpdateSuggestions();
-        } else {
-            final boolean swapWeakSpace = maybeStripSpaceWhileInBatchEdit(ic, primaryCode,
-                    spaceState, KeyboardActionListener.SUGGESTION_STRIP_COORDINATE == x);
-
-            sendKeyCodePoint(primaryCode);
-
-            if (swapWeakSpace) {
-                swapSwapperAndSpaceWhileInBatchEdit(ic);
-                mSpaceState = SPACE_STATE_WEAK;
-            }
-            // Some characters are not word separators, yet they don't start a new
-            // composing span. For these, we haven't changed the suggestion strip, and
-            // if the "add to dictionary" hint is shown, we should do so now. Examples of
-            // such characters include single quote, dollar, and others; the exact list is
-            // the list of characters for which we enter handleCharacterWhileInBatchEdit
-            // that don't match the test if ((isAlphabet...)) at the top of this method.
-            if (null != mSuggestionsView && mSuggestionsView.dismissAddToDictionaryHint()) {
-                mHandler.postUpdateBigramPredictions();
-            }
-        }
-        Utils.Stats.onNonSeparator((char)primaryCode, x, y);
-    }
-
-    // Returns true if we did an autocorrection, false otherwise.
-    private boolean handleSeparator(final int primaryCode, final int x, final int y,
-            final int spaceState) {
-        // Should dismiss the "Touch again to save" message when handling separator
-        if (mSuggestionsView != null && mSuggestionsView.dismissAddToDictionaryHint()) {
-            mHandler.cancelUpdateBigramPredictions();
-            mHandler.postUpdateSuggestions();
-        }
-
-        boolean didAutoCorrect = false;
-        // Handle separator
-        final InputConnection ic = getCurrentInputConnection();
-        if (ic != null) {
-            ic.beginBatchEdit();
-        }
-        if (mWordComposer.isComposingWord()) {
-            // In certain languages where single quote is a separator, it's better
-            // not to auto correct, but accept the typed word. For instance,
-            // in Italian dov' should not be expanded to dove' because the elision
-            // requires the last vowel to be removed.
-            final boolean shouldAutoCorrect = mSettingsValues.mAutoCorrectEnabled
-                    && !mInputAttributes.mInputTypeNoAutoCorrect;
-            if (shouldAutoCorrect && primaryCode != Keyboard.CODE_SINGLE_QUOTE) {
-                commitCurrentAutoCorrection(primaryCode, ic);
-                didAutoCorrect = true;
-            } else {
-                commitTyped(ic, primaryCode);
-            }
-        }
-
-        final boolean swapWeakSpace = maybeStripSpaceWhileInBatchEdit(ic, primaryCode, spaceState,
-                KeyboardActionListener.SUGGESTION_STRIP_COORDINATE == x);
-
-        if (SPACE_STATE_PHANTOM == spaceState &&
-                mSettingsValues.isPhantomSpacePromotingSymbol(primaryCode)) {
-            sendKeyCodePoint(Keyboard.CODE_SPACE);
-        }
-        sendKeyCodePoint(primaryCode);
-
-        if (Keyboard.CODE_SPACE == primaryCode) {
-            if (isSuggestionsRequested()) {
-                if (maybeDoubleSpaceWhileInBatchEdit(ic)) {
-                    mSpaceState = SPACE_STATE_DOUBLE;
-                } else if (!isShowingPunctuationList()) {
-                    mSpaceState = SPACE_STATE_WEAK;
-                }
-            }
-
-            mHandler.startDoubleSpacesTimer();
-            if (!isCursorTouchingWord()) {
-                mHandler.cancelUpdateSuggestions();
-                mHandler.postUpdateBigramPredictions();
-            }
-        } else {
-            if (swapWeakSpace) {
-                swapSwapperAndSpaceWhileInBatchEdit(ic);
-                mSpaceState = SPACE_STATE_SWAP_PUNCTUATION;
-            } else if (SPACE_STATE_PHANTOM == spaceState) {
-                // If we are in phantom space state, and the user presses a separator, we want to
-                // stay in phantom space state so that the next keypress has a chance to add the
-                // space. For example, if I type "Good dat", pick "day" from the suggestion strip
-                // then insert a comma and go on to typing the next word, I want the space to be
-                // inserted automatically before the next word, the same way it is when I don't
-                // input the comma.
-                mSpaceState = SPACE_STATE_PHANTOM;
-            }
-
-            // Set punctuation right away. onUpdateSelection will fire but tests whether it is
-            // already displayed or not, so it's okay.
-            setPunctuationSuggestions();
-        }
-
-        Utils.Stats.onSeparator((char)primaryCode, x, y);
-
-        if (ic != null) {
-            ic.endBatchEdit();
-        }
-        return didAutoCorrect;
-    }
-
-    private CharSequence getTextWithUnderline(final CharSequence text) {
-        return mIsAutoCorrectionIndicatorOn
-                ? SuggestionSpanUtils.getTextWithAutoCorrectionIndicatorUnderline(this, text)
-                : text;
-    }
-
-    private void handleClose() {
-        commitTyped(getCurrentInputConnection(), LastComposedWord.NOT_A_SEPARATOR);
-        requestHideSelf(0);
-        LatinKeyboardView inputView = mKeyboardSwitcher.getKeyboardView();
-        if (inputView != null)
-            inputView.closing();
-    }
-
-    public boolean isSuggestionsRequested() {
-        return mInputAttributes.mIsSettingsSuggestionStripOn
-                && (mCorrectionMode > 0 || isShowingSuggestionsStrip());
-    }
-
-    public boolean isShowingPunctuationList() {
-        if (mSuggestionsView == null) return false;
-        return mSettingsValues.mSuggestPuncList == mSuggestionsView.getSuggestions();
-    }
-
-    public boolean isShowingSuggestionsStrip() {
-        return (mSuggestionVisibility == SUGGESTION_VISIBILILTY_SHOW_VALUE)
-                || (mSuggestionVisibility == SUGGESTION_VISIBILILTY_SHOW_ONLY_PORTRAIT_VALUE
-                        && mDisplayOrientation == Configuration.ORIENTATION_PORTRAIT);
-    }
-
-    public boolean isSuggestionsStripVisible() {
-        if (mSuggestionsView == null)
-            return false;
-        if (mSuggestionsView.isShowingAddToDictionaryHint())
-            return true;
-        if (!isShowingSuggestionsStrip())
-            return false;
-        if (mInputAttributes.mApplicationSpecifiedCompletionOn)
-            return true;
-        return isSuggestionsRequested();
-    }
-
-    public void switchToKeyboardView() {
-        if (DEBUG) {
-            Log.d(TAG, "Switch to keyboard view.");
-        }
-        if (ProductionFlag.IS_EXPERIMENTAL) {
-            ResearchLogger.latinIME_switchToKeyboardView();
-        }
-        View v = mKeyboardSwitcher.getKeyboardView();
-        if (v != null) {
-            // Confirms that the keyboard view doesn't have parent view.
-            ViewParent p = v.getParent();
-            if (p != null && p instanceof ViewGroup) {
-                ((ViewGroup) p).removeView(v);
-            }
-            setInputView(v);
-        }
-        setSuggestionStripShown(isSuggestionsStripVisible());
-        updateInputViewShown();
-        mHandler.postUpdateSuggestions();
-    }
-
-    public void clearSuggestions() {
-        setSuggestions(SuggestedWords.EMPTY, false);
-        setAutoCorrectionIndicator(false);
-    }
-
-    private void setSuggestions(final SuggestedWords words, final boolean isAutoCorrection) {
-        if (mSuggestionsView != null) {
-            mSuggestionsView.setSuggestions(words);
-            mKeyboardSwitcher.onAutoCorrectionStateChanged(isAutoCorrection);
-        }
-    }
-
-    private void setAutoCorrectionIndicator(final boolean newAutoCorrectionIndicator) {
-        // Put a blue underline to a word in TextView which will be auto-corrected.
-        final InputConnection ic = getCurrentInputConnection();
-        if (ic == null) return;
-        if (mIsAutoCorrectionIndicatorOn != newAutoCorrectionIndicator
-                && mWordComposer.isComposingWord()) {
-            mIsAutoCorrectionIndicatorOn = newAutoCorrectionIndicator;
-            final CharSequence textWithUnderline =
-                    getTextWithUnderline(mWordComposer.getTypedWord());
-            ic.setComposingText(textWithUnderline, 1);
-        }
-    }
-
-    public void updateSuggestions() {
-        // Check if we have a suggestion engine attached.
-        if ((mSuggest == null || !isSuggestionsRequested())) {
-            if (mWordComposer.isComposingWord()) {
-                Log.w(TAG, "Called updateSuggestions but suggestions were not requested!");
-                mWordComposer.setAutoCorrection(mWordComposer.getTypedWord());
-            }
+    // TODO[IL]: Move this out of LatinIME.
+    public void getSuggestedWords(final int inputStyle, final int sequenceNumber,
+            final OnGetSuggestedWordsCallback callback) {
+        final Keyboard keyboard = mKeyboardSwitcher.getKeyboard();
+        if (keyboard == null) {
+            callback.onGetSuggestedWords(SuggestedWords.getEmptyInstance());
             return;
         }
-
-        mHandler.cancelUpdateSuggestions();
-        mHandler.cancelUpdateBigramPredictions();
-
-        if (!mWordComposer.isComposingWord()) {
-            setPunctuationSuggestions();
-            return;
-        }
-
-        // TODO: May need a better way of retrieving previous word
-        final InputConnection ic = getCurrentInputConnection();
-        final CharSequence prevWord;
-        if (null == ic) {
-            prevWord = null;
-        } else {
-            prevWord = EditingUtils.getPreviousWord(ic, mSettingsValues.mWordSeparators);
-        }
-
-        final CharSequence typedWord = mWordComposer.getTypedWord();
-        // getSuggestedWords handles gracefully a null value of prevWord
-        final SuggestedWords suggestedWords = mSuggest.getSuggestedWords(mWordComposer,
-                prevWord, mKeyboardSwitcher.getKeyboard().getProximityInfo(), mCorrectionMode);
-
-        // Basically, we update the suggestion strip only when suggestion count > 1.  However,
-        // there is an exception: We update the suggestion strip whenever typed word's length
-        // is 1 or typed word is found in dictionary, regardless of suggestion count.  Actually,
-        // in most cases, suggestion count is 1 when typed word's length is 1, but we do always
-        // need to clear the previous state when the user starts typing a word (i.e. typed word's
-        // length == 1).
-        if (suggestedWords.size() > 1 || typedWord.length() == 1
-                || !suggestedWords.mAllowsToBeAutoCorrected
-                || mSuggestionsView.isShowingAddToDictionaryHint()) {
-            showSuggestions(suggestedWords, typedWord);
-        } else {
-            SuggestedWords previousSuggestions = mSuggestionsView.getSuggestions();
-            if (previousSuggestions == mSettingsValues.mSuggestPuncList) {
-                previousSuggestions = SuggestedWords.EMPTY;
-            }
-            final ArrayList<SuggestedWords.SuggestedWordInfo> typedWordAndPreviousSuggestions =
-                    SuggestedWords.getTypedWordAndPreviousSuggestions(
-                            typedWord, previousSuggestions);
-            final SuggestedWords obsoleteSuggestedWords =
-                    new SuggestedWords(typedWordAndPreviousSuggestions,
-                            false /* typedWordValid */,
-                            false /* hasAutoCorrectionCandidate */,
-                            false /* allowsToBeAutoCorrected */,
-                            false /* isPunctuationSuggestions */,
-                            true /* isObsoleteSuggestions */,
-                            false /* isPrediction */);
-            showSuggestions(obsoleteSuggestedWords, typedWord);
-        }
-    }
-
-    public void showSuggestions(final SuggestedWords suggestedWords, final CharSequence typedWord) {
-        final CharSequence autoCorrection;
-        if (suggestedWords.size() > 0) {
-            if (suggestedWords.hasAutoCorrectionWord()) {
-                autoCorrection = suggestedWords.getWord(1);
-            } else {
-                autoCorrection = typedWord;
-            }
-        } else {
-            autoCorrection = null;
-        }
-        mWordComposer.setAutoCorrection(autoCorrection);
-        final boolean isAutoCorrection = suggestedWords.willAutoCorrect();
-        setSuggestions(suggestedWords, isAutoCorrection);
-        setAutoCorrectionIndicator(isAutoCorrection);
-        setSuggestionStripShown(isSuggestionsStripVisible());
-    }
-
-    private void commitCurrentAutoCorrection(final int separatorCodePoint,
-            final InputConnection ic) {
-        // Complete any pending suggestions query first
-        if (mHandler.hasPendingUpdateSuggestions()) {
-            mHandler.cancelUpdateSuggestions();
-            updateSuggestions();
-        }
-        final CharSequence autoCorrection = mWordComposer.getAutoCorrectionOrNull();
-        if (autoCorrection != null) {
-            final String typedWord = mWordComposer.getTypedWord();
-            if (TextUtils.isEmpty(typedWord)) {
-                throw new RuntimeException("We have an auto-correction but the typed word "
-                        + "is empty? Impossible! I must commit suicide.");
-            }
-            Utils.Stats.onAutoCorrection(typedWord, autoCorrection.toString(), separatorCodePoint);
-            if (ProductionFlag.IS_EXPERIMENTAL) {
-                ResearchLogger.latinIME_commitCurrentAutoCorrection(typedWord,
-                        autoCorrection.toString());
-            }
-            mExpectingUpdateSelection = true;
-            commitChosenWord(autoCorrection, LastComposedWord.COMMIT_TYPE_DECIDED_WORD,
-                    separatorCodePoint);
-            if (!typedWord.equals(autoCorrection) && null != ic) {
-                // This will make the correction flash for a short while as a visual clue
-                // to the user that auto-correction happened.
-                ic.commitCorrection(new CorrectionInfo(mLastSelectionEnd - typedWord.length(),
-                        typedWord, autoCorrection));
-            }
-        }
+        mInputLogic.getSuggestedWords(mSettings.getCurrent(), keyboard,
+                mKeyboardSwitcher.getKeyboardShiftMode(), inputStyle, sequenceNumber, callback);
     }
 
     @Override
-    public void pickSuggestionManually(final int index, final CharSequence suggestion,
-            int x, int y) {
-        final InputConnection ic = getCurrentInputConnection();
-        if (null != ic) ic.beginBatchEdit();
-        pickSuggestionManuallyWhileInBatchEdit(index, suggestion, x, y, ic);
-        if (null != ic) ic.endBatchEdit();
-    }
-
-    public void pickSuggestionManuallyWhileInBatchEdit(final int index,
-        final CharSequence suggestion, final int x, final int y, final InputConnection ic) {
-        final SuggestedWords suggestedWords = mSuggestionsView.getSuggestions();
-        // If this is a punctuation picked from the suggestion strip, pass it to onCodeInput
-        if (suggestion.length() == 1 && isShowingPunctuationList()) {
-            // Word separators are suggested before the user inputs something.
-            // So, LatinImeLogger logs "" as a user's input.
-            LatinImeLogger.logOnManualSuggestion("", suggestion.toString(), index, suggestedWords);
-            // Rely on onCodeInput to do the complicated swapping/stripping logic consistently.
-            if (ProductionFlag.IS_EXPERIMENTAL) {
-                ResearchLogger.latinIME_punctuationSuggestion(index, suggestion, x, y);
-            }
-            final int primaryCode = suggestion.charAt(0);
-            onCodeInput(primaryCode,
-                    KeyboardActionListener.SUGGESTION_STRIP_COORDINATE,
-                    KeyboardActionListener.SUGGESTION_STRIP_COORDINATE);
-            return;
-        }
-
-        if (SPACE_STATE_PHANTOM == mSpaceState && suggestion.length() > 0) {
-            int firstChar = Character.codePointAt(suggestion, 0);
-            if ((!mSettingsValues.isWeakSpaceStripper(firstChar))
-                    && (!mSettingsValues.isWeakSpaceSwapper(firstChar))) {
-                sendKeyCodePoint(Keyboard.CODE_SPACE);
-            }
-        }
-
-        if (mInputAttributes.mApplicationSpecifiedCompletionOn
-                && mApplicationSpecifiedCompletions != null
-                && index >= 0 && index < mApplicationSpecifiedCompletions.length) {
-            if (mSuggestionsView != null) {
-                mSuggestionsView.clear();
-            }
-            mKeyboardSwitcher.updateShiftState();
-            resetComposingState(true /* alsoResetLastComposedWord */);
-            if (ic != null) {
-                final CompletionInfo completionInfo = mApplicationSpecifiedCompletions[index];
-                ic.commitCompletion(completionInfo);
-                if (ProductionFlag.IS_EXPERIMENTAL) {
-                    ResearchLogger.latinIME_pickApplicationSpecifiedCompletion(index,
-                            completionInfo.getText(), x, y);
-                }
-            }
-            return;
-        }
-
-        // We need to log before we commit, because the word composer will store away the user
-        // typed word.
-        final String replacedWord = mWordComposer.getTypedWord().toString();
-        LatinImeLogger.logOnManualSuggestion(replacedWord,
-                suggestion.toString(), index, suggestedWords);
-        if (ProductionFlag.IS_EXPERIMENTAL) {
-            ResearchLogger.latinIME_pickSuggestionManually(replacedWord, index, suggestion, x, y);
-        }
-        mExpectingUpdateSelection = true;
-        commitChosenWord(suggestion, LastComposedWord.COMMIT_TYPE_MANUAL_PICK,
-                LastComposedWord.NOT_A_SEPARATOR);
-        // Don't allow cancellation of manual pick
-        mLastComposedWord.deactivate();
-        mSpaceState = SPACE_STATE_PHANTOM;
-        // TODO: is this necessary?
-        mKeyboardSwitcher.updateShiftState();
-
-        // We should show the "Touch again to save" hint if the user pressed the first entry
-        // AND either:
-        // - There is no dictionary (we know that because we tried to load it => null != mSuggest
-        //   AND mSuggest.hasMainDictionary() is false)
-        // - There is a dictionary and the word is not in it
-        // Please note that if mSuggest is null, it means that everything is off: suggestion
-        // and correction, so we shouldn't try to show the hint
-        // We used to look at mCorrectionMode here, but showing the hint should have nothing
-        // to do with the autocorrection setting.
-        final boolean showingAddToDictionaryHint = index == 0 && mSuggest != null
-                // If there is no dictionary the hint should be shown.
-                && (!mSuggest.hasMainDictionary()
-                        // If "suggestion" is not in the dictionary, the hint should be shown.
-                        || !AutoCorrection.isValidWord(
-                                mSuggest.getUnigramDictionaries(), suggestion, true));
-
-        Utils.Stats.onSeparator((char)Keyboard.CODE_SPACE, WordComposer.NOT_A_COORDINATE,
-                WordComposer.NOT_A_COORDINATE);
-        if (!showingAddToDictionaryHint) {
-            // If we're not showing the "Touch again to save", then show corrections again.
-            // In case the cursor position doesn't change, make sure we show the suggestions again.
-            updateBigramPredictions();
-            // Updating the predictions right away may be slow and feel unresponsive on slower
-            // terminals. On the other hand if we just postUpdateBigramPredictions() it will
-            // take a noticeable delay to update them which may feel uneasy.
+    public void showSuggestionStrip(final SuggestedWords suggestedWords) {
+        if (suggestedWords.isEmpty()) {
+            setNeutralSuggestionStrip();
         } else {
-            if (mIsUserDictionaryAvailable) {
-                mSuggestionsView.showAddToDictionaryHint(
-                        suggestion, mSettingsValues.mHintToSaveText);
-            } else {
-                mHandler.postUpdateSuggestions();
-            }
+            setSuggestedWords(suggestedWords);
         }
+        // Cache the auto-correction in accessibility code so we can speak it if the user
+        // touches a key that will insert it.
+        AccessibilityUtils.getInstance().setAutoCorrection(suggestedWords);
     }
 
-    /**
-     * Commits the chosen word to the text field and saves it for later retrieval.
-     */
-    private void commitChosenWord(final CharSequence chosenWord, final int commitType,
-            final int separatorCode) {
-        final InputConnection ic = getCurrentInputConnection();
-        if (ic != null) {
-            if (mSettingsValues.mEnableSuggestionSpanInsertion) {
-                final SuggestedWords suggestedWords = mSuggestionsView.getSuggestions();
-                ic.commitText(SuggestionSpanUtils.getTextWithSuggestionSpan(
-                        this, chosenWord, suggestedWords, mIsMainDictionaryAvailable),
-                        1);
-                if (ProductionFlag.IS_EXPERIMENTAL) {
-                    ResearchLogger.latinIME_commitText(chosenWord);
-                }
-            } else {
-                ic.commitText(chosenWord, 1);
-                if (ProductionFlag.IS_EXPERIMENTAL) {
-                    ResearchLogger.latinIME_commitText(chosenWord);
-                }
-            }
-        }
-        // Add the word to the user history dictionary
-        final CharSequence prevWord = addToUserHistoryDictionary(chosenWord);
-        // TODO: figure out here if this is an auto-correct or if the best word is actually
-        // what user typed. Note: currently this is done much later in
-        // LastComposedWord#didCommitTypedWord by string equality of the remembered
-        // strings.
-        mLastComposedWord = mWordComposer.commitWord(commitType, chosenWord.toString(),
-                separatorCode, prevWord);
+    // Called from {@link SuggestionStripView} through the {@link SuggestionStripView#Listener}
+    // interface
+    @Override
+    public void pickSuggestionManually(final SuggestedWordInfo suggestionInfo) {
+        final InputTransaction completeInputTransaction = mInputLogic.onPickSuggestionManually(
+                mSettings.getCurrent(), suggestionInfo,
+                mKeyboardSwitcher.getKeyboardShiftMode(),
+                mKeyboardSwitcher.getCurrentKeyboardScriptId(),
+                mHandler);
+        updateStateAfterInputTransaction(completeInputTransaction);
     }
 
-    public void updateBigramPredictions() {
-        if (mSuggest == null || !isSuggestionsRequested())
-            return;
-
-        if (!mSettingsValues.mBigramPredictionEnabled) {
-            setPunctuationSuggestions();
-            return;
-        }
-
-        final SuggestedWords suggestedWords;
-        if (mCorrectionMode == Suggest.CORRECTION_FULL_BIGRAM) {
-            final CharSequence prevWord = EditingUtils.getThisWord(getCurrentInputConnection(),
-                    mSettingsValues.mWordSeparators);
-            if (!TextUtils.isEmpty(prevWord)) {
-                suggestedWords = mSuggest.getBigramPredictions(prevWord);
-            } else {
-                suggestedWords = null;
-            }
-        } else {
-            suggestedWords = null;
-        }
-
-        if (null != suggestedWords && suggestedWords.size() > 0) {
-            // Explicitly supply an empty typed word (the no-second-arg version of
-            // showSuggestions will retrieve the word near the cursor, we don't want that here)
-            showSuggestions(suggestedWords, "");
-        } else {
-            clearSuggestions();
-        }
+    // This will show either an empty suggestion strip (if prediction is enabled) or
+    // punctuation suggestions (if it's disabled).
+    @Override
+    public void setNeutralSuggestionStrip() {
+        final SettingsValues currentSettings = mSettings.getCurrent();
+        final SuggestedWords neutralSuggestions = currentSettings.mBigramPredictionEnabled
+                ? SuggestedWords.getEmptyInstance()
+                : currentSettings.mSpacingAndPunctuations.mSuggestPuncList;
+        setSuggestedWords(neutralSuggestions);
     }
 
-    public void setPunctuationSuggestions() {
-        if (mSettingsValues.mBigramPredictionEnabled) {
-            clearSuggestions();
-        } else {
-            setSuggestions(mSettingsValues.mSuggestPuncList, false);
-        }
-        setAutoCorrectionIndicator(false);
-        setSuggestionStripShown(isSuggestionsStripVisible());
-    }
-
-    private CharSequence addToUserHistoryDictionary(final CharSequence suggestion) {
-        if (TextUtils.isEmpty(suggestion)) return null;
-
-        // Only auto-add to dictionary if auto-correct is ON. Otherwise we'll be
-        // adding words in situations where the user or application really didn't
-        // want corrections enabled or learned.
-        if (!(mCorrectionMode == Suggest.CORRECTION_FULL
-                || mCorrectionMode == Suggest.CORRECTION_FULL_BIGRAM)) {
-            return null;
-        }
-
-        if (mUserHistoryDictionary != null) {
-            final InputConnection ic = getCurrentInputConnection();
-            final CharSequence prevWord;
-            if (null != ic) {
-                prevWord = EditingUtils.getPreviousWord(ic, mSettingsValues.mWordSeparators);
-            } else {
-                prevWord = null;
-            }
-            final String secondWord;
-            if (mWordComposer.isAutoCapitalized() && !mWordComposer.isMostlyCaps()) {
-                secondWord = suggestion.toString().toLowerCase(
-                        mSubtypeSwitcher.getCurrentSubtypeLocale());
-            } else {
-                secondWord = suggestion.toString();
-            }
-            // We demote unrecognized words (frequency < 0, below) by specifying them as "invalid".
-            // We don't add words with 0-frequency (assuming they would be profanity etc.).
-            final int maxFreq = AutoCorrection.getMaxFrequency(
-                    mSuggest.getUnigramDictionaries(), suggestion);
-            if (maxFreq == 0) return null;
-            mUserHistoryDictionary.addToUserHistory(null == prevWord ? null : prevWord.toString(),
-                    secondWord, maxFreq > 0);
-            return prevWord;
-        }
-        return null;
-    }
-
-    public boolean isCursorTouchingWord() {
-        final InputConnection ic = getCurrentInputConnection();
-        if (ic == null) return false;
-        CharSequence before = ic.getTextBeforeCursor(1, 0);
-        CharSequence after = ic.getTextAfterCursor(1, 0);
-        if (!TextUtils.isEmpty(before) && !mSettingsValues.isWordSeparator(before.charAt(0))
-                && !mSettingsValues.isSymbolExcludedFromWordSeparators(before.charAt(0))) {
-            return true;
-        }
-        if (!TextUtils.isEmpty(after) && !mSettingsValues.isWordSeparator(after.charAt(0))
-                && !mSettingsValues.isSymbolExcludedFromWordSeparators(after.charAt(0))) {
-            return true;
-        }
-        return false;
-    }
-
-    // "ic" must not be null
-    private static boolean sameAsTextBeforeCursor(final InputConnection ic,
-            final CharSequence text) {
-        final CharSequence beforeText = ic.getTextBeforeCursor(text.length(), 0);
-        return TextUtils.equals(text, beforeText);
-    }
-
-    // "ic" must not be null
-    /**
-     * Check if the cursor is actually at the end of a word. If so, restart suggestions on this
-     * word, else do nothing.
-     */
-    private void restartSuggestionsOnWordBeforeCursorIfAtEndOfWord(
-            final InputConnection ic) {
-        // Bail out if the cursor is not at the end of a word (cursor must be preceded by
-        // non-whitespace, non-separator, non-start-of-text)
-        // Example ("|" is the cursor here) : <SOL>"|a" " |a" " | " all get rejected here.
-        final CharSequence textBeforeCursor = ic.getTextBeforeCursor(1, 0);
-        if (TextUtils.isEmpty(textBeforeCursor)
-                || mSettingsValues.isWordSeparator(textBeforeCursor.charAt(0))) return;
-
-        // Bail out if the cursor is in the middle of a word (cursor must be followed by whitespace,
-        // separator or end of line/text)
-        // Example: "test|"<EOL> "te|st" get rejected here
-        final CharSequence textAfterCursor = ic.getTextAfterCursor(1, 0);
-        if (!TextUtils.isEmpty(textAfterCursor)
-                && !mSettingsValues.isWordSeparator(textAfterCursor.charAt(0))) return;
-
-        // Bail out if word before cursor is 0-length or a single non letter (like an apostrophe)
-        // Example: " -|" gets rejected here but "e-|" and "e|" are okay
-        CharSequence word = EditingUtils.getWordAtCursor(ic, mSettingsValues.mWordSeparators);
-        // We don't suggest on leading single quotes, so we have to remove them from the word if
-        // it starts with single quotes.
-        while (!TextUtils.isEmpty(word) && Keyboard.CODE_SINGLE_QUOTE == word.charAt(0)) {
-            word = word.subSequence(1, word.length());
-        }
-        if (TextUtils.isEmpty(word)) return;
-        final char firstChar = word.charAt(0); // we just tested that word is not empty
-        if (word.length() == 1 && !Character.isLetter(firstChar)) return;
-
-        // We only suggest on words that start with a letter or a symbol that is excluded from
-        // word separators (see #handleCharacterWhileInBatchEdit).
-        if (!(isAlphabet(firstChar)
-                || mSettingsValues.isSymbolExcludedFromWordSeparators(firstChar))) {
-            return;
-        }
-
-        // Okay, we are at the end of a word. Restart suggestions.
-        restartSuggestionsOnWordBeforeCursor(ic, word);
-    }
-
-    // "ic" must not be null
-    private void restartSuggestionsOnWordBeforeCursor(final InputConnection ic,
-            final CharSequence word) {
-        mWordComposer.setComposingWord(word, mKeyboardSwitcher.getKeyboard());
-        final int length = word.length();
-        ic.deleteSurroundingText(length, 0);
-        if (ProductionFlag.IS_EXPERIMENTAL) {
-            ResearchLogger.latinIME_deleteSurroundingText(length);
-        }
-        ic.setComposingText(word, 1);
-        mHandler.postUpdateSuggestions();
-    }
-
-    // "ic" must not be null
-    private void revertCommit(final InputConnection ic) {
-        final CharSequence previousWord = mLastComposedWord.mPrevWord;
-        final String originallyTypedWord = mLastComposedWord.mTypedWord;
-        final CharSequence committedWord = mLastComposedWord.mCommittedWord;
-        final int cancelLength = committedWord.length();
-        final int separatorLength = LastComposedWord.getSeparatorLength(
-                mLastComposedWord.mSeparatorCode);
-        // TODO: should we check our saved separator against the actual contents of the text view?
-        final int deleteLength = cancelLength + separatorLength;
-        if (DEBUG) {
-            if (mWordComposer.isComposingWord()) {
-                throw new RuntimeException("revertCommit, but we are composing a word");
-            }
-            final String wordBeforeCursor =
-                    ic.getTextBeforeCursor(deleteLength, 0)
-                            .subSequence(0, cancelLength).toString();
-            if (!TextUtils.equals(committedWord, wordBeforeCursor)) {
-                throw new RuntimeException("revertCommit check failed: we thought we were "
-                        + "reverting \"" + committedWord
-                        + "\", but before the cursor we found \"" + wordBeforeCursor + "\"");
-            }
-        }
-        ic.deleteSurroundingText(deleteLength, 0);
-        if (ProductionFlag.IS_EXPERIMENTAL) {
-            ResearchLogger.latinIME_deleteSurroundingText(deleteLength);
-        }
-        if (!TextUtils.isEmpty(previousWord) && !TextUtils.isEmpty(committedWord)) {
-            mUserHistoryDictionary.cancelAddingUserHistory(
-                    previousWord.toString(), committedWord.toString());
-        }
-        if (0 == separatorLength || mLastComposedWord.didCommitTypedWord()) {
-            // This is the case when we cancel a manual pick.
-            // We should restart suggestion on the word right away.
-            mWordComposer.resumeSuggestionOnLastComposedWord(mLastComposedWord);
-            ic.setComposingText(originallyTypedWord, 1);
-        } else {
-            ic.commitText(originallyTypedWord, 1);
-            // Re-insert the separator
-            sendKeyCodePoint(mLastComposedWord.mSeparatorCode);
-            Utils.Stats.onSeparator(mLastComposedWord.mSeparatorCode, WordComposer.NOT_A_COORDINATE,
-                    WordComposer.NOT_A_COORDINATE);
-            if (ProductionFlag.IS_EXPERIMENTAL) {
-                ResearchLogger.latinIME_revertCommit(originallyTypedWord);
-            }
-            // Don't restart suggestion yet. We'll restart if the user deletes the
-            // separator.
-        }
-        mLastComposedWord = LastComposedWord.NOT_A_COMPOSED_WORD;
-        mHandler.cancelUpdateBigramPredictions();
-        mHandler.postUpdateSuggestions();
-    }
-
-    // "ic" must not be null
-    private boolean revertDoubleSpaceWhileInBatchEdit(final InputConnection ic) {
-        mHandler.cancelDoubleSpacesTimer();
-        // Here we test whether we indeed have a period and a space before us. This should not
-        // be needed, but it's there just in case something went wrong.
-        final CharSequence textBeforeCursor = ic.getTextBeforeCursor(2, 0);
-        if (!". ".equals(textBeforeCursor)) {
-            // Theoretically we should not be coming here if there isn't ". " before the
-            // cursor, but the application may be changing the text while we are typing, so
-            // anything goes. We should not crash.
-            Log.d(TAG, "Tried to revert double-space combo but we didn't find "
-                    + "\". \" just before the cursor.");
-            return false;
-        }
-        ic.deleteSurroundingText(2, 0);
-        if (ProductionFlag.IS_EXPERIMENTAL) {
-            ResearchLogger.latinIME_deleteSurroundingText(2);
-        }
-        ic.commitText("  ", 1);
-        if (ProductionFlag.IS_EXPERIMENTAL) {
-            ResearchLogger.latinIME_revertDoubleSpaceWhileInBatchEdit();
-        }
-        return true;
-    }
-
-    private static boolean revertSwapPunctuation(final InputConnection ic) {
-        // Here we test whether we indeed have a space and something else before us. This should not
-        // be needed, but it's there just in case something went wrong.
-        final CharSequence textBeforeCursor = ic.getTextBeforeCursor(2, 0);
-        // NOTE: This does not work with surrogate pairs. Hopefully when the keyboard is able to
-        // enter surrogate pairs this code will have been removed.
-        if (TextUtils.isEmpty(textBeforeCursor)
-                || (Keyboard.CODE_SPACE != textBeforeCursor.charAt(1))) {
-            // We may only come here if the application is changing the text while we are typing.
-            // This is quite a broken case, but not logically impossible, so we shouldn't crash,
-            // but some debugging log may be in order.
-            Log.d(TAG, "Tried to revert a swap of punctuation but we didn't "
-                    + "find a space just before the cursor.");
-            return false;
-        }
-        ic.beginBatchEdit();
-        ic.deleteSurroundingText(2, 0);
-        if (ProductionFlag.IS_EXPERIMENTAL) {
-            ResearchLogger.latinIME_deleteSurroundingText(2);
-        }
-        ic.commitText(" " + textBeforeCursor.subSequence(0, 1), 1);
-        if (ProductionFlag.IS_EXPERIMENTAL) {
-            ResearchLogger.latinIME_revertSwapPunctuation();
-        }
-        ic.endBatchEdit();
-        return true;
-    }
-
-    public boolean isWordSeparator(int code) {
-        return mSettingsValues.isWordSeparator(code);
-    }
-
-    public boolean preferCapitalization() {
-        return mWordComposer.isFirstCharCapitalized();
-    }
-
-    // Notify that language or mode have been changed and toggleLanguage will update KeyboardID
-    // according to new language or mode.
-    public void onRefreshKeyboard() {
-        // When the device locale is changed in SetupWizard etc., this method may get called via
-        // onConfigurationChanged before SoftInputWindow is shown.
-        if (mKeyboardSwitcher.getKeyboardView() != null) {
-            // Reload keyboard because the current language has been changed.
-            mKeyboardSwitcher.loadKeyboard(getCurrentInputEditorInfo(), mSettingsValues);
-        }
-        initSuggest();
-        updateCorrectionMode();
+    // Outside LatinIME, only used by the {@link InputTestsBase} test suite.
+    @UsedForTesting
+    void loadKeyboard() {
+        // Since we are switching languages, the most urgent thing is to let the keyboard graphics
+        // update. LoadKeyboard does that, but we need to wait for buffer flip for it to be on
+        // the screen. Anything we do right now will delay this, so wait until the next frame
+        // before we do the rest, like reopening dictionaries and updating suggestions. So we
+        // post a message.
+        mHandler.postReopenDictionaries();
         loadSettings();
-        // Since we just changed languages, we should re-evaluate suggestions with whatever word
-        // we are currently composing. If we are not composing anything, we may want to display
-        // predictions or punctuation signs (which is done by updateBigramPredictions anyway).
-        if (isCursorTouchingWord()) {
-            mHandler.postUpdateSuggestions();
-        } else {
-            mHandler.postUpdateBigramPredictions();
+        if (mKeyboardSwitcher.getMainKeyboardView() != null) {
+            // Reload keyboard because the current language has been changed.
+            mKeyboardSwitcher.loadKeyboard(getCurrentInputEditorInfo(), mSettings.getCurrent(),
+                    getCurrentAutoCapsState(), getCurrentRecapitalizeState());
         }
     }
 
-    // TODO: Remove this method from {@link LatinIME} and move {@link FeedbackManager} to
-    // {@link KeyboardSwitcher}.
-    public void hapticAndAudioFeedback(final int primaryCode) {
-        mFeedbackManager.hapticAndAudioFeedback(primaryCode, mKeyboardSwitcher.getKeyboardView());
+    /**
+     * After an input transaction has been executed, some state must be updated. This includes
+     * the shift state of the keyboard and suggestions. This method looks at the finished
+     * inputTransaction to find out what is necessary and updates the state accordingly.
+     * @param inputTransaction The transaction that has been executed.
+     */
+    private void updateStateAfterInputTransaction(final InputTransaction inputTransaction) {
+        switch (inputTransaction.getRequiredShiftUpdate()) {
+        case InputTransaction.SHIFT_UPDATE_LATER:
+            mHandler.postUpdateShiftState();
+            break;
+        case InputTransaction.SHIFT_UPDATE_NOW:
+            mKeyboardSwitcher.requestUpdatingShiftState(getCurrentAutoCapsState(),
+                    getCurrentRecapitalizeState());
+            break;
+        default: // SHIFT_NO_UPDATE
+        }
+        if (inputTransaction.requiresUpdateSuggestions()) {
+            final int inputStyle;
+            if (inputTransaction.mEvent.isSuggestionStripPress()) {
+                // Suggestion strip press: no input.
+                inputStyle = SuggestedWords.INPUT_STYLE_NONE;
+            } else if (inputTransaction.mEvent.isGesture()) {
+                inputStyle = SuggestedWords.INPUT_STYLE_TAIL_BATCH;
+            } else {
+                inputStyle = SuggestedWords.INPUT_STYLE_TYPING;
+            }
+            mHandler.postUpdateSuggestionStrip(inputStyle);
+        }
+        if (inputTransaction.didAffectContents()) {
+            mSubtypeState.setCurrentSubtypeHasBeenUsed();
+        }
+    }
+
+    private void hapticAndAudioFeedback(final int code, final int repeatCount) {
+        final MainKeyboardView keyboardView = mKeyboardSwitcher.getMainKeyboardView();
+        if (keyboardView != null && keyboardView.isInDraggingFinger()) {
+            // No need to feedback while finger is dragging.
+            return;
+        }
+        if (repeatCount > 0) {
+            if (code == Constants.CODE_DELETE && !mInputLogic.mConnection.canDeleteCharacters()) {
+                // No need to feedback when repeat delete key will have no effect.
+                return;
+            }
+            // TODO: Use event time that the last feedback has been generated instead of relying on
+            // a repeat count to thin out feedback.
+            if (repeatCount % PERIOD_FOR_AUDIO_AND_HAPTIC_FEEDBACK_IN_KEY_REPEAT == 0) {
+                return;
+            }
+        }
+        final AudioAndHapticFeedbackManager feedbackManager =
+                AudioAndHapticFeedbackManager.getInstance();
+        if (repeatCount == 0) {
+            // TODO: Reconsider how to perform haptic feedback when repeating key.
+            feedbackManager.performHapticFeedback(keyboardView);
+        }
+        feedbackManager.performAudioFeedback(code);
+    }
+
+    // Callback of the {@link KeyboardActionListener}. This is called when a key is depressed;
+    // release matching call is {@link #onReleaseKey(int,boolean)} below.
+    @Override
+    public void onPressKey(final int primaryCode, final int repeatCount,
+            final boolean isSinglePointer) {
+        mKeyboardSwitcher.onPressKey(primaryCode, isSinglePointer, getCurrentAutoCapsState(),
+                getCurrentRecapitalizeState());
+        hapticAndAudioFeedback(primaryCode, repeatCount);
+    }
+
+    // Callback of the {@link KeyboardActionListener}. This is called when a key is released;
+    // press matching call is {@link #onPressKey(int,int,boolean)} above.
+    @Override
+    public void onReleaseKey(final int primaryCode, final boolean withSliding) {
+        mKeyboardSwitcher.onReleaseKey(primaryCode, withSliding, getCurrentAutoCapsState(),
+                getCurrentRecapitalizeState());
+    }
+
+    private HardwareEventDecoder getHardwareKeyEventDecoder(final int deviceId) {
+        final HardwareEventDecoder decoder = mHardwareEventDecoders.get(deviceId);
+        if (null != decoder) return decoder;
+        // TODO: create the decoder according to the specification
+        final HardwareEventDecoder newDecoder = new HardwareKeyboardEventDecoder(deviceId);
+        mHardwareEventDecoders.put(deviceId, newDecoder);
+        return newDecoder;
+    }
+
+    // Hooks for hardware keyboard
+    @Override
+    public boolean onKeyDown(final int keyCode, final KeyEvent keyEvent) {
+        if (mEmojiAltPhysicalKeyDetector == null) {
+            mEmojiAltPhysicalKeyDetector = new EmojiAltPhysicalKeyDetector(
+                    getApplicationContext().getResources());
+        }
+        mEmojiAltPhysicalKeyDetector.onKeyDown(keyEvent);
+        if (!ProductionFlags.IS_HARDWARE_KEYBOARD_SUPPORTED) {
+            return super.onKeyDown(keyCode, keyEvent);
+        }
+        final Event event = getHardwareKeyEventDecoder(
+                keyEvent.getDeviceId()).decodeHardwareKey(keyEvent);
+        // If the event is not handled by LatinIME, we just pass it to the parent implementation.
+        // If it's handled, we return true because we did handle it.
+        if (event.isHandled()) {
+            mInputLogic.onCodeInput(mSettings.getCurrent(), event,
+                    mKeyboardSwitcher.getKeyboardShiftMode(),
+                    // TODO: this is not necessarily correct for a hardware keyboard right now
+                    mKeyboardSwitcher.getCurrentKeyboardScriptId(),
+                    mHandler);
+            return true;
+        }
+        return super.onKeyDown(keyCode, keyEvent);
     }
 
     @Override
-    public void onPressKey(int primaryCode) {
-        mKeyboardSwitcher.onPressKey(primaryCode);
+    public boolean onKeyUp(final int keyCode, final KeyEvent keyEvent) {
+        if (mEmojiAltPhysicalKeyDetector == null) {
+            mEmojiAltPhysicalKeyDetector = new EmojiAltPhysicalKeyDetector(
+                    getApplicationContext().getResources());
+        }
+        mEmojiAltPhysicalKeyDetector.onKeyUp(keyEvent);
+        if (!ProductionFlags.IS_HARDWARE_KEYBOARD_SUPPORTED) {
+            return super.onKeyUp(keyCode, keyEvent);
+        }
+        final long keyIdentifier = keyEvent.getDeviceId() << 32 + keyEvent.getKeyCode();
+        if (mInputLogic.mCurrentlyPressedHardwareKeys.remove(keyIdentifier)) {
+            return true;
+        }
+        return super.onKeyUp(keyCode, keyEvent);
     }
 
-    @Override
-    public void onReleaseKey(int primaryCode, boolean withSliding) {
-        mKeyboardSwitcher.onReleaseKey(primaryCode, withSliding);
+    // onKeyDown and onKeyUp are the main events we are interested in. There are two more events
+    // related to handling of hardware key events that we may want to implement in the future:
+    // boolean onKeyLongPress(final int keyCode, final KeyEvent event);
+    // boolean onKeyMultiple(final int keyCode, final int count, final KeyEvent event);
 
-        // If accessibility is on, ensure the user receives keyboard state updates.
-        if (AccessibilityUtils.getInstance().isTouchExplorationEnabled()) {
-            switch (primaryCode) {
-            case Keyboard.CODE_SHIFT:
-                AccessibleKeyboardViewProxy.getInstance().notifyShiftState();
-                break;
-            case Keyboard.CODE_SWITCH_ALPHA_SYMBOL:
-                AccessibleKeyboardViewProxy.getInstance().notifySymbolsState();
-                break;
-            }
-        }
-
-        if (Keyboard.CODE_DELETE == primaryCode) {
-            // This is a stopgap solution to avoid leaving a high surrogate alone in a text view.
-            // In the future, we need to deprecate deteleSurroundingText() and have a surrogate
-            // pair-friendly way of deleting characters in InputConnection.
-            final InputConnection ic = getCurrentInputConnection();
-            if (null != ic) {
-                final CharSequence lastChar = ic.getTextBeforeCursor(1, 0);
-                if (!TextUtils.isEmpty(lastChar) && Character.isHighSurrogate(lastChar.charAt(0))) {
-                    ic.deleteSurroundingText(1, 0);
-                }
-            }
-        }
-    }
-
-    // receive ringer mode change and network state change.
-    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+    // receive ringer mode change.
+    private final BroadcastReceiver mRingerModeChangeReceiver = new BroadcastReceiver() {
         @Override
-        public void onReceive(Context context, Intent intent) {
+        public void onReceive(final Context context, final Intent intent) {
             final String action = intent.getAction();
-            if (action.equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
-                mSubtypeSwitcher.onNetworkStateChanged(intent);
-            } else if (action.equals(AudioManager.RINGER_MODE_CHANGED_ACTION)) {
-                mFeedbackManager.onRingerModeChanged();
+            if (action.equals(AudioManager.RINGER_MODE_CHANGED_ACTION)) {
+                AudioAndHapticFeedbackManager.getInstance().onRingerModeChanged();
             }
         }
     };
 
-    private void updateCorrectionMode() {
-        // TODO: cleanup messy flags
-        final boolean shouldAutoCorrect = mSettingsValues.mAutoCorrectEnabled
-                && !mInputAttributes.mInputTypeNoAutoCorrect;
-        mCorrectionMode = shouldAutoCorrect ? Suggest.CORRECTION_FULL : Suggest.CORRECTION_NONE;
-        mCorrectionMode = (mSettingsValues.mBigramSuggestionEnabled && shouldAutoCorrect)
-                ? Suggest.CORRECTION_FULL_BIGRAM : mCorrectionMode;
+    /**
+     * Starts {@link android.app.Activity} on the same display where the IME is shown.
+     *
+     * @param intent {@link Intent} to be used to start {@link android.app.Activity}.
+     */
+    private void startActivityOnTheSameDisplay(Intent intent) {
+        // Note that WindowManager#getDefaultDisplay() returns the display ID associated with the
+        // Context from which the WindowManager instance was obtained. Therefore the following code
+        // returns the display ID for the window where the IME is shown.
+        final int currentDisplayId = ((WindowManager) getSystemService(Context.WINDOW_SERVICE))
+                .getDefaultDisplay().getDisplayId();
+
+        startActivity(intent,
+                ActivityOptions.makeBasic().setLaunchDisplayId(currentDisplayId).toBundle());
     }
 
-    private void updateSuggestionVisibility(final Resources res) {
-        final String suggestionVisiblityStr = mSettingsValues.mShowSuggestionsSetting;
-        for (int visibility : SUGGESTION_VISIBILITY_VALUE_ARRAY) {
-            if (suggestionVisiblityStr.equals(res.getString(visibility))) {
-                mSuggestionVisibility = visibility;
-                break;
-            }
+    void launchSettings(final String extraEntryValue) {
+        mInputLogic.commitTyped(mSettings.getCurrent(), LastComposedWord.NOT_A_SEPARATOR);
+        requestHideSelf(0);
+        final MainKeyboardView mainKeyboardView = mKeyboardSwitcher.getMainKeyboardView();
+        if (mainKeyboardView != null) {
+            mainKeyboardView.closing();
         }
-    }
-
-    private void launchSettings() {
-        launchSettingsClass(SettingsActivity.class);
-    }
-
-    public void launchDebugSettings() {
-        launchSettingsClass(DebugSettingsActivity.class);
-    }
-
-    private void launchSettingsClass(Class<? extends PreferenceActivity> settingsClass) {
-        handleClose();
-        Intent intent = new Intent();
-        intent.setClass(LatinIME.this, settingsClass);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+        final Intent intent = new Intent();
+        intent.setClass(LatinIME.this, SettingsActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED
+                | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra(SettingsActivity.EXTRA_SHOW_HOME_AS_UP, false);
+        intent.putExtra(SettingsActivity.EXTRA_ENTRY_KEY, extraEntryValue);
+        startActivityOnTheSameDisplay(intent);
     }
 
     private void showSubtypeSelectorAndSettings() {
         final CharSequence title = getString(R.string.english_ime_input_options);
+        // TODO: Should use new string "Select active input modes".
+        final CharSequence languageSelectionTitle = getString(R.string.language_selection_title);
         final CharSequence[] items = new CharSequence[] {
-                // TODO: Should use new string "Select active input modes".
-                getString(R.string.language_selection_title),
-                getString(R.string.english_ime_settings),
+                languageSelectionTitle,
+                getString(ApplicationUtils.getActivityTitleResId(this, SettingsActivity.class))
         };
-        final Context context = this;
-        final DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+        final String imeId = mRichImm.getInputMethodIdOfThisIme();
+        final OnClickListener listener = new OnClickListener() {
             @Override
             public void onClick(DialogInterface di, int position) {
                 di.dismiss();
                 switch (position) {
                 case 0:
-                    Intent intent = CompatUtils.getInputLanguageSelectionIntent(
-                            ImfUtils.getInputMethodIdOfThisIme(context),
+                    final Intent intent = IntentUtils.getInputLanguageSelectionIntent(
+                            imeId,
                             Intent.FLAG_ACTIVITY_NEW_TASK
-                            | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED
-                            | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
+                                    | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED
+                                    | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.putExtra(Intent.EXTRA_TITLE, languageSelectionTitle);
+                    startActivityOnTheSameDisplay(intent);
                     break;
                 case 1:
-                    launchSettings();
+                    launchSettings(SettingsActivity.EXTRA_ENTRY_VALUE_LONG_PRESS_COMMA);
                     break;
                 }
             }
         };
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this)
-                .setItems(items, listener)
-                .setTitle(title);
-        showOptionDialogInternal(builder.create());
+        final AlertDialog.Builder builder = new AlertDialog.Builder(
+                DialogUtils.getPlatformDialogThemeContext(this));
+        builder.setItems(items, listener).setTitle(title);
+        final AlertDialog dialog = builder.create();
+        dialog.setCancelable(true /* cancelable */);
+        dialog.setCanceledOnTouchOutside(true /* cancelable */);
+        showOptionDialog(dialog);
     }
 
-    private void showOptionDialogInternal(AlertDialog dialog) {
-        final IBinder windowToken = mKeyboardSwitcher.getKeyboardView().getWindowToken();
-        if (windowToken == null) return;
-
-        dialog.setCancelable(true);
-        dialog.setCanceledOnTouchOutside(true);
+    // TODO: Move this method out of {@link LatinIME}.
+    private void showOptionDialog(final AlertDialog dialog) {
+        final IBinder windowToken = mKeyboardSwitcher.getMainKeyboardView().getWindowToken();
+        if (windowToken == null) {
+            return;
+        }
 
         final Window window = dialog.getWindow();
         final WindowManager.LayoutParams lp = window.getAttributes();
@@ -2461,22 +1896,104 @@ public class LatinIME extends InputMethodService implements KeyboardActionListen
         dialog.show();
     }
 
+    @UsedForTesting
+    SuggestedWords getSuggestedWordsForTest() {
+        // You may not use this method for anything else than debug
+        return DebugFlags.DEBUG_ENABLED ? mInputLogic.mSuggestedWords : null;
+    }
+
+    // DO NOT USE THIS for any other purpose than testing. This is information private to LatinIME.
+    @UsedForTesting
+    void waitForLoadingDictionaries(final long timeout, final TimeUnit unit)
+            throws InterruptedException {
+        mDictionaryFacilitator.waitForLoadingDictionariesForTesting(timeout, unit);
+    }
+
+    // DO NOT USE THIS for any other purpose than testing. This can break the keyboard badly.
+    @UsedForTesting
+    void replaceDictionariesForTest(final Locale locale) {
+        final SettingsValues settingsValues = mSettings.getCurrent();
+        mDictionaryFacilitator.resetDictionaries(this, locale,
+            settingsValues.mUseContactsDict, settingsValues.mUsePersonalizedDicts,
+            false /* forceReloadMainDictionary */,
+            settingsValues.mAccount, "", /* dictionaryNamePrefix */
+            this /* DictionaryInitializationListener */);
+    }
+
+    // DO NOT USE THIS for any other purpose than testing.
+    @UsedForTesting
+    void clearPersonalizedDictionariesForTest() {
+        mDictionaryFacilitator.clearUserHistoryDictionary(this);
+    }
+
+    @UsedForTesting
+    List<InputMethodSubtype> getEnabledSubtypesForTest() {
+        return (mRichImm != null) ? mRichImm.getMyEnabledInputMethodSubtypeList(
+                true /* allowsImplicitlySelectedSubtypes */) : new ArrayList<InputMethodSubtype>();
+    }
+
+    public void dumpDictionaryForDebug(final String dictName) {
+        if (!mDictionaryFacilitator.isActive()) {
+            resetDictionaryFacilitatorIfNecessary();
+        }
+        mDictionaryFacilitator.dumpDictionaryForDebug(dictName);
+    }
+
+    public void debugDumpStateAndCrashWithException(final String context) {
+        final SettingsValues settingsValues = mSettings.getCurrent();
+        final StringBuilder s = new StringBuilder(settingsValues.toString());
+        s.append("\nAttributes : ").append(settingsValues.mInputAttributes)
+                .append("\nContext : ").append(context);
+        throw new RuntimeException(s.toString());
+    }
+
     @Override
-    protected void dump(FileDescriptor fd, PrintWriter fout, String[] args) {
+    protected void dump(final FileDescriptor fd, final PrintWriter fout, final String[] args) {
         super.dump(fd, fout, args);
 
         final Printer p = new PrintWriterPrinter(fout);
         p.println("LatinIME state :");
+        p.println("  VersionCode = " + ApplicationUtils.getVersionCode(this));
+        p.println("  VersionName = " + ApplicationUtils.getVersionName(this));
         final Keyboard keyboard = mKeyboardSwitcher.getKeyboard();
         final int keyboardMode = keyboard != null ? keyboard.mId.mMode : -1;
         p.println("  Keyboard mode = " + keyboardMode);
-        p.println("  mIsSuggestionsRequested=" + mInputAttributes.mIsSettingsSuggestionStripOn);
-        p.println("  mCorrectionMode=" + mCorrectionMode);
-        p.println("  isComposingWord=" + mWordComposer.isComposingWord());
-        p.println("  mAutoCorrectEnabled=" + mSettingsValues.mAutoCorrectEnabled);
-        p.println("  mSoundOn=" + mSettingsValues.mSoundOn);
-        p.println("  mVibrateOn=" + mSettingsValues.mVibrateOn);
-        p.println("  mKeyPreviewPopupOn=" + mSettingsValues.mKeyPreviewPopupOn);
-        p.println("  mInputAttributes=" + mInputAttributes.toString());
+        final SettingsValues settingsValues = mSettings.getCurrent();
+        p.println(settingsValues.dump());
+        p.println(mDictionaryFacilitator.dump(this /* context */));
+        // TODO: Dump all settings values
+    }
+
+    public boolean shouldSwitchToOtherInputMethods() {
+        // TODO: Revisit here to reorganize the settings. Probably we can/should use different
+        // strategy once the implementation of
+        // {@link InputMethodManager#shouldOfferSwitchingToNextInputMethod} is defined well.
+        final boolean fallbackValue = mSettings.getCurrent().mIncludesOtherImesInLanguageSwitchList;
+        final IBinder token = getWindow().getWindow().getAttributes().token;
+        if (token == null) {
+            return fallbackValue;
+        }
+        return mRichImm.shouldOfferSwitchingToNextInputMethod(token, fallbackValue);
+    }
+
+    public boolean shouldShowLanguageSwitchKey() {
+        // TODO: Revisit here to reorganize the settings. Probably we can/should use different
+        // strategy once the implementation of
+        // {@link InputMethodManager#shouldOfferSwitchingToNextInputMethod} is defined well.
+        final boolean fallbackValue = mSettings.getCurrent().isLanguageSwitchKeyEnabled();
+        final IBinder token = getWindow().getWindow().getAttributes().token;
+        if (token == null) {
+            return fallbackValue;
+        }
+        return mRichImm.shouldOfferSwitchingToNextInputMethod(token, fallbackValue);
+    }
+
+    private void setNavigationBarVisibility(final boolean visible) {
+        if (BuildCompatUtils.EFFECTIVE_SDK_INT > Build.VERSION_CODES.M) {
+            // For N and later, IMEs can specify Color.TRANSPARENT to make the navigation bar
+            // transparent.  For other colors the system uses the default color.
+            getWindow().getWindow().setNavigationBarColor(
+                    visible ? Color.BLACK : Color.TRANSPARENT);
+        }
     }
 }

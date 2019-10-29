@@ -16,11 +16,11 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="@string/android_spell_checker_settings">
-  <!--CheckBoxPreference
-     android:key="pref_spellcheck_use_contacts"
-     android:title="@string/use_contacts_for_spellchecking_option_title"
-     android:summary="@string/use_contacts_for_spellchecking_option_summary"
-     android:persistent="true"
-     android:defaultValue="true" /-->
+>
+    <CheckBoxPreference
+        android:key="pref_spellcheck_use_contacts"
+        android:title="@string/use_contacts_for_spellchecking_option_title"
+        android:summary="@string/use_contacts_for_spellchecking_option_summary"
+        android:defaultValue="true"
+        android:persistent="true" />
 </PreferenceScreen>

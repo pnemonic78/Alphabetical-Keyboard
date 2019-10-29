@@ -1,26 +1,36 @@
 /*
  * Copyright (C) 2012 The Android Open Source Project
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.android.inputmethod.keyboard;
 
-import android.test.AndroidTestCase;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 
-import com.android.inputmethod.keyboard.MoreKeysKeyboard.Builder.MoreKeysKeyboardParams;
+import androidx.test.filters.MediumTest;
+import androidx.test.runner.AndroidJUnit4;
 
-public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
+import com.android.inputmethod.keyboard.MoreKeysKeyboard.MoreKeysKeyboardParams;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+@MediumTest
+@RunWith(AndroidJUnit4.class)
+public class MoreKeysKeyboardBuilderFixedOrderTests {
     private static final int WIDTH = 10;
     private static final int HEIGHT = 10;
 
@@ -36,24 +46,21 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     private static final int XPOS_R1 = WIDTH * 8 + WIDTH / 2;
     private static final int XPOS_R0 = WIDTH * 9 + WIDTH / 2;
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-    }
-
-    private static MoreKeysKeyboardParams createParams(int numKeys, int columnNum,
-            int coordXInParnet) {
+    private static MoreKeysKeyboardParams createParams(final int numKeys, final int columnNum,
+            final int coordXInParent) {
         final MoreKeysKeyboardParams params = new MoreKeysKeyboardParams();
-        params.setParameters(numKeys, columnNum, WIDTH, HEIGHT, coordXInParnet, KEYBOARD_WIDTH,
-                /* isFixedOrderColumn */true, /* dividerWidth */0);
+        params.setParameters(numKeys, columnNum, WIDTH, HEIGHT, coordXInParent, KEYBOARD_WIDTH,
+                true /* isMoreKeysFixedColumn */, true /* isMoreKeysFixedOrder */,
+                0 /* dividerWidth */);
         return params;
     }
 
+    @Test
     public void testLayoutError() {
         MoreKeysKeyboardParams params = null;
         try {
             final int fixColumns = KEYBOARD_WIDTH / WIDTH;
-            params = createParams(10, fixColumns + 1, HEIGHT);
+            params = createParams(fixColumns + 1, fixColumns + 1, HEIGHT);
             fail("Should throw IllegalArgumentException");
         } catch (IllegalArgumentException e) {
             // Too small keyboard to hold more keys keyboard.
@@ -66,6 +73,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     // "<m>" is the default key.
 
     // <1>
+    @Test
     public void testLayout1KeyFix5M0() {
         MoreKeysKeyboardParams params = createParams(1, 5, XPOS_M0);
         assertEquals("1 key fix 5 M0 columns", 1, params.mNumColumns);
@@ -78,6 +86,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // |<1>
+    @Test
     public void testLayout1KeyFix5L0() {
         MoreKeysKeyboardParams params = createParams(1, 5, XPOS_L0);
         assertEquals("1 key fix 5 L0 columns", 1, params.mNumColumns);
@@ -90,6 +99,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // |___ <1>
+    @Test
     public void testLayout1KeyFix5L1() {
         MoreKeysKeyboardParams params = createParams(1, 5, XPOS_L1);
         assertEquals("1 key fix 5 L1 columns", 1, params.mNumColumns);
@@ -102,6 +112,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // |___ ___ <1>
+    @Test
     public void testLayout1KeyFix5L2() {
         MoreKeysKeyboardParams params = createParams(1, 5, XPOS_L2);
         assertEquals("1 key fix 5 L2 columns", 1, params.mNumColumns);
@@ -114,6 +125,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // <1>|
+    @Test
     public void testLayout1KeyFix5R0() {
         MoreKeysKeyboardParams params = createParams(1, 5, XPOS_R0);
         assertEquals("1 key fix 5 R0 columns", 1, params.mNumColumns);
@@ -126,6 +138,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // <1> ___|
+    @Test
     public void testLayout1KeyFix5R1() {
         MoreKeysKeyboardParams params = createParams(1, 5, XPOS_R1);
         assertEquals("1 key fix 5 R1 columns", 1, params.mNumColumns);
@@ -138,6 +151,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // <1> ___ ___|
+    @Test
     public void testLayout1KeyFix5R2() {
         MoreKeysKeyboardParams params = createParams(1, 5, XPOS_R2);
         assertEquals("1 key fix 5 R2 columns", 1, params.mNumColumns);
@@ -150,6 +164,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // <1> [2]
+    @Test
     public void testLayout2KeyFix5M0() {
         MoreKeysKeyboardParams params = createParams(2, 5, XPOS_M0);
         assertEquals("2 key fix 5 M0 columns", 2, params.mNumColumns);
@@ -163,6 +178,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // |<1> [2]
+    @Test
     public void testLayout2KeyFix5L0() {
         MoreKeysKeyboardParams params = createParams(2, 5, XPOS_L0);
         assertEquals("2 key fix 5 L0 columns", 2, params.mNumColumns);
@@ -176,6 +192,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // |___ <1> [2]
+    @Test
     public void testLayout2KeyFix5L1() {
         MoreKeysKeyboardParams params = createParams(2, 5, XPOS_L1);
         assertEquals("2 key fix 5 L1 columns", 2, params.mNumColumns);
@@ -189,6 +206,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // |___ ___ <1> [2]
+    @Test
     public void testLayout2KeyFix5L2() {
         MoreKeysKeyboardParams params = createParams(2, 5, XPOS_L2);
         assertEquals("2 key fix 5 L2 columns", 2, params.mNumColumns);
@@ -202,6 +220,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // [1] <2>|
+    @Test
     public void testLayout2KeyFix5R0() {
         MoreKeysKeyboardParams params = createParams(2, 5, XPOS_R0);
         assertEquals("2 key fix 5 R0 columns", 2, params.mNumColumns);
@@ -215,6 +234,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // [1] <2> ___|
+    @Test
     public void testLayout2KeyFix5R1() {
         MoreKeysKeyboardParams params = createParams(2, 5, XPOS_R1);
         assertEquals("2 key fix 5 R1 columns", 2, params.mNumColumns);
@@ -228,6 +248,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // <1> [2] ___|
+    @Test
     public void testLayout2KeyFix5R2() {
         MoreKeysKeyboardParams params = createParams(2, 5, XPOS_R2);
         assertEquals("2 key fix 5 R2 columns", 2, params.mNumColumns);
@@ -242,6 +263,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // [3]
     // <1> [2]
+    @Test
     public void testLayout3KeyFix2M0() {
         MoreKeysKeyboardParams params = createParams(3, 2, XPOS_M0);
         assertEquals("3 key fix 2 M0 columns", 2, params.mNumColumns);
@@ -257,6 +279,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |[3]
     // |<1> [2]
+    @Test
     public void testLayout3KeyFix2L0() {
         MoreKeysKeyboardParams params = createParams(3, 2, XPOS_L0);
         assertEquals("3 key fix 2 L0 columns", 2, params.mNumColumns);
@@ -272,6 +295,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |___ [3]
     // |___ <1> [2]
+    @Test
     public void testLayout3KeyFix2L1() {
         MoreKeysKeyboardParams params = createParams(3, 2, XPOS_L1);
         assertEquals("3 key fix 2 L1 columns", 2, params.mNumColumns);
@@ -287,6 +311,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |        [3]
     // |___ ___ <1> [2]
+    @Test
     public void testLayout3KeyFix2L2() {
         MoreKeysKeyboardParams params = createParams(3, 2, XPOS_L2);
         assertEquals("3 key fix 2 L2 columns", 2, params.mNumColumns);
@@ -302,6 +327,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //     [3]|
     // [1] <2>|
+    @Test
     public void testLayout3KeyFix2R0() {
         MoreKeysKeyboardParams params = createParams(3, 2, XPOS_R0);
         assertEquals("3 key fix 2 R0 columns", 2, params.mNumColumns);
@@ -317,6 +343,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //     [3] ___|
     // [1] <2> ___|
+    @Test
     public void testLayout3KeyFix2R1() {
         MoreKeysKeyboardParams params = createParams(3, 2, XPOS_R1);
         assertEquals("3 key fix 2 R1 columns", 2, params.mNumColumns);
@@ -332,6 +359,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // [3]     ___|
     // <1> [2] ___|
+    @Test
     public void testLayout3KeyFix2R2() {
         MoreKeysKeyboardParams params = createParams(3, 2, XPOS_R2);
         assertEquals("3 key fix 2 R2 columns", 2, params.mNumColumns);
@@ -347,6 +375,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // [3] [4]
     // <1> [2]
+    @Test
     public void testLayout4KeyFix2M0() {
         MoreKeysKeyboardParams params = createParams(4, 2, XPOS_M0);
         assertEquals("3 key fix 2 M0 columns", 2, params.mNumColumns);
@@ -363,6 +392,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |[3] [4]
     // |<1> [2]
+    @Test
     public void testLayout4KeyFix2L0() {
         MoreKeysKeyboardParams params = createParams(4, 2, XPOS_L0);
         assertEquals("3 key fix 2 L0 columns", 2, params.mNumColumns);
@@ -379,6 +409,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |___ [3] [4]
     // |___ <1> [2]
+    @Test
     public void testLayout4KeyFix2L1() {
         MoreKeysKeyboardParams params = createParams(4, 2, XPOS_L1);
         assertEquals("3 key fix 2 L1 columns", 2, params.mNumColumns);
@@ -395,6 +426,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |        [3] [4]
     // |___ ___ <1> [2]
+    @Test
     public void testLayout4KeyFix2L2() {
         MoreKeysKeyboardParams params = createParams(4, 2, XPOS_L2);
         assertEquals("3 key fix 2 L2 columns", 2, params.mNumColumns);
@@ -411,6 +443,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // [3] [4]|
     // [1] <2>|
+    @Test
     public void testLayout4KeyFix2R0() {
         MoreKeysKeyboardParams params = createParams(4, 2, XPOS_R0);
         assertEquals("3 key fix 2 R0 columns", 2, params.mNumColumns);
@@ -427,6 +460,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // [3] [4] ___|
     // [1] <2> ___|
+    @Test
     public void testLayout4KeyFix2R1() {
         MoreKeysKeyboardParams params = createParams(4, 2, XPOS_R1);
         assertEquals("3 key fix 2 R1 columns", 2, params.mNumColumns);
@@ -443,6 +477,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // [3] [4] ___|
     // <1> [2] ___|
+    @Test
     public void testLayout4KeyFix2R2() {
         MoreKeysKeyboardParams params = createParams(4, 2, XPOS_R2);
         assertEquals("3 key fix 2 R2 columns", 2, params.mNumColumns);
@@ -458,6 +493,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // [1] <2> [3]
+    @Test
     public void testLayout3KeyFix5M0() {
         MoreKeysKeyboardParams params = createParams(3, 5, XPOS_M0);
         assertEquals("3 key fix 5 columns", 3, params.mNumColumns);
@@ -472,6 +508,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // |<1> [2] [3]
+    @Test
     public void testLayout3KeyFix5L0() {
         MoreKeysKeyboardParams params = createParams(3, 5, XPOS_L0);
         assertEquals("3 key fix 5 L0 columns", 3, params.mNumColumns);
@@ -486,6 +523,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // |___ <1> [2] [3]
+    @Test
     public void testLayout3KeyFix5L1() {
         MoreKeysKeyboardParams params = createParams(3, 5, XPOS_L1);
         assertEquals("3 key fix 5 L1 columns", 3, params.mNumColumns);
@@ -500,6 +538,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // |___ [1] <2> [3]
+    @Test
     public void testLayout3KeyFix5L2() {
         MoreKeysKeyboardParams params = createParams(3, 5, XPOS_L2);
         assertEquals("3 key fix 5 L2 columns", 3, params.mNumColumns);
@@ -514,6 +553,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // [1] [2] <3>|
+    @Test
     public void testLayout3KeyFix5R0() {
         MoreKeysKeyboardParams params = createParams(3, 5, XPOS_R0);
         assertEquals("3 key fix 5 R0 columns", 3, params.mNumColumns);
@@ -528,6 +568,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // [1] [2] <3> ___|
+    @Test
     public void testLayout3KeyFix5R1() {
         MoreKeysKeyboardParams params = createParams(3, 5, XPOS_R1);
         assertEquals("3 key fix 5 R1 columns", 3, params.mNumColumns);
@@ -542,6 +583,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // [1] <2> [3] ___|
+    @Test
     public void testLayout3KeyFix5R2() {
         MoreKeysKeyboardParams params = createParams(3, 5, XPOS_R2);
         assertEquals("3 key fix 5 R2 columns", 3, params.mNumColumns);
@@ -557,6 +599,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //     [4]
     // [1] <2> [3]
+    @Test
     public void testLayout4KeyFix3M0() {
         MoreKeysKeyboardParams params = createParams(4, 3, XPOS_M0);
         assertEquals("4 key fix 3 M0 columns", 3, params.mNumColumns);
@@ -573,6 +616,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |[4]
     // |<1> [2] [3]
+    @Test
     public void testLayout4KeyFix3L0() {
         MoreKeysKeyboardParams params = createParams(4, 3, XPOS_L0);
         assertEquals("4 key fix 3 L0 columns", 3, params.mNumColumns);
@@ -589,6 +633,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |___ [4]
     // |___ <1> [2] [3]
+    @Test
     public void testLayout4KeyFix3L1() {
         MoreKeysKeyboardParams params = createParams(4, 3, XPOS_L1);
         assertEquals("4 key fix 3 L1 columns", 3, params.mNumColumns);
@@ -605,6 +650,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |___ ___     [4]
     // |___ ___ [1] <2> [3]
+    @Test
     public void testLayout4KeyFix3L2() {
         MoreKeysKeyboardParams params = createParams(4, 3, XPOS_L2);
         assertEquals("4 key fix 3 L2 columns", 3, params.mNumColumns);
@@ -621,6 +667,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //         [4]|
     // [1] [2] <3>|
+    @Test
     public void testLayout4KeyFix3R0() {
         MoreKeysKeyboardParams params = createParams(4, 3, XPOS_R0);
         assertEquals("4 key fix 3 R0 columns", 3, params.mNumColumns);
@@ -637,6 +684,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //         [4] ___|
     // [1] [2] <3> ___|
+    @Test
     public void testLayout4KeyFix3R1() {
         MoreKeysKeyboardParams params = createParams(4, 3, XPOS_R1);
         assertEquals("4 key fix 3 R1 columns", 3, params.mNumColumns);
@@ -653,6 +701,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //     [4]     ___|
     // [1] <2> [3] ___|
+    @Test
     public void testLayout4KeyFix3R2() {
         MoreKeysKeyboardParams params = createParams(4, 3, XPOS_R2);
         assertEquals("4 key fix 3 R2 columns", 3, params.mNumColumns);
@@ -669,6 +718,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //   [4] [5]
     // [1] <2> [3]
+    @Test
     public void testLayout5KeyFix3M0() {
         MoreKeysKeyboardParams params = createParams(5, 3, XPOS_M0);
         assertEquals("5 key fix 3 M0 columns", 3, params.mNumColumns);
@@ -686,6 +736,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |[4] [5]
     // |<1> [2] [3]
+    @Test
     public void testLayout5KeyFix3L0() {
         MoreKeysKeyboardParams params = createParams(5, 3, XPOS_L0);
         assertEquals("5 key fix 3 L0 columns", 3, params.mNumColumns);
@@ -703,6 +754,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |___ [4] [5]
     // |___ <1> [2] [3]
+    @Test
     public void testLayout5KeyFix3L1() {
         MoreKeysKeyboardParams params = createParams(5, 3, XPOS_L1);
         assertEquals("5 key fix 3 L1 columns", 3, params.mNumColumns);
@@ -720,6 +772,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |___   [4] [5]
     // |___ [1] <2> [3]
+    @Test
     public void testLayout5KeyFix3L2() {
         MoreKeysKeyboardParams params = createParams(5, 3, XPOS_L2);
         assertEquals("5 key fix 3 L2 columns", 3, params.mNumColumns);
@@ -737,6 +790,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //     [4] [5]|
     // [1] [2] <3>|
+    @Test
     public void testLayout5KeyFix3R0() {
         MoreKeysKeyboardParams params = createParams(5, 3, XPOS_R0);
         assertEquals("5 key fix 3 R0 columns", 3, params.mNumColumns);
@@ -754,6 +808,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //     [4] [5] ___|
     // [1] [2] <3> ___|
+    @Test
     public void testLayout5KeyFix3R1() {
         MoreKeysKeyboardParams params = createParams(5, 3, XPOS_R1);
         assertEquals("5 key fix 3 R1 columns", 3, params.mNumColumns);
@@ -771,6 +826,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //   [4] [5]   ___|
     // [1] <2> [3] ___|
+    @Test
     public void testLayout5KeyFix3R2() {
         MoreKeysKeyboardParams params = createParams(5, 3, XPOS_R2);
         assertEquals("5 key fix 3 R2 columns", 3, params.mNumColumns);
@@ -788,6 +844,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // [4] [5] [6]
     // [1] <2> [3]
+    @Test
     public void testLayout6KeyFix3M0() {
         MoreKeysKeyboardParams params = createParams(6, 3, XPOS_M0);
         assertEquals("6 key fix 3 M0 columns", 3, params.mNumColumns);
@@ -806,6 +863,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |[4] [5] [6]
     // |<1> [2] [3]
+    @Test
     public void testLayout6KeyFix3L0() {
         MoreKeysKeyboardParams params = createParams(6, 3, XPOS_L0);
         assertEquals("6 key fix 3 L0 columns", 3, params.mNumColumns);
@@ -824,6 +882,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |___ [4] [5] [6]
     // |___ <1> [2] [3]
+    @Test
     public void testLayout6KeyFix3L1() {
         MoreKeysKeyboardParams params = createParams(6, 3, XPOS_L1);
         assertEquals("6 key fix 3 L1 columns", 3, params.mNumColumns);
@@ -842,6 +901,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |___ [4] [5] [6]
     // |___ [1] <2> [3]
+    @Test
     public void testLayout6KeyFix3L2() {
         MoreKeysKeyboardParams params = createParams(6, 3, XPOS_L2);
         assertEquals("6 key fix 3 L2 columns", 3, params.mNumColumns);
@@ -860,6 +920,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // [4] [5] [6]|
     // [1] [2] <3>|
+    @Test
     public void testLayout6KeyFix3R0() {
         MoreKeysKeyboardParams params = createParams(6, 3, XPOS_R0);
         assertEquals("6 key fix 3 R0 columns", 3, params.mNumColumns);
@@ -878,6 +939,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // [4] [5] [6] ___|
     // [1] [2] <3> ___|
+    @Test
     public void testLayout6KeyFix3R1() {
         MoreKeysKeyboardParams params = createParams(6, 3, XPOS_R1);
         assertEquals("6 key fix 3 R1 columns", 3, params.mNumColumns);
@@ -896,6 +958,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // [4] [5] [6] ___|
     // [1] <2> [3] ___|
+    @Test
     public void testLayout6KeyFix3R2() {
         MoreKeysKeyboardParams params = createParams(6, 3, XPOS_R2);
         assertEquals("6 key fix 3 R2 columns", 3, params.mNumColumns);
@@ -913,6 +976,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // <1> [2] [3] [4]
+    @Test
     public void testLayout4KeyFix5M0() {
         MoreKeysKeyboardParams params = createParams(4, 5, XPOS_M0);
         assertEquals("4 key fix 5 columns", 4, params.mNumColumns);
@@ -928,6 +992,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // |<1> [2] [3] [4]
+    @Test
     public void testLayout4KeyFix5L0() {
         MoreKeysKeyboardParams params = createParams(4, 5, XPOS_L0);
         assertEquals("4 key fix 5 L0 columns", 4, params.mNumColumns);
@@ -943,6 +1008,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // |___ <1> [2] [3] [4]
+    @Test
     public void testLayout4KeyFix5L1() {
         MoreKeysKeyboardParams params = createParams(4, 5, XPOS_L1);
         assertEquals("4 key fix 5 L1 columns", 4, params.mNumColumns);
@@ -958,6 +1024,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // |___ [1] <2> [3] [4]
+    @Test
     public void testLayout4KeyFix5L2() {
         MoreKeysKeyboardParams params = createParams(4, 5, XPOS_L2);
         assertEquals("4 key fix 5 L2 columns", 4, params.mNumColumns);
@@ -973,6 +1040,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // [1] [2] [3] <4>|
+    @Test
     public void testLayout4KeyFix5R0() {
         MoreKeysKeyboardParams params = createParams(4, 5, XPOS_R0);
         assertEquals("4 key fix 5 R0 columns", 4, params.mNumColumns);
@@ -988,6 +1056,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // [1] [2] [3] <4> ___|
+    @Test
     public void testLayout4KeyFix5R1() {
         MoreKeysKeyboardParams params = createParams(4, 5, XPOS_R1);
         assertEquals("4 key fix 5 R1 columns", 4, params.mNumColumns);
@@ -1003,6 +1072,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // [1] [2] <3> [4] ___|
+    @Test
     public void testLayout4KeyFix5R2() {
         MoreKeysKeyboardParams params = createParams(4, 5, XPOS_R2);
         assertEquals("4 key fix 5 R2 columns", 4, params.mNumColumns);
@@ -1019,6 +1089,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //     [5]
     // [1] <2> [3] [4]
+    @Test
     public void testLayout5KeyFix4M0() {
         MoreKeysKeyboardParams params = createParams(5, 4, XPOS_M0);
         assertEquals("5 key fix 4 M0 columns", 4, params.mNumColumns);
@@ -1036,6 +1107,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |[5]
     // |<1> [2] [3] [4]
+    @Test
     public void testLayout5KeyFix4L0() {
         MoreKeysKeyboardParams params = createParams(5, 4, XPOS_L0);
         assertEquals("5 key fix 4 L0 columns", 4, params.mNumColumns);
@@ -1053,6 +1125,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |___ [5]
     // |___ <1> [2] [3] [4]
+    @Test
     public void testLayout5KeyFix4L1() {
         MoreKeysKeyboardParams params = createParams(5, 4, XPOS_L1);
         assertEquals("5 key fix 4 L1 columns", 4, params.mNumColumns);
@@ -1070,6 +1143,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |___     [5]
     // |___ [1] <2> [3] [4]
+    @Test
     public void testLayout5KeyFix4L2() {
         MoreKeysKeyboardParams params = createParams(5, 4, XPOS_L2);
         assertEquals("5 key fix 4 L2 columns", 4, params.mNumColumns);
@@ -1087,6 +1161,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //             [5]|
     // [1] [2] [3] <4>|
+    @Test
     public void testLayout5KeyFix4R0() {
         MoreKeysKeyboardParams params = createParams(5, 4, XPOS_R0);
         assertEquals("5 key fix 4 R0 columns", 4, params.mNumColumns);
@@ -1104,6 +1179,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //             [5] ___|
     // [1] [2] [3] <4> ___|
+    @Test
     public void testLayout5KeyFix4R1() {
         MoreKeysKeyboardParams params = createParams(5, 4, XPOS_R1);
         assertEquals("5 key fix 4 R1 columns", 4, params.mNumColumns);
@@ -1121,6 +1197,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //         [5]     ___|
     // [1] [2] <3> [4] ___|
+    @Test
     public void testLayout5KeyFix4R2() {
         MoreKeysKeyboardParams params = createParams(5, 4, XPOS_R2);
         assertEquals("5 key fix 4 R2 columns", 4, params.mNumColumns);
@@ -1138,6 +1215,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //   [5] [6]
     // [1] <2> [3] [4]
+    @Test
     public void testLayout6KeyFix4M0() {
         MoreKeysKeyboardParams params = createParams(6, 4, XPOS_M0);
         assertEquals("6 key fix 4 M0 columns", 4, params.mNumColumns);
@@ -1156,6 +1234,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |[5] [6]
     // |<1> [2] [3] [4]
+    @Test
     public void testLayout6KeyFix4L0() {
         MoreKeysKeyboardParams params = createParams(6, 4, XPOS_L0);
         assertEquals("6 key fix 4 L0 columns", 4, params.mNumColumns);
@@ -1174,6 +1253,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |___ [5] [6]
     // |___ <1> [2] [3] [4]
+    @Test
     public void testLayout6KeyFix4L1() {
         MoreKeysKeyboardParams params = createParams(6, 4, XPOS_L1);
         assertEquals("6 key fix 4 L1 columns", 4, params.mNumColumns);
@@ -1192,6 +1272,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |___   [5] [6]
     // |___ [1] <2> [3] [4]
+    @Test
     public void testLayout6KeyFix4L2() {
         MoreKeysKeyboardParams params = createParams(6, 4, XPOS_L2);
         assertEquals("6 key fix 4 L2 columns", 4, params.mNumColumns);
@@ -1210,6 +1291,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //         [5] [6]|
     // [1] [2] [3] <4>|
+    @Test
     public void testLayout6KeyFix4R0() {
         MoreKeysKeyboardParams params = createParams(6, 4, XPOS_R0);
         assertEquals("6 key fix 4 R0 columns", 4, params.mNumColumns);
@@ -1228,6 +1310,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //         [5] [6] ___|
     // [1] [2] [3] <4> ___|
+    @Test
     public void testLayout6KeyFix4R1() {
         MoreKeysKeyboardParams params = createParams(6, 4, XPOS_R1);
         assertEquals("6 key fix 4 R1 columns", 4, params.mNumColumns);
@@ -1246,6 +1329,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //       [5] [6]   ___|
     // [1] [2] <3> [4] ___|
+    @Test
     public void testLayout6KeyFix4R2() {
         MoreKeysKeyboardParams params = createParams(6, 4, XPOS_R2);
         assertEquals("6 key fix 4 R2 columns", 4, params.mNumColumns);
@@ -1264,6 +1348,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // [5] [6] [7]
     // [1] <2> [3] [4]
+    @Test
     public void testLayout7KeyFix4M0() {
         MoreKeysKeyboardParams params = createParams(7, 4, XPOS_M0);
         assertEquals("7 key fix 4 M0 columns", 4, params.mNumColumns);
@@ -1283,6 +1368,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |[5] [6] [7]
     // |<1> [2] [3] [4]
+    @Test
     public void testLayout7KeyFix4L0() {
         MoreKeysKeyboardParams params = createParams(7, 4, XPOS_L0);
         assertEquals("7 key fix 4 L0 columns", 4, params.mNumColumns);
@@ -1302,6 +1388,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |___ [5] [6] [7]
     // |___ <1> [2] [3] [4]
+    @Test
     public void testLayout7KeyFix4L1() {
         MoreKeysKeyboardParams params = createParams(7, 4, XPOS_L1);
         assertEquals("7 key fix 4 L1 columns", 4, params.mNumColumns);
@@ -1321,6 +1408,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |___ [5] [6] [7]
     // |___ [1] <2> [3] [4]
+    @Test
     public void testLayout7KeyFix4L2() {
         MoreKeysKeyboardParams params = createParams(7, 4, XPOS_L2);
         assertEquals("7 key fix 4 L2 columns", 4, params.mNumColumns);
@@ -1340,6 +1428,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //     [5] [6] [7]|
     // [1] [2] [3] <4>|
+    @Test
     public void testLayout7KeyFix4R0() {
         MoreKeysKeyboardParams params = createParams(7, 4, XPOS_R0);
         assertEquals("7 key fix 4 R0 columns", 4, params.mNumColumns);
@@ -1359,6 +1448,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //     [5] [6] [7] ___|
     // [1] [2] [3] <4> ___|
+    @Test
     public void testLayout7KeyFix4R1() {
         MoreKeysKeyboardParams params = createParams(7, 4, XPOS_R1);
         assertEquals("7 key fix 4 R1 columns", 4, params.mNumColumns);
@@ -1378,6 +1468,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //     [5] [6] [7] ___|
     // [1] [2] <3> [4] ___|
+    @Test
     public void testLayout7KeyFix4R2() {
         MoreKeysKeyboardParams params = createParams(7, 4, XPOS_R2);
         assertEquals("7 key fix 4 R2 columns", 4, params.mNumColumns);
@@ -1397,6 +1488,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // [5] [6] [7] [8]
     // [1] <2> [3] [4]
+    @Test
     public void testLayout8KeyFix4M0() {
         MoreKeysKeyboardParams params = createParams(8, 4, XPOS_M0);
         assertEquals("8 key fix 4 M0 columns", 4, params.mNumColumns);
@@ -1417,6 +1509,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |[5] [6] [7] [8]
     // |<1> [2] [3] [4]
+    @Test
     public void testLayout8KeyFix4L0() {
         MoreKeysKeyboardParams params = createParams(8, 4, XPOS_L0);
         assertEquals("8 key fix 4 L0 columns", 4, params.mNumColumns);
@@ -1437,6 +1530,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |___ [5] [6] [7] [8]
     // |___ <1> [2] [3] [4]
+    @Test
     public void testLayout8KeyFix4L1() {
         MoreKeysKeyboardParams params = createParams(8, 4, XPOS_L1);
         assertEquals("8 key fix 4 L1 columns", 4, params.mNumColumns);
@@ -1457,6 +1551,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |___ [5] [6] [7] [8]
     // |___ [1] <2> [3] [4]
+    @Test
     public void testLayout8KeyFix4L2() {
         MoreKeysKeyboardParams params = createParams(8, 4, XPOS_L2);
         assertEquals("8 key fix 4 L2 columns", 4, params.mNumColumns);
@@ -1477,6 +1572,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // [5] [6] [7] [8]|
     // [1] [2] [3] <4>|
+    @Test
     public void testLayout8KeyFix4R0() {
         MoreKeysKeyboardParams params = createParams(8, 4, XPOS_R0);
         assertEquals("8 key fix 4 R0 columns", 4, params.mNumColumns);
@@ -1497,6 +1593,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // [5] [6] [7] [8] ___|
     // [1] [2] [3] <4> ___|
+    @Test
     public void testLayout8KeyFix4R1() {
         MoreKeysKeyboardParams params = createParams(8, 4, XPOS_R1);
         assertEquals("8 key fix 4 R1 columns", 4, params.mNumColumns);
@@ -1517,6 +1614,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // [5] [6] [7] [8] ___|
     // [1] [2] <3> [4] ___|
+    @Test
     public void testLayout8KeyFix4R2() {
         MoreKeysKeyboardParams params = createParams(8, 4, XPOS_R2);
         assertEquals("8 key fix 4 R2 columns", 4, params.mNumColumns);
@@ -1536,6 +1634,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
      // [1] [2] <3> [4] [5]
+    @Test
     public void testLayout5KeyFix5M0() {
         MoreKeysKeyboardParams params = createParams(5, 5, XPOS_M0);
         assertEquals("5 key fix 5 columns", 5, params.mNumColumns);
@@ -1552,6 +1651,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // |<1> [2] [3] [4] [5]
+    @Test
     public void testLayout5KeyFix5L0() {
         MoreKeysKeyboardParams params = createParams(5, 5, XPOS_L0);
         assertEquals("5 key fix 5 L0 columns", 5, params.mNumColumns);
@@ -1568,6 +1668,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // |___ <1> [2] [3] [4] [5]
+    @Test
     public void testLayout5KeyFix5L1() {
         MoreKeysKeyboardParams params = createParams(5, 5, XPOS_L1);
         assertEquals("5 key fix 5 L1 columns", 5, params.mNumColumns);
@@ -1584,6 +1685,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // |___ [1] <2> [3] [4] [5]
+    @Test
     public void testLayout5KeyFix5L2() {
         MoreKeysKeyboardParams params = createParams(5, 5, XPOS_L2);
         assertEquals("5 key fix 5 L2 columns", 5, params.mNumColumns);
@@ -1600,6 +1702,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // [1] [2] [3] [4] <5>|
+    @Test
     public void testLayout5KeyFix5R0() {
         MoreKeysKeyboardParams params = createParams(5, 5, XPOS_R0);
         assertEquals("5 key fix 5 R0 columns", 5, params.mNumColumns);
@@ -1616,6 +1719,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // [1] [2] [3] [4] <5> ___|
+    @Test
     public void testLayout5KeyFix5R1() {
         MoreKeysKeyboardParams params = createParams(5, 5, XPOS_R1);
         assertEquals("5 key fix 5 R1 columns", 5, params.mNumColumns);
@@ -1632,6 +1736,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // [1] [2] [3] <4> [5] ___|
+    @Test
     public void testLayout5KeyFix5R2() {
         MoreKeysKeyboardParams params = createParams(5, 5, XPOS_R2);
         assertEquals("5 key fix 5 R2 columns", 5, params.mNumColumns);
@@ -1649,6 +1754,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //         [6]
     // [1] [2] <3> [4] [5]
+    @Test
     public void testLayout6KeyFix5M0() {
         MoreKeysKeyboardParams params = createParams(6, 5, XPOS_M0);
         assertEquals("6 key fix 5 columns", 5, params.mNumColumns);
@@ -1667,6 +1773,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |[6]
     // |<1> [2] [3] [4] [5]
+    @Test
     public void testLayout6KeyFix5L0() {
         MoreKeysKeyboardParams params = createParams(6, 5, XPOS_L0);
         assertEquals("6 key fix 5 L0 columns", 5, params.mNumColumns);
@@ -1685,6 +1792,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |___ [6]
     // |___ <1> [2] [3] [4] [5]
+    @Test
     public void testLayout6KeyFix5L1() {
         MoreKeysKeyboardParams params = createParams(6, 5, XPOS_L1);
         assertEquals("6 key fix 5 L1 columns", 5, params.mNumColumns);
@@ -1703,6 +1811,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |___     [6]
     // |___ [1] <2> [3] [4] [5]
+    @Test
     public void testLayout6KeyFix5L2() {
         MoreKeysKeyboardParams params = createParams(6, 5, XPOS_L2);
         assertEquals("6 key fix 5 L2 columns", 5, params.mNumColumns);
@@ -1721,6 +1830,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //                 [6]|
     // [1] [2] [3] [4] <5>|
+    @Test
     public void testLayout6KeyFix5R0() {
         MoreKeysKeyboardParams params = createParams(6, 5, XPOS_R0);
         assertEquals("6 key fix 5 R0 columns", 5, params.mNumColumns);
@@ -1739,6 +1849,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //                 [6] ___|
     // [1] [2] [3] [4] <5> ___|
+    @Test
     public void testLayout6KeyFix5R1() {
         MoreKeysKeyboardParams params = createParams(6, 5, XPOS_R1);
         assertEquals("6 key fix 5 R1 columns", 5, params.mNumColumns);
@@ -1757,6 +1868,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //             [6]     ___|
     // [1] [2] [3] <4> [5] ___|
+    @Test
     public void testLayout6KeyFix5R2() {
         MoreKeysKeyboardParams params = createParams(6, 5, XPOS_R2);
         assertEquals("6 key fix 5 R2 columns", 5, params.mNumColumns);
@@ -1775,6 +1887,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //       [6] [7]
     // [1] [2] <3> [4] [5]
+    @Test
     public void testLayout7KeyFix5M0() {
         MoreKeysKeyboardParams params = createParams(7, 5, XPOS_M0);
         assertEquals("7 key fix 5 columns", 5, params.mNumColumns);
@@ -1794,6 +1907,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |[6] [7]
     // |<1> [2] [3] [4] [5]
+    @Test
     public void testLayout7KeyFix5L0() {
         MoreKeysKeyboardParams params = createParams(7, 5, XPOS_L0);
         assertEquals("7 key fix 5 L0 columns", 5, params.mNumColumns);
@@ -1813,6 +1927,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |___ [6] [7]
     // |___ <1> [2] [3] [4] [5]
+    @Test
     public void testLayout7KeyFix5L1() {
         MoreKeysKeyboardParams params = createParams(7, 5, XPOS_L1);
         assertEquals("7 key fix 5 L1 columns", 5, params.mNumColumns);
@@ -1832,6 +1947,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |___   [6] [7]
     // |___ [1] <2> [3] [4] [5]
+    @Test
     public void testLayout7KeyFix5L2() {
         MoreKeysKeyboardParams params = createParams(7, 5, XPOS_L2);
         assertEquals("7 key fix 5 L2 columns", 5, params.mNumColumns);
@@ -1851,6 +1967,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //             [6] [7]|
     // [1] [2] [3] [4] <5>|
+    @Test
     public void testLayout7KeyFix5R0() {
         MoreKeysKeyboardParams params = createParams(7, 5, XPOS_R0);
         assertEquals("7 key fix 5 R0 columns", 5, params.mNumColumns);
@@ -1870,6 +1987,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //             [6] [7] ___|
     // [1] [2] [3] [4] <5> ___|
+    @Test
     public void testLayout7KeyFix5R1() {
         MoreKeysKeyboardParams params = createParams(7, 5, XPOS_R1);
         assertEquals("7 key fix 5 R1 columns", 5, params.mNumColumns);
@@ -1889,6 +2007,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //           [6] [7]   ___|
     // [1] [2] [3] <4> [5] ___|
+    @Test
     public void testLayout7KeyFix5R2() {
         MoreKeysKeyboardParams params = createParams(7, 5, XPOS_R2);
         assertEquals("7 key fix 5 R2 columns",5, params.mNumColumns);
@@ -1908,6 +2027,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //     [6] [7] [8]
     // [1] [2] <3> [4] [5]
+    @Test
     public void testLayout8KeyFix5M0() {
         MoreKeysKeyboardParams params = createParams(8, 5, XPOS_M0);
         assertEquals("8 key fix 5 M0 columns", 5, params.mNumColumns);
@@ -1928,6 +2048,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |[6] [7] [8]
     // |<1> [2] [3] [4] [5]
+    @Test
     public void testLayout8KeyFix5L0() {
         MoreKeysKeyboardParams params = createParams(8, 5, XPOS_L0);
         assertEquals("8 key fix 5 L0 columns", 5, params.mNumColumns);
@@ -1948,6 +2069,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |___ [6] [7] [8]
     // |___ <1> [2] [3] [4] [5]
+    @Test
     public void testLayout8KeyFix5L1() {
         MoreKeysKeyboardParams params = createParams(8, 5, XPOS_L1);
         assertEquals("8 key fix 5 L1 columns", 5, params.mNumColumns);
@@ -1968,6 +2090,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |___ [6] [7] [8]
     // |___ [1] <2> [3] [4] [5]
+    @Test
     public void testLayout8KeyFix5L2() {
         MoreKeysKeyboardParams params = createParams(8, 5, XPOS_L2);
         assertEquals("8 key fix 5 L2 columns", 5, params.mNumColumns);
@@ -1988,6 +2111,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //         [6] [7] [8]|
     // [1] [2] [3] [4] <5>|
+    @Test
     public void testLayout8KeyFix5R0() {
         MoreKeysKeyboardParams params = createParams(8, 5, XPOS_R0);
         assertEquals("8 key fix 5 R0 columns", 5, params.mNumColumns);
@@ -2008,6 +2132,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //         [6] [7] [8] ___|
     // [1] [2] [3] [4] <5> ___|
+    @Test
     public void testLayout8KeyFix5R1() {
         MoreKeysKeyboardParams params = createParams(8, 5, XPOS_R1);
         assertEquals("8 key fix 5 R1 columns", 5, params.mNumColumns);
@@ -2028,6 +2153,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //         [6] [7] [8] ___|
     // [1] [2] [3] <4> [5] ___|
+    @Test
     public void testLayout8KeyFix5R2() {
         MoreKeysKeyboardParams params = createParams(8, 5, XPOS_R2);
         assertEquals("8 key fix 5 R2 columns", 5, params.mNumColumns);
@@ -2048,6 +2174,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //   [6] [7] [8] [9]
     // [1] [2] <3> [4] [5]
+    @Test
     public void testLayout9KeyFix5M0() {
         MoreKeysKeyboardParams params = createParams(9, 5, XPOS_M0);
         assertEquals("9 key fix 5 M0 columns", 5, params.mNumColumns);
@@ -2069,6 +2196,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |[6] [7] [8] [9]
     // |<1> [2] [3] [4] [5]
+    @Test
     public void testLayout9KeyFix5L0() {
         MoreKeysKeyboardParams params = createParams(9, 5, XPOS_L0);
         assertEquals("9 key fix 5 L0 columns", 5, params.mNumColumns);
@@ -2090,6 +2218,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |___ [6] [7] [8] [9]
     // |___ <1> [2] [3] [4] [5]
+    @Test
     public void testLayout9KeyFix5L1() {
         MoreKeysKeyboardParams params = createParams(9, 5, XPOS_L1);
         assertEquals("9 key fix 5 L1 columns", 5, params.mNumColumns);
@@ -2111,6 +2240,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |___   [6] [7] [8] [9]
     // |___ [1] <2> [3] [4] [5]
+    @Test
     public void testLayout9KeyFix5L2() {
         MoreKeysKeyboardParams params = createParams(9, 5, XPOS_L2);
         assertEquals("9 key fix 5 L2 columns", 5, params.mNumColumns);
@@ -2132,6 +2262,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //     [6] [7] [8] [9]|
     // [1] [2] [3] [4] <5>|
+    @Test
     public void testLayout9KeyFix5R0() {
         MoreKeysKeyboardParams params = createParams(9, 5, XPOS_R0);
         assertEquals("9 key fix 5 R0 columns", 5, params.mNumColumns);
@@ -2153,6 +2284,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //     [6] [7] [8] [9] ___|
     // [1] [2] [3] [4] <5> ___|
+    @Test
     public void testLayout9KeyFix5R1() {
         MoreKeysKeyboardParams params = createParams(9, 5, XPOS_R1);
         assertEquals("9 key fix 5 R1 columns", 5, params.mNumColumns);
@@ -2174,6 +2306,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     //   [6] [7] [8] [9]  ___|
     // [1] [2] [3] <4> [5] ___|
+    @Test
     public void testLayout9KeyFix5R2() {
         MoreKeysKeyboardParams params = createParams(9, 5, XPOS_R2);
         assertEquals("9 key fix 5 R2 columns", 5, params.mNumColumns);
@@ -2195,6 +2328,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // [6] [7] [8] [9] [A]
     // [1] [2] <3> [4] [5]
+    @Test
     public void testLayout10KeyFix5M0() {
         MoreKeysKeyboardParams params = createParams(10, 5, XPOS_M0);
         assertEquals("10 key fix 5 M0 columns", 5, params.mNumColumns);
@@ -2217,6 +2351,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |[6] [7] [8] [9] [A]
     // |<1> [2] [3] [4] [5]
+    @Test
     public void testLayout10KeyFix5L0() {
         MoreKeysKeyboardParams params = createParams(10, 5, XPOS_L0);
         assertEquals("10 key fix 5 L0 columns", 5, params.mNumColumns);
@@ -2239,6 +2374,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |___ [6] [7] [8] [9] [A]
     // |___ <1> [2] [3] [4] [5]
+    @Test
     public void testLayout10KeyFix5L1() {
         MoreKeysKeyboardParams params = createParams(10, 5, XPOS_L1);
         assertEquals("10 key fix 5 L1 columns", 5, params.mNumColumns);
@@ -2261,6 +2397,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // |___ [6] [7] [8] [9] [A]
     // |___ [1] <2> [3] [4] [5]
+    @Test
     public void testLayout10KeyFix5L2() {
         MoreKeysKeyboardParams params = createParams(10, 5, XPOS_L2);
         assertEquals("10 key fix 5 L2 columns", 5, params.mNumColumns);
@@ -2283,6 +2420,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // [6] [7] [8] [9] [A]|
     // [1] [2] [3] [4] <5>|
+    @Test
     public void testLayout10KeyFix5R0() {
         MoreKeysKeyboardParams params = createParams(10, 5, XPOS_R0);
         assertEquals("10 key fix 5 R0 columns", 5, params.mNumColumns);
@@ -2305,6 +2443,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // [6] [7] [8] [9] [A] ___|
     // [1] [2] [3] [4] <5> ___|
+    @Test
     public void testLayout10KeyFix5R1() {
         MoreKeysKeyboardParams params = createParams(10, 5, XPOS_R1);
         assertEquals("10 key fix 5 R1 columns", 5, params.mNumColumns);
@@ -2327,6 +2466,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
 
     // [6] [7] [8] [9] [A] ___|
     // [1] [2] [3] <4> [5] ___|
+    @Test
     public void testLayout10KeyFix5R2() {
         MoreKeysKeyboardParams params = createParams(10, 5, XPOS_R2);
         assertEquals("10 key fix 5 R2 columns", 5, params.mNumColumns);
@@ -2350,6 +2490,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     //         [B]
     // [6] [7] [8] [9] [A]
     // [1] [2] <3> [4] [5]
+    @Test
     public void testLayout11KeyFix5M0() {
         MoreKeysKeyboardParams params = createParams(11, 5, XPOS_M0);
         assertEquals("11 key fix 5 M0 columns", 5, params.mNumColumns);
@@ -2374,6 +2515,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     //       [B] [C]
     // [6] [7] [8] [9] [A]
     // [1] [2] <3> [4] [5]
+    @Test
     public void testLayout12KeyFix5M0() {
         MoreKeysKeyboardParams params = createParams(12, 5, XPOS_M0);
         assertEquals("12 key fix 5 M0 columns", 5, params.mNumColumns);
@@ -2399,6 +2541,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     //     [B] [C] [D]
     // [6] [7] [8] [9] [A]
     // [1] [2] <3> [4] [5]
+    @Test
     public void testLayout13KeyFix5M0() {
         MoreKeysKeyboardParams params = createParams(13, 5, XPOS_M0);
         assertEquals("13 key fix 5 M0 columns", 5, params.mNumColumns);
@@ -2425,6 +2568,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     //   [B] [C] [D] [E]
     // [6] [7] [8] [9] [A]
     // [1] [2] <3> [4] [5]
+    @Test
     public void testLayout14KeyFix5M0() {
         MoreKeysKeyboardParams params = createParams(14, 5, XPOS_M0);
         assertEquals("14 key fix 5 M0 columns", 5, params.mNumColumns);
@@ -2450,6 +2594,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // |<1> [2] [3] [4] [5] [6] [7]
+    @Test
     public void testLayout7KeyFix7L0() {
         MoreKeysKeyboardParams params = createParams(7, 7, XPOS_L0);
         assertEquals("7 key fix 7 L0 columns", 7, params.mNumColumns);
@@ -2468,6 +2613,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // |___ <1> [2] [3] [4] [5] [6] [7]
+    @Test
     public void testLayout7KeyFix7L1() {
         MoreKeysKeyboardParams params = createParams(7, 7, XPOS_L1);
         assertEquals("7 key fix 7 L1 columns", 7, params.mNumColumns);
@@ -2486,6 +2632,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // |___ [1] <2> [3] [4] [5] [6] [7]
+    @Test
     public void testLayout7KeyFix7L2() {
         MoreKeysKeyboardParams params = createParams(7, 7, XPOS_L2);
         assertEquals("7 key fix 7 L2 columns", 7, params.mNumColumns);
@@ -2504,6 +2651,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // |___ [1] [2] <3> [4] [5] [6] [7]
+    @Test
     public void testLayout7KeyFix7L3() {
         MoreKeysKeyboardParams params = createParams(7, 7, XPOS_L3);
         assertEquals("7 key fix 7 L3 columns", 7, params.mNumColumns);
@@ -2522,6 +2670,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // |___ [1] [2] [3] <4> [5] [6] [7] ___ ___|
+    @Test
     public void testLayout7KeyFix7M0() {
         MoreKeysKeyboardParams params = createParams(7, 7, XPOS_M0);
         assertEquals("7 key fix 7 M0 columns", 7, params.mNumColumns);
@@ -2540,6 +2689,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // |___ ___ [1] [2] [3] <4> [5] [6] [7] ___|
+    @Test
     public void testLayout7KeyFix7M1() {
         MoreKeysKeyboardParams params = createParams(7, 7, XPOS_M1);
         assertEquals("7 key fix 7 M1 columns", 7, params.mNumColumns);
@@ -2558,6 +2708,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // [1] [2] [3] [4] <5> [6] [7] ___|
+    @Test
     public void testLayout7KeyFix7R3() {
         MoreKeysKeyboardParams params = createParams(7, 7, XPOS_R3);
         assertEquals("7 key fix 7 R3 columns", 7, params.mNumColumns);
@@ -2576,6 +2727,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // [1] [2] [3] [4] [5] <6> [7] ___|
+    @Test
     public void testLayout7KeyFix7R2() {
         MoreKeysKeyboardParams params = createParams(7, 7, XPOS_R2);
         assertEquals("7 key fix 7 R2 columns", 7, params.mNumColumns);
@@ -2594,6 +2746,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // [1] [2] [3] [4] [5] [6] <7> ___|
+    @Test
     public void testLayout7KeyFix7R1() {
         MoreKeysKeyboardParams params = createParams(7, 7, XPOS_R1);
         assertEquals("7 key fix 7 R1 columns", 7, params.mNumColumns);
@@ -2612,6 +2765,7 @@ public class MoreKeysKeyboardBuilderFixedOrderTests extends AndroidTestCase {
     }
 
     // [1] [2] [3] [4] [5] [6] <7>|
+    @Test
     public void testLayout7KeyFix7R0() {
         MoreKeysKeyboardParams params = createParams(7, 7, XPOS_R0);
         assertEquals("7 key fix 7 R0 columns", 7, params.mNumColumns);

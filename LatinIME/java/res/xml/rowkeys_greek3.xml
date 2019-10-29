@@ -21,28 +21,27 @@
 <merge
     xmlns:latin="http://schemas.android.com/apk/res-auto"
 >
-    <!-- U+03C4: "τ" GREEK SMALL LETTER TAU -->
+    <!-- U+03B6: "ζ" GREEK SMALL LETTER ZETA -->
     <Key
-        latin:keyLabel="&#x03C4;" />
-    <!-- U+03C5: "υ" GREEK SMALL LETTER UPSILON
-         U+03CD: "ύ" GREEK SMALL LETTER UPSILON WITH TONOS
-         U+03CB: "ϋ" GREEK SMALL LETTER UPSILON WITH DIALYTIKA
-         U+03B0: "ΰ" GREEK SMALL LETTER UPSILON WITH DIALYTIKA AND TONOS -->
-    <Key
-        latin:keyLabel="&#x03C5;"
-        latin:moreKeys="&#x03CD;,&#x03CB;,&#x03B0;" />
-    <!-- U+03C6: "φ" GREEK SMALL LETTER PHI -->
-    <Key
-        latin:keyLabel="&#x03C6;" />
+        latin:keySpec="&#x03B6;" />
     <!-- U+03C7: "χ" GREEK SMALL LETTER CHI -->
     <Key
-        latin:keyLabel="&#x03C7;" />
+        latin:keySpec="&#x03C7;" />
     <!-- U+03C8: "ψ" GREEK SMALL LETTER PSI -->
     <Key
-        latin:keyLabel="&#x03C8;" />
+        latin:keySpec="&#x03C8;" />
     <!-- U+03C9: "ω" GREEK SMALL LETTER OMEGA
          U+03CE: "ώ" GREEK SMALL LETTER OMEGA WITH TONOS -->
     <Key
-        latin:keyLabel="&#x03C9;"
+        latin:keySpec="&#x03C9;"
         latin:moreKeys="&#x03CE;" />
+    <!-- U+03B2: "β" GREEK SMALL LETTER BETA -->
+    <Key
+        latin:keySpec="&#x03B2;" />
+    <!-- U+03BD: "ν" GREEK SMALL LETTER NU -->
+    <Key
+        latin:keySpec="&#x03BD;" />
+    <!-- U+03BC: "μ" GREEK SMALL LETTER MU -->
+    <Key
+        latin:keySpec="&#x03BC;" />
 </merge>

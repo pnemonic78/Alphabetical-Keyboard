@@ -18,43 +18,46 @@
 */
 -->
 
-<merge
-    xmlns:latin="http://schemas.android.com/apk/res-auto"
->
-    <!-- U+063A: "غ" ARABIC LETTER GHAIN -->
-    <Key
-        latin:keyLabel="&#x063A;" />
-    <!-- U+0639: "ع" ARABIC LETTER AIN -->
-    <Key
-        latin:keyLabel="&#x0639;" />
-    <!-- U+0638: "ظ" ARABIC LETTER ZAH -->
-    <Key
-        latin:keyLabel="&#x0638;" />
-    <!-- U+0637: "ط" ARABIC LETTER TAH -->
-    <Key
-        latin:keyLabel="&#x0637;" />
-    <!-- U+0636: "ض" ARABIC LETTER DAD -->
-    <Key
-        latin:keyLabel="&#x0636;" />
-    <!-- U+0635: "ص" ARABIC LETTER SAD -->
-    <Key
-        latin:keyLabel="&#x0635;"
-        latin:moreKeys="%" />
+<merge xmlns:latin="http://schemas.android.com/apk/res-auto">
     <!-- U+0634: "ش" ARABIC LETTER SHEEN -->
+    <Key latin:keySpec="&#x0634;" />
+    <!-- U+0633: "س" ARABIC LETTER SEEN -->
+    <Key latin:keySpec="&#x0633;" />
+    <!-- U+06CC: "ی" ARABIC LETTER FARSI YEH
+         U+0626: "ئ" ARABIC LETTER YEH WITH HAMZA ABOVE
+         U+064A: "ي" ARABIC LETTER YEH
+         U+FBE8: "ﯨ" ARABIC LETTER UIGHUR KAZAKH KIRGHIZ ALEF MAKSURA INITIAL FORM
+         U+0649: "ى" ARABIC LETTER ALEF MAKSURA -->
     <Key
-        latin:keyLabel="&#x0634;" />
-    <!-- U+0633: "س" ARABIC LETTER SEEN
-         U+0636: "ض" ARABIC LETTER DAD -->
+        latin:keySpec="&#x06CC;"
+        latin:moreKeys="&#x0626;,&#x064A;,&#xFBE8;|&#x0649;" />
+    <!-- U+0628: "ب" ARABIC LETTER BEH -->
+    <Key latin:keySpec="&#x0628;" />
+    <!-- U+0644: "ل" ARABIC LETTER LAM -->
+    <Key latin:keySpec="&#x0644;" />
+    <!-- U+0627: "ا" ARABIC LETTER ALEF
+         U+0671: "ٱ" ARABIC LETTER ALEF WASLA
+         U+0621: "ء" ARABIC LETTER HAMZA
+         U+0622: "آ" ARABIC LETTER ALEF WITH MADDA ABOVE
+         U+0623: "أ" ARABIC LETTER ALEF WITH HAMZA ABOVE
+         U+0625: "إ" ARABIC LETTER ALEF WITH HAMZA BELOW -->
     <Key
-        latin:keyLabel="&#x0633;"
-        latin:moreKeys="&#x0636;" />
-    <!-- U+0698: "ژ" ARABIC LETTER JEH -->
+        latin:keySpec="&#x0627;"
+        latin:moreKeys="!fixedColumnOrder!5,&#x0671;,&#x0621;,&#x0622;,&#x0623;,&#x0625;" />
+    <!-- U+062A: "ت" ARABIC LETTER TEH
+         U+0629: "ة": ARABIC LETTER TEH MARBUTA -->
     <Key
-        latin:keyLabel="&#x0698;" />
-    <!-- U+0632: "ز" ARABIC LETTER ZAIN -->
+        latin:keySpec="&#x062A;"
+        latin:moreKeys="&#x0629;" />
+    <!-- U+0646: "ن" ARABIC LETTER NOON -->
+    <Key latin:keySpec="&#x0646;" />
+    <!-- U+0645: "م" ARABIC LETTER MEEM -->
+    <Key latin:keySpec="&#x0645;" />
+    <!-- U+06A9: "ک" ARABIC LETTER KEHEH
+         U+0643: "ك" ARABIC LETTER KAF -->
     <Key
-        latin:keyLabel="&#x0632;" />
-    <!-- U+0631: "ر" ARABIC LETTER REH -->
-    <Key
-        latin:keyLabel="&#x0631;" />
+        latin:keySpec="&#x06A9;"
+        latin:moreKeys="&#x0643;" />
+    <!-- U+06AF: "گ" ARABIC LETTER GAF -->
+    <Key latin:keySpec="&#x06AF;" />
 </merge>

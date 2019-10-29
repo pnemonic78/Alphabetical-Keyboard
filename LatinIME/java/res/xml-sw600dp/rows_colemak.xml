@@ -27,10 +27,7 @@
         latin:keyWidth="9.0%p"
     >
         <include
-            latin:keyboardLayout="@xml/rowkeys_colemak1"
-            latin:keyLabelFlags="disableAdditionalMoreKeys|disableKeyHintLabel" />
-        <include
-            latin:keyboardLayout="@xml/key_colemak_colon" />
+            latin:keyboardLayout="@xml/rowkeys_colemak1" />
         <Key
             latin:keyStyle="deleteKeyStyle"
             latin:keyWidth="fillRight" />
@@ -53,7 +50,7 @@
         <include
             latin:keyboardLayout="@xml/rowkeys_colemak3" />
         <include
-            latin:keyboardLayout="@xml/keys_comma_period" />
+            latin:keyboardLayout="@xml/keys_exclamation_question" />
         <Key
             latin:keyStyle="shiftKeyStyle"
             latin:keyWidth="fillRight" />

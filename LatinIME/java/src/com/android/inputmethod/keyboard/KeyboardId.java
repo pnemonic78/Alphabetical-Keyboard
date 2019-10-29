@@ -1,31 +1,30 @@
 /*
- * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2015 The Android Open Source Project
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.android.inputmethod.keyboard;
 
-import static com.android.inputmethod.latin.Constants.Subtype.ExtraValue.KEYBOARD_LAYOUT_SET;
+import static com.android.inputmethod.latin.common.Constants.Subtype.ExtraValue.KEYBOARD_LAYOUT_SET;
 
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodSubtype;
 
 import com.android.inputmethod.compat.EditorInfoCompatUtils;
-import com.android.inputmethod.latin.InputTypeUtils;
-import com.android.inputmethod.latin.SubtypeLocale;
+import com.android.inputmethod.latin.RichInputMethodSubtype;
+import com.android.inputmethod.latin.utils.InputTypeUtils;
 
 import java.util.Arrays;
 import java.util.Locale;
@@ -33,7 +32,7 @@ import java.util.Locale;
 /**
  * Unique identifier for each keyboard type.
  */
-public class KeyboardId {
+public final class KeyboardId {
     public static final int MODE_TEXT = 0;
     public static final int MODE_URL = 1;
     public static final int MODE_EMAIL = 2;
@@ -54,53 +53,63 @@ public class KeyboardId {
     public static final int ELEMENT_PHONE = 7;
     public static final int ELEMENT_PHONE_SYMBOLS = 8;
     public static final int ELEMENT_NUMBER = 9;
+    public static final int ELEMENT_EMOJI_RECENTS = 10;
+    public static final int ELEMENT_EMOJI_CATEGORY1 = 11;
+    public static final int ELEMENT_EMOJI_CATEGORY2 = 12;
+    public static final int ELEMENT_EMOJI_CATEGORY3 = 13;
+    public static final int ELEMENT_EMOJI_CATEGORY4 = 14;
+    public static final int ELEMENT_EMOJI_CATEGORY5 = 15;
+    public static final int ELEMENT_EMOJI_CATEGORY6 = 16;
+    public static final int ELEMENT_EMOJI_CATEGORY7 = 17;
+    public static final int ELEMENT_EMOJI_CATEGORY8 = 18;
+    public static final int ELEMENT_EMOJI_CATEGORY9 = 19;
+    public static final int ELEMENT_EMOJI_CATEGORY10 = 20;
+    public static final int ELEMENT_EMOJI_CATEGORY11 = 21;
+    public static final int ELEMENT_EMOJI_CATEGORY12 = 22;
+    public static final int ELEMENT_EMOJI_CATEGORY13 = 23;
+    public static final int ELEMENT_EMOJI_CATEGORY14 = 24;
+    public static final int ELEMENT_EMOJI_CATEGORY15 = 25;
+    public static final int ELEMENT_EMOJI_CATEGORY16 = 26;
 
-    private static final int IME_ACTION_CUSTOM_LABEL = EditorInfo.IME_MASK_ACTION + 1;
-
-    public final InputMethodSubtype mSubtype;
-    public final Locale mLocale;
-    public final int mOrientation;
+    public final RichInputMethodSubtype mSubtype;
     public final int mWidth;
+    public final int mHeight;
     public final int mMode;
     public final int mElementId;
-    private final EditorInfo mEditorInfo;
+    public final EditorInfo mEditorInfo;
     public final boolean mClobberSettingsKey;
-    public final boolean mShortcutKeyEnabled;
-    public final boolean mHasShortcutKey;
     public final boolean mLanguageSwitchKeyEnabled;
     public final String mCustomActionLabel;
+    public final boolean mHasShortcutKey;
+    public final boolean mIsSplitLayout;
 
     private final int mHashCode;
 
-    public KeyboardId(int elementId, InputMethodSubtype subtype, int orientation, int width,
-            int mode, EditorInfo editorInfo, boolean clobberSettingsKey, boolean shortcutKeyEnabled,
-            boolean hasShortcutKey, boolean languageSwitchKeyEnabled) {
-        mSubtype = subtype;
-        mLocale = SubtypeLocale.getSubtypeLocale(subtype);
-        mOrientation = orientation;
-        mWidth = width;
-        mMode = mode;
+    public KeyboardId(final int elementId, final KeyboardLayoutSet.Params params) {
+        mSubtype = params.mSubtype;
+        mWidth = params.mKeyboardWidth;
+        mHeight = params.mKeyboardHeight;
+        mMode = params.mMode;
         mElementId = elementId;
-        mEditorInfo = editorInfo;
-        mClobberSettingsKey = clobberSettingsKey;
-        mShortcutKeyEnabled = shortcutKeyEnabled;
-        mHasShortcutKey = hasShortcutKey;
-        mLanguageSwitchKeyEnabled = languageSwitchKeyEnabled;
-        mCustomActionLabel = (editorInfo.actionLabel != null)
-                ? editorInfo.actionLabel.toString() : null;
+        mEditorInfo = params.mEditorInfo;
+        mClobberSettingsKey = params.mNoSettingsKey;
+        mLanguageSwitchKeyEnabled = params.mLanguageSwitchKeyEnabled;
+        mCustomActionLabel = (mEditorInfo.actionLabel != null)
+                ? mEditorInfo.actionLabel.toString() : null;
+        mHasShortcutKey = params.mVoiceInputKeyEnabled;
+        mIsSplitLayout = params.mIsSplitLayoutEnabled;
 
         mHashCode = computeHashCode(this);
     }
 
-    private static int computeHashCode(KeyboardId id) {
+    private static int computeHashCode(final KeyboardId id) {
         return Arrays.hashCode(new Object[] {
-                id.mOrientation,
                 id.mElementId,
                 id.mMode,
                 id.mWidth,
+                id.mHeight,
                 id.passwordInput(),
                 id.mClobberSettingsKey,
-                id.mShortcutKeyEnabled,
                 id.mHasShortcutKey,
                 id.mLanguageSwitchKeyEnabled,
                 id.isMultiLine(),
@@ -108,20 +117,20 @@ public class KeyboardId {
                 id.mCustomActionLabel,
                 id.navigateNext(),
                 id.navigatePrevious(),
-                id.mSubtype
+                id.mSubtype,
+                id.mIsSplitLayout
         });
     }
 
-    private boolean equals(KeyboardId other) {
+    private boolean equals(final KeyboardId other) {
         if (other == this)
             return true;
-        return other.mOrientation == mOrientation
-                && other.mElementId == mElementId
+        return other.mElementId == mElementId
                 && other.mMode == mMode
                 && other.mWidth == mWidth
+                && other.mHeight == mHeight
                 && other.passwordInput() == passwordInput()
                 && other.mClobberSettingsKey == mClobberSettingsKey
-                && other.mShortcutKeyEnabled == mShortcutKeyEnabled
                 && other.mHasShortcutKey == mHasShortcutKey
                 && other.mLanguageSwitchKeyEnabled == mLanguageSwitchKeyEnabled
                 && other.isMultiLine() == isMultiLine()
@@ -129,19 +138,26 @@ public class KeyboardId {
                 && TextUtils.equals(other.mCustomActionLabel, mCustomActionLabel)
                 && other.navigateNext() == navigateNext()
                 && other.navigatePrevious() == navigatePrevious()
-                && other.mSubtype.equals(mSubtype);
+                && other.mSubtype.equals(mSubtype)
+                && other.mIsSplitLayout == mIsSplitLayout;
+    }
+
+    private static boolean isAlphabetKeyboard(final int elementId) {
+        return elementId < ELEMENT_SYMBOLS;
     }
 
     public boolean isAlphabetKeyboard() {
-        return mElementId < ELEMENT_SYMBOLS;
+        return isAlphabetKeyboard(mElementId);
     }
 
     public boolean navigateNext() {
-        return (mEditorInfo.imeOptions & EditorInfo.IME_FLAG_NAVIGATE_NEXT) != 0;
+        return (mEditorInfo.imeOptions & EditorInfo.IME_FLAG_NAVIGATE_NEXT) != 0
+                || imeAction() == EditorInfo.IME_ACTION_NEXT;
     }
 
     public boolean navigatePrevious() {
-        return (mEditorInfo.imeOptions & EditorInfo.IME_FLAG_NAVIGATE_PREVIOUS) != 0;
+        return (mEditorInfo.imeOptions & EditorInfo.IME_FLAG_NAVIGATE_PREVIOUS) != 0
+                || imeAction() == EditorInfo.IME_ACTION_PREVIOUS;
     }
 
     public boolean passwordInput() {
@@ -155,23 +171,15 @@ public class KeyboardId {
     }
 
     public int imeAction() {
-        final int actionId = mEditorInfo.imeOptions & EditorInfo.IME_MASK_ACTION;
-        if ((mEditorInfo.imeOptions & EditorInfo.IME_FLAG_NO_ENTER_ACTION) != 0) {
-            return EditorInfo.IME_ACTION_NONE;
-        } else if (mEditorInfo.actionLabel != null) {
-            return IME_ACTION_CUSTOM_LABEL;
-        } else {
-            return actionId;
-        }
+        return InputTypeUtils.getImeOptionsActionIdFromEditorInfo(mEditorInfo);
     }
 
-    public int imeActionId() {
-        final int actionId = imeAction();
-        return actionId == IME_ACTION_CUSTOM_LABEL ? mEditorInfo.actionId : actionId;
+    public Locale getLocale() {
+        return mSubtype.getLocale();
     }
 
     @Override
-    public boolean equals(Object other) {
+    public boolean equals(final Object other) {
         return other instanceof KeyboardId && equals((KeyboardId) other);
     }
 
@@ -182,25 +190,25 @@ public class KeyboardId {
 
     @Override
     public String toString() {
-        return String.format("[%s %s:%s %s%d %s %s %s%s%s%s%s%s%s%s]",
+        return String.format(Locale.ROOT, "[%s %s:%s %dx%d %s %s%s%s%s%s%s%s%s%s]",
                 elementIdToName(mElementId),
-                mLocale,
+                mSubtype.getLocale(),
                 mSubtype.getExtraValueOf(KEYBOARD_LAYOUT_SET),
-                (mOrientation == 1 ? "port" : "land"), mWidth,
+                mWidth, mHeight,
                 modeName(mMode),
-                imeAction(),
-                (navigateNext() ? "navigateNext" : ""),
-                (navigatePrevious() ? "navigatePrevious" : ""),
+                actionName(imeAction()),
+                (navigateNext() ? " navigateNext" : ""),
+                (navigatePrevious() ? " navigatePrevious" : ""),
                 (mClobberSettingsKey ? " clobberSettingsKey" : ""),
                 (passwordInput() ? " passwordInput" : ""),
-                (mShortcutKeyEnabled ? " shortcutKeyEnabled" : ""),
                 (mHasShortcutKey ? " hasShortcutKey" : ""),
                 (mLanguageSwitchKeyEnabled ? " languageSwitchKeyEnabled" : ""),
-                (isMultiLine() ? "isMultiLine" : "")
+                (isMultiLine() ? " isMultiLine" : ""),
+                (mIsSplitLayout ? " isSplitLayout" : "")
         );
     }
 
-    public static boolean equivalentEditorInfoForKeyboard(EditorInfo a, EditorInfo b) {
+    public static boolean equivalentEditorInfoForKeyboard(final EditorInfo a, final EditorInfo b) {
         if (a == null && b == null) return true;
         if (a == null || b == null) return false;
         return a.inputType == b.inputType
@@ -208,7 +216,7 @@ public class KeyboardId {
                 && TextUtils.equals(a.privateImeOptions, b.privateImeOptions);
     }
 
-    public static String elementIdToName(int elementId) {
+    public static String elementIdToName(final int elementId) {
         switch (elementId) {
         case ELEMENT_ALPHABET: return "alphabet";
         case ELEMENT_ALPHABET_MANUAL_SHIFTED: return "alphabetManualShifted";
@@ -220,11 +228,28 @@ public class KeyboardId {
         case ELEMENT_PHONE: return "phone";
         case ELEMENT_PHONE_SYMBOLS: return "phoneSymbols";
         case ELEMENT_NUMBER: return "number";
+        case ELEMENT_EMOJI_RECENTS: return "emojiRecents";
+        case ELEMENT_EMOJI_CATEGORY1: return "emojiCategory1";
+        case ELEMENT_EMOJI_CATEGORY2: return "emojiCategory2";
+        case ELEMENT_EMOJI_CATEGORY3: return "emojiCategory3";
+        case ELEMENT_EMOJI_CATEGORY4: return "emojiCategory4";
+        case ELEMENT_EMOJI_CATEGORY5: return "emojiCategory5";
+        case ELEMENT_EMOJI_CATEGORY6: return "emojiCategory6";
+        case ELEMENT_EMOJI_CATEGORY7: return "emojiCategory7";
+        case ELEMENT_EMOJI_CATEGORY8: return "emojiCategory8";
+        case ELEMENT_EMOJI_CATEGORY9: return "emojiCategory9";
+        case ELEMENT_EMOJI_CATEGORY10: return "emojiCategory10";
+        case ELEMENT_EMOJI_CATEGORY11: return "emojiCategory11";
+        case ELEMENT_EMOJI_CATEGORY12: return "emojiCategory12";
+        case ELEMENT_EMOJI_CATEGORY13: return "emojiCategory13";
+        case ELEMENT_EMOJI_CATEGORY14: return "emojiCategory14";
+        case ELEMENT_EMOJI_CATEGORY15: return "emojiCategory15";
+        case ELEMENT_EMOJI_CATEGORY16: return "emojiCategory16";
         default: return null;
         }
     }
 
-    public static String modeName(int mode) {
+    public static String modeName(final int mode) {
         switch (mode) {
         case MODE_TEXT: return "text";
         case MODE_URL: return "url";
@@ -239,8 +264,8 @@ public class KeyboardId {
         }
     }
 
-    public static String actionName(int actionId) {
-        return (actionId == IME_ACTION_CUSTOM_LABEL) ? "actionCustomLabel"
+    public static String actionName(final int actionId) {
+        return (actionId == InputTypeUtils.IME_ACTION_CUSTOM_LABEL) ? "actionCustomLabel"
                 : EditorInfoCompatUtils.imeActionName(actionId);
     }
 }

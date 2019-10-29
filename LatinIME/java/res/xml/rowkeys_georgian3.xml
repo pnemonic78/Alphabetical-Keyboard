@@ -24,67 +24,52 @@
     <switch>
         <case
             latin:keyboardLayoutSetElement="alphabetManualShifted|alphabetShiftLocked|alphabetShiftLockShifted"
-            >
-            <!-- U+10B4: "Ⴔ" GEORGIAN CAPITAL LETTER PHAR
-                 U+10F6: "ჶ" GEORGIAN LETTER FI -->
+        >
+            <!-- U+10EB: "ძ" GEORGIAN LETTER JIL -->
             <Key
-                latin:keyLabel="&#x10B4;"
-                latin:moreKeys="&#x10F6;" />
-            <!-- U+10B5: "Ⴕ" GEORGIAN CAPITAL LETTER GHAN -->
+                latin:keySpec="&#x10EB;" />
             <Key
-                latin:keyLabel="&#x10B5;" />
-            <!-- U+10B6: "Ⴖ" GEORGIAN CAPITAL LETTER GHAN -->
+                latin:keySpec="X" />
+            <!-- U+10E9: "ჩ" GEORGIAN LETTER CHIN -->
             <Key
-                latin:keyLabel="&#x10B6;" />
-            <!-- U+10B7: "Ⴗ" GEORGIAN CAPITAL LETTER QAR
-                 U+10F8: "ჸ" GEORGIAN LETTER ELIFI -->
+                latin:keySpec="&#x10E9;" />
             <Key
-                latin:keyLabel="&#x10B7;"
-                latin:moreKeys="&#x10F8;" />
-            <!-- U+10B8: "Ⴘ" GEORGIAN CAPITAL LETTER SHIN -->
+                latin:keySpec="V" />
             <Key
-                latin:keyLabel="&#x10B8;" />
-            <!-- U+10B9: "Ⴙ" GEORGIAN CAPITAL LETTER CHIN
-                 U+10BD: "Ⴝ" GEORGIAN CAPITAL LETTER CHAR -->
+                latin:keySpec="B" />
             <Key
-                latin:keyLabel="&#x10B9;"
-                latin:moreKeys="&#x10BD;" />
-            <!-- U+10BA: "Ⴚ" GEORGIAN CAPITAL LETTER CAN
-                 U+10BC: "Ⴜ" GEORGIAN CAPITAL LETTER CIL -->
+                latin:keySpec="N" />
             <Key
-                latin:keyLabel="&#x10BA;"
-                latin:moreKeys="&#x10BC;" />
+                latin:keySpec="M" />
         </case>
         <default>
-            <!-- U+10E4: "ფ" GEORGIAN LETTER PHAR
-                 U+10F6: "ჶ" GEORGIAN LETTER FI -->
+            <!-- U+10D6: "ზ" GEORGIAN LETTER ZEN -->
             <Key
-                latin:keyLabel="&#x10E4;"
-                latin:moreKeys="&#x10F6;" />
-            <!-- U+10E5: "ქ" GEORGIAN LETTER GHAN -->
+                latin:keySpec="&#x10D6;" />
+            <!-- U+10EE: "ხ" GEORGIAN LETTER XAN
+                 U+10F4: "ჴ" GEORGIAN LETTER HAR -->
             <Key
-                latin:keyLabel="&#x10E5;" />
-            <!-- U+10E6: "ღ" GEORGIAN LETTER GHAN -->
+                latin:keySpec="&#x10EE;"
+                latin:moreKeys="&#x10F4;" />
+            <!-- U+10EA: "ც" GEORGIAN LETTER CAN -->
             <Key
-                latin:keyLabel="&#x10E6;" />
-            <!-- U+10E7: "ყ" GEORGIAN LETTER QAR
-                 U+10F8: "ჸ" GEORGIAN LETTER ELIFI -->
+                latin:keySpec="&#x10EA;" />
+            <!-- U+10D5: "ვ" GEORGIAN LETTER VIN
+                 U+10F3: "ჳ" GEORGIAN LETTER WE -->
             <Key
-                latin:keyLabel="&#x10E7;"
-                latin:moreKeys="&#x10F8;" />
-            <!-- U+10E8: "შ" GEORGIAN LETTER SHIN -->
+                latin:keySpec="&#x10D5;"
+                latin:moreKeys="&#x10F3;" />
+            <!-- U+10D1: "ბ" GEORGIAN LETTER BAN -->
             <Key
-                latin:keyLabel="&#x10E8;" />
-            <!-- U+10E9: "ჩ" GEORGIAN LETTER CHIN
-                 U+10ED: "ჭ" GEORGIAN LETTER CHAR -->
+                latin:keySpec="&#x10D1;" />
+            <!-- U+10DC: "ნ" GEORGIAN LETTER NAR
+                 U+10FC: "ჼ" MODIFIER LETTER GEORGIAN NAR -->
             <Key
-                latin:keyLabel="&#x10E9;"
-                latin:moreKeys="&#x10ED;" />
-            <!-- U+10EA: "ც" GEORGIAN LETTER CAN
-                 U+10EC: "წ" GEORGIAN LETTER CIL -->
+                latin:keySpec="&#x10DC;"
+                latin:moreKeys="&#x10FC;" />
+            <!-- U+10DB: "მ" GEORGIAN LETTER MAN -->
             <Key
-                latin:keyLabel="&#x10EA;"
-                latin:moreKeys="&#x10EC;" />
+                latin:keySpec="&#x10DB;" />
         </default>
     </switch>
 </merge>

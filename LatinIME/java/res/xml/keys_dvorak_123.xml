@@ -26,7 +26,7 @@
             latin:keyboardLayoutSetElement="alphabetManualShifted|alphabetShiftLocked|alphabetShiftLockShifted"
         >
             <Key
-                latin:keyLabel="&quot;"
+                latin:keySpec="&quot;"
                 latin:keyHintLabel="1"
                 latin:additionalMoreKeys="1" />
         </case>
@@ -34,7 +34,7 @@
             latin:mode="url"
         >
             <Key
-                latin:keyLabel="/"
+                latin:keySpec="/"
                 latin:keyHintLabel="1"
                 latin:additionalMoreKeys="1" />
         </case>
@@ -42,16 +42,16 @@
             latin:mode="email"
         >
             <Key
-                latin:keyLabel="\@"
+                latin:keySpec="\@"
                 latin:keyHintLabel="1"
                 latin:additionalMoreKeys="1" />
         </case>
         <default>
             <Key
-                latin:keyLabel="\'"
+                latin:keySpec="\'"
                 latin:keyHintLabel="1"
                 latin:additionalMoreKeys="1"
-                latin:moreKeys="!" />
+                latin:moreKeys="!,&quot;" />
         </default>
     </switch>
     <switch>
@@ -59,26 +59,25 @@
             latin:keyboardLayoutSetElement="alphabetManualShifted|alphabetShiftLocked|alphabetShiftLockShifted"
         >
             <Key
-                latin:keyLabel="&lt;"
+                latin:keySpec="&lt;"
                 latin:keyHintLabel="2"
                 latin:additionalMoreKeys="2" />
             <Key
-                latin:keyLabel="&gt;"
+                latin:keySpec="&gt;"
                 latin:keyHintLabel="3"
                 latin:additionalMoreKeys="3" />
         </case>
         <default>
             <Key
-                latin:keyLabel=","
+                latin:keySpec=","
                 latin:keyHintLabel="2"
                 latin:additionalMoreKeys="2"
-                latin:moreKeys="\?" />
+                latin:moreKeys="\?,&lt;" />
             <Key
-                latin:keyLabel="."
+                latin:keySpec="."
                 latin:keyHintLabel="3"
                 latin:additionalMoreKeys="3"
-                latin:keyLabelFlags="hasPopupHint|preserveCase"
-                latin:moreKeys="!text/more_keys_for_punctuation,%" />
+                latin:moreKeys="&gt;" />
         </default>
     </switch>
 </merge>

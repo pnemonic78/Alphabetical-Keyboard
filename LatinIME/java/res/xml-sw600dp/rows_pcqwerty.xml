@@ -44,10 +44,8 @@
     <Row
         latin:keyWidth="7.0%p"
     >
-        <Key
-            latin:keyStyle="toSymbolKeyStyle"
-            latin:keyLabel="!text/label_to_symbol_key_pcqwerty"
-            latin:keyWidth="12.0%p" />
+        <Spacer
+            latin:keyWidth="10.0%p" />
         <include
             latin:keyboardLayout="@xml/rowkeys_pcqwerty3" />
         <Key

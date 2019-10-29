@@ -17,32 +17,43 @@
 package com.android.inputmethod.accessibility;
 
 import android.content.Context;
-import android.inputmethodservice.InputMethodService;
 import android.media.AudioManager;
+import android.os.Build;
 import android.os.SystemClock;
 import android.provider.Settings;
+import androidx.core.view.accessibility.AccessibilityEventCompat;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
 import android.view.inputmethod.EditorInfo;
 
-import com.android.inputmethod.compat.AudioManagerCompatWrapper;
 import com.android.inputmethod.compat.SettingsSecureCompatUtils;
-import com.android.inputmethod.latin.InputTypeUtils;
 import com.android.inputmethod.latin.R;
+import com.android.inputmethod.latin.SuggestedWords;
+import com.android.inputmethod.latin.utils.InputTypeUtils;
 
-public class AccessibilityUtils {
+public final class AccessibilityUtils {
     private static final String TAG = AccessibilityUtils.class.getSimpleName();
-    private static final String CLASS = AccessibilityUtils.class.getClass().getName();
-    private static final String PACKAGE = AccessibilityUtils.class.getClass().getPackage()
-            .getName();
+    private static final String CLASS = AccessibilityUtils.class.getName();
+    private static final String PACKAGE =
+            AccessibilityUtils.class.getPackage().getName();
 
     private static final AccessibilityUtils sInstance = new AccessibilityUtils();
 
     private Context mContext;
     private AccessibilityManager mAccessibilityManager;
-    private AudioManagerCompatWrapper mAudioManager;
+    private AudioManager mAudioManager;
+
+    /** The most recent auto-correction. */
+    private String mAutoCorrectionWord;
+
+    /** The most recent typed word for auto-correction. */
+    private String mTypedWord;
 
     /*
      * Setting this constant to {@code false} will disable all keyboard
@@ -51,14 +62,11 @@ public class AccessibilityUtils {
      */
     private static final boolean ENABLE_ACCESSIBILITY = true;
 
-    public static void init(InputMethodService inputMethod) {
-        if (!ENABLE_ACCESSIBILITY)
-            return;
+    public static void init(final Context context) {
+        if (!ENABLE_ACCESSIBILITY) return;
 
         // These only need to be initialized if the kill switch is off.
-        sInstance.initInternal(inputMethod);
-        KeyCodeDescriptionMapper.init();
-        AccessibleKeyboardViewProxy.init(inputMethod);
+        sInstance.initInternal(context);
     }
 
     public static AccessibilityUtils getInstance() {
@@ -69,27 +77,32 @@ public class AccessibilityUtils {
         // This class is not publicly instantiable.
     }
 
-    private void initInternal(Context context) {
+    private void initInternal(final Context context) {
         mContext = context;
-        mAccessibilityManager = (AccessibilityManager) context
-                .getSystemService(Context.ACCESSIBILITY_SERVICE);
+        mAccessibilityManager =
+                (AccessibilityManager) context.getSystemService(Context.ACCESSIBILITY_SERVICE);
+        mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+    }
 
-        final AudioManager audioManager = (AudioManager) context
-                .getSystemService(Context.AUDIO_SERVICE);
-        mAudioManager = new AudioManagerCompatWrapper(audioManager);
+    /**
+     * Returns {@code true} if accessibility is enabled. Currently, this means
+     * that the kill switch is off and system accessibility is turned on.
+     *
+     * @return {@code true} if accessibility is enabled.
+     */
+    public boolean isAccessibilityEnabled() {
+        return ENABLE_ACCESSIBILITY && mAccessibilityManager.isEnabled();
     }
 
     /**
      * Returns {@code true} if touch exploration is enabled. Currently, this
      * means that the kill switch is off, the device supports touch exploration,
-     * and a spoken feedback service is turned on.
+     * and system accessibility is turned on.
      *
      * @return {@code true} if touch exploration is enabled.
      */
     public boolean isTouchExplorationEnabled() {
-        return ENABLE_ACCESSIBILITY
-                && mAccessibilityManager.isEnabled()
-                && mAccessibilityManager.isTouchExplorationEnabled();
+        return isAccessibilityEnabled() && mAccessibilityManager.isTouchExplorationEnabled();
     }
 
     /**
@@ -100,9 +113,8 @@ public class AccessibilityUtils {
      * @param event The event to check.
      * @return {@true} is the event is a touch exploration event
      */
-    public boolean isTouchExplorationEvent(MotionEvent event) {
+    public static boolean isTouchExplorationEvent(final MotionEvent event) {
         final int action = event.getAction();
-
         return action == MotionEvent.ACTION_HOVER_ENTER
                 || action == MotionEvent.ACTION_HOVER_EXIT
                 || action == MotionEvent.ACTION_HOVER_MOVE;
@@ -114,33 +126,83 @@ public class AccessibilityUtils {
      *
      * @return {@code true} if the device should obscure password characters.
      */
-    public boolean shouldObscureInput(EditorInfo editorInfo) {
-        if (editorInfo == null)
-            return false;
+    @SuppressWarnings("deprecation")
+    public boolean shouldObscureInput(final EditorInfo editorInfo) {
+        if (editorInfo == null) return false;
 
         // The user can optionally force speaking passwords.
         if (SettingsSecureCompatUtils.ACCESSIBILITY_SPEAK_PASSWORD != null) {
             final boolean speakPassword = Settings.Secure.getInt(mContext.getContentResolver(),
                     SettingsSecureCompatUtils.ACCESSIBILITY_SPEAK_PASSWORD, 0) != 0;
-            if (speakPassword)
-                return false;
+            if (speakPassword) return false;
         }
 
         // Always speak if the user is listening through headphones.
-        if (mAudioManager.isWiredHeadsetOn() || mAudioManager.isBluetoothA2dpOn())
+        if (mAudioManager.isWiredHeadsetOn() || mAudioManager.isBluetoothA2dpOn()) {
             return false;
+        }
 
         // Don't speak if the IME is connected to a password field.
         return InputTypeUtils.isPasswordInputType(editorInfo.inputType);
     }
 
     /**
+     * Sets the current auto-correction word and typed word. These may be used
+     * to provide the user with a spoken description of what auto-correction
+     * will occur when a key is typed.
+     *
+     * @param suggestedWords the list of suggested auto-correction words
+     */
+    public void setAutoCorrection(final SuggestedWords suggestedWords) {
+        if (suggestedWords.mWillAutoCorrect) {
+            mAutoCorrectionWord = suggestedWords.getWord(SuggestedWords.INDEX_OF_AUTO_CORRECTION);
+            final SuggestedWords.SuggestedWordInfo typedWordInfo = suggestedWords.mTypedWordInfo;
+            if (null == typedWordInfo) {
+                mTypedWord = null;
+            } else {
+                mTypedWord = typedWordInfo.mWord;
+            }
+        } else {
+            mAutoCorrectionWord = null;
+            mTypedWord = null;
+        }
+    }
+
+    /**
+     * Obtains a description for an auto-correction key, taking into account the
+     * currently typed word and auto-correction.
+     *
+     * @param keyCodeDescription spoken description of the key that will insert
+     *            an auto-correction
+     * @param shouldObscure whether the key should be obscured
+     * @return a description including a description of the auto-correction, if
+     *         needed
+     */
+    public String getAutoCorrectionDescription(
+            final String keyCodeDescription, final boolean shouldObscure) {
+        if (!TextUtils.isEmpty(mAutoCorrectionWord)) {
+            if (!TextUtils.equals(mAutoCorrectionWord, mTypedWord)) {
+                if (shouldObscure) {
+                    // This should never happen, but just in case...
+                    return mContext.getString(R.string.spoken_auto_correct_obscured,
+                            keyCodeDescription);
+                }
+                return mContext.getString(R.string.spoken_auto_correct, keyCodeDescription,
+                        mTypedWord, mAutoCorrectionWord);
+            }
+        }
+
+        return keyCodeDescription;
+    }
+
+    /**
      * Sends the specified text to the {@link AccessibilityManager} to be
      * spoken.
      *
-     * @param text the text to speak
+     * @param view The source view.
+     * @param text The text to speak.
      */
-    public void speak(CharSequence text) {
+    public void announceForAccessibility(final View view, final CharSequence text) {
         if (!mAccessibilityManager.isEnabled()) {
             Log.e(TAG, "Attempted to speak when accessibility was disabled!");
             return;
@@ -149,8 +211,7 @@ public class AccessibilityUtils {
         // The following is a hack to avoid using the heavy-weight TextToSpeech
         // class. Instead, we're just forcing a fake AccessibilityEvent into
         // the screen reader to make it speak.
-        final AccessibilityEvent event = AccessibilityEvent
-                .obtain(AccessibilityEvent.TYPE_VIEW_FOCUSED);
+        final AccessibilityEvent event = AccessibilityEvent.obtain();
 
         event.setPackageName(PACKAGE);
         event.setClassName(CLASS);
@@ -158,20 +219,36 @@ public class AccessibilityUtils {
         event.setEnabled(true);
         event.getText().add(text);
 
-        mAccessibilityManager.sendAccessibilityEvent(event);
+        // Platforms starting at SDK version 16 (Build.VERSION_CODES.JELLY_BEAN) should use
+        // announce events.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            event.setEventType(AccessibilityEventCompat.TYPE_ANNOUNCEMENT);
+        } else {
+            event.setEventType(AccessibilityEvent.TYPE_VIEW_FOCUSED);
+        }
+
+        final ViewParent viewParent = view.getParent();
+        if ((viewParent == null) || !(viewParent instanceof ViewGroup)) {
+            Log.e(TAG, "Failed to obtain ViewParent in announceForAccessibility");
+            return;
+        }
+
+        viewParent.requestSendAccessibilityEvent(view, event);
     }
 
     /**
      * Handles speaking the "connect a headset to hear passwords" notification
      * when connecting to a password field.
      *
+     * @param view The source view.
      * @param editorInfo The input connection's editor info attribute.
      * @param restarting Whether the connection is being restarted.
      */
-    public void onStartInputViewInternal(EditorInfo editorInfo, boolean restarting) {
+    public void onStartInputViewInternal(final View view, final EditorInfo editorInfo,
+            final boolean restarting) {
         if (shouldObscureInput(editorInfo)) {
             final CharSequence text = mContext.getText(R.string.spoken_use_headphones);
-            speak(text);
+            announceForAccessibility(view, text);
         }
     }
 
@@ -181,7 +258,7 @@ public class AccessibilityUtils {
      *
      * @param event The event to send.
      */
-    public void requestSendAccessibilityEvent(AccessibilityEvent event) {
+    public void requestSendAccessibilityEvent(final AccessibilityEvent event) {
         if (mAccessibilityManager.isEnabled()) {
             mAccessibilityManager.sendAccessibilityEvent(event);
         }
