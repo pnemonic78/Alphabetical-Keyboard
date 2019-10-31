@@ -33,7 +33,7 @@ import android.view.accessibility.AccessibilityManager;
 import android.view.inputmethod.EditorInfo;
 
 import com.android.inputmethod.compat.SettingsSecureCompatUtils;
-import com.android.inputmethod.latin.R;
+import com.github.inputmethod.alphabetical.R;
 import com.android.inputmethod.latin.SuggestedWords;
 import com.android.inputmethod.latin.utils.InputTypeUtils;
 

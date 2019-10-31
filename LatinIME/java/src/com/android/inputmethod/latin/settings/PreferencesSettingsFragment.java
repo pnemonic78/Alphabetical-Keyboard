@@ -24,7 +24,7 @@ import android.os.Bundle;
 import android.preference.Preference;
 
 import com.android.inputmethod.latin.AudioAndHapticFeedbackManager;
-import com.android.inputmethod.latin.R;
+import com.github.inputmethod.alphabetical.R;
 import com.android.inputmethod.latin.RichInputMethodManager;
 
 /**

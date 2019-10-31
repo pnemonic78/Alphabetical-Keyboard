@@ -20,7 +20,7 @@ import android.content.res.TypedArray;
 import android.util.Log;
 import android.util.SparseArray;
 
-import com.android.inputmethod.latin.R;
+import com.github.inputmethod.alphabetical.R;
 import com.android.inputmethod.latin.utils.XmlParseUtils;
 
 import org.xmlpull.v1.XmlPullParser;

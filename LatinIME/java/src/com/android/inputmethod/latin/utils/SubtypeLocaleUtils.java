@@ -26,7 +26,7 @@ import android.os.Build;
 import android.util.Log;
 import android.view.inputmethod.InputMethodSubtype;
 
-import com.android.inputmethod.latin.R;
+import com.github.inputmethod.alphabetical.R;
 import com.android.inputmethod.latin.common.LocaleUtils;
 import com.android.inputmethod.latin.common.StringUtils;
 

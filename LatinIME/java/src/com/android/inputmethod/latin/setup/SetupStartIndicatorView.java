@@ -28,7 +28,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.inputmethod.latin.R;
+import com.github.inputmethod.alphabetical.R;
 
 public final class SetupStartIndicatorView extends LinearLayout {
     public SetupStartIndicatorView(final Context context, final AttributeSet attrs) {

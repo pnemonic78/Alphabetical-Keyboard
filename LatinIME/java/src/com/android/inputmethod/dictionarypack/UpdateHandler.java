@@ -38,7 +38,7 @@ import android.util.Log;
 
 import com.android.inputmethod.compat.ConnectivityManagerCompatUtils;
 import com.android.inputmethod.compat.NotificationCompatUtils;
-import com.android.inputmethod.latin.R;
+import com.github.inputmethod.alphabetical.R;
 import com.android.inputmethod.latin.common.LocaleUtils;
 import com.android.inputmethod.latin.makedict.FormatSpec;
 import com.android.inputmethod.latin.utils.ApplicationUtils;

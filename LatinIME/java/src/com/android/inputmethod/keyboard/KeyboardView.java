@@ -34,7 +34,7 @@ import android.view.View;
 
 import com.android.inputmethod.keyboard.internal.KeyDrawParams;
 import com.android.inputmethod.keyboard.internal.KeyVisualAttributes;
-import com.android.inputmethod.latin.R;
+import com.github.inputmethod.alphabetical.R;
 import com.android.inputmethod.latin.common.Constants;
 import com.android.inputmethod.latin.utils.TypefaceUtils;
 

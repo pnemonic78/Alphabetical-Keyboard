@@ -100,6 +100,7 @@ import com.android.inputmethod.latin.utils.StatsUtils;
 import com.android.inputmethod.latin.utils.StatsUtilsManager;
 import com.android.inputmethod.latin.utils.SubtypeLocaleUtils;
 import com.android.inputmethod.latin.utils.ViewLayoutUtils;
+import com.github.inputmethod.alphabetical.R;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;

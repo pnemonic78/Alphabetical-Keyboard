@@ -28,7 +28,7 @@ import android.util.Log;
 import com.android.inputmethod.compat.BuildCompatUtils;
 import com.android.inputmethod.latin.AudioAndHapticFeedbackManager;
 import com.android.inputmethod.latin.InputAttributes;
-import com.android.inputmethod.latin.R;
+import com.github.inputmethod.alphabetical.R;
 import com.android.inputmethod.latin.common.StringUtils;
 import com.android.inputmethod.latin.utils.AdditionalSubtypeUtils;
 import com.android.inputmethod.latin.utils.ResourceUtils;

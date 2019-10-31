@@ -24,7 +24,7 @@ import androidx.core.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.android.inputmethod.latin.R;
+import com.github.inputmethod.alphabetical.R;
 
 public final class SetupStepIndicatorView extends View {
     private final Path mIndicatorPath = new Path();

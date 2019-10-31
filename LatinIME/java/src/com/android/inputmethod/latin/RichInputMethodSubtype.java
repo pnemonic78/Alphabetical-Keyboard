@@ -27,6 +27,7 @@ import com.android.inputmethod.compat.InputMethodSubtypeCompatUtils;
 import com.android.inputmethod.latin.common.Constants;
 import com.android.inputmethod.latin.common.LocaleUtils;
 import com.android.inputmethod.latin.utils.SubtypeLocaleUtils;
+import com.github.inputmethod.alphabetical.R;
 
 import java.util.HashMap;
 import java.util.Locale;

@@ -26,7 +26,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.inputmethod.latin.BinaryDictionaryFileDumper;
-import com.android.inputmethod.latin.R;
+import com.github.inputmethod.alphabetical.R;
 import com.android.inputmethod.latin.common.LocaleUtils;
 import com.android.inputmethod.latin.utils.ApplicationUtils;
 import com.android.inputmethod.latin.utils.DebugLogUtils;

@@ -22,7 +22,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.RadioButton;
 
-import com.android.inputmethod.latin.R;
+import com.github.inputmethod.alphabetical.R;
 
 /**
  * Radio Button preference
