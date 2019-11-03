@@ -16,7 +16,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 4
-        versionName "1.03"
+        versionName "2.00"
 
         applicationId 'com.github.inputmethod.alphabetical'
         testApplicationId 'com.github.inputmethod.alphabetical.tests'
