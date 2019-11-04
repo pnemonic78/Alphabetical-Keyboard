@@ -64,6 +64,7 @@
         android:title="@string/use_contacts_dict"
         android:summary="@string/use_contacts_dict_summary"
         android:defaultValue="true"
+        android:enabled="false"
         android:persistent="true" />
     <CheckBoxPreference
         android:key="next_word_prediction"
