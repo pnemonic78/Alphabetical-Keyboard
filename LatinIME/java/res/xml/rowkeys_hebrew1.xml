@@ -47,44 +47,50 @@
                 latin:moreKeys="_" />
         </default>
     </switch>
-    <!-- U+05E7: "ק" HEBREW LETTER QOF -->
+    <!-- U+05D7: "ח" HEBREW LETTER HET
+         U+05D7 U+05F3: "ח׳" HEBREW LETTER HET + HEBREW PUNCTUATION GERESH -->
     <Key
-        latin:keySpec="&#x05E7;"
+        latin:keySpec="&#x05D7;"
         latin:keyHintLabel="3"
-        latin:additionalMoreKeys="3" />
-    <!-- U+05E8: "ר" HEBREW LETTER RESH -->
+        latin:additionalMoreKeys="3"
+        latin:moreKeys="&#x05D7;&#x05F3;" />
+    <!-- U+05D6: "ז" HEBREW LETTER ZAYIN
+         U+05D6 U+05F3: "ז׳" HEBREW LETTER ZAYIN + HEBREW PUNCTUATION GERESH -->
     <Key
-        latin:keySpec="&#x05E8;"
+        latin:keySpec="&#x05D6;"
         latin:keyHintLabel="4"
-        latin:additionalMoreKeys="4" />
-    <!-- U+05D0: "א" HEBREW LETTER ALEF -->
-    <Key
-        latin:keySpec="&#x05D0;"
-        latin:keyHintLabel="5"
-        latin:additionalMoreKeys="5" />
-    <!-- U+05D8: "ט" HEBREW LETTER TET -->
-    <Key
-        latin:keySpec="&#x05D8;"
-        latin:keyHintLabel="6"
-        latin:additionalMoreKeys="6" />
+        latin:additionalMoreKeys="4"
+        latin:moreKeys="&#x05D6;&#x05F3;" />
     <!-- U+05D5: "ו" HEBREW LETTER VAV -->
     <Key
         latin:keySpec="&#x05D5;"
+        latin:keyHintLabel="5"
+        latin:additionalMoreKeys="5" />
+    <!-- U+05D4: "ה" HEBREW LETTER HE -->
+    <Key
+        latin:keySpec="&#x05D4;"
+        latin:keyHintLabel="6"
+        latin:additionalMoreKeys="6" />
+    <!-- U+05D3: "ד" HEBREW LETTER DALET -->
+    <Key
+        latin:keySpec="&#x05D3;"
         latin:keyHintLabel="7"
         latin:additionalMoreKeys="7" />
-    <!-- U+05DF: "ן" HEBREW LETTER FINAL NUN -->
+    <!-- U+05D2: "ג" HEBREW LETTER GIMEL
+         U+05D2 U+05F3: "ג׳" HEBREW LETTER GIMEL + HEBREW PUNCTUATION GERESH -->
     <Key
-        latin:keySpec="&#x05DF;"
+        latin:keySpec="&#x05D2;"
         latin:keyHintLabel="8"
-        latin:additionalMoreKeys="8" />
-    <!-- U+05DD: "ם" HEBREW LETTER FINAL MEM -->
+        latin:additionalMoreKeys="8"
+        latin:moreKeys="&#x05D2;&#x05F3;" />
+    <!-- U+05D1: "ב" HEBREW LETTER BET -->
     <Key
-        latin:keySpec="&#x05DD;"
+        latin:keySpec="&#x05D1;"
         latin:keyHintLabel="9"
         latin:additionalMoreKeys="9" />
-    <!-- U+05E4: "פ" HEBREW LETTER PE -->
+    <!-- U+05D0: "א" HEBREW LETTER ALEF -->
     <Key
-        latin:keySpec="&#x05E4;"
+        latin:keySpec="&#x05D0;"
         latin:keyHintLabel="0"
         latin:additionalMoreKeys="0" />
 </merge>
