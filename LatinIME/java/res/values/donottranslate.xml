@@ -48,20 +48,10 @@
     <!-- Predefined keyboard layouts for additional subtype -->
     <string-array name="predefined_layouts">
         <item>qwerty</item>
-        <item>qwertz</item>
-        <item>azerty</item>
-        <item>dvorak</item>
-        <item>colemak</item>
-        <item>pcqwerty</item>
     </string-array>
     <!-- Predefined keyboard layout display names -->
     <string-array name="predefined_layout_display_names">
         <item>QWERTY</item>
-        <item>QWERTZ</item>
-        <item>AZERTY</item>
-        <item>Dvorak</item>
-        <item>Colemak</item>
-        <item>PC</item>
     </string-array>
     <!-- Description for generic subtype that has predefined layout.
          The string resource name must be "subtype_generic_<layout name>".
@@ -86,23 +76,23 @@
         <item>ar:SupportTouchPositionCorrection,EmojiCapable</item>
         <item>arabic</item>
         <item>cs:AsciiCapable,SupportTouchPositionCorrection,EmojiCapable</item>
-        <item>qwertz</item>
+        <item>qwerty</item>
         <item>da:AsciiCapable,SupportTouchPositionCorrection,EmojiCapable</item>
         <item>nordic</item>
         <item>de:AsciiCapable,SupportTouchPositionCorrection,EmojiCapable</item>
-        <item>qwertz</item>
+        <item>qwerty</item>
         <item>es:AsciiCapable,SupportTouchPositionCorrection,EmojiCapable</item>
         <item>spanish</item>
         <item>fi:AsciiCapable,SupportTouchPositionCorrection,EmojiCapable</item>
         <item>nordic</item>
         <item>fr:AsciiCapable,SupportTouchPositionCorrection,EmojiCapable</item>
-        <item>azerty</item>
+        <item>qwerty</item>
         <item>fr_CA:AsciiCapable,SupportTouchPositionCorrection,EmojiCapable</item>
         <item>qwerty</item>
         <item>hr:AsciiCapable,SupportTouchPositionCorrection,EmojiCapable</item>
-        <item>qwertz</item>
+        <item>qwerty</item>
         <item>hu:AsciiCapable,SupportTouchPositionCorrection,EmojiCapable</item>
-        <item>qwertz</item>
+        <item>qwerty</item>
         <item>it:AsciiCapable,SupportTouchPositionCorrection,EmojiCapable</item>
         <item>qwerty</item>
         <item>iw:SupportTouchPositionCorrection,EmojiCapable</item>
