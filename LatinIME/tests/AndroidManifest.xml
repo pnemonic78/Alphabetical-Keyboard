@@ -15,10 +15,8 @@
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.android.inputmethod.latin.tests"
+    package="com.github.inputmethod.alphabetical.tests"
     android:versionCode="28">
-
-    <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="28" />
 
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
@@ -29,7 +27,7 @@
     </application>
 
     <instrumentation android:name="androidx.test.runner.AndroidJUnitRunner"
-        android:targetPackage="com.android.inputmethod.latin"
+        android:targetPackage="com.github.inputmethod.alphabetical"
         android:label="LatinIME tests">
     </instrumentation>
 </manifest>

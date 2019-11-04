@@ -49,6 +49,7 @@ import com.android.inputmethod.latin.common.StringUtils;
 import com.android.inputmethod.latin.settings.DebugSettings;
 import com.android.inputmethod.latin.settings.Settings;
 import com.android.inputmethod.latin.utils.SubtypeLocaleUtils;
+import com.github.inputmethod.alphabetical.R;
 
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
