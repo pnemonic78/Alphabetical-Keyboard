@@ -26,7 +26,8 @@
         latin:keySpec="&#x0649;"
         latin:moreKeys="&#x0626;" />
     <!-- U+0648: "و" ARABIC LETTER WAW -->
-    <Key latin:keySpec="&#x0648;" />
+    <Key
+        latin:keySpec="&#x0648;" />
     <!-- U+0647: "ه" ARABIC LETTER HEH
          U+0668: "٨" ARABIC-INDIC DIGIT EIGHT
          U+FEEB: "ﻫ" ARABIC LETTER HEH INITIAL FORM
@@ -35,9 +36,11 @@
         latin:keySpec="&#x0647;"
         latin:moreKeys="&#xFEEB;|&#x0647;&#x200D;" />
     <!-- U+0646: "ن" ARABIC LETTER NOON -->
-    <Key latin:keySpec="&#x0646;" />
+    <Key
+        latin:keySpec="&#x0646;" />
     <!-- U+0645: "م" ARABIC LETTER MEEM -->
-    <Key latin:keySpec="&#x0645;" />
+    <Key
+        latin:keySpec="&#x0645;" />
     <!-- U+0644: "ل" ARABIC LETTER LAM
          U+FEFB: "ﻻ" ARABIC LIGATURE LAM WITH ALEF ISOLATED FORM
          U+0627: "ا" ARABIC LETTER ALEF

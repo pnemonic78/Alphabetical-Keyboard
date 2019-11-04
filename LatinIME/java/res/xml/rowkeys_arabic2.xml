@@ -28,9 +28,11 @@
     <Key
         latin:keySpec="&#x0639;" />
     <!-- U+0638: "ظ" ARABIC LETTER ZAH -->
-    <Key latin:keySpec="&#x0638;" />
+    <Key
+        latin:keySpec="&#x0638;" />
     <!-- U+0637: "ط" ARABIC LETTER TAH -->
-    <Key latin:keySpec="&#x0637;" />
+    <Key
+        latin:keySpec="&#x0637;" />
     <!-- U+0636: "ض" ARABIC LETTER DAD
          U+0661: "١" ARABIC-INDIC DIGIT ONE -->
     <Key
@@ -46,14 +48,16 @@
         latin:keySpec="&#x0634;"
         latin:moreKeys="&#x069C;" />
     <!-- U+0633: "س" ARABIC LETTER SEEN -->
-    <Key latin:keySpec="&#x0633;" />
+    <Key
+        latin:keySpec="&#x0633;" />
     <!-- U+0632: "ز" ARABIC LETTER ZAIN
          U+0698: "ژ" ARABIC LETTER JEH -->
     <Key
         latin:keySpec="&#x0632;"
         latin:moreKeys="&#x0698;" />
     <!-- U+0631: "ر" ARABIC LETTER REH -->
-    <Key latin:keySpec="&#x0631;" />
+    <Key
+        latin:keySpec="&#x0631;" />
     <!-- U+0630: "ذ" ARABIC LETTER THAL -->
     <Key
         latin:keySpec="&#x0630;" />
