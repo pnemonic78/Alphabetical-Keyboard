@@ -21,10 +21,10 @@
 <merge
     xmlns:latin="http://schemas.android.com/apk/res-auto"
 >
-    <!-- a,s,d,f,g -->
+    <!-- k,l,m,n,o -->
     <include
         latin:keyboardLayout="@xml/rowkeys_qwerty2_left5" />
-    <!-- h,j,k,l -->
+    <!-- p,q,r,s -->
     <include
         latin:keyboardLayout="@xml/rowkeys_qwerty2_right4" />
 </merge>

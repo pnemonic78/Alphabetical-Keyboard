@@ -22,27 +22,27 @@
     xmlns:latin="http://schemas.android.com/apk/res-auto"
 >
     <Key
-        latin:keySpec="!text/keyspec_y"
+        latin:keySpec="f"
         latin:keyHintLabel="6"
-        latin:additionalMoreKeys="6"
-        latin:moreKeys="!text/morekeys_y" />
+        latin:additionalMoreKeys="6" />
     <Key
-        latin:keySpec="u"
+        latin:keySpec="g"
         latin:keyHintLabel="7"
         latin:additionalMoreKeys="7"
-        latin:moreKeys="!text/morekeys_u" />
+        latin:moreKeys="!text/morekeys_g" />
     <Key
-        latin:keySpec="i"
+        latin:keySpec="h"
         latin:keyHintLabel="8"
         latin:additionalMoreKeys="8"
-        latin:moreKeys="!text/morekeys_i" />
+        latin:moreKeys="!text/morekeys_h" />
     <Key
-        latin:keySpec="o"
+        latin:keySpec="i"
         latin:keyHintLabel="9"
         latin:additionalMoreKeys="9"
-        latin:moreKeys="!text/morekeys_o" />
+        latin:moreKeys="!text/morekeys_i" />
     <Key
-        latin:keySpec="p"
+        latin:keySpec="j"
         latin:keyHintLabel="0"
-        latin:additionalMoreKeys="0" />
+        latin:additionalMoreKeys="0"
+        latin:moreKeys="!text/morekeys_j" />
 </merge>

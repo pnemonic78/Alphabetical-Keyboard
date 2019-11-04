@@ -22,10 +22,12 @@
     xmlns:latin="http://schemas.android.com/apk/res-auto"
 >
     <Key
-        latin:keySpec="b" />
+        latin:keySpec="!text/keyspec_x"
+        latin:moreKeys="!text/morekeys_x" />
     <Key
-        latin:keySpec="n"
-        latin:moreKeys="!text/morekeys_n" />
+        latin:keySpec="!text/keyspec_y"
+        latin:moreKeys="!text/morekeys_y" />
     <Key
-        latin:keySpec="m" />
+        latin:keySpec="z"
+        latin:moreKeys="!text/morekeys_z" />
 </merge>
