@@ -27,5 +27,5 @@
     latin:touchPositionCorrectionData="@array/touch_position_correction_data_default"
 >
     <include
-        latin:keyboardLayout="@xml/rows_pcqwerty" />
+        latin:keyboardLayout="@xml/rows_qwerty" />
 </Keyboard>
