@@ -20,12 +20,10 @@
 
 <merge xmlns:latin="http://schemas.android.com/apk/res-auto">
     <!-- U+09AC: "ব" BENGALI LETTER BA
-         U+09AD: "ভ" BENGALI LETTER BHA
-         U+09EC: "৬" BENGALI DIGIT SIX -->
+         U+09AD: "ভ" BENGALI LETTER BHA -->
     <Key
         latin:keySpec="&#x09AC;"
-        latin:moreKeys="&#x09AD;,%"
-        latin:additionalMoreKeys="&#x09EC;" />
+        latin:moreKeys="&#x09AD;,%" />
     <!-- U+09AE: "ম" BENGALI LETTER MA -->
     <Key latin:keySpec="&#x09AE;" />
     <!-- U+09B0: "র" BENGALI LETTER RA
@@ -47,11 +45,9 @@
     <Key
         latin:keySpec="&#x09B8;"
         latin:moreKeys="&#x09B6;" />
-    <!-- U+09B9: "হ" BENGALI LETTER HA
-         U+09ED: "৭" BENGALI DIGIT SEVEN -->
+    <!-- U+09B9: "হ" BENGALI LETTER HA -->
     <Key
-        latin:keySpec="&#x09B9;"
-        latin:moreKeys="&#x09ED;" />
+        latin:keySpec="&#x09B9;" />
     <!-- U+09DF: "য়" BENGALI LETTER YYA
          U+09AF: "য" BENGALI LETTER YA -->
     <Key
