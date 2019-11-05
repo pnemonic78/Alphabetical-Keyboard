@@ -38,7 +38,6 @@
         latin:keyLabelFlags="fontNormal"
     >
         <include latin:keyboardLayout="@xml/rowkeys_armenian_phonetic3" />
-        <include latin:keyboardLayout="@xml/key_armenian_xeh" />
     </Row>
     <Row
         latin:keyWidth="9.8000%p"
@@ -48,7 +47,6 @@
             latin:keyStyle="shiftKeyStyle"
             latin:keyWidth="10.8%p" />
         <include latin:keyboardLayout="@xml/rowkeys_armenian_phonetic4" />
-        <include latin:keyboardLayout="@xml/key_armenian_sha" />
         <Key
             latin:keyStyle="deleteKeyStyle"
             latin:keyWidth="fillRight" />

@@ -34,14 +34,12 @@
         latin:keyLabelFlags="fontNormal"
     >
         <include latin:keyboardLayout="@xml/rowkeys_armenian_phonetic2" />
-        <include latin:keyboardLayout="@xml/key_armenian_xeh" />
     </Row>
     <Row
         latin:keyWidth="9.0%p"
         latin:keyLabelFlags="fontNormal"
     >
         <include latin:keyboardLayout="@xml/rowkeys_armenian_phonetic3" />
-        <include latin:keyboardLayout="@xml/key_armenian_sha" />
         <Key
             latin:keyStyle="enterKeyStyle"
             latin:keyWidth="fillRight" />
@@ -55,9 +53,6 @@
             latin:keyWidth="10.0%p" />
         <include latin:keyboardLayout="@xml/rowkeys_armenian_phonetic4" />
         <include latin:keyboardLayout="@xml/keys_exclamation_question" />
-        <Key
-            latin:keyStyle="shiftKeyStyle"
-            latin:keyWidth="fillRight" />
     </Row>
     <include latin:keyboardLayout="@xml/row_qwerty4" />
 </merge>
