@@ -1,2 +1,2 @@
-include ':LatinIME'
+include ':LatinIME', ':sorter'
 include ':LatinIME:tools:maketext'
