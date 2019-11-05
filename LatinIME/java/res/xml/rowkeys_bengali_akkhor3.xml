@@ -21,35 +21,29 @@
 <merge xmlns:latin="http://schemas.android.com/apk/res-auto">
     <switch>
         <case latin:keyboardLayoutSetElement="alphabetManualShifted|alphabetShiftLocked|alphabetShiftLockShifted">
+            <!-- U+09C8: "ৈ" BENGALI VOWEL SIGN AI
+                 U+0990: "ঐ" BENGALI LETTER AI -->
+            <Key latin:keySpec="ৈ" latin:moreKeys="ঐ"/>
+            <!-- U+09CC: "ৌ" BENGALI VOWEL SIGN AU
+                 U+099A: "ঔ" BENGALI LETTER CA
+                 U+09D7: "ৗ" BENGALI AU LENGTH MARK -->
+            <Key latin:keySpec="ৌ" latin:moreKeys="চ,ৗ"/>
+            <!-- U+09CE: "ৎ" BENGALI LETTER KHANDA TA -->
+            <Key latin:keySpec="ৎ"/>
+            <!-- U+09DC: "ড়" BENGALI LETTER RRA
+                 U+09BC: "়" BENGALI SIGN NUKTA -->
+            <Key latin:keySpec="ড়" latin:moreKeys="়"/>
+            <!-- U+09DD: "ঢ়" BENGALI LETTER RHA -->
+            <Key latin:keySpec="ঢ়"/>
             <!-- U+0964: "।" DEVANAGARI DANDA
                  U+0965: "॥" DEVANAGARI DOUBLE DANDA -->
-            <Key
-                 latin:keySpec="&#x0964;"
-                 latin:moreKeys="&#x0965;" />
-            <!-- U+0999: "ঙ BENGALI LETTER NGA
-                 U+0999/U+09CD/U+0995: "ঙ্ক"
-                 U+0999/U+09CD/U+0996: "ঙ্খ"
-                 U+0999/U+09CD/U+0997: "ঙ্গ" -->
-            <Key latin:keySpec="&#x0999;"
-                 latin:moreKeys="&#x0999;&#x09CD;&#x0995;,&#x0999;&#x09CD;&#x0996;,&#x0999;&#x09CD;&#x0997;" />
-            <!-- U+099B: "ছ" BENGALI LETTER CHA -->
-            <Key latin:keySpec="&#x099B;" />
-            <!-- U+0983: "ঃ" BENGALI SIGN VISARGA -->
-            <Key latin:keySpec="&#x0983;" />
+            <Key latin:keySpec="।" latin:moreKeys="॥"/>
             <!-- U+0981: "ঁ" BENGALI SIGN CANDRABINDU -->
-            <Key latin:keySpec="&#x0981;" />
-            <!-- U+09A3: "ণ" BENGALI LETTER NNA
-                 U+09A3/U+09CD/U+099F: "ণ্ট" BENGALI LETTER NNA/BENGALI SIGN VIRAMA/BENGALI LETTER TTA
-                 U+09A3/U+09CD/U+09A1: "ণ্ড" BENGALI LETTER NNA/BENGALI SIGN VIRAMA/BENGALI LETTER DDA
-                 U+09A3/U+09CD/U+09A3: "ণ্ণ" BENGALI LETTER NNA/BENGALI SIGN VIRAMA/BENGALI LETTER NNA -->
-            <Key latin:keySpec="&#x09A3;"
-                 latin:moreKeys="&#x09A3;&#x09CD;&#x099F;,&#x09A3;&#x09CD;&#x09A1;,&#x09A3;&#x09CD;&#x09A3;" />
+            <Key latin:keySpec="ঁ"/>
             <!-- U+0982: "ং" BENGALI SIGN ANUSVARA -->
-            <Key latin:keySpec="&#x0982;" />
-            <!-- U+0990: "ঐ" BENGALI LETTER AI -->
-            <Key latin:keySpec="&#x0990;" />
-            <!-- U+0994: "ঔ" BENGALI LETTER AU -->
-            <Key latin:keySpec="&#x0994;" />
+            <Key latin:keySpec="ং"/>
+            <!-- U+0983: "ঃ" BENGALI SIGN VISARGA -->
+            <Key latin:keySpec="ঃ"/>
         </case>
         <default>
             <!-- U+09B8: "স" BENGALI LETTER SA
