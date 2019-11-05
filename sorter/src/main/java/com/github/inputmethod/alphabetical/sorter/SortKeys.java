@@ -63,7 +63,7 @@ public class SortKeys {
         transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
         transformer.setOutputProperty(OutputPropertiesFactory.S_KEY_INDENT_AMOUNT, "4");
         DOMSource source = new DOMSource(document);
-        File fileOut = new File(file.getParent(), "s_" + file.getName());
+        File fileOut = file;
         StreamResult result = new StreamResult(fileOut);
         transformer.transform(source, result);
     }
