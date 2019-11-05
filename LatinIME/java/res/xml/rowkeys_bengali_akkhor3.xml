@@ -47,39 +47,34 @@
         </case>
         <default>
             <!-- U+09B8: "স" BENGALI LETTER SA
-                         U+09B8/U+09CD/U+09AC: "স্ব" BENGALI LETTER SA/BENGALI SIGN VIRAMA/BENGALI LETTER BA
-                         U+09B8/U+09CD/U+09A4: "স্ত" BENGALI LETTER SA/BENGALI SIGN VIRAMA/BENGALI LETTER TA
-                         U+09B8/U+09CD/U+099F: "স্ট" BENGALI LETTER SA/BENGALI SIGN VIRAMA/BENGALI LETTER TTA
-                         U+09B8/U+09CD/U+0995: "স্ক" BENGALI LETTER SA/BENGALI SIGN VIRAMA/BENGALI LETTER KA
-                         U+09B8/U+09CD/U+09AA: "স্প" BENGALI LETTER SA/BENGALI SIGN VIRAMA/BENGALI LETTER PA -->
+                 U+09B8/U+09CD/U+09AC: "স্ব" BENGALI LETTER SA/BENGALI SIGN VIRAMA/BENGALI LETTER BA
+                 U+09B8/U+09CD/U+09A4: "স্ত" BENGALI LETTER SA/BENGALI SIGN VIRAMA/BENGALI LETTER TA
+                 U+09B8/U+09CD/U+099F: "স্ট" BENGALI LETTER SA/BENGALI SIGN VIRAMA/BENGALI LETTER TTA
+                 U+09B8/U+09CD/U+0995: "স্ক" BENGALI LETTER SA/BENGALI SIGN VIRAMA/BENGALI LETTER KA
+                 U+09B8/U+09CD/U+09AA: "স্প" BENGALI LETTER SA/BENGALI SIGN VIRAMA/BENGALI LETTER PA -->
             <Key latin:keySpec="স" latin:moreKeys="স্ব,স্ত,স্ট,স্ক,স্প" />
             <!-- U+09BE: "া BENGALI VOWEL SIGN AA
-                         U+0986: "আ" BENGALI LETTER AA -->
+                 U+0986: "আ" BENGALI LETTER AA -->
             <Key latin:keySpec="া" latin:moreKeys="আ" />
             <!-- U+09BF: "ি" BENGALI VOWEL SIGN I
-                         U+09EE: "৮" BENGALI DIGIT EIGHT
-                         U+0987: "ই BENGALI LETTER I -->
-            <Key latin:additionalMoreKeys="৮" latin:keySpec="ি" latin:moreKeys="ই" />
+                 U+0987: "ই BENGALI LETTER I -->
+            <Key latin:keySpec="ি" latin:moreKeys="ই" />
             <!-- U+09C1: "ু" BENGALI VOWEL SIGN U
-                         U+09ED: "৭" BENGALI DIGIT SEVEN
-                         U+0989: "উ" BENGALI LETTER U -->
-            <Key latin:additionalMoreKeys="৭" latin:keySpec="ু" latin:moreKeys="উ" />
+                 U+0989: "উ" BENGALI LETTER U -->
+            <Key latin:keySpec="ু" latin:moreKeys="উ" />
             <!-- U+09C3: "ৃ" BENGALI VOWEL SIGN VOCALIC R
-                         U+098B: "ঋ" BENGALI LETTER VOCALIC R -->
+                 U+098B: "ঋ" BENGALI LETTER VOCALIC R -->
             <Key latin:keySpec="ৃ" latin:moreKeys="ঋ" />
             <!-- U+09C7: "ে" BENGALI VOWEL SIGN E
-                         U+09E9: "৩" BENGALI DIGIT THREE
-                         U+098F: "এ" BENGALI LETTER E -->
-            <Key latin:additionalMoreKeys="৩" latin:keySpec="ে" latin:moreKeys="এ" />
+                 U+098F: "এ" BENGALI LETTER E -->
+            <Key latin:keySpec="ে" latin:moreKeys="এ" />
             <!-- U+09CB: "ো" BENGALI VOWEL SIGN O
-                         U+09EF: "৯" BENGALI DIGIT NINE
-                         U+0993: "ও" BENGALI LETTER O -->
-            <Key latin:additionalMoreKeys="৯" latin:keySpec="ো" latin:moreKeys="ও" />
+                 U+0993: "ও" BENGALI LETTER O -->
+            <Key latin:keySpec="ো" latin:moreKeys="ও" />
             <!-- U+09CD: "্" BENGALI SIGN VIRAMA -->§
             <Key latin:keySpec="্" />
-            <!-- U+09DF: "য়" BENGALI LETTER YYA
-                         U+09EC: "৬" BENGALI DIGIT SIX -->
-            <Key latin:additionalMoreKeys="৬" latin:keySpec="য়" />
+            <!-- U+09DF: "য়" BENGALI LETTER YYA -->
+            <Key latin:keySpec="য়" />
         </default>
     </switch>
 </merge>
