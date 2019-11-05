@@ -96,7 +96,9 @@ public class SortKeys {
         }
 
         for (KeyPair pair2 : pairs) {
-            root.appendChild(pair2.comment);
+            if (pair2.comment != null) {
+                root.appendChild(pair2.comment);
+            }
             root.appendChild(pair2.key);
             System.out.println(pair2.comparable);
         }
