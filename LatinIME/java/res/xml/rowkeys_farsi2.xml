@@ -19,6 +19,12 @@
 -->
 
 <merge xmlns:latin="http://schemas.android.com/apk/res-auto">
+    <!-- U+0631: "ر" ARABIC LETTER REH -->
+    <Key latin:keySpec="ر"/>
+    <!-- U+0632: "ز" ARABIC LETTER ZAIN -->
+    <Key latin:keySpec="ز"/>
+    <!-- U+0698: "ژ" ARABIC LETTER JEH -->
+    <Key latin:keySpec="ژ"/>
     <!-- U+0633: "س" ARABIC LETTER SEEN -->
     <Key latin:keySpec="س"/>
     <!-- U+0634: "ش" ARABIC LETTER SHEEN -->
@@ -35,10 +41,4 @@
     <Key latin:keySpec="ع"/>
     <!-- U+063A: "غ" ARABIC LETTER GHAIN -->
     <Key latin:keySpec="غ"/>
-    <!-- U+0641: "ف" ARABIC LETTER FEH -->
-    <Key latin:keySpec="ف"/>
-    <!-- U+0642: "ق" ARABIC LETTER QAF -->
-    <Key latin:keySpec="ق"/>
-    <!-- U+0644: "ل" ARABIC LETTER LAM -->
-    <Key latin:keySpec="ل"/>
 </merge>
