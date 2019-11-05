@@ -8,8 +8,10 @@ import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -29,22 +31,26 @@ public class SortKeys {
     private static final String ELEMENT_KEY = "Key";
 
     public static void main(String[] args) throws Exception {
-        String path;
+        String path = "keys.xml";
+        boolean reverse = false;
         if (args.length > 0) {
-            path = args[0];
-        } else {
-            path = "keys.xml";
+            String args0 = args[0];
+            if (args0.equals("-reverse") || args0.equals("-rtl")) {
+                reverse = true;
+            } else {
+                path = args0;
+            }
         }
-        new SortKeys().sort(path);
+        new SortKeys().sort(path, reverse);
     }
 
-    public void sort(String path) throws Exception {
-        sort(new File(path));
+    public void sort(String path, boolean reverse) throws Exception {
+        sort(new File(path), reverse);
     }
 
-    public void sort(File file) throws Exception {
+    public void sort(File file, boolean reverse) throws Exception {
         Document document = parse(file);
-        sort(document);
+        sort(document, reverse);
         write(document, file);
     }
 
@@ -68,7 +74,7 @@ public class SortKeys {
         transformer.transform(source, result);
     }
 
-    private void sort(Document document) {
+    private void sort(Document document, boolean reverse) {
         Node root = document.getFirstChild();
         Node node;
         short nodeType;
@@ -76,7 +82,7 @@ public class SortKeys {
         Node comment = null;
         Node key;
         KeyPair pair;
-        final SortedSet<KeyPair> pairs = new TreeSet<>();
+        final List<KeyPair> pairs = new ArrayList<>();
 
         while (root.hasChildNodes()) {
             node = root.getFirstChild();
@@ -95,6 +101,11 @@ public class SortKeys {
             }
         }
 
+        Comparator<KeyPair> comparator = new KeyPairComparator();
+        Collections.sort(pairs, comparator);
+        if (reverse) {
+            Collections.reverse(pairs);
+        }
         for (KeyPair pair2 : pairs) {
             if (pair2.comment != null) {
                 root.appendChild(pair2.comment);
@@ -121,6 +132,14 @@ public class SortKeys {
         @Override
         public int compareTo(KeyPair that) {
             return comparable.compareTo(that.comparable);
+        }
+    }
+
+    private static class KeyPairComparator implements Comparator<KeyPair> {
+
+        @Override
+        public int compare(KeyPair k1, KeyPair k2) {
+            return k1.compareTo(k2);
         }
     }
 }
