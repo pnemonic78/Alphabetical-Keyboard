@@ -383,7 +383,7 @@ public final class KeyboardLayoutSet {
             final int xmlId = getXmlId(mResources, mParams.mKeyboardLayoutSetName);
             try {
                 parseKeyboardLayoutSet(mResources, xmlId);
-            } catch (final IOException | XmlPullParserException e) {
+            } catch (final IOException | XmlPullParserException | Resources.NotFoundException e) {
                 throw new RuntimeException(e.getMessage() + " in " + mParams.mKeyboardLayoutSetName,
                         e);
             }

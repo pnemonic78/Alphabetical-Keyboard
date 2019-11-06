@@ -162,7 +162,7 @@
             android:subtypeId="0x1dc3a859"
             android:imeSubtypeLocale="be_BY"
             android:imeSubtypeMode="keyboard"
-            android:imeSubtypeExtraValue="KeyboardLayoutSet=east_slavic,EmojiCapable"
+            android:imeSubtypeExtraValue="KeyboardLayoutSet=east_slavic_be,EmojiCapable"
             android:isAsciiCapable="false"
     />
     <subtype android:icon="@drawable/ic_ime_switcher_dark"
@@ -451,7 +451,7 @@
             android:subtypeId="0x2d73d2f6"
             android:imeSubtypeLocale="kk"
             android:imeSubtypeMode="keyboard"
-            android:imeSubtypeExtraValue="KeyboardLayoutSet=east_slavic,EmojiCapable"
+            android:imeSubtypeExtraValue="KeyboardLayoutSet=east_slavic_kk,EmojiCapable"
             android:isAsciiCapable="false"
     />
     <subtype android:icon="@drawable/ic_ime_switcher_dark"
@@ -475,7 +475,7 @@
             android:subtypeId="0x2e391c04"
             android:imeSubtypeLocale="ky"
             android:imeSubtypeMode="keyboard"
-            android:imeSubtypeExtraValue="KeyboardLayoutSet=east_slavic,EmojiCapable"
+            android:imeSubtypeExtraValue="KeyboardLayoutSet=east_slavic_ky,EmojiCapable"
             android:isAsciiCapable="false"
     />
     <subtype android:icon="@drawable/ic_ime_switcher_dark"
@@ -750,7 +750,7 @@
             android:subtypeId="0x3e84492c"
             android:imeSubtypeLocale="uk"
             android:imeSubtypeMode="keyboard"
-            android:imeSubtypeExtraValue="KeyboardLayoutSet=east_slavic,EmojiCapable"
+            android:imeSubtypeExtraValue="KeyboardLayoutSet=east_slavic_uk,EmojiCapable"
             android:isAsciiCapable="false"
     />
     <!-- TODO: This Uzbek keyboard is a preliminary layout.
