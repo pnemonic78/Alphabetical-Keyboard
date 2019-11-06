@@ -19,52 +19,71 @@
 -->
 
 <merge xmlns:latin="http://schemas.android.com/apk/res-auto">
-    <!-- U+062F: "د" ARABIC LETTER DAL -->
+    <!-- U+0632: "ز" ARABIC LETTER ZAIN
+         U+0698: "ژ" ARABIC LETTER JEH
+         U+0661: "١" ARABIC-INDIC DIGIT ONE -->
     <Key
-        latin:keySpec="&#x062F;"
+        latin:keySpec="&#x0632;"
         latin:keyHintLabel="1"
-        latin:additionalMoreKeys="1,&#x0661;" />
-    <!-- U+062E: "خ" ARABIC LETTER KHAH
-         U+0669: "٩" ARABIC-INDIC DIGIT NINE -->
+        latin:additionalMoreKeys="1,&#x0661;"
+        latin:moreKeys="&#x0698;" />
+    <!-- U+0631: "ر" ARABIC LETTER REH
+         U+0662: "٢" ARABIC-INDIC DIGIT TWO -->
     <Key
-        latin:keySpec="&#x062E;"
+        latin:keySpec="&#x0631;"
         latin:keyHintLabel="2"
         latin:additionalMoreKeys="2,&#x0662;" />
-    <!-- U+062D: "ح" ARABIC LETTER HAH
-         U+0660: "٠" ARABIC-INDIC DIGIT ZERO -->
-    <Key
-        latin:keySpec="&#x062D;"
-        latin:keyHintLabel="3"
-        latin:additionalMoreKeys="3,&#x0663;" />
-    <!-- U+062C: "ج" ARABIC LETTER JEEM
-         U+0686: "چ" ARABIC LETTER TCHEH -->
-    <Key
-        latin:keySpec="&#x062C;"
-        latin:keyHintLabel="4"
-        latin:additionalMoreKeys="4,&#x0664;"
-        latin:moreKeys="&#x0686;" />
-    <!-- U+062B: "ث" ARABIC LETTER THEH
+    <!-- U+0630: "ذ" ARABIC LETTER THAL
          U+0663: "٣" ARABIC-INDIC DIGIT THREE -->
     <Key
-        latin:keySpec="&#x062B;"
+        latin:keySpec="&#x0630;"
+        latin:keyHintLabel="3"
+        latin:additionalMoreKeys="3,&#x0663;" />
+    <!-- U+062F: "د" ARABIC LETTER DAL
+         U+0664: "٤" ARABIC-INDIC DIGIT FOUR -->
+    <Key
+        latin:keySpec="&#x062F;"
+        latin:keyHintLabel="4"
+        latin:additionalMoreKeys="4,&#x0664;" />
+    <!-- U+062E: "خ" ARABIC LETTER KHAH
+         U+0665: "٥" ARABIC-INDIC DIGIT FIVE -->
+    <Key
+        latin:keySpec="&#x062E;"
         latin:keyHintLabel="5"
         latin:additionalMoreKeys="5,&#x0665;" />
-    <!-- U+062A: "ت" ARABIC LETTER TEH -->
+    <!-- U+062D: "ح" ARABIC LETTER HAH
+         U+0666: "٦" ARABIC-INDIC DIGIT SIX -->
     <Key
-        latin:keySpec="&#x062A;"
+        latin:keySpec="&#x062D;"
         latin:keyHintLabel="6"
         latin:additionalMoreKeys="6,&#x0666;" />
-    <!-- U+0629: "ة" ARABIC LETTER TEH MARBUTA -->
+    <!-- U+062C: "ج" ARABIC LETTER JEEM
+         U+0686: "چ" ARABIC LETTER TCHEH
+         U+0667: "٧" ARABIC-INDIC DIGIT SEVEN -->
     <Key
-        latin:keySpec="&#x0629;"
+        latin:keySpec="&#x062C;"
         latin:keyHintLabel="7"
-        latin:additionalMoreKeys="7,&#x0667;" />
+        latin:additionalMoreKeys="7,&#x0667;"
+        latin:moreKeys="&#x0686;" />
+    <!-- U+062B: "ث" ARABIC LETTER THEH
+         U+0668: "٨" ARABIC-INDIC DIGIT EIGHT -->
+    <Key
+        latin:keySpec="&#x062B;"
+        latin:keyHintLabel="8"
+        latin:additionalMoreKeys="8,&#x0668;" />
+    <!-- U+062A: "ت" ARABIC LETTER TEH
+         U+0669: "٩" ARABIC-INDIC DIGIT NINE -->
+    <Key
+        latin:keySpec="&#x062A;"
+        latin:keyHintLabel="9"
+        latin:additionalMoreKeys="9,&#x0669;" />
     <!-- U+0628: "ب" ARABIC LETTER BEH
-         U+067E: "پ" ARABIC LETTER PEH -->
+         U+067E: "پ" ARABIC LETTER PEH
+         U+0660: "٠" ARABIC-INDIC DIGIT ZERO -->
     <Key
         latin:keySpec="&#x0628;"
-        latin:keyHintLabel="8"
-        latin:additionalMoreKeys="8,&#x0668;"
+        latin:keyHintLabel="0"
+        latin:additionalMoreKeys="0,&#x0660;"
         latin:moreKeys="&#x067E;" />
     <!-- U+0627: "ا" ARABIC LETTER ALEF
          U+0622: "آ" ARABIC LETTER ALEF WITH MADDA ABOVE
@@ -74,15 +93,5 @@
          U+0671: "ٱ" ARABIC LETTER ALEF WASLA -->
     <Key
         latin:keySpec="&#x0627;"
-        latin:keyHintLabel="9"
-        latin:additionalMoreKeys="9,&#x0669;"
         latin:moreKeys="!fixedColumnOrder!5,&#x0622;,&#x0621;,&#x0623;,&#x0625;,&#x0671;" />
-    <!-- U+0624: "ؤ" ARABIC LETTER WAW WITH HAMZA ABOVE -->
-    <Key
-        latin:keySpec="&#x0624;"
-        latin:keyHintLabel="0"
-        latin:additionalMoreKeys="0,&#x0660;" />
-    <!-- U+0621: "ء" ARABIC LETTER HAMZA -->
-    <Key
-        latin:keySpec="&#x0621;" />
 </merge>

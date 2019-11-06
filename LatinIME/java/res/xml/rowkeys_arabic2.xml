@@ -19,12 +19,31 @@
 -->
 
 <merge xmlns:latin="http://schemas.android.com/apk/res-auto">
-    <!-- U+063A: "غ" ARABIC LETTER GHAIN
-         U+0666: "٦" ARABIC-INDIC DIGIT SIX -->
+    <!-- U+0643: "ك" ARABIC LETTER KAF
+         U+06AF: "گ" ARABIC LETTER GAF
+         U+06A9: "ک" ARABIC LETTER KEHEH -->
+    <Key
+        latin:keySpec="&#x0643;"
+        latin:moreKeys="&#x06AF;,&#x06A9;" />
+    <!-- U+0642: "ق" ARABIC LETTER QAF
+         U+06A8: "ڨ" ARABIC LETTER QAF WITH THREE DOTS ABOVE -->
+    <!-- TODO: DroidSansArabic lacks the glyph of U+06A8 ARABIC LETTER QAF WITH THREE DOTS ABOVE -->
+    <Key
+        latin:keySpec="&#x0642;"
+        latin:moreKeys="&#x06A8;" />
+    <!-- U+0641: "ف" ARABIC LETTER FEH
+         U+06A4: "ڤ" ARABIC LETTER VEH
+         U+06A2: "ڢ" ARABIC LETTER FEH WITH DOT MOVED BELOW
+         U+06A5: "ڥ" ARABIC LETTER FEH WITH THREE DOTS BELOW -->
+    <!-- TODO: DroidSansArabic lacks the glyph of U+06A2 ARABIC LETTER FEH WITH DOT MOVED BELOW -->
+    <!-- TODO: DroidSansArabic lacks the glyph of U+06A5 ARABIC LETTER FEH WITH THREE DOTS BELOW -->
+    <Key
+        latin:keySpec="&#x0641;"
+        latin:moreKeys="&#x06A4;,&#x06A2;,&#x06A5;" />
+    <!-- U+063A: "غ" ARABIC LETTER GHAIN -->
     <Key
         latin:keySpec="&#x063A;" />
-    <!-- U+0639: "ع" ARABIC LETTER AIN
-         U+0667: "٧" ARABIC-INDIC DIGIT SEVEN -->
+    <!-- U+0639: "ع" ARABIC LETTER AIN -->
     <Key
         latin:keySpec="&#x0639;" />
     <!-- U+0638: "ظ" ARABIC LETTER ZAH -->
@@ -33,12 +52,10 @@
     <!-- U+0637: "ط" ARABIC LETTER TAH -->
     <Key
         latin:keySpec="&#x0637;" />
-    <!-- U+0636: "ض" ARABIC LETTER DAD
-         U+0661: "١" ARABIC-INDIC DIGIT ONE -->
+    <!-- U+0636: "ض" ARABIC LETTER DAD -->
     <Key
         latin:keySpec="&#x0636;" />
-    <!-- U+0635: "ص" ARABIC LETTER SAD
-         U+0662: "٢" ARABIC-INDIC DIGIT TWO -->
+    <!-- U+0635: "ص" ARABIC LETTER SAD -->
     <Key
         latin:keySpec="&#x0635;" />
     <!-- U+0634: "ش" ARABIC LETTER SHEEN
@@ -50,15 +67,4 @@
     <!-- U+0633: "س" ARABIC LETTER SEEN -->
     <Key
         latin:keySpec="&#x0633;" />
-    <!-- U+0632: "ز" ARABIC LETTER ZAIN
-         U+0698: "ژ" ARABIC LETTER JEH -->
-    <Key
-        latin:keySpec="&#x0632;"
-        latin:moreKeys="&#x0698;" />
-    <!-- U+0631: "ر" ARABIC LETTER REH -->
-    <Key
-        latin:keySpec="&#x0631;" />
-    <!-- U+0630: "ذ" ARABIC LETTER THAL -->
-    <Key
-        latin:keySpec="&#x0630;" />
 </merge>

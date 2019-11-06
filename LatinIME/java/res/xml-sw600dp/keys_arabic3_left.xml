@@ -24,10 +24,4 @@
     <!-- U+0626: "ئ" ARABIC LETTER YEH WITH HAMZA ABOVE -->
     <Key
         latin:keySpec="&#x0626;" />
-    <!-- U+064A: "ي" ARABIC LETTER YEH
-         U+0626: "ئ" ARABIC LETTER YEH WITH HAMZA ABOVE
-         U+0649: "ى" ARABIC LETTER ALEF MAKSURA -->
-    <Key
-        latin:keySpec="&#x064A;"
-        latin:moreKeys="&#x0626;,&#x0649;" />
 </merge>
