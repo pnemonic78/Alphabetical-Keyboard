@@ -36,7 +36,7 @@
     <!-- U+0436: "ж" CYRILLIC SMALL LETTER ZHE -->
     <Key latin:keySpec="ж" latin:additionalMoreKeys="7" latin:keyHintLabel="7"/>
     <!-- U+0437: "з" CYRILLIC SMALL LETTER ZE -->
-    <Key latin:additionalMoreKeys="8" latin:keyHintLabel="8" latin:keySpec="з"/>
+    <Key latin:keySpec="з" latin:additionalMoreKeys="8" latin:keyHintLabel="8"/>
     <!-- U+0438: "и" CYRILLIC SMALL LETTER I -->
     <Key latin:keySpec="и" latin:additionalMoreKeys="9" latin:keyHintLabel="9"/>
     <!-- U+0439: "й" CYRILLIC SMALL LETTER SHORT I -->
