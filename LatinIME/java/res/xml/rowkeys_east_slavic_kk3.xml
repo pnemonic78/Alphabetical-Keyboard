@@ -21,31 +21,24 @@
 <merge
     xmlns:latin="http://schemas.android.com/apk/res-auto"
 >
-    <!-- U+044F: "я" CYRILLIC SMALL LETTER YA -->
-    <Key
-        latin:keySpec="&#x044F;" />
+    <!-- U+0446: "ц" CYRILLIC SMALL LETTER TSE -->
+    <Key latin:keySpec="ц"/>
     <!-- U+0447: "ч" CYRILLIC SMALL LETTER CHE -->
-    <Key
-        latin:keySpec="&#x0447;" />
-    <!-- U+0441: "с" CYRILLIC SMALL LETTER ES -->
-    <Key
-        latin:keySpec="&#x0441;" />
-    <!-- U+043C: "м" CYRILLIC SMALL LETTER EM -->
-    <Key
-        latin:keySpec="&#x043C;" />
-    <Key
-        latin:keySpec="!text/keyspec_east_slavic_row3_5" />
-    <!-- U+0442: "т" CYRILLIC SMALL LETTER TE -->
-    <Key
-        latin:keySpec="&#x0442;" />
+    <Key latin:keySpec="ч"/>
+    <!-- U+0448: "ш" CYRILLIC SMALL LETTER SHA -->
+    <Key latin:keySpec="ш"/>
+    <!-- U+0449: "щ" CYRILLIC SMALL LETTER SHCHA -->
+    <Key latin:keySpec="щ"/>
+    <!-- U+044B: "ы" CYRILLIC SMALL LETTER YERU
+         U+0456: "і" CYRILLIC SMALL LETTER BYELORUSSIAN-UKRAINIAN I -->
+    <Key latin:keySpec="ы" latin:moreKeys="і"/>
     <!-- U+044C: "ь" CYRILLIC SMALL LETTER SOFT SIGN -->
-    <Key
-        latin:keySpec="&#x044C;"
-        latin:moreKeys="!text/morekeys_cyrillic_soft_sign" />
-    <!-- U+0431: "б" CYRILLIC SMALL LETTER BE -->
-    <Key
-        latin:keySpec="&#x0431;" />
+    <Key latin:keySpec="ь" latin:moreKeys="!text/morekeys_cyrillic_soft_sign"/>
+    <!-- U+044D: "э" CYRILLIC SMALL LETTER E
+         U+04BB: "һ" CYRILLIC SMALL LETTER SHHA -->
+    <Key latin:keySpec="э" latin:moreKeys="һ"/>
     <!-- U+044E: "ю" CYRILLIC SMALL LETTER YU -->
-    <Key
-        latin:keySpec="&#x044E;" />
+    <Key latin:keySpec="ю"/>
+    <!-- U+044F: "я" CYRILLIC SMALL LETTER YA -->
+    <Key latin:keySpec="я"/>
 </merge>
