@@ -19,7 +19,17 @@
 -->
 
 <merge xmlns:latin="http://schemas.android.com/apk/res-auto" >
-    <include latin:keyboardLayout="@xml/rowkeys_qwertz1" />
-    <!-- U+0161: "š" LATIN SMALL LETTER S WITH CARON -->
-    <Key latin:keySpec="&#x0161;" />
+    <Key latin:keySpec="a" latin:additionalMoreKeys="1" latin:keyHintLabel="1"/>
+    <Key latin:keySpec="b" latin:additionalMoreKeys="2" latin:keyHintLabel="2"/>
+    <Key latin:keySpec="c" latin:moreKeys="!text/morekeys_c" latin:additionalMoreKeys="3" latin:keyHintLabel="3"/>
+    <!-- U+010D: "č" LATIN SMALL LETTER C WITH CARON -->
+    <Key latin:keySpec="č" latin:additionalMoreKeys="4" latin:keyHintLabel="4"/>
+    <!-- U+0107: "ć" LATIN SMALL LETTER C WITH ACUTE -->
+    <Key latin:keySpec="ć" latin:additionalMoreKeys="5" latin:keyHintLabel="5"/>
+    <Key latin:keySpec="d" latin:moreKeys="!text/morekeys_d" latin:additionalMoreKeys="6" latin:keyHintLabel="6"/>
+    <!-- U+0111: "đ" LATIN SMALL LETTER D WITH STROKE -->
+    <Key latin:keySpec="đ" latin:additionalMoreKeys="7" latin:keyHintLabel="7"/>
+    <Key latin:keySpec="e" latin:moreKeys="!text/morekeys_e" latin:additionalMoreKeys="8" latin:keyHintLabel="8"/>
+    <Key latin:keySpec="f" latin:additionalMoreKeys="9" latin:keyHintLabel="9"/>
+    <Key latin:keySpec="g" latin:moreKeys="!text/morekeys_g" latin:additionalMoreKeys="0" latin:keyHintLabel="0"/>
 </merge>

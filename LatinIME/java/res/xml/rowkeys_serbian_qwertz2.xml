@@ -19,9 +19,13 @@
 -->
 
 <merge xmlns:latin="http://schemas.android.com/apk/res-auto" >
-    <include latin:keyboardLayout="@xml/rowkeys_qwerty2" />
-    <!-- U+010D: "č" LATIN SMALL LETTER C WITH CARON -->
-    <Key latin:keySpec="&#x010D;" />
-    <!-- U+0107: "ć" LATIN SMALL LETTER C WITH ACUTE -->
-    <Key latin:keySpec="&#x0107;" />
+    <Key latin:keySpec="h" latin:moreKeys="!text/morekeys_h"/>
+    <Key latin:keySpec="i" latin:moreKeys="!text/morekeys_i"/>
+    <Key latin:keySpec="j" latin:moreKeys="!text/morekeys_j"/>
+    <Key latin:keySpec="k" latin:moreKeys="!text/morekeys_k"/>
+    <Key latin:keySpec="l" latin:moreKeys="!text/morekeys_l"/>
+    <Key latin:keySpec="m"/>
+    <Key latin:keySpec="n" latin:moreKeys="!text/morekeys_n"/>
+    <Key latin:keySpec="o" latin:moreKeys="!text/morekeys_o"/>
+    <Key latin:keySpec="p"/>
 </merge>
