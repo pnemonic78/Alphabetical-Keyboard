@@ -655,7 +655,7 @@
             android:subtypeId="0x77c5196e"
             android:imeSubtypeLocale="sr"
             android:imeSubtypeMode="keyboard"
-            android:imeSubtypeExtraValue="SupportTouchPositionCorrection,EmojiCapable"
+            android:imeSubtypeExtraValue="KeyboardLayoutSet=serbian,SupportTouchPositionCorrection,EmojiCapable"
             android:isAsciiCapable="false"
     />
     <!-- TODO: This Serbian Latin keyboard is a preliminary layout.
