@@ -333,7 +333,7 @@
             android:imeSubtypeLocale="fr_CH"
             android:languageTag="fr-CH"
             android:imeSubtypeMode="keyboard"
-            android:imeSubtypeExtraValue="KeyboardLayoutSet=swiss,AsciiCapable,SupportTouchPositionCorrection,EmojiCapable"
+            android:imeSubtypeExtraValue="KeyboardLayoutSet=swiss_fr,AsciiCapable,SupportTouchPositionCorrection,EmojiCapable"
             android:isAsciiCapable="true"
     />
     <subtype android:icon="@drawable/ic_ime_switcher_dark"

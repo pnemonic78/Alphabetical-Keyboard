@@ -21,16 +21,15 @@
 <merge
     xmlns:latin="http://schemas.android.com/apk/res-auto"
 >
+    <Key latin:keySpec="i" latin:moreKeys="!text/morekeys_i"/>
+    <Key latin:keySpec="j" latin:moreKeys="!text/morekeys_j"/>
     <Key latin:keySpec="k" latin:moreKeys="!text/morekeys_k"/>
     <Key latin:keySpec="l" latin:moreKeys="!text/morekeys_l"/>
     <Key latin:keySpec="m"/>
     <Key latin:keySpec="n" latin:moreKeys="!text/morekeys_n"/>
     <Key latin:keySpec="o" latin:moreKeys="!text/morekeys_o"/>
-    <!-- U+00F6: "ö" LATIN SMALL LETTER O WITH DIAERESIS -->
-    <Key latin:keySpec="ö" latin:moreKeys="!text/morekeys_swiss_row2_10"/>
     <Key latin:keySpec="p"/>
     <Key latin:keySpec="q" latin:moreKeys="!text/morekeys_q"/>
     <Key latin:keySpec="r" latin:moreKeys="!text/morekeys_r"/>
     <Key latin:keySpec="s" latin:moreKeys="!text/morekeys_s"/>
-    <Key latin:keySpec="t" latin:moreKeys="!text/morekeys_t"/>
 </merge>
