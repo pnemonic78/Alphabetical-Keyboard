@@ -50,7 +50,7 @@
         <Spacer
             latin:keyWidth="3.181%p" />
         <include
-            latin:keyboardLayout="@xml/rowkeys_qwerty3" />
+            latin:keyboardLayout="@xml/rowkeys_nordic3" />
         <include
             latin:keyboardLayout="@xml/keys_exclamation_question" />
         <Key

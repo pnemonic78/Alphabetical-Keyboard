@@ -45,7 +45,7 @@
         <Spacer
             latin:keyWidth="2.8%p" />
         <include
-            latin:keyboardLayout="@xml/rowkeys_qwerty3" />
+            latin:keyboardLayout="@xml/rowkeys_nordic3" />
         <Key
             latin:keyStyle="deleteKeyStyle"
             latin:keyXPos="-15%p"
