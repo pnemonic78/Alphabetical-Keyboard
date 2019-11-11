@@ -47,11 +47,9 @@
 
     <!-- Predefined keyboard layouts for additional subtype -->
     <string-array name="predefined_layouts">
-        <item>qwerty</item>
     </string-array>
     <!-- Predefined keyboard layout display names -->
     <string-array name="predefined_layout_display_names">
-        <item>QWERTY</item>
     </string-array>
     <!-- Description for generic subtype that has predefined layout.
          The string resource name must be "subtype_generic_<layout name>".
