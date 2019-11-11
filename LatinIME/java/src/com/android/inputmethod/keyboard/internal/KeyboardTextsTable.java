@@ -1728,18 +1728,18 @@ public final class KeyboardTextsTable {
         /* ~ morekeys_cyrillic_ie */
         // U+00E5: "å" LATIN SMALL LETTER A WITH RING ABOVE
         /* keyspec_nordic_row1_11 */ "\u00E5",
-        // U+00F6: "ö" LATIN SMALL LETTER O WITH DIAERESIS
-        /* keyspec_nordic_row2_10 */ "\u00F6",
         // U+00E4: "ä" LATIN SMALL LETTER A WITH DIAERESIS
-        /* keyspec_nordic_row2_11 */ "\u00E4",
-        // U+00F8: "ø" LATIN SMALL LETTER O WITH STROKE
-        /* morekeys_nordic_row2_10 */ "\u00F8",
+        /* keyspec_nordic_row2_10 */ "\u00E4",
+        // U+00F6: "ö" LATIN SMALL LETTER O WITH DIAERESIS
+        /* keyspec_nordic_row2_11 */ "\u00F6",
+        // U+00E6: "æ" LATIN SMALL LETTER AE
+        /* morekeys_nordic_row2_10 */ "\u00E6",
         /* keyspec_east_slavic_row1_9 ~ */
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null, null, null, null, null,
         /* ~ morekeys_tablet_period */
-        // U+00E6: "æ" LATIN SMALL LETTER AE
-        /* morekeys_nordic_row2_11 */ "\u00E6",
+        // U+00F8: "ø" LATIN SMALL LETTER O WITH STROKE
+        /* morekeys_nordic_row2_11 */ "\u00F8",
     };
 
     /* Locale fr: French */
@@ -3505,19 +3505,19 @@ public final class KeyboardTextsTable {
         /* morekeys_cyrillic_ie */ null,
         // U+00E5: "å" LATIN SMALL LETTER A WITH RING ABOVE
         /* keyspec_nordic_row1_11 */ "\u00E5",
-        // U+00F6: "ö" LATIN SMALL LETTER O WITH DIAERESIS
-        /* keyspec_nordic_row2_10 */ "\u00F6",
         // U+00E4: "ä" LATIN SMALL LETTER A WITH DIAERESIS
-        /* keyspec_nordic_row2_11 */ "\u00E4",
-        // U+00F8: "ø" LATIN SMALL LETTER O WITH STROKE
-        // U+0153: "œ" LATIN SMALL LIGATURE OE
-        /* morekeys_nordic_row2_10 */ "\u00F8,\u0153",
+        /* keyspec_nordic_row2_10 */ "\u00E4",
+        // U+00F6: "ö" LATIN SMALL LETTER O WITH DIAERESIS
+        /* keyspec_nordic_row2_11 */ "\u00F6",
+        // U+00E6: "æ" LATIN SMALL LETTER AE
+        /* morekeys_nordic_row2_10 */ "\u00E6",
         /* keyspec_east_slavic_row1_9 ~ */
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null, null, null, null, null,
         /* ~ morekeys_tablet_period */
-        // U+00E6: "æ" LATIN SMALL LETTER AE
-        /* morekeys_nordic_row2_11 */ "\u00E6",
+        // U+00F8: "ø" LATIN SMALL LETTER O WITH STROKE
+        // U+0153: "œ" LATIN SMALL LIGATURE OE
+        /* morekeys_nordic_row2_11 */ "\u00F8,\u0153",
     };
 
     /* Locale sw: Swahili */
