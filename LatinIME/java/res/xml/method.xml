@@ -194,7 +194,7 @@
             android:subtypeId="0xd2e520d5"
             android:imeSubtypeLocale="ca"
             android:imeSubtypeMode="keyboard"
-            android:imeSubtypeExtraValue="KeyboardLayoutSet=spanish,AsciiCapable,EmojiCapable"
+            android:imeSubtypeExtraValue="KeyboardLayoutSet=qwerty,AsciiCapable,EmojiCapable"
             android:isAsciiCapable="true"
     />
     <subtype android:icon="@drawable/ic_ime_switcher_dark"
