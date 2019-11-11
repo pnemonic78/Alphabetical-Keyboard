@@ -115,7 +115,7 @@
     <string name="subtype_generic_traditional" msgid="8584594350973800586">"<xliff:g id="LANGUAGE_NAME">%s</xliff:g> (සාම්ප්‍රදායික)"</string>
     <string name="subtype_generic_compact" msgid="3353673321203202922">"<xliff:g id="LANGUAGE_NAME">%s</xliff:g> (සංයුක්ත)"</string>
     <string name="subtype_no_language" msgid="7137390094240139495">"භාෂාවක් නැත (අකාරාදිය)"</string>
-    <string name="subtype_no_language_qwerty" msgid="244337630616742604">"අකාරාදිය (QWERTY)"</string>
+    <string name="subtype_no_language_qwerty" msgid="244337630616742604">"අකාරාදිය"</string>
     <string name="subtype_no_language_qwertz" msgid="443066912507547976">"අකාරාදිය (QWERTZ)"</string>
     <string name="subtype_no_language_azerty" msgid="8144348527575640087">"අකාරාදිය (AZERTY)"</string>
     <string name="subtype_no_language_dvorak" msgid="1564494667584718094">"අකාරාදිය (Dvorak)"</string>

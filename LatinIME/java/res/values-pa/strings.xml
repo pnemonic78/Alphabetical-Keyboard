@@ -115,7 +115,7 @@
     <string name="subtype_generic_traditional" msgid="8584594350973800586">"<xliff:g id="LANGUAGE_NAME">%s</xliff:g> (ਪਰੰਪਰਿਕ)"</string>
     <string name="subtype_generic_compact" msgid="3353673321203202922">"<xliff:g id="LANGUAGE_NAME">%s</xliff:g> (ਸੰਖਿਪਤ)"</string>
     <string name="subtype_no_language" msgid="7137390094240139495">"ਕੋਈ ਭਾਸ਼ਾ ਨਹੀਂ (ਵਰਨਮਾਲਾ)"</string>
-    <string name="subtype_no_language_qwerty" msgid="244337630616742604">"ਵਰਨਮਾਲਾ (QWERTY)"</string>
+    <string name="subtype_no_language_qwerty" msgid="244337630616742604">"ਵਰਨਮਾਲਾ"</string>
     <string name="subtype_no_language_qwertz" msgid="443066912507547976">"ਵਰਨਮਾਲਾ (QWERTZ)"</string>
     <string name="subtype_no_language_azerty" msgid="8144348527575640087">"ਵਰਨਮਾਲਾ (AZERTY)"</string>
     <string name="subtype_no_language_dvorak" msgid="1564494667584718094">"ਵਰਨਮਾਲਾ (ਵੋਰਕ)"</string>

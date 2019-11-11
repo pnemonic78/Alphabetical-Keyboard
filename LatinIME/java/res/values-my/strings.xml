@@ -115,7 +115,7 @@
     <string name="subtype_generic_traditional" msgid="8584594350973800586">"<xliff:g id="LANGUAGE_NAME">%s</xliff:g> (ရိုးရာ)"</string>
     <string name="subtype_generic_compact" msgid="3353673321203202922">"<xliff:g id="LANGUAGE_NAME">%s</xliff:g> (ကျစ်လစ်သော)"</string>
     <string name="subtype_no_language" msgid="7137390094240139495">"ဘာသာစကားမရှိ (ဗျည်းအက္ခရာ)"</string>
-    <string name="subtype_no_language_qwerty" msgid="244337630616742604">"ဗျည်းအက္ခရာ (ကွာတီ)"</string>
+    <string name="subtype_no_language_qwerty" msgid="244337630616742604">"ဗျည်းအက္ခရာ"</string>
     <string name="subtype_no_language_qwertz" msgid="443066912507547976">"ဗျည်းအက္ခရာ (ကွာတီ)"</string>
     <string name="subtype_no_language_azerty" msgid="8144348527575640087">"ဗျည်း (အဇာတည်)"</string>
     <string name="subtype_no_language_dvorak" msgid="1564494667584718094">"ဗျည်းအက္ခရာ (ဒီဘိုရခ်)"</string>

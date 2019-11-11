@@ -115,7 +115,7 @@
     <string name="subtype_generic_traditional" msgid="8584594350973800586">"<xliff:g id="LANGUAGE_NAME">%s</xliff:g> (പരമ്പരാഗതം)"</string>
     <string name="subtype_generic_compact" msgid="3353673321203202922">"<xliff:g id="LANGUAGE_NAME">%s</xliff:g> (കോം‌പാക്‌ട്)"</string>
     <string name="subtype_no_language" msgid="7137390094240139495">"ഭാഷയില്ല (അക്ഷരമാല)"</string>
-    <string name="subtype_no_language_qwerty" msgid="244337630616742604">"അക്ഷരമാല (QWERTY)"</string>
+    <string name="subtype_no_language_qwerty" msgid="244337630616742604">"അക്ഷരമാല"</string>
     <string name="subtype_no_language_qwertz" msgid="443066912507547976">"അക്ഷരമാല (QWERTZ)"</string>
     <string name="subtype_no_language_azerty" msgid="8144348527575640087">"അക്ഷരമാല (AZERTY)"</string>
     <string name="subtype_no_language_dvorak" msgid="1564494667584718094">"അക്ഷരമാല (Dvorak)"</string>
