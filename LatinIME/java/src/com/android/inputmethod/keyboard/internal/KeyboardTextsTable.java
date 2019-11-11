@@ -1478,12 +1478,12 @@ public final class KeyboardTextsTable {
         // U+0137: "ķ" LATIN SMALL LETTER K WITH CEDILLA
         /* morekeys_k */ "\u0137",
         /* morekeys_cyrillic_ie */ null,
-        // U+00FC: "ü" LATIN SMALL LETTER U WITH DIAERESIS
-        /* keyspec_nordic_row1_11 */ "\u00FC",
+        // U+00E4: "ä" LATIN SMALL LETTER A WITH DIAERESIS
+        /* keyspec_nordic_row1_11 */ "\u00E4",
         // U+00F6: "ö" LATIN SMALL LETTER O WITH DIAERESIS
         /* keyspec_nordic_row2_10 */ "\u00F6",
-        // U+00E4: "ä" LATIN SMALL LETTER A WITH DIAERESIS
-        /* keyspec_nordic_row2_11 */ "\u00E4",
+        // U+00FC: "ü" LATIN SMALL LETTER U WITH DIAERESIS
+        /* keyspec_nordic_row2_11 */ "\u00FC",
         // U+00F5: "õ" LATIN SMALL LETTER O WITH TILDE
         /* morekeys_nordic_row2_10 */ "\u00F5",
     };
