@@ -21,6 +21,16 @@
 <merge
     xmlns:latin="http://schemas.android.com/apk/res-auto"
 >
-    <include
-        latin:keyboardLayout="@xml/rowkeys_qwerty1" />
+    <!-- U+0125: "ĥ" LATIN SMALL LETTER H WITH CIRCUMFLEX -->
+    <Key latin:keySpec="ĥ"/>
+    <Key latin:keySpec="i" latin:moreKeys="!text/morekeys_i"/>
+    <Key latin:keySpec="j" latin:moreKeys="!text/morekeys_j"/>
+    <!-- U+0135: "ĵ" LATIN SMALL LETTER J WITH CIRCUMFLEX -->
+    <Key latin:keySpec="ĵ"/>
+    <Key latin:keySpec="k" latin:moreKeys="!text/morekeys_k"/>
+    <Key latin:keySpec="l" latin:moreKeys="!text/morekeys_l"/>
+    <Key latin:keySpec="m"/>
+    <Key latin:keySpec="n" latin:moreKeys="!text/morekeys_n"/>
+    <Key latin:keySpec="o" latin:moreKeys="!text/morekeys_o"/>
+    <Key latin:keySpec="p"/>
 </merge>

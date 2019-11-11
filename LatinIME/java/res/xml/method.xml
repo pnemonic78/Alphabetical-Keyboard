@@ -250,7 +250,7 @@
             android:subtypeId="0x4090554a"
             android:imeSubtypeLocale="eo"
             android:imeSubtypeMode="keyboard"
-            android:imeSubtypeExtraValue="KeyboardLayoutSet=spanish,EmojiCapable"
+            android:imeSubtypeExtraValue="KeyboardLayoutSet=esperanto,EmojiCapable"
             android:isAsciiCapable="false"
     />
     <subtype android:icon="@drawable/ic_ime_switcher_dark"
