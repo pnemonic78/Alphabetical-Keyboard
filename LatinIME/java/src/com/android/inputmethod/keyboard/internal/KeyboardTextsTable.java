@@ -1028,20 +1028,20 @@ public final class KeyboardTextsTable {
         /* morekeys_r ~ */
         null, null, null,
         /* ~ morekeys_cyrillic_ie */
-        // U+00E5: "å" LATIN SMALL LETTER A WITH RING ABOVE
-        /* keyspec_nordic_row1_11 */ "\u00E5",
         // U+00E6: "æ" LATIN SMALL LETTER AE
-        /* keyspec_nordic_row2_10 */ "\u00E6",
+        /* keyspec_nordic_row1_11 */ "\u00E6",
         // U+00F8: "ø" LATIN SMALL LETTER O WITH STROKE
-        /* keyspec_nordic_row2_11 */ "\u00F8",
-        // U+00E4: "ä" LATIN SMALL LETTER A WITH DIAERESIS
-        /* morekeys_nordic_row2_10 */ "\u00E4",
+        /* keyspec_nordic_row2_10 */ "\u00F8",
+        // U+00E5: "å" LATIN SMALL LETTER A WITH RING ABOVE
+        /* keyspec_nordic_row2_11 */ "\u00E5",
+        // U+00F6: "ö" LATIN SMALL LETTER O WITH DIAERESIS
+        /* morekeys_nordic_row2_10 */ "\u00F6",
         /* keyspec_east_slavic_row1_9 ~ */
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null, null, null, null, null,
         /* ~ morekeys_tablet_period */
-        // U+00F6: "ö" LATIN SMALL LETTER O WITH DIAERESIS
-        /* morekeys_nordic_row2_11 */ "\u00F6",
+        // U+00E4: "ä" LATIN SMALL LETTER A WITH DIAERESIS
+        /* morekeys_nordic_row2_11 */ "\u00E4",
     };
 
     /* Locale de: German */
@@ -2859,12 +2859,12 @@ public final class KeyboardTextsTable {
         /* keyspec_currency ~ */
         null, null, null, null, null, null, null, null, null, null, null, null,
         /* ~ morekeys_cyrillic_ie */
-        // U+00E5: "å" LATIN SMALL LETTER A WITH RING ABOVE
-        /* keyspec_nordic_row1_11 */ "\u00E5",
+        // U+00E6: "æ" LATIN SMALL LETTER AE
+        /* keyspec_nordic_row1_11 */ "\u00E6",
         // U+00F8: "ø" LATIN SMALL LETTER O WITH STROKE
         /* keyspec_nordic_row2_10 */ "\u00F8",
-        // U+00E6: "æ" LATIN SMALL LETTER AE
-        /* keyspec_nordic_row2_11 */ "\u00E6",
+        // U+00E5: "å" LATIN SMALL LETTER A WITH RING ABOVE
+        /* keyspec_nordic_row2_11 */ "\u00E5",
         // U+00F6: "ö" LATIN SMALL LETTER O WITH DIAERESIS
         /* morekeys_nordic_row2_10 */ "\u00F6",
         /* keyspec_east_slavic_row1_9 ~ */
