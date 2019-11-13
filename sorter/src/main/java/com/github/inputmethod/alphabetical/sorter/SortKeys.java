@@ -79,7 +79,8 @@ public class SortKeys {
         Node node;
         short nodeType;
         String nodeName;
-        Node comment = null;
+        Node comment1 = null;
+        Node comment2 = null;
         Node key;
         KeyPair pair;
         final List<KeyPair> pairs = new ArrayList<>();
@@ -89,14 +90,19 @@ public class SortKeys {
             root.removeChild(node);
             nodeType = node.getNodeType();
             if (nodeType == Node.COMMENT_NODE) {
-                comment = node;
+                if (comment1 == null) {
+                    comment1 = node;
+                } else if (comment2 == null) {
+                    comment2 = node;
+                }
             } else if (nodeType == Node.ELEMENT_NODE) {
                 nodeName = node.getNodeName();
                 if (nodeName.equals(ELEMENT_KEY)) {
                     key = node;
-                    pair = new KeyPair(comment, key);
+                    pair = new KeyPair(comment1, comment2, key);
                     pairs.add(pair);
-                    comment = null;
+                    comment1 = null;
+                    comment2 = null;
                 }
             }
         }
@@ -107,8 +113,11 @@ public class SortKeys {
             Collections.reverse(pairs);
         }
         for (KeyPair pair2 : pairs) {
-            if (pair2.comment != null) {
-                root.appendChild(pair2.comment);
+            if (pair2.comment1 != null) {
+                root.appendChild(pair2.comment1);
+            }
+            if (pair2.comment2 != null) {
+                root.appendChild(pair2.comment2);
             }
             root.appendChild(pair2.key);
             System.out.println(pair2.comparable);
@@ -119,12 +128,18 @@ public class SortKeys {
 
         private static final String ATTRIBUTE_TO_SORT = "latin:keySpec";
 
-        final Node comment;
+        final Node comment1;
+        final Node comment2;
         final Node key;
         final String comparable;
 
         private KeyPair(Node comment, Node key) {
-            this.comment = comment;
+            this(comment, null, key);
+        }
+
+        private KeyPair(Node comment1, Node comment2, Node key) {
+            this.comment1 = comment1;
+            this.comment2 = comment2;
             this.key = key;
             this.comparable = key.getAttributes().getNamedItem(ATTRIBUTE_TO_SORT).getNodeValue();
         }
