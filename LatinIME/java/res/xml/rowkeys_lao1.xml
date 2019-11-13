@@ -54,29 +54,25 @@
             <Key
                 latin:keySpec="&#x0EA2;"
                 latin:keyHintLabel="1"
-                latin:additionalMoreKeys="1"
-                latin:moreKeys="&#x0ED1;" />
+                latin:additionalMoreKeys="1,&#x0ED1;" />
             <!-- U+0E9F: "ຟ" LAO LETTER FO SUNG
                  U+0ED2: "໒" LAO DIGIT TWO -->
             <Key
                 latin:keySpec="&#x0E9F;"
                 latin:keyHintLabel="2"
-                latin:additionalMoreKeys="2"
-                latin:moreKeys="&#x0ED2;" />
+                latin:additionalMoreKeys="2,&#x0ED2;" />
             <!-- U+0EC2: "ໂ" LAO VOWEL SIGN O
                  U+0ED3: "໓" LAO DIGIT THREE -->
             <Key
                 latin:keySpec="&#x0EC2;"
                 latin:keyHintLabel="3"
-                latin:additionalMoreKeys="3"
-                latin:moreKeys="&#x0ED3;" />
+                latin:additionalMoreKeys="3&#x0ED3;" />
             <!-- U+0E96: "ຖ" LAO LETTER THO SUNG
                  U+0ED4: "໔" LAO DIGIT FOUR -->
             <Key
                 latin:keySpec="&#x0E96;"
                 latin:keyHintLabel="4"
-                latin:additionalMoreKeys="4"
-                latin:moreKeys="&#x0ED4;" />
+                latin:additionalMoreKeys="4,&#x0ED4;" />
             <!-- U+0EB8: "ຸ" LAO VOWEL SIGN U -->
             <Key latin:keySpec="&#x0EB8;" />
             <!-- U+0EB9: "ູ" LAO VOWEL SIGN UU -->
@@ -86,38 +82,36 @@
             <Key
                 latin:keySpec="&#x0E84;"
                 latin:keyHintLabel="5"
-                latin:additionalMoreKeys="5"
-                latin:moreKeys="&#x0ED5;" />
+                latin:additionalMoreKeys="5,&#x0ED5;" />
             <!-- U+0E95: "ຕ" LAO LETTER TO
                  U+0ED6: "໖" LAO DIGIT SIX -->
             <Key
                 latin:keySpec="&#x0E95;"
                 latin:keyHintLabel="6"
-                latin:additionalMoreKeys="6"
-                latin:moreKeys="&#x0ED6;" />
+                latin:additionalMoreKeys="6,&#x0ED6;" />
             <!-- U+0E88: "ຈ" LAO LETTER CO
                  U+0ED7: "໗" LAO DIGIT SEVEN -->
             <Key
                 latin:keySpec="&#x0E88;"
                 latin:keyHintLabel="7"
-                latin:additionalMoreKeys="7"
-                latin:moreKeys="&#x0ED7;" />
+                latin:additionalMoreKeys="7,&#x0ED7;" />
             <!-- U+0E82: "ຂ" LAO LETTER KHO SUNG
                  U+0ED8: "໘" LAO DIGIT EIGHT -->
             <Key
                 latin:keySpec="&#x0E82;"
                 latin:keyHintLabel="8"
-                latin:additionalMoreKeys="8"
-                latin:moreKeys="&#x0ED8;" />
+                latin:additionalMoreKeys="8,&#x0ED8;" />
             <!-- U+0E8A: "ຊ" LAO LETTER SO TAM
                  U+0ED9: "໙" LAO DIGIT NINE -->
             <Key
                 latin:keySpec="&#x0E8A;"
                 latin:keyHintLabel="9"
-                latin:additionalMoreKeys="9"
-                latin:moreKeys="&#x0ED9;" />
-            <!-- U+0ECD: "ໍ" LAO NIGGAHITA -->
-            <Key latin:keySpec="&#x0ECD;" />
+                latin:additionalMoreKeys="9,&#x0ED9;" />
+            <!-- U+0ECD: "ໍ" LAO NIGGAHITA
+                 U+0ED0: "໐" LAO DIGIT ZERO -->
+            <Key latin:keySpec="&#x0ECD;"
+                latin:keyHintLabel="0"
+                latin:additionalMoreKeys="0,&#x0ED0;" />
         </default>
     </switch>
 </merge>

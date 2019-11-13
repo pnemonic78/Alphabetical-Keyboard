@@ -63,13 +63,9 @@
         <default>
             <!-- U+0EBB: "ົ" LAO VOWEL SIGN MAI KON -->
             <Key latin:keySpec="&#x0EBB;" />
-            <!-- U+0EC4: "ໄ" LAO VOWEL SIGN AI
-                 U+0ED0: "໐" LAO DIGIT ZERO -->
+            <!-- U+0EC4: "ໄ" LAO VOWEL SIGN AI -->
             <Key
-                latin:keySpec="&#x0EC4;"
-                latin:keyHintLabel="0"
-                latin:additionalMoreKeys="0"
-                latin:moreKeys="&#x0ED0;" />
+                latin:keySpec="&#x0EC4;" />
             <!-- U+0EB3: "ຳ" LAO VOWEL SIGN AM -->
             <Key latin:keySpec="&#x0EB3;" />
             <!-- U+0E9E: "ພ" LAO LETTER PHO TAM -->
