@@ -48,18 +48,8 @@
         latin:keyWidth="7.5%p"
         latin:keyLabelFlags="fontNormal"
     >
-        <Key
-            latin:keyStyle="shiftKeyStyle"
-            latin:keyWidth="10.0%p" />
         <include latin:keyboardLayout="@xml/rowkeys_lao4" />
-        <switch>
-            <case latin:keyboardLayoutSetElement="alphabetManualShifted|alphabetShiftLocked|alphabetShiftLockShifted">
-                <Spacer />
-            </case>
-            <default>
-                <include latin:keyboardLayout="@xml/keys_exclamation_question" />
-            </default>
-        </switch>
+        <include latin:keyboardLayout="@xml/keys_exclamation_question" />
     </Row>
     <include latin:keyboardLayout="@xml/row_qwerty4" />
 </merge>
