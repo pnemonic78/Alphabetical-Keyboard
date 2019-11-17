@@ -78,54 +78,41 @@
             <Key latin:keySpec="&#x0920;" />
         </case>
         <default>
-            <!-- Because the font rendering system prior to API version 16 can't automatically
-                 render dotted circle for incomplete combining letter of some scripts, different
-                 set of Key definitions are needed based on the API version. -->
-            <include latin:keyboardLayout="@xml/keystyle_devanagari_vowel_sign_o" />
-            <Key latin:keyStyle="baseKeyDevanagariVowelSignO" />
-            <!-- Because the font rendering system prior to API version 16 can't automatically
-                 render dotted circle for incomplete combining letter of some scripts, different
-                 set of Key definitions are needed based on the API version. -->
-            <include latin:keyboardLayout="@xml/keystyle_devanagari_vowel_sign_e" />
-            <Key latin:keyStyle="baseKeyDevanagariVowelSignE" />
-            <!-- Because the font rendering system prior to API version 16 can't automatically
-                 render dotted circle for incomplete combining letter of some scripts, different
-                 set of Key definitions are needed based on the API version. -->
-            <include latin:keyboardLayout="@xml/keystyle_devanagari_sign_virama" />
-            <Key latin:keyStyle="baseKeyDevanagariSignVirama" />
-            <!-- Because the font rendering system prior to API version 16 can't automatically
-                 render dotted circle for incomplete combining letter of some scripts, different
-                 set of Key definitions are needed based on the API version. -->
-            <include latin:keyboardLayout="@xml/keystyle_devanagari_vowel_sign_i" />
-            <Key latin:keyStyle="baseKeyDevanagariVowelSignI" />
-            <!-- Because the font rendering system prior to API version 16 can't automatically
-                 render dotted circle for incomplete combining letter of some scripts, different
-                 set of Key definitions are needed based on the API version. -->
-            <include latin:keyboardLayout="@xml/keystyle_devanagari_vowel_sign_u" />
-            <Key latin:keyStyle="baseKeyDevanagariVowelSignU" />
-            <!-- U+092A: "प" DEVANAGARI LETTER PA -->
-            <Key latin:keySpec="&#x092A;" />
+            <!-- U+092E: "म" DEVANAGARI LETTER MA
+                 U+0950: "ॐ" DEVANAGARI OM -->
+            <Key latin:keySpec="म" latin:moreKeys="ॐ"/>
+            <!-- U+092F: "य" DEVANAGARI LETTER YA
+                 U+095F: "य़" DEVANAGARI LETTER YYA -->
+            <Key latin:keySpec="य" latin:moreKeys="य़"/>
             <!-- U+0930: "र" DEVANAGARI LETTER RA
                  U+090B: "ऋ" DEVANAGARI LETTER VOCALIC R
                  U+0930/U+093C: "ऱ" DEVANAGARI LETTER RA/DEVANAGARI SIGN NUKTA
                  U+0960: "ॠ" DEVANAGARI LETTER VOCALIC RR -->
-            <Key
-                latin:keySpec="&#x0930;"
-                latin:moreKeys="&#x090B;,&#x0930;&#x093C;,&#x0960;" />
-            <!-- U+0915: "क" DEVANAGARI LETTER KA
-                 U+0915/U+093C: "क़" DEVANAGARI LETTER KA/DEVANAGARI SIGN NUKTA -->
-            <Key
-                latin:keySpec="&#x0915;"
-                latin:moreKeys="&#x0915;&#x093C;" />
-            <!-- U+0924: "त" DEVANAGARI LETTER TA
-                 U+0924/U+094D/U+0930: "त्र" DEVANAGARI LETTER TA/DEVANAGARI SIGN VIRAMA/DEVANAGARI LETTER RA -->
-            <Key
-                latin:keySpec="&#x0924;"
-                latin:moreKeys="&#x0924;&#x094D;&#x0930;" />
-            <!-- U+091A: "च" DEVANAGARI LETTER CA -->
-            <Key latin:keySpec="&#x091A;" />
-            <!-- U+091F: "ट" DEVANAGARI LETTER TTA -->
-            <Key latin:keySpec="&#x091F;" />
+            <Key latin:keySpec="र" latin:moreKeys="ऋ,ऱ,ॠ"/>
+            <!-- U+0932: "ल" DEVANAGARI LETTER LA
+                 U+090C: "ऌ" DEVANAGARI LETTER VOCALIC L
+                 U+0961: "ॡ" DEVANAGARI LETTER VOCALIC LL -->
+            <Key latin:keySpec="ल" latin:moreKeys="ऌ,ॡ"/>
+            <!-- U+0935: "व" DEVANAGARI LETTER VA -->
+            <Key latin:keySpec="व"/>
+            <!-- U+0938: "स" DEVANAGARI LETTER SA -->
+            <Key latin:keySpec="स"/>
+            <!-- U+0939: "ह" DEVANAGARI LETTER HA -->
+            <Key latin:keySpec="ह"/>
+            <!-- U+0902: "ं" DEVANAGARI SIGN ANUSVARA -->
+            <Key latin:keySpec="ं"/>
+            <!-- U+093C: "़" DEVANAGARI SIGN NUKTA
+                 U+097D: "ॽ" DEVANAGARI LETTER GLOTTAL STOP
+                 U+0970: "॰" DEVANAGARI ABBREVIATION SIGN
+                 U+093D: "ऽ" DEVANAGARI SIGN AVAGRAHA -->
+            <Key latin:keySpec="़" latin:moreKeys="ॽ,॰,ऽ"/>
+            <!-- U+093E: "ा" DEVANAGARI VOWEL SIGN AA
+                 U+093E/U+0902: "ां" DEVANAGARI VOWEL SIGN AA/DEVANAGARI SIGN ANUSVARA
+                 U+093E/U+0901: "ाँ" DEVANAGARI VOWEL SIGN AA/DEVANAGARI SIGN CANDRABINDU -->
+            <Key latin:keySpec="ा" latin:moreKeys="ां,ाँ,%"/>
+            <!-- U+093F: "ि" DEVANAGARI VOWEL SIGN I
+                 U+093F/U+0902: "िं" DEVANAGARI VOWEL SIGN I/DEVANAGARI SIGN ANUSVARA -->
+            <Key latin:keySpec="ि" latin:moreKeys="िं"/>
         </default>
     </switch>
 </merge>

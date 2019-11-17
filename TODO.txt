@@ -1,3 +1,14 @@
+hindi
+hindi_compact
+kannada
+khmer
+malayalam
+marathi
+nepali_romanized
+nepali_traditional
+sinhala
+tamil
+
 tall screens: separate row of numbers above alphabet
 Amharic
 Korean
