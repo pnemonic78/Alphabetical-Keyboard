@@ -1,5 +1,4 @@
 khmer
-malayalam
 marathi
 nepali_romanized
 nepali_traditional
