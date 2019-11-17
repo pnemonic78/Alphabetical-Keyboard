@@ -1,4 +1,3 @@
-hindi_compact
 kannada
 khmer
 malayalam
