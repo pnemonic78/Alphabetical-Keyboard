@@ -23,7 +23,7 @@
         <case latin:keyboardLayoutSetElement="alphabetManualShifted|alphabetShiftLocked|alphabetShiftLockShifted">
             <!-- U+0911: "ऑ" DEVANAGARI LETTER CANDRA O -->
             <Key latin:keySpec="&#x0911;" />
-            <!-- include latin:keyboardLayout="@xml/keystyle_devanagari_sign_candrabindu" /-->
+            <include latin:keyboardLayout="@xml/keystyle_devanagari_sign_candrabindu" />
             <Key latin:keyStyle="baseKeyDevanagariSignCandrabindu" />
             <!-- U+0923: "ण" DEVANAGARI LETTER NNA -->
             <Key latin:keySpec="&#x0923;" />
@@ -38,7 +38,7 @@
             <Key latin:keySpec="&#x0936;" />
             <!-- U+0937: "ष" DEVANAGARI LETTER SSA -->
             <Key latin:keySpec="&#x0937;" />
-            <!-- include latin:keyboardLayout="@xml/keystyle_devanagari_vowel_sign_vocalic_r" /-->
+            <include latin:keyboardLayout="@xml/keystyle_devanagari_vowel_sign_vocalic_r" />
             <Key latin:keyStyle="baseKeyDevanagariVowelSignVocalicR" />
             <!-- U+091E: "ञ" DEVANAGARI LETTER NYA -->
             <Key latin:keySpec="&#x091E;" />
