@@ -21,27 +21,30 @@
 <merge xmlns:latin="http://schemas.android.com/apk/res-auto">
     <switch>
         <case latin:keyboardLayoutSetElement="alphabetManualShifted|alphabetShiftLocked|alphabetShiftLockShifted">
-            <!-- U+0911: "ऑ" DEVANAGARI LETTER CANDRA O -->
-            <Key latin:keySpec="&#x0911;" />
-            <include latin:keyboardLayout="@xml/keystyle_devanagari_sign_candrabindu" />
-            <Key latin:keyStyle="baseKeyDevanagariSignCandrabindu" />
-            <!-- U+0923: "ण" DEVANAGARI LETTER NNA -->
-            <Key latin:keySpec="&#x0923;" />
-            <!-- U+0929: "ऩ" DEVANAGARI LETTER NNNA -->
-            <Key latin:keySpec="&#x0929;" />
+            <!-- U+092B: "फ" DEVANAGARI LETTER PHA
+                 U+092B/U+093C: "फ़" DEVANAGARI LETTER PHA/DEVANAGARI SIGN NUKTA -->
+            <Key latin:keySpec="फ" latin:moreKeys="फ़"/>
+            <!-- U+092D: "भ" DEVANAGARI LETTER BHA -->
+            <Key latin:keySpec="भ"/>
+            <!-- U+0931: "ऱ" DEVANAGARI LETTER RRA
+                 U+094D/U+0930: "्र" DEVANAGARI SIGN VIRAMA/DEVANAGARI LETTER RA
+                 U+0930/U+094D: "र्" DEVANAGARI LETTER RA/DEVANAGARI SIGN VIRAMA -->
+            <Key latin:keySpec="ऱ" latin:moreKeys="्र,र्"/>
             <!-- U+0933: "ळ" DEVANAGARI LETTER LLA
                  U+0934: "ऴ" DEVANAGARI LETTER LLLA -->
-            <Key
-                latin:keySpec="&#x0933;"
-                latin:moreKeys="&#x0934;" />
+            <Key latin:keySpec="ळ" latin:moreKeys="ऴ"/>
             <!-- U+0936: "श" DEVANAGARI LETTER SHA -->
-            <Key latin:keySpec="&#x0936;" />
+            <Key latin:keySpec="श"/>
             <!-- U+0937: "ष" DEVANAGARI LETTER SSA -->
-            <Key latin:keySpec="&#x0937;" />
-            <include latin:keyboardLayout="@xml/keystyle_devanagari_vowel_sign_vocalic_r" />
-            <Key latin:keyStyle="baseKeyDevanagariVowelSignVocalicR" />
-            <!-- U+091E: "ञ" DEVANAGARI LETTER NYA -->
-            <Key latin:keySpec="&#x091E;" />
+            <Key latin:keySpec="ष"/>
+            <!-- U+0901: "ँ" DEVANAGARI SIGN CANDRABINDU
+                 U+0945: "ॅ" DEVANAGARI VOWEL SIGN CANDRA E -->
+            <Key latin:keySpec="ँ" latin:moreKeys="ॅ"/>
+            <!-- U+0903: "ः" DEVANAGARI SIGN VISARGA -->
+            <Key latin:keySpec="ः"/>
+            <!-- U+0943: "ृ" DEVANAGARI VOWEL SIGN VOCALIC R
+                 U+0944: "ॄ" DEVANAGARI VOWEL SIGN VOCALIC RR -->
+            <Key latin:keySpec="ृ" latin:moreKeys="ॄ"/>
         </case>
         <default>
             <!-- U+0940: "ी" DEVANAGARI VOWEL SIGN II
