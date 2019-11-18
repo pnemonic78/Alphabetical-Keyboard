@@ -1,6 +1,4 @@
 nepali_romanized
-nepali_traditional
-tamil
 
 tall screens: separate row of numbers above alphabet
 Amharic

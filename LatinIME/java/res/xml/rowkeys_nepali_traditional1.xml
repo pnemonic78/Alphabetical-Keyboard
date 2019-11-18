@@ -79,10 +79,15 @@
             <Key
                 latin:keySpec="&#x090F;"
                 latin:moreKeys="&#x0923;" />
-            <!-- Because the font rendering system prior to API version 16 can't automatically
-                 render dotted circle for incomplete combining letter of some scripts, different
-                 set of Key definitions are needed based on the API version. -->
-            <include latin:keyboardLayout="@xml/keystyle_devanagari_vowel_sign_vocalic_r" />
+            <!-- U+0913: "ओ" DEVANAGARI LETTER O -->
+            <key-style
+                latin:styleName="moreKeysDevanagariVowelSignVocalicR"
+                latin:moreKeys="&#x0913;" />
+            <!-- U+0943: "ृ" DEVANAGARI VOWEL SIGN VOCALIC R -->
+            <key-style
+                latin:styleName="baseKeyDevanagariVowelSignVocalicR"
+                latin:parentStyle="moreKeysDevanagariVowelSignVocalicR"
+                latin:keySpec="&#x0943;" />
             <Key latin:keyStyle="baseKeyDevanagariVowelSignVocalicR" />
         </case>
         <default>
