@@ -622,9 +622,6 @@
             android:imeSubtypeExtraValue="SupportTouchPositionCorrection,EmojiCapable"
             android:isAsciiCapable="false"
     />
-    <!-- TODO: This Sinhala keyboard is a preliminary layout.
-               This isn't based on the final specification. -->
-    <!-- si_LK is currently disabled due to lack of combination rules.
     <subtype android:icon="@drawable/ic_ime_switcher_dark"
             android:label="@string/subtype_generic"
             android:subtypeId="0x5c6b3bde"
@@ -633,7 +630,6 @@
             android:imeSubtypeExtraValue="KeyboardLayoutSet=sinhala,EmojiCapable"
             android:isAsciiCapable="false"
     />
-    -->
     <subtype android:icon="@drawable/ic_ime_switcher_dark"
             android:label="@string/subtype_generic"
             android:subtypeId="0x8e94d413"
