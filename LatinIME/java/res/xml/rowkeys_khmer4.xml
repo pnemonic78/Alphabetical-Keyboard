@@ -34,10 +34,10 @@
             <Key latin:keySpec="។"/>
             <!-- U+17D5: "៕" KHMER SIGN BARIYOOSAN -->
             <Key latin:keySpec="៕"/>
-            <!-- U+17D6: "៖" KHMER SIGN CAMNUC PII KUUH -->
-            <Key latin:keyHintLabel="%" latin:keySpec="៖" latin:moreKeys="%"/>
             <!-- U+17D7: "ៗ" KHMER SIGN LEK TOO -->
             <Key latin:keySpec="ៗ"/>
+            <!-- U+17D6: "៖" KHMER SIGN CAMNUC PII KUUH -->
+            <Key latin:keyHintLabel="%" latin:keySpec="៖" latin:moreKeys="%"/>
             <Key latin:keyStyle="zwnjKeyStyle"/>
         </case>
         <default>
