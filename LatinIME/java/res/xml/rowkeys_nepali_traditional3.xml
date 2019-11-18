@@ -34,28 +34,19 @@
             <!-- U+0950: "ॐ" DEVANAGARI OM -->
             <Key latin:keySpec="&#x0950;" />
             <!-- U+094C: "ौ" DEVANAGARI VOWEL SIGN AU -->
-            <key-style
-                latin:styleName="baseKeyDevanagariVowelSignAu"
-                latin:keySpec="&#x094C;" />
-            <Key latin:keyStyle="baseKeyDevanagariVowelSignAu" />
+            <Key latin:keySpec="&#x094C;" />
             <!-- U+0926/U+094D/U+092F: "द्य" DEVANAGARI LETTER DA/DEVANAGARI SIGN VIRAMA/DEVANAGARI LETTER YA -->
             <Key
                 latin:keySpec="&#x0926;&#x094D;&#x092F;"
                 latin:keyLabelFlags="followKeyLetterRatio" />
             <!-- U+0902: "ं" DEVANAGARI SIGN ANUSVARA -->
-            <key-style
-                latin:styleName="baseKeyDevanagariSignAnusvara"
-                latin:keySpec="&#x0902;" />
-            <Key latin:keyStyle="baseKeyDevanagariSignAnusvara" />
+            <Key latin:keySpec="&#x0902;" />
             <!-- U+0919: "ङ" DEVANAGARI LETTER NGA -->
             <Key latin:keySpec="&#x0919;" />
-            <!-- U+0948: "ै" DEVANAGARI VOWEL SIGN AI -->
-            <!-- U+0936/U+094D/U+0930: "श्र" DEVANAGARI LETTER SHA/DEVANAGARI SIGN VIRAMA/DEVANAGARI LETTER RA -->
-            <key-style
-                latin:styleName="baseKeyDevanagariVowelSignAi"
-                latin:moreKeys="&#x0936;&#x094D;&#x0930;"
+            <!-- U+0948: "ै" DEVANAGARI VOWEL SIGN AI
+                 U+0936/U+094D/U+0930: "श्र" DEVANAGARI LETTER SHA/DEVANAGARI SIGN VIRAMA/DEVANAGARI LETTER RA -->
+            <Key latin:moreKeys="&#x0936;&#x094D;&#x0930;"
                 latin:keySpec="&#x0948;" />
-            <Key latin:keyStyle="baseKeyDevanagariVowelSignAi" />
         </case>
         <default>
             <!-- U+0936: "श" DEVANAGARI LETTER SHA -->
@@ -71,18 +62,12 @@
             <!-- U+0932: "ल" DEVANAGARI LETTER LA -->
             <Key latin:keySpec="&#x0932;" />
             <!-- U+0903: "ः‍" DEVANAGARI SIGN VISARGA
-                 U+093D: "ऽ" DEVANAGARI SIGN AVAGRAHA -->
-            <!-- U+0947: "े" DEVANAGARI VOWEL SIGN E -->
-            <key-style
-                latin:styleName="baseKeyDevanagariVowelSignE"
-                latin:moreKeys="&#x0903;,&#x093D;"
+                 U+093D: "ऽ" DEVANAGARI SIGN AVAGRAHA
+                 U+0947: "े" DEVANAGARI VOWEL SIGN E -->
+            <Key latin:moreKeys="&#x0903;,&#x093D;"
                 latin:keySpec="&#x0947;" />
-            <Key latin:keyStyle="baseKeyDevanagariVowelSignE" />
             <!-- U+094D: "्" DEVANAGARI SIGN VIRAMA -->
-            <key-style
-                latin:styleName="baseKeyDevanagariSignVirama"
-                latin:keySpec="&#x094D;" />
-            <Key latin:keyStyle="baseKeyDevanagariSignVirama" />
+            <Key latin:keySpec="&#x094D;" />
             <!-- U+0930: "र" DEVANAGARI LETTER RA
                  U+0930/U+0941: "रु" DEVANAGARI LETTER RA/DEVANAGARI VOWEL SIGN U -->
             <Key

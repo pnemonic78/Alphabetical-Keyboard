@@ -79,13 +79,10 @@
             <Key
                 latin:keySpec="&#x090F;"
                 latin:moreKeys="&#x0923;" />
-            <!-- U+0913: "ओ" DEVANAGARI LETTER O -->
-            <!-- U+0943: "ृ" DEVANAGARI VOWEL SIGN VOCALIC R -->
-            <key-style
-                latin:styleName="baseKeyDevanagariVowelSignVocalicR"
-                latin:moreKeys="&#x0913;"
+            <!-- U+0913: "ओ" DEVANAGARI LETTER O
+                 U+0943: "ृ" DEVANAGARI VOWEL SIGN VOCALIC R -->
+            <Key latin:moreKeys="&#x0913;"
                 latin:keySpec="&#x0943;" />
-            <Key latin:keyStyle="baseKeyDevanagariVowelSignVocalicR" />
         </case>
         <default>
             <!-- U+091F: "ट" DEVANAGARI LETTER TTA
