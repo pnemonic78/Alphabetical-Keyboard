@@ -26,10 +26,6 @@ import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import androidx.core.app.ActivityCompat;
 
-import com.crashlytics.android.Crashlytics;
-
-import io.fabric.sdk.android.Fabric;
-
 /**
  * Spell checker preference screen.
  */
@@ -40,7 +36,6 @@ public final class SpellCheckerSettingsActivity extends PreferenceActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Fabric.with(this, new Crashlytics());
     }
 
     @Override

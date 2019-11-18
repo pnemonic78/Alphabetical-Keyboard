@@ -48,6 +48,7 @@
 
     <application android:label="@string/english_ime_name"
             android:icon="@drawable/ic_launcher_keyboard"
+            android:name="com.android.inputmethod.latin.LatinApplication"
             android:supportsRtl="true"
             android:allowBackup="true"
             android:defaultToDeviceProtectedStorage="true"
