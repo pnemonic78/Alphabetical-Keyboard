@@ -48,8 +48,7 @@
             <!-- U+17D5: "៕" KHMER SIGN BARIYOOSAN -->
             <Key latin:keySpec="&#x17D5;" />
             <Key
-                latin:keySpec="\?"
-                latin:keyLabelFlags="fontDefault" />
+                latin:keyStyle="zwnjKeyStyle" />
         </case>
         <default>
             <!-- U+178B: "ឋ" KHMER LETTER TTHA -->

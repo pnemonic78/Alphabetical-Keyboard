@@ -1,4 +1,3 @@
-khmer
 nepali_romanized
 nepali_traditional
 tamil

@@ -21,16 +21,11 @@
 <merge xmlns:latin="http://schemas.android.com/apk/res-auto">
     <switch>
         <case latin:keyboardLayoutSetElement="alphabetManualShifted|alphabetShiftLocked|alphabetShiftLockShifted">
-            <!-- U+200D: ZERO WIDTH JOINER -->
-            <Key
-                latin:keySpec="!"
-                latin:moreKeys="!icon/zwj_key|&#x200D;"
-                latin:keyLabelFlags="fontDefault" />
-            <!-- U+17D7: "ៗ" KHMER SIGN LEK TOO
-                 U+200C: ZERO WIDTH NON-JOINER -->
+            <Spacer />
+            <!-- U+17D7: "ៗ" KHMER SIGN LEK TOO -->
             <Key
                 latin:keySpec="&#x17D7;"
-                latin:moreKeys="!icon/zwnj_key|&#x200C;" />
+                latin:moreKeys="" />
             <!-- U+17D1: "៑" KHMER SIGN VIRIAM -->
             <Key
                 latin:keySpec="&quot;"
