@@ -26,29 +26,17 @@
             <!-- U+0914: "औ" DEVANAGARI LETTER AU -->
             <Key latin:keySpec="&#x0914;" />
             <!-- U+0948: "ै" DEVANAGARI VOWEL SIGN AI -->
-            <key-style
-                latin:styleName="baseKeyDevanagariVowelSignAi"
-                latin:keySpec="&#x0948;" />
-            <Key latin:keyStyle="baseKeyDevanagariVowelSignAi" />
+            <Key latin:keySpec="&#x0948;" />
             <!-- U+0943: "ृ" DEVANAGARI VOWEL SIGN VOCALIC R -->
-            <key-style
-                latin:styleName="baseKeyDevanagariVowelSignVocalicR"
-                latin:keySpec="&#x0943;" />
-            <Key latin:keyStyle="baseKeyDevanagariVowelSignVocalicR" />
+            <Key latin:keySpec="&#x0943;" />
             <!-- U+0925: "थ" DEVANAGARI LETTER THA -->
             <Key latin:keySpec="&#x0925;" />
             <!-- U+091E: "ञ" DEVANAGARI LETTER NYA -->
             <Key latin:keySpec="&#x091E;" />
             <!-- U+0942: "ू" DEVANAGARI VOWEL SIGN UU -->
-            <key-style
-                latin:styleName="baseKeyDevanagariVowelSignUu"
-                latin:keySpec="&#x0942;" />
-            <Key latin:keyStyle="baseKeyDevanagariVowelSignUu" />
+            <Key latin:keySpec="&#x0942;" />
             <!-- U+0940: "ी" DEVANAGARI VOWEL SIGN II -->
-            <key-style
-                latin:styleName="baseKeyDevanagariVowelSignIi"
-                latin:keySpec="&#x0940;" />
-            <Key latin:keyStyle="baseKeyDevanagariVowelSignIi" />
+            <Key latin:keySpec="&#x0940;" />
             <!-- U+0913: "ओ" DEVANAGARI LETTER O -->
             <Key latin:keySpec="&#x0913;" />
             <!-- U+092B: "फ" DEVANAGARI LETTER PHA -->
@@ -57,38 +45,24 @@
             <Key latin:keySpec="&#x0908;" />
         </case>
         <default>
-            <!-- U+093C: "़" DEVANAGARI SIGN NUKTA -->
-            <key-style
-                latin:styleName="moreKeysDevanagariSignNukta"
-                latin:moreKeys="&#x093C;" />
-            <!-- U+093C: "़" DEVANAGARI SIGN NUKTA -->
-            <key-style
-                latin:styleName="baseKeyDevanagariSignNukta"
-                latin:parentStyle="moreKeysDevanagariSignNukta"
-                latin:keySpec="&#x093C;" />
             <!-- U+091F: "ट" DEVANAGARI LETTER TTA
-                 U+0967: "१" DEVANAGARI DIGIT ONE -->
+                 U+0967: "१" DEVANAGARI DIGIT ONE
+                 U+093C: "़" DEVANAGARI SIGN NUKTA -->
             <Key
                 latin:keySpec="&#x091F;"
                 latin:keyHintLabel="1"
                 latin:additionalMoreKeys="&#x0967;,1"
-                latin:keyStyle="moreKeysDevanagariSignNukta" />
-            <!-- U+094C: "ौ" DEVANAGARI VOWEL SIGN AU -->
-            <key-style
-                latin:styleName="baseKeyDevanagariVowelSignAu"
-                latin:keySpec="&#x094C;" />
-            <!-- U+0968: "२" DEVANAGARI DIGIT TWO -->
+                latin:moreKeys="&#x093C;" />
+            <!-- U+094C: "ौ" DEVANAGARI VOWEL SIGN AU
+                 U+0968: "२" DEVANAGARI DIGIT TWO -->
             <Key
-                latin:keyStyle="baseKeyDevanagariVowelSignAu"
+                latin:keySpec="&#x094C;"
                 latin:keyHintLabel="2"
                 latin:additionalMoreKeys="&#x0968;,2" />
-            <!-- U+0947: "े" DEVANAGARI VOWEL SIGN E -->
-            <key-style
-                latin:styleName="baseKeyDevanagariVowelSignE"
-                latin:keySpec="&#x0947;" />
-            <!-- U+0969: "३" DEVANAGARI DIGIT THREE -->
+            <!-- U+0947: "े" DEVANAGARI VOWEL SIGN E
+                 U+0969: "३" DEVANAGARI DIGIT THREE -->
             <Key
-                latin:keyStyle="baseKeyDevanagariVowelSignE"
+                latin:keySpec="&#x0947;"
                 latin:keyHintLabel="3"
                 latin:additionalMoreKeys="&#x0969;,3" />
             <!-- U+0930: "र" DEVANAGARI LETTER RA
@@ -110,30 +84,21 @@
                 latin:keyHintLabel="6"
                 latin:additionalMoreKeys="&#x096C;,6" />
             <!-- U+0941: "ु" DEVANAGARI VOWEL SIGN U -->
-            <key-style
-                latin:styleName="baseKeyDevanagariVowelSignU"
-                latin:keySpec="&#x0941;" />
             <!-- U+096D: "७" DEVANAGARI DIGIT SEVEN -->
             <Key
-                latin:keyStyle="baseKeyDevanagariVowelSignU"
+                latin:keySpec="&#x0941;"
                 latin:keyHintLabel="7"
                 latin:additionalMoreKeys="&#x096D;,7" />
             <!-- U+093F: "ि" DEVANAGARI VOWEL SIGN I -->
-            <key-style
-                latin:styleName="baseKeyDevanagariVowelSignI"
-                latin:keySpec="&#x093F;" />
             <!-- U+096E: "८" DEVANAGARI DIGIT EIGHT -->
             <Key
-                latin:keyStyle="baseKeyDevanagariVowelSignI"
+                latin:keySpec="&#x093F;"
                 latin:keyHintLabel="8"
                 latin:additionalMoreKeys="&#x096E;,8" />
             <!-- U+094B: "ो" DEVANAGARI VOWEL SIGN O -->
-            <key-style
-                latin:styleName="baseKeyDevanagariVowelSignO"
-                latin:keySpec="&#x094B;" />
             <!-- U+096F: "९" DEVANAGARI DIGIT NINE -->
             <Key
-                latin:keyStyle="baseKeyDevanagariVowelSignO"
+                latin:keySpec="&#x094B;"
                 latin:keyHintLabel="9"
                 latin:additionalMoreKeys="&#x096F;,9" />
             <!-- U+092A: "प" DEVANAGARI LETTER PA

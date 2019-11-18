@@ -28,19 +28,13 @@
             <!-- U+091B: "छ" DEVANAGARI LETTER CHA -->
             <Key latin:keySpec="&#x091B;" />
             <!-- U+0901: "ँ" DEVANAGARI SIGN CANDRABINDU -->
-            <key-style
-                latin:styleName="baseKeyDevanagariSignCandrabindu"
-                latin:keySpec="&#x0901;" />
-            <Key latin:keyStyle="baseKeyDevanagariSignCandrabindu" />
+            <Key latin:keySpec="&#x0901;" />
             <!-- U+092D: "भ" DEVANAGARI LETTER BHA -->
             <Key latin:keySpec="&#x092D;" />
             <!-- U+0923: "ण" DEVANAGARI LETTER NNA -->
             <Key latin:keySpec="&#x0923;" />
             <!-- U+0902: "ं" DEVANAGARI SIGN ANUSVARA -->
-            <key-style
-                latin:styleName="baseKeyDevanagariSignAnusvara"
-                latin:keySpec="&#x0902;" />
-            <Key latin:keyStyle="baseKeyDevanagariSignAnusvara" />
+            <Key latin:keySpec="&#x0902;" />
             <!-- U+0919: "ङ" DEVANAGARI LETTER NGA -->
             <Key latin:keySpec="&#x0919;" />
         </case>
@@ -59,13 +53,10 @@
             <Key latin:keySpec="&#x0928;" />
             <!-- U+092E: "म" DEVANAGARI LETTER MA -->
             <Key latin:keySpec="&#x092E;" />
-            <!-- U+094D: "्" DEVANAGARI SIGN VIRAMA -->
-            <key-style
-                latin:styleName="baseKeyDevanagariSignVirama"
-                latin:keySpec="&#x094D;" />
-            <!-- U+093D: "ऽ" DEVANAGARI SIGN AVAGRAHA -->
+            <!-- U+094D: "्" DEVANAGARI SIGN VIRAMA
+                 U+093D: "ऽ" DEVANAGARI SIGN AVAGRAHA -->
             <Key
-                latin:keyStyle="baseKeyDevanagariSignVirama"
+                latin:keySpec="&#x094D;"
                 latin:moreKeys="&#x093D;" />
         </default>
     </switch>

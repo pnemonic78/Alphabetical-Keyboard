@@ -42,17 +42,11 @@
             <!-- U+0910: "ऐ" DEVANAGARI LETTER AI -->
             <Key latin:keySpec="&#x0910;" />
             <!-- U+0903: "ः" DEVANAGARI SIGN VISARGA -->
-            <key-style
-                latin:styleName="baseKeyDevanagariSignVisarga"
-                latin:keySpec="&#x0903;" />
-            <Key latin:keyStyle="baseKeyDevanagariSignVisarga" />
+            <Key latin:keySpec="&#x0903;" />
         </case>
         <default>
             <!-- U+093E: "ा" DEVANAGARI VOWEL SIGN AA -->
-            <key-style
-                latin:styleName="baseKeyDevanagariVowelSignAa"
-                latin:keySpec="&#x093E;" />
-            <Key latin:keyStyle="baseKeyDevanagariVowelSignAa" />
+            <Key latin:keySpec="&#x093E;" />
             <!-- U+0938: "स" DEVANAGARI LETTER SA -->
             <Key latin:keySpec="&#x0938;" />
             <!-- U+0926: "द" DEVANAGARI LETTER DA -->
