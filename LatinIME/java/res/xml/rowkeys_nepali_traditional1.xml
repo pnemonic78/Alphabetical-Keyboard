@@ -80,13 +80,10 @@
                 latin:keySpec="&#x090F;"
                 latin:moreKeys="&#x0923;" />
             <!-- U+0913: "ओ" DEVANAGARI LETTER O -->
-            <key-style
-                latin:styleName="moreKeysDevanagariVowelSignVocalicR"
-                latin:moreKeys="&#x0913;" />
             <!-- U+0943: "ृ" DEVANAGARI VOWEL SIGN VOCALIC R -->
             <key-style
                 latin:styleName="baseKeyDevanagariVowelSignVocalicR"
-                latin:parentStyle="moreKeysDevanagariVowelSignVocalicR"
+                latin:moreKeys="&#x0913;"
                 latin:keySpec="&#x0943;" />
             <Key latin:keyStyle="baseKeyDevanagariVowelSignVocalicR" />
         </case>
