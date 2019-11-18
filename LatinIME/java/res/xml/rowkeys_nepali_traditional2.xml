@@ -21,60 +21,55 @@
 <merge xmlns:latin="http://schemas.android.com/apk/res-auto">
     <switch>
         <case latin:keyboardLayoutSetElement="alphabetManualShifted|alphabetShiftLocked|alphabetShiftLockShifted">
-            <!-- U+0906: "आ" DEVANAGARI LETTER AA -->
-            <Key latin:keySpec="&#x0906;" />
-            <!-- U+0919/U+094D: "ङ्" DEVANAGARI LETTER NGA/DEVANAGARI SIGN VIRAMA -->
-            <Key
-                latin:keySpec="&#x0919;&#x094D;"
-                latin:keyLabelFlags="followKeyLetterRatio" />
-            <!-- U+0921/U+094D/U+0921: "ड्ड" DEVANAGARI LETTER DDA/DEVANAGARI SIGN VIRAMA/DEVANAGARI LETTER DDA -->
-            <Key
-                latin:keySpec="&#x0921;&#x094D;&#x0921;"
-                latin:keyLabelFlags="followKeyLetterRatio" />
-            <!-- U+0901: "ँ" DEVANAGARI SIGN CANDRABINDU -->
-            <Key latin:keySpec="&#x0901;" />
-            <!-- U+0926/U+094D/U+0926: "द्द" DEVANAGARI LETTER DA/DEVANAGARI SIGN VIRAMA/DEVANAGARI LETTER DA -->
-            <Key
-                latin:keySpec="&#x0926;&#x094D;&#x0926;"
-                latin:keyLabelFlags="followKeyLetterRatio" />
-            <!-- U+091D: "झ" DEVANAGARI LETTER JHA -->
-            <Key latin:keySpec="&#x091D;" />
-            <!-- U+094B: "ो" DEVANAGARI VOWEL SIGN O -->
-            <Key latin:keySpec="&#x094B;" />
-            <!-- U+092B: "फ" DEVANAGARI LETTER PHA -->
-            <Key latin:keySpec="&#x092B;" />
+            <!-- U+0930: "र" DEVANAGARI LETTER RA
+                 U+0930/U+0941: "रु" DEVANAGARI LETTER RA/DEVANAGARI VOWEL SIGN U -->
+            <Key latin:keySpec="र" latin:moreKeys="रु"/>
+            <!-- U+0932: "ल" DEVANAGARI LETTER LA -->
+            <Key latin:keySpec="ल"/>
+            <!-- U+0935: "व" DEVANAGARI LETTER VA -->
+            <Key latin:keySpec="व"/>
+            <!-- U+0936: "श" DEVANAGARI LETTER SHA -->
+            <Key latin:keySpec="श"/>
+            <!-- U+0937: "ष" DEVANAGARI LETTER SSA -->
+            <Key latin:keySpec="ष"/>
+            <!-- U+0938: "स" DEVANAGARI LETTER SA -->
+            <Key latin:keySpec="स"/>
+            <!-- U+0939: "ह" DEVANAGARI LETTER HA -->
+            <Key latin:keySpec="ह"/>
+            <!-- U+0939/U+094D/U+092E: "ह्म" DEVANAGARI LETTER HA/DEVANAGARI SIGN VIRAMA/DEVANAGARI LETTER MA -->
+            <Key latin:keyLabelFlags="followKeyLetterRatio" latin:keySpec="ह्म"/>
+            <!-- U+093E: "ा" DEVANAGARI VOWEL SIGN AA -->
+            <Key latin:keySpec="ा"/>
+            <!-- U+093F: "ि" DEVANAGARI VOWEL SIGN I -->
+            <Key latin:keySpec="ि"/>
             <!-- U+0940: "ी" DEVANAGARI VOWEL SIGN II -->
-            <Key latin:keySpec="&#x0940;" />
-            <!-- U+091F/U+094D/U+0920: "ट्ठ" DEVANAGARI LETTER TTA/DEVANAGARI SIGN VIRAMA/DEVANAGARI LETTER TTHA -->
-            <Key
-                latin:keySpec="&#x091F;&#x094D;&#x0920;"
-                latin:keyLabelFlags="followKeyLetterRatio" />
-            <!-- U+0942: "ू" DEVANAGARI VOWEL SIGN UU -->
-            <Key latin:keySpec="&#x0942;" />
+            <Key latin:keySpec="ी"/>
         </case>
         <default>
-            <!-- U+092C: "ब" DEVANAGARI LETTER BA -->
-            <Key latin:keySpec="&#x092C;" />
-            <!-- U+0915: "क" DEVANAGARI LETTER KA -->
-            <Key latin:keySpec="&#x0915;" />
-            <!-- U+092E: "म" DEVANAGARI LETTER MA -->
-            <Key latin:keySpec="&#x092E;" />
-            <!-- U+093E: "ा" DEVANAGARI VOWEL SIGN AA -->
-            <Key latin:keySpec="&#x093E;" />
-            <!-- U+0928: "न" DEVANAGARI LETTER NA -->
-            <Key latin:keySpec="&#x0928;" />
+            <!-- U+0915/U+094D: "क्" DEVANAGARI LETTER KA/DEVANAGARI SIGN VIRAMA -->
+            <Key latin:keyLabelFlags="followKeyLetterRatio" latin:keySpec="क्"/>
+            <!-- U+0915/U+094D/U+0937: "क्ष" DEVANAGARI LETTER KA/DEVANAGARI SIGN VIRAMA/DEVANAGARI LETTER SSA
+                 U+0921: "ड" DEVANAGARI LETTER DDA -->
+            <Key latin:keyLabelFlags="followKeyLetterRatio" latin:keySpec="क्ष" latin:moreKeys="ड"/>
+            <!-- U+0916: "ख" DEVANAGARI LETTER KHA -->
+            <Key latin:keySpec="ख"/>
+            <!-- U+0917: "ग" DEVANAGARI LETTER G -->
+            <Key latin:keySpec="ग"/>
+            <!-- U+0919: "ङ" DEVANAGARI LETTER NGA -->
+            <Key latin:keySpec="ङ"/>
+            <!-- U+0919/U+094D: "ङ्" DEVANAGARI LETTER NGA/DEVANAGARI SIGN VIRAMA -->
+            <Key latin:keyLabelFlags="followKeyLetterRatio" latin:keySpec="ङ्"/>
+            <!-- U+091A: "च" DEVANAGARI LETTER CA -->
+            <Key latin:keySpec="च"/>
             <!-- U+091C: "ज" DEVANAGARI LETTER JA -->
-            <Key latin:keySpec="&#x091C;" />
-            <!-- U+0935: "व" DEVANAGARI LETTER VA -->
-            <Key latin:keySpec="&#x0935;" />
-            <!-- U+092A: "प" DEVANAGARI LETTER PA -->
-            <Key latin:keySpec="&#x092A;" />
-            <!-- U+093F: "ि" DEVANAGARI VOWEL SIGN I -->
-            <Key latin:keySpec="&#x093F;" />
-            <!-- U+0938: "स" DEVANAGARI LETTER SA -->
-            <Key latin:keySpec="&#x0938;" />
-            <!-- U+0941: "ु" DEVANAGARI VOWEL SIGN U -->
-            <Key latin:keySpec="&#x0941;" />
+            <Key latin:keySpec="ज"/>
+            <!-- U+091D: "झ" DEVANAGARI LETTER JHA -->
+            <Key latin:keySpec="झ"/>
+            <!-- U+091F: "ट" DEVANAGARI LETTER TTA -->
+            <Key latin:keySpec="ट"/>
+            <!-- U+091F/U+094D/U+091F: "ट्ट" DEVANAGARI LETTER TTA/DEVANAGARI SIGN VIRAMA/DEVANAGARI LETTER TTA
+                 U+091B: "छ" DEVANAGARI LETTER CHA -->
+            <Key latin:keyLabelFlags="followKeyLetterRatio" latin:keySpec="ट्ट" latin:moreKeys="छ"/>
         </default>
     </switch>
 </merge>
