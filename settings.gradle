@@ -1,2 +1,3 @@
 include ':LatinIME'
-include ':LatinIME:tools:maketext'
+include ':LatinIME:tools:make-keyboard-text'
+include ':sorter'

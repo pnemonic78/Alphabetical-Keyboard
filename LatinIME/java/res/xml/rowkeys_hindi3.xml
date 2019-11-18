@@ -18,103 +18,64 @@
 */
 -->
 
-<merge
-    xmlns:latin="http://schemas.android.com/apk/res-auto"
->
+<merge xmlns:latin="http://schemas.android.com/apk/res-auto">
     <switch>
-        <case
-            latin:keyboardLayoutSetElement="alphabetManualShifted|alphabetShiftLocked|alphabetShiftLockShifted"
-        >
-            <!-- U+0927: "ध" DEVANAGARI LETTER DHA
-                 U+0915/U+094D/U+0937: "क्ष" DEVANAGARI LETTER KA/DEVANAGARI SIGN VIRAMA/DEVANAGARI LETTER SSA
-                 U+0936/U+094D/U+0930: "श्र" DEVANAGARI LETTER SHA/DEVANAGARI SIGN VIRAMA/DEVANAGARI LETTER RA -->
-            <Key
-                latin:keyLabel="&#x0927;"
-                latin:moreKeys="&#x0915;&#x094D;&#x0937;,&#x0936;&#x094D;&#x0930;" />
-            <!-- U+0929: "ऩ" DEVANAGARI LETTER NNNA -->
-            <Key
-                latin:keyLabel="&#x0929;" />
+        <case latin:keyboardLayoutSetElement="alphabetManualShifted|alphabetShiftLocked|alphabetShiftLockShifted">
             <!-- U+092B: "फ" DEVANAGARI LETTER PHA
                  U+092B/U+093C: "फ़" DEVANAGARI LETTER PHA/DEVANAGARI SIGN NUKTA -->
-            <Key
-                latin:keyLabel="&#x092B;"
-                latin:moreKeys="&#x092B;&#x093C;" />
+            <Key latin:keySpec="फ" latin:moreKeys="फ़"/>
             <!-- U+092D: "भ" DEVANAGARI LETTER BHA -->
-            <Key
-                latin:keyLabel="&#x092D;" />
+            <Key latin:keySpec="भ"/>
             <!-- U+0931: "ऱ" DEVANAGARI LETTER RRA
                  U+094D/U+0930: "्र" DEVANAGARI SIGN VIRAMA/DEVANAGARI LETTER RA
                  U+0930/U+094D: "र्" DEVANAGARI LETTER RA/DEVANAGARI SIGN VIRAMA -->
-            <Key
-                latin:keyLabel="&#x0931;"
-                latin:moreKeys="&#x094D;&#x0930;,&#x0930;&#x094D;" />
+            <Key latin:keySpec="ऱ" latin:moreKeys="्र,र्"/>
             <!-- U+0933: "ळ" DEVANAGARI LETTER LLA
                  U+0934: "ऴ" DEVANAGARI LETTER LLLA -->
-            <Key
-                latin:keyLabel="&#x0933;"
-                latin:moreKeys="&#x0934;" />
+            <Key latin:keySpec="ळ" latin:moreKeys="ऴ"/>
             <!-- U+0936: "श" DEVANAGARI LETTER SHA -->
-            <Key
-                latin:keyLabel="&#x0936;" />
+            <Key latin:keySpec="श"/>
             <!-- U+0937: "ष" DEVANAGARI LETTER SSA -->
-            <Key
-                latin:keyLabel="&#x0937;" />
+            <Key latin:keySpec="ष"/>
+            <!-- U+0901: "ँ" DEVANAGARI SIGN CANDRABINDU
+                 U+0945: "ॅ" DEVANAGARI VOWEL SIGN CANDRA E -->
+            <Key latin:keySpec="ँ" latin:moreKeys="ॅ"/>
+            <!-- U+0903: "ः" DEVANAGARI SIGN VISARGA -->
+            <Key latin:keySpec="ः"/>
             <!-- U+0943: "ृ" DEVANAGARI VOWEL SIGN VOCALIC R
                  U+0944: "ॄ" DEVANAGARI VOWEL SIGN VOCALIC RR -->
-            <Key
-                latin:keyLabel="&#x0943;"
-                latin:moreKeys="&#x0944;" />
+            <Key latin:keySpec="ृ" latin:moreKeys="ॄ"/>
         </case>
         <default>
             <!-- U+0940: "ी" DEVANAGARI VOWEL SIGN II
-                 U+0940/U+0902: "ीं" DEVANAGARI VOWEL SIGN II/DEVANAGARI SIGN ANUSVARA
-                 U+096A: "४" DEVANAGARI DIGIT FOUR -->
-            <Key
-                latin:keyLabel="&#x0940;"
-                latin:moreKeys="&#x0940;&#x0902;,%" />
+                 U+0940/U+0902: "ीं" DEVANAGARI VOWEL SIGN II/DEVANAGARI SIGN ANUSVARA -->
+            <Key latin:keySpec="ी" latin:moreKeys="ीं,%"/>
             <!-- U+0941: "ु" DEVANAGARI VOWEL SIGN U
                  U+0941/U+0902: "ुं" DEVANAGARI VOWEL SIGN U/DEVANAGARI SIGN ANUSVARA
                  U+0941/U+0901: "ुँ" DEVANAGARI VOWEL SIGN U/DEVANAGARI SIGN CANDRABINDU -->
-            <Key
-                latin:keyLabel="&#x0941;"
-                latin:moreKeys="&#x0941;&#x0902;,&#x0941;&#x0901;" />
+            <Key latin:keySpec="ु" latin:moreKeys="ुं,ुँ"/>
             <!-- U+0942: "ू" DEVANAGARI VOWEL SIGN UU
                  U+0942/U+0902: "ूं" DEVANAGARI VOWEL SIGN UU/DEVANAGARI SIGN ANUSVARA
-                 U+0942/U+0901: "ूँ" DEVANAGARI VOWEL SIGN UU/DEVANAGARI SIGN CANDRABINDU
-                 U+096B: "५" DEVANAGARI DIGIT FIVE -->
-            <Key
-                latin:keyLabel="&#x0942;"
-                latin:moreKeys="&#x0942;&#x0902;,&#x0942;&#x0901;,%" />
-            <!-- U+0948: "ै" DEVANAGARI VOWEL SIGN AI
-                 U+0948/U+0902: "ैं" DEVANAGARI VOWEL SIGN AI/DEVANAGARI SIGN ANUSVARA
-                 U+0968: "२" DEVANAGARI DIGIT TWO -->
-            <Key
-                latin:keyLabel="&#x0948;"
-                latin:moreKeys="&#x0948;&#x0902;,%" />
+                 U+0942/U+0901: "ूँ" DEVANAGARI VOWEL SIGN UU/DEVANAGARI SIGN CANDRABINDU -->
+            <Key latin:keySpec="ू" latin:moreKeys="ूं,ूँ,%"/>
             <!-- U+0947: "े" DEVANAGARI VOWEL SIGN E
                  U+0947/U+0902: "ें" DEVANAGARI VOWEL SIGN E/DEVANAGARI SIGN ANUSVARA -->
-            <Key
-                latin:keyLabel="&#x0947;"
-                latin:moreKeys="&#x0947;&#x0902;" />
+            <Key latin:keySpec="े" latin:moreKeys="ें"/>
+            <!-- U+0948: "ै" DEVANAGARI VOWEL SIGN AI
+                 U+0948/U+0902: "ैं" DEVANAGARI VOWEL SIGN AI/DEVANAGARI SIGN ANUSVARA -->
+            <Key latin:keySpec="ै" latin:moreKeys="ैं,%"/>
             <!-- U+0949: "ॉ" DEVANAGARI VOWEL SIGN CANDRA O -->
-            <Key
-                latin:keyLabel="&#x0949;" />
+            <Key latin:keySpec="ॉ"/>
             <!-- U+094B: "ो" DEVANAGARI VOWEL SIGN O
-                 U+094B/U+0902: "қं" DEVANAGARI VOWEL SIGN O/DEVANAGARI SIGN ANUSVARA
+                 U+094B/U+0902: "ों" DEVANAGARI VOWEL SIGN O/DEVANAGARI SIGN ANUSVARA
                  U+0949: "ॉ" DEVANAGARI VOWEL SIGN CANDRA O
                  U+094A: "ॊ" DEVANAGARI VOWEL SIGN SHORT O -->
-            <Key
-                latin:keyLabel="&#x094B;"
-                latin:moreKeys="&#x094B;&#x0902;,&#x0949;,&#x094A;" />
+            <Key latin:keySpec="ो" latin:moreKeys="ों,ॉ,ॊ"/>
             <!-- U+094C: "ौ" DEVANAGARI VOWEL SIGN AU
-                 U+094C/U+0902: "ौं" DEVANAGARI VOWEL SIGN AU/DEVANAGARI SIGN ANUSVARA
-                 U+0967: "१" DEVANAGARI DIGIT ONE -->
-            <Key
-                latin:keyLabel="&#x094C;"
-                latin:moreKeys="&#x094C;&#x0902;,%" />
+                 U+094C/U+0902: "ौं" DEVANAGARI VOWEL SIGN AU/DEVANAGARI SIGN ANUSVARA -->
+            <Key latin:keySpec="ौ" latin:moreKeys="ौं,%"/>
             <!-- U+094D: "्" DEVANAGARI SIGN VIRAMA -->
-            <Key
-                latin:keyLabel="&#x094D;" />
+            <Key latin:keySpec="्"/>
         </default>
     </switch>
 </merge>

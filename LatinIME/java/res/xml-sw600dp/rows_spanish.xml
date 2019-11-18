@@ -45,11 +45,12 @@
         latin:keyWidth="9.0%p"
     >
         <Key
-            latin:keyStyle="shiftKeyStyle" />
+            latin:keyStyle="shiftKeyStyle"
+            latin:keyWidth="10.0%p" />
         <include
             latin:keyboardLayout="@xml/rowkeys_qwerty3" />
         <include
-            latin:keyboardLayout="@xml/keys_comma_period" />
+            latin:keyboardLayout="@xml/keys_exclamation_question" />
         <Key
             latin:keyStyle="shiftKeyStyle"
             latin:keyWidth="fillRight" />

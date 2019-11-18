@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*
+**
+** Copyright 2013, The Android Open Source Project
+**
+** Licensed under the Apache License, Version 2.0 (the "License");
+** you may not use this file except in compliance with the License.
+** You may obtain a copy of the License at
+**
+**     http://www.apache.org/licenses/LICENSE-2.0
+**
+** Unless required by applicable law or agreed to in writing, software
+** distributed under the License is distributed on an "AS IS" BASIS,
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+** See the License for the specific language governing permissions and
+** limitations under the License.
+*/
+-->
+
+<merge xmlns:latin="http://schemas.android.com/apk/res-auto">
+    <switch>
+        <case latin:keyboardLayoutSetElement="alphabetManualShifted|alphabetShiftLocked|alphabetShiftLockShifted">
+            <!-- U+0941: "ु" DEVANAGARI VOWEL SIGN U -->
+            <Key latin:keySpec="ु"/>
+            <!-- U+0942: "ू" DEVANAGARI VOWEL SIGN UU -->
+            <Key latin:keySpec="ू"/>
+            <!-- U+0913: "ओ" DEVANAGARI LETTER O
+                 U+0943: "ृ" DEVANAGARI VOWEL SIGN VOCALIC R -->
+            <Key latin:keySpec="ृ" latin:moreKeys="ओ"/>
+            <!-- U+0903: "ः‍" DEVANAGARI SIGN VISARGA
+                 U+093D: "ऽ" DEVANAGARI SIGN AVAGRAHA
+                 U+0947: "े" DEVANAGARI VOWEL SIGN E -->
+            <Key latin:keySpec="े" latin:moreKeys="ः,ऽ"/>
+            <!-- U+0948: "ै" DEVANAGARI VOWEL SIGN AI
+                 U+0936/U+094D/U+0930: "श्र" DEVANAGARI LETTER SHA/DEVANAGARI SIGN VIRAMA/DEVANAGARI LETTER RA -->
+            <Key latin:keySpec="ै" latin:moreKeys="श्र"/>
+            <!-- U+094B: "ो" DEVANAGARI VOWEL SIGN O -->
+            <Key latin:keySpec="ो"/>
+            <!-- U+094C: "ौ" DEVANAGARI VOWEL SIGN AU -->
+            <Key latin:keySpec="ौ"/>
+            <!-- U+094D: "्" DEVANAGARI SIGN VIRAMA -->
+            <Key latin:keySpec="्"/>
+            <!-- U+0950: "ॐ" DEVANAGARI OM -->
+            <Key latin:keySpec="ॐ"/>
+        </case>
+        <default>
+            <!-- U+091F/U+094D/U+0920: "ट्ठ" DEVANAGARI LETTER TTA/DEVANAGARI SIGN VIRAMA/DEVANAGARI LETTER TTHA -->
+            <Key latin:keyLabelFlags="followKeyLetterRatio" latin:keySpec="ट्ठ"/>
+            <!-- U+0920/U+094D/U+0920: "ठ्ठ" DEVANAGARI LETTER TTHA/DEVANAGARI SIGN VIRAMA/DEVANAGARI LETTER TTHA
+                 U+091F: "ट" DEVANAGARI LETTER TTA -->
+            <Key latin:keyLabelFlags="followKeyLetterRatio" latin:keySpec="ठ्ठ" latin:moreKeys="ट"/>
+            <!-- U+0921/U+094D/U+0921: "ड्ड" DEVANAGARI LETTER DDA/DEVANAGARI SIGN VIRAMA/DEVANAGARI LETTER DDA -->
+            <Key latin:keyLabelFlags="followKeyLetterRatio" latin:keySpec="ड्ड"/>
+            <!-- U+0921/U+094D/U+0922: "ड्ढ" DEVANAGARI LETTER DDA/DEVANAGARI SIGN VIRAMA/DEVANAGARI LETTER DDHA
+                 U+0908: "ई" DEVANAGARI LETTER II -->
+            <Key latin:keyLabelFlags="followKeyLetterRatio" latin:keySpec="ड्ढ" latin:moreKeys="ई"/>
+            <!-- U+0924: "त" DEVANAGARI LETTER TA -->
+            <Key latin:keySpec="त"/>
+            <!-- U+0924/U+094D/U+0924: "त्त" DEVANAGARI LETTER TA/DEVANAGARI SIGN VIRAMA/DEVANAGARI LETTER TA
+                 U+091E: "ञ" DEVANAGARI LETTER NYA
+                 U+091C/U+094D/U+091E: "ज्ञ" DEVANAGARI LETTER JA/DEVANAGARI SIGN VIRAMA/DEVANAGARI LETTER NYA
+                 U+0965: "॥" DEVANAGARI DOUBLE DANDA -->
+            <Key latin:keyLabelFlags="followKeyLetterRatio" latin:keySpec="त्त" latin:moreKeys="ञ,ज्ञ,॥"/>
+            <!-- U+0925: "थ" DEVANAGARI LETTER THA -->
+            <Key latin:keySpec="थ"/>
+            <!-- U+0926: "द" DEVANAGARI LETTER DA -->
+            <Key latin:keySpec="द"/>
+            <!-- U+0926/U+094D/U+0926: "द्द" DEVANAGARI LETTER DA/DEVANAGARI SIGN VIRAMA/DEVANAGARI LETTER DA -->
+            <Key latin:keyLabelFlags="followKeyLetterRatio" latin:keySpec="द्द"/>
+        </default>
+    </switch>
+</merge>

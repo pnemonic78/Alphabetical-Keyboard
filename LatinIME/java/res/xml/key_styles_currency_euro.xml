@@ -22,25 +22,23 @@
     <!-- U+20AC: "€" EURO SIGN
          U+00A2: "¢" CENT SIGN
          U+00A3: "£" POUND SIGN
-         U+00A4: "¤" CURRENCY SIGN
-         U+00A5: "¥" YEN SIGN -->
+         U+00A5: "¥" YEN SIGN
+         U+20B1: "₱" PESO SIGN -->
     <key-style
         latin:styleName="currencyKeyStyle"
-        latin:keyLabel="&#x20AC;"
-        latin:keyHintLabel="&#x00A4;"
-        latin:moreKeys="!text/more_keys_for_currency_euro" />
+        latin:keySpec="&#x20AC;"
+        latin:moreKeys="&#x00A2;,&#x00A3;,$,&#x00A5;,&#x20B1;" />
     <key-style
         latin:styleName="moreCurrency1KeyStyle"
-        latin:keyLabel="&#x00A3;" />
+        latin:keySpec="&#x00A3;" />
     <key-style
         latin:styleName="moreCurrency2KeyStyle"
-        latin:keyLabel="&#x00A5;" />
+        latin:keySpec="&#x00A5;" />
     <key-style
         latin:styleName="moreCurrency3KeyStyle"
-        latin:keyLabel="$"
-        latin:keyHintLabel="&#x00A2;"
+        latin:keySpec="$"
         latin:moreKeys="&#x00A2;" />
     <key-style
         latin:styleName="moreCurrency4KeyStyle"
-        latin:keyLabel="&#x00A2;" />
+        latin:keySpec="&#x00A2;" />
 </merge>

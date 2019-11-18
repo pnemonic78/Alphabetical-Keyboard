@@ -18,40 +18,27 @@
 */
 -->
 
-<merge
-    xmlns:latin="http://schemas.android.com/apk/res-auto"
->
+<merge xmlns:latin="http://schemas.android.com/apk/res-auto">
     <!-- U+043B: "л" CYRILLIC SMALL LETTER EL -->
-    <Key
-        latin:keyLabel="&#x043B;" />
+    <Key latin:keySpec="л" />
     <!-- U+043C: "м" CYRILLIC SMALL LETTER EM -->
-    <Key
-        latin:keyLabel="&#x043C;" />
+    <Key latin:keySpec="м" />
     <!-- U+043D: "н" CYRILLIC SMALL LETTER EN -->
-    <Key
-        latin:keyLabel="&#x043D;" />
+    <Key latin:keySpec="н" />
     <!-- U+043E: "о" CYRILLIC SMALL LETTER O -->
-    <Key
-        latin:keyLabel="&#x043E;" />
+    <Key latin:keySpec="о" />
     <!-- U+043F: "п" CYRILLIC SMALL LETTER PE -->
-    <Key
-        latin:keyLabel="&#x043F;" />
+    <Key latin:keySpec="п" />
     <!-- U+0440: "р" CYRILLIC SMALL LETTER ER -->
-    <Key
-        latin:keyLabel="&#x0440;" />
+    <Key latin:keySpec="р" />
     <!-- U+0441: "с" CYRILLIC SMALL LETTER ES -->
-    <Key
-        latin:keyLabel="&#x0441;" />
+    <Key latin:keySpec="с" />
     <!-- U+0442: "т" CYRILLIC SMALL LETTER TE -->
-    <Key
-        latin:keyLabel="&#x0442;" />
+    <Key latin:keySpec="т" />
     <!-- U+0443: "у" CYRILLIC SMALL LETTER U -->
-    <Key
-        latin:keyLabel="&#x0443;" />
+    <Key latin:keySpec="у" />
     <!-- U+0444: "ф" CYRILLIC SMALL LETTER EF -->
-    <Key
-        latin:keyLabel="&#x0444;" />
+    <Key latin:keySpec="ф" />
     <!-- U+0445: "х" CYRILLIC SMALL LETTER HA -->
-    <Key
-        latin:keyLabel="&#x0445;" />
+    <Key latin:keySpec="х" />
 </merge>

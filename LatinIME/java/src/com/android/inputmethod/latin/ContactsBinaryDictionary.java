@@ -1,289 +1,176 @@
 /*
  * Copyright (C) 2012 The Android Open Source Project
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.android.inputmethod.latin;
 
-import android.content.ContentResolver;
+import android.Manifest;
 import android.content.Context;
-import android.database.ContentObserver;
-import android.database.Cursor;
-import android.os.SystemClock;
-import android.provider.BaseColumns;
+import android.net.Uri;
+import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
-import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.inputmethod.keyboard.Keyboard;
+import com.android.inputmethod.annotations.ExternallyReferenced;
+import com.android.inputmethod.latin.ContactsManager.ContactsChangedListener;
+import com.android.inputmethod.latin.common.StringUtils;
+import com.android.inputmethod.latin.permissions.PermissionsUtil;
+import com.android.inputmethod.latin.personalization.AccountUtils;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
-public class ContactsBinaryDictionary extends ExpandableBinaryDictionary {
+import javax.annotation.Nullable;
 
-    private static final String[] PROJECTION = {BaseColumns._ID, Contacts.DISPLAY_NAME,};
-    private static final String[] PROJECTION_ID_ONLY = {BaseColumns._ID};
-
+public class ContactsBinaryDictionary extends ExpandableBinaryDictionary
+        implements ContactsChangedListener {
     private static final String TAG = ContactsBinaryDictionary.class.getSimpleName();
     private static final String NAME = "contacts";
 
-    private static boolean DEBUG = false;
-
-    /**
-     * Frequency for contacts information into the dictionary
-     */
-    private static final int FREQUENCY_FOR_CONTACTS = 40;
-    private static final int FREQUENCY_FOR_CONTACTS_BIGRAM = 90;
-
-    /** The maximum number of contacts that this dictionary supports. */
-    private static final int MAX_CONTACT_COUNT = 10000;
-
-    private static final int INDEX_NAME = 1;
-
-    /** The number of contacts in the most recent dictionary rebuild. */
-    static private int sContactCountAtLastRebuild = 0;
-
-    private ContentObserver mObserver;
+    private static final boolean DEBUG = false;
+    private static final boolean DEBUG_DUMP = false;
 
     /**
      * Whether to use "firstname lastname" in bigram predictions.
      */
     private final boolean mUseFirstLastBigrams;
+    private final ContactsManager mContactsManager;
 
-    public ContactsBinaryDictionary(final Context context, final int dicTypeId, Locale locale) {
-        super(context, getFilenameWithLocale(NAME, locale.toString()), dicTypeId);
-        mUseFirstLastBigrams = useFirstLastBigramsForLocale(locale);
-        registerObserver(context);
-
-        // Load the current binary dictionary from internal storage. If no binary dictionary exists,
-        // loadDictionary will start a new thread to generate one asynchronously.
-        loadDictionary();
+    protected ContactsBinaryDictionary(final Context context, final Locale locale,
+            final File dictFile, final String name) {
+        super(context, getDictName(name, locale, dictFile), locale, Dictionary.TYPE_CONTACTS,
+                dictFile);
+        mUseFirstLastBigrams = ContactsDictionaryUtils.useFirstLastBigramsForLocale(locale);
+        mContactsManager = new ContactsManager(context);
+        mContactsManager.registerForUpdates(this /* listener */);
+        reloadDictionaryIfRequired();
     }
 
-    private synchronized void registerObserver(final Context context) {
-        // Perform a managed query. The Activity will handle closing and requerying the cursor
-        // when needed.
-        if (mObserver != null) return;
-        ContentResolver cres = context.getContentResolver();
-        cres.registerContentObserver(Contacts.CONTENT_URI, true, mObserver =
-                new ContentObserver(null) {
-                    @Override
-                    public void onChange(boolean self) {
-                        setRequiresReload(true);
-                    }
-                });
-    }
-
-    public void reopen(final Context context) {
-        registerObserver(context);
+    // Note: This method is called by {@link DictionaryFacilitator} using Java reflection.
+    @ExternallyReferenced
+    public static ContactsBinaryDictionary getDictionary(final Context context, final Locale locale,
+            final File dictFile, final String dictNamePrefix, @Nullable final String account) {
+        return new ContactsBinaryDictionary(context, locale, dictFile, dictNamePrefix + NAME);
     }
 
     @Override
     public synchronized void close() {
-        if (mObserver != null) {
-            mContext.getContentResolver().unregisterContentObserver(mObserver);
-            mObserver = null;
-        }
+        mContactsManager.close();
         super.close();
     }
 
+    /**
+     * Typically called whenever the dictionary is created for the first time or
+     * recreated when we think that there are updates to the dictionary.
+     * This is called asynchronously.
+     */
     @Override
-    public void loadDictionaryAsync() {
-        try {
-            Cursor cursor = mContext.getContentResolver()
-                    .query(Contacts.CONTENT_URI, PROJECTION, null, null, null);
-            if (cursor != null) {
-                try {
-                    if (cursor.moveToFirst()) {
-                        sContactCountAtLastRebuild = getContactCount();
-                        addWords(cursor);
-                    }
-                } finally {
-                    cursor.close();
-                }
+    public void loadInitialContentsLocked() {
+        loadDeviceAccountsEmailAddressesLocked();
+        loadDictionaryForUriLocked(ContactsContract.Profile.CONTENT_URI);
+        // TODO: Switch this URL to the newer ContactsContract too
+        loadDictionaryForUriLocked(Contacts.CONTENT_URI);
+    }
+
+    /**
+     * Loads device accounts to the dictionary.
+     */
+    private void loadDeviceAccountsEmailAddressesLocked() {
+        final List<String> accountVocabulary =
+                AccountUtils.getDeviceAccountsEmailAddresses(mContext);
+        if (accountVocabulary == null || accountVocabulary.isEmpty()) {
+            return;
+        }
+        for (String word : accountVocabulary) {
+            if (DEBUG) {
+                Log.d(TAG, "loadAccountVocabulary: " + word);
             }
-        } catch (IllegalStateException e) {
-            Log.e(TAG, "Contacts DB is having problems");
+            runGCIfRequiredLocked(true /* mindsBlockByGC */);
+            addUnigramLocked(word, ContactsDictionaryConstants.FREQUENCY_FOR_CONTACTS,
+                    false /* isNotAWord */, false /* isPossiblyOffensive */,
+                    BinaryDictionary.NOT_A_VALID_TIMESTAMP);
         }
     }
 
-    @Override
-    public void getBigrams(final WordComposer codes, final CharSequence previousWord,
-            final WordCallback callback) {
-        super.getBigrams(codes, previousWord, callback);
-    }
-
-    private boolean useFirstLastBigramsForLocale(Locale locale) {
-        // TODO: Add firstname/lastname bigram rules for other languages.
-        if (locale != null && locale.getLanguage().equals(Locale.ENGLISH.getLanguage())) {
-            return true;
+    /**
+     * Loads data within content providers to the dictionary.
+     */
+    private void loadDictionaryForUriLocked(final Uri uri) {
+        if (!PermissionsUtil.checkAllPermissionsGranted(
+                mContext, Manifest.permission.READ_CONTACTS)) {
+            Log.i(TAG, "No permission to read contacts. Not loading the Dictionary.");
         }
-        return false;
-    }
 
-    private void addWords(Cursor cursor) {
-        clearFusionDictionary();
-        int count = 0;
-        while (!cursor.isAfterLast() && count < MAX_CONTACT_COUNT) {
-            String name = cursor.getString(INDEX_NAME);
-            if (isValidName(name)) {
-                addName(name);
-                ++count;
-            }
-            cursor.moveToNext();
+        final ArrayList<String> validNames = mContactsManager.getValidNames(uri);
+        for (final String name : validNames) {
+            addNameLocked(name);
         }
-    }
-
-    private int getContactCount() {
-        // TODO: consider switching to a rawQuery("select count(*)...") on the database if
-        // performance is a bottleneck.
-        final Cursor cursor = mContext.getContentResolver().query(
-                Contacts.CONTENT_URI, PROJECTION_ID_ONLY, null, null, null);
-        if (cursor != null) {
-            try {
-                return cursor.getCount();
-            } finally {
-                cursor.close();
-            }
+        if (uri.equals(Contacts.CONTENT_URI)) {
+            // Since we were able to add content successfully, update the local
+            // state of the manager.
+            mContactsManager.updateLocalState(validNames);
         }
-        return 0;
     }
 
     /**
      * Adds the words in a name (e.g., firstname/lastname) to the binary dictionary along with their
      * bigrams depending on locale.
      */
-    private void addName(String name) {
-        int len = name.codePointCount(0, name.length());
-        String prevWord = null;
+    private void addNameLocked(final String name) {
+        int len = StringUtils.codePointCount(name);
+        NgramContext ngramContext = NgramContext.getEmptyPrevWordsContext(
+                BinaryDictionary.MAX_PREV_WORD_COUNT_FOR_N_GRAM);
         // TODO: Better tokenization for non-Latin writing systems
         for (int i = 0; i < len; i++) {
             if (Character.isLetter(name.codePointAt(i))) {
-                int end = getWordEndPosition(name, len, i);
+                int end = ContactsDictionaryUtils.getWordEndPosition(name, len, i);
                 String word = name.substring(i, end);
+                if (DEBUG_DUMP) {
+                    Log.d(TAG, "addName word = " + word);
+                }
                 i = end - 1;
                 // Don't add single letter words, possibly confuses
                 // capitalization of i.
-                final int wordLen = word.codePointCount(0, word.length());
-                if (wordLen < MAX_WORD_LENGTH && wordLen > 1) {
-                    super.addWord(word, null /* shortcut */, FREQUENCY_FOR_CONTACTS);
-                    if (!TextUtils.isEmpty(prevWord)) {
-                        if (mUseFirstLastBigrams) {
-                            super.setBigram(prevWord, word, FREQUENCY_FOR_CONTACTS_BIGRAM);
-                        }
+                final int wordLen = StringUtils.codePointCount(word);
+                if (wordLen <= MAX_WORD_LENGTH && wordLen > 1) {
+                    if (DEBUG) {
+                        Log.d(TAG, "addName " + name + ", " + word + ", "  + ngramContext);
                     }
-                    prevWord = word;
+                    runGCIfRequiredLocked(true /* mindsBlockByGC */);
+                    addUnigramLocked(word,
+                            ContactsDictionaryConstants.FREQUENCY_FOR_CONTACTS, false /* isNotAWord */,
+                            false /* isPossiblyOffensive */,
+                            BinaryDictionary.NOT_A_VALID_TIMESTAMP);
+                    if (ngramContext.isValid() && mUseFirstLastBigrams) {
+                        runGCIfRequiredLocked(true /* mindsBlockByGC */);
+                        addNgramEntryLocked(ngramContext,
+                                word,
+                                ContactsDictionaryConstants.FREQUENCY_FOR_CONTACTS_BIGRAM,
+                                BinaryDictionary.NOT_A_VALID_TIMESTAMP);
+                    }
+                    ngramContext = ngramContext.getNextNgramContext(
+                            new NgramContext.WordInfo(word));
                 }
             }
         }
-    }
-
-    /**
-     * Returns the index of the last letter in the word, starting from position startIndex.
-     */
-    private static int getWordEndPosition(String string, int len, int startIndex) {
-        int end;
-        int cp = 0;
-        for (end = startIndex + 1; end < len; end += Character.charCount(cp)) {
-            cp = string.codePointAt(end);
-            if (!(cp == Keyboard.CODE_DASH || cp == Keyboard.CODE_SINGLE_QUOTE
-                    || Character.isLetter(cp))) {
-                break;
-            }
-        }
-        return end;
     }
 
     @Override
-    protected boolean hasContentChanged() {
-        final long startTime = SystemClock.uptimeMillis();
-        final int contactCount = getContactCount();
-        if (contactCount > MAX_CONTACT_COUNT) {
-            // If there are too many contacts then return false. In this rare case it is impossible
-            // to include all of them anyways and the cost of rebuilding the dictionary is too high.
-            // TODO: Sort and check only the MAX_CONTACT_COUNT most recent contacts?
-            return false;
-        }
-        if (contactCount != sContactCountAtLastRebuild) {
-            if (DEBUG) {
-                Log.d(TAG, "Contact count changed: " + sContactCountAtLastRebuild + " to "
-                        + contactCount);
-            }
-            return true;
-        }
-        // Check all contacts since it's not possible to find out which names have changed.
-        // This is needed because it's possible to receive extraneous onChange events even when no
-        // name has changed.
-        Cursor cursor = mContext.getContentResolver().query(
-                Contacts.CONTENT_URI, PROJECTION, null, null, null);
-        if (cursor != null) {
-            try {
-                if (cursor.moveToFirst()) {
-                    while (!cursor.isAfterLast()) {
-                        String name = cursor.getString(INDEX_NAME);
-                        if (isValidName(name) && !isNameInDictionary(name)) {
-                            if (DEBUG) {
-                                Log.d(TAG, "Contact name missing: " + name + " (runtime = "
-                                        + (SystemClock.uptimeMillis() - startTime) + " ms)");
-                            }
-                            return true;
-                        }
-                        cursor.moveToNext();
-                    }
-                }
-            } finally {
-                cursor.close();
-            }
-        }
-        if (DEBUG) {
-            Log.d(TAG, "No contacts changed. (runtime = " + (SystemClock.uptimeMillis() - startTime)
-                    + " ms)");
-        }
-        return false;
-    }
-
-    private static boolean isValidName(String name) {
-        if (name != null && -1 == name.indexOf('@')) {
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Checks if the words in a name are in the current binary dictionary.
-     */
-    private boolean isNameInDictionary(String name) {
-        int len = name.codePointCount(0, name.length());
-        String prevWord = null;
-        for (int i = 0; i < len; i++) {
-            if (Character.isLetter(name.codePointAt(i))) {
-                int end = getWordEndPosition(name, len, i);
-                String word = name.substring(i, end);
-                i = end - 1;
-                final int wordLen = word.codePointCount(0, word.length());
-                if (wordLen < MAX_WORD_LENGTH && wordLen > 1) {
-                    if (!TextUtils.isEmpty(prevWord) && mUseFirstLastBigrams) {
-                        if (!super.isValidBigramLocked(prevWord, word)) {
-                            return false;
-                        }
-                    } else {
-                        if (!super.isValidWordLocked(word)) {
-                            return false;
-                        }
-                    }
-                    prevWord = word;
-                }
-            }
-        }
-        return true;
+    public void onContactsChange() {
+        setNeedsToRecreate();
     }
 }

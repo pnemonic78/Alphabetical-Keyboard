@@ -17,77 +17,62 @@
 package com.android.inputmethod.keyboard;
 
 import android.content.Context;
-import android.content.res.Resources;
+import android.content.res.TypedArray;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.PopupWindow;
+import android.view.ViewGroup;
 
-import com.android.inputmethod.keyboard.PointerTracker.DrawingProxy;
-import com.android.inputmethod.keyboard.PointerTracker.TimerProxy;
-import com.android.inputmethod.latin.R;
+import com.android.inputmethod.accessibility.AccessibilityUtils;
+import com.android.inputmethod.accessibility.MoreKeysKeyboardAccessibilityDelegate;
+import com.android.inputmethod.keyboard.internal.KeyDrawParams;
+import com.github.inputmethod.alphabetical.R;
+import com.android.inputmethod.latin.common.Constants;
+import com.android.inputmethod.latin.common.CoordinateUtils;
 
 /**
  * A view that renders a virtual {@link MoreKeysKeyboard}. It handles rendering of keys and
  * detecting key presses and touch movements.
  */
 public class MoreKeysKeyboardView extends KeyboardView implements MoreKeysPanel {
-    private final int[] mCoordinates = new int[2];
+    private final int[] mCoordinates = CoordinateUtils.newInstance();
 
-    private final KeyDetector mKeyDetector;
-
-    private Controller mController;
-    private KeyboardActionListener mListener;
+    private final Drawable mDivider;
+    protected final KeyDetector mKeyDetector;
+    private Controller mController = EMPTY_CONTROLLER;
+    protected KeyboardActionListener mListener;
     private int mOriginX;
     private int mOriginY;
+    private Key mCurrentKey;
 
-    private static final TimerProxy EMPTY_TIMER_PROXY = new TimerProxy.Adapter();
+    private int mActivePointerId;
 
-    private final KeyboardActionListener mMoreKeysKeyboardListener =
-            new KeyboardActionListener.Adapter() {
-        @Override
-        public void onCodeInput(int primaryCode, int x, int y) {
-            // Because a more keys keyboard doesn't need proximity characters correction, we don't
-            // send touch event coordinates.
-            mListener.onCodeInput(primaryCode, NOT_A_TOUCH_COORDINATE, NOT_A_TOUCH_COORDINATE);
-        }
+    protected MoreKeysKeyboardAccessibilityDelegate mAccessibilityDelegate;
 
-        @Override
-        public void onTextInput(CharSequence text) {
-            mListener.onTextInput(text);
-        }
-
-        @Override
-        public void onCancelInput() {
-            mListener.onCancelInput();
-        }
-
-        @Override
-        public void onPressKey(int primaryCode) {
-            mListener.onPressKey(primaryCode);
-        }
-
-        @Override
-        public void onReleaseKey(int primaryCode, boolean withSliding) {
-            mListener.onReleaseKey(primaryCode, withSliding);
-        }
-    };
-
-    public MoreKeysKeyboardView(Context context, AttributeSet attrs) {
+    public MoreKeysKeyboardView(final Context context, final AttributeSet attrs) {
         this(context, attrs, R.attr.moreKeysKeyboardViewStyle);
     }
 
-    public MoreKeysKeyboardView(Context context, AttributeSet attrs, int defStyle) {
+    public MoreKeysKeyboardView(final Context context, final AttributeSet attrs,
+            final int defStyle) {
         super(context, attrs, defStyle);
-
-        final Resources res = context.getResources();
-        mKeyDetector = new MoreKeysDetector(
-                res.getDimension(R.dimen.more_keys_keyboard_slide_allowance));
-        setKeyPreviewPopupEnabled(false, 0);
+        final TypedArray moreKeysKeyboardViewAttr = context.obtainStyledAttributes(attrs,
+                R.styleable.MoreKeysKeyboardView, defStyle, R.style.MoreKeysKeyboardView);
+        mDivider = moreKeysKeyboardViewAttr.getDrawable(R.styleable.MoreKeysKeyboardView_divider);
+        if (mDivider != null) {
+            // TODO: Drawable itself should have an alpha value.
+            mDivider.setAlpha(128);
+        }
+        moreKeysKeyboardViewAttr.recycle();
+        mKeyDetector = new MoreKeysDetector(getResources().getDimension(
+                R.dimen.config_more_keys_keyboard_slide_allowance));
     }
 
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+    protected void onMeasure(final int widthMeasureSpec, final int heightMeasureSpec) {
         final Keyboard keyboard = getKeyboard();
         if (keyboard != null) {
             final int width = keyboard.mOccupiedWidth + getPaddingLeft() + getPaddingRight();
@@ -99,80 +84,237 @@ public class MoreKeysKeyboardView extends KeyboardView implements MoreKeysPanel 
     }
 
     @Override
-    public void setKeyboard(Keyboard keyboard) {
+    protected void onDrawKeyTopVisuals(final Key key, final Canvas canvas, final Paint paint,
+            final KeyDrawParams params) {
+        if (!key.isSpacer() || !(key instanceof MoreKeysKeyboard.MoreKeyDivider)
+                || mDivider == null) {
+            super.onDrawKeyTopVisuals(key, canvas, paint, params);
+            return;
+        }
+        final int keyWidth = key.getDrawWidth();
+        final int keyHeight = key.getHeight();
+        final int iconWidth = Math.min(mDivider.getIntrinsicWidth(), keyWidth);
+        final int iconHeight = mDivider.getIntrinsicHeight();
+        final int iconX = (keyWidth - iconWidth) / 2; // Align horizontally center
+        final int iconY = (keyHeight - iconHeight) / 2; // Align vertically center
+        drawIcon(canvas, mDivider, iconX, iconY, iconWidth, iconHeight);
+    }
+
+    @Override
+    public void setKeyboard(final Keyboard keyboard) {
         super.setKeyboard(keyboard);
-        mKeyDetector.setKeyboard(keyboard, -getPaddingLeft(),
-                -getPaddingTop() + mVerticalCorrection);
+        mKeyDetector.setKeyboard(
+                keyboard, -getPaddingLeft(), -getPaddingTop() + getVerticalCorrection());
+        if (AccessibilityUtils.getInstance().isAccessibilityEnabled()) {
+            if (mAccessibilityDelegate == null) {
+                mAccessibilityDelegate = new MoreKeysKeyboardAccessibilityDelegate(
+                        this, mKeyDetector);
+                mAccessibilityDelegate.setOpenAnnounce(R.string.spoken_open_more_keys_keyboard);
+                mAccessibilityDelegate.setCloseAnnounce(R.string.spoken_close_more_keys_keyboard);
+            }
+            mAccessibilityDelegate.setKeyboard(keyboard);
+        } else {
+            mAccessibilityDelegate = null;
+        }
     }
 
     @Override
-    public KeyDetector getKeyDetector() {
-        return mKeyDetector;
-    }
-
-    @Override
-    public KeyboardActionListener getKeyboardActionListener() {
-        return mMoreKeysKeyboardListener;
-    }
-
-    @Override
-    public DrawingProxy getDrawingProxy() {
-        return this;
-    }
-
-    @Override
-    public TimerProxy getTimerProxy() {
-        return EMPTY_TIMER_PROXY;
-    }
-
-    @Override
-    public void setKeyPreviewPopupEnabled(boolean previewEnabled, int delay) {
-        // More keys keyboard needs no pop-up key preview displayed, so we pass always false with a
-        // delay of 0. The delay does not matter actually since the popup is not shown anyway.
-        super.setKeyPreviewPopupEnabled(false, 0);
-    }
-
-    @Override
-    public void showMoreKeysPanel(View parentView, Controller controller, int pointX, int pointY,
-            PopupWindow window, KeyboardActionListener listener) {
+    public void showMoreKeysPanel(final View parentView, final Controller controller,
+            final int pointX, final int pointY, final KeyboardActionListener listener) {
         mController = controller;
         mListener = listener;
-        final View container = (View)getParent();
-        final MoreKeysKeyboard pane = (MoreKeysKeyboard)getKeyboard();
-        final int defaultCoordX = pane.getDefaultCoordX();
+        final View container = getContainerView();
         // The coordinates of panel's left-top corner in parentView's coordinate system.
-        final int x = pointX - defaultCoordX - container.getPaddingLeft();
-        final int y = pointY - container.getMeasuredHeight() + container.getPaddingBottom();
+        // We need to consider background drawable paddings.
+        final int x = pointX - getDefaultCoordX() - container.getPaddingLeft() - getPaddingLeft();
+        final int y = pointY - container.getMeasuredHeight() + container.getPaddingBottom()
+                + getPaddingBottom();
 
-        window.setContentView(container);
-        window.setWidth(container.getMeasuredWidth());
-        window.setHeight(container.getMeasuredHeight());
         parentView.getLocationInWindow(mCoordinates);
-        window.showAtLocation(parentView, Gravity.NO_GRAVITY,
-                x + mCoordinates[0], y + mCoordinates[1]);
+        // Ensure the horizontal position of the panel does not extend past the parentView edges.
+        final int maxX = parentView.getMeasuredWidth() - container.getMeasuredWidth();
+        final int panelX = Math.max(0, Math.min(maxX, x)) + CoordinateUtils.x(mCoordinates);
+        final int panelY = y + CoordinateUtils.y(mCoordinates);
+        container.setX(panelX);
+        container.setY(panelY);
 
         mOriginX = x + container.getPaddingLeft();
         mOriginY = y + container.getPaddingTop();
+        controller.onShowMoreKeysPanel(this);
+        final MoreKeysKeyboardAccessibilityDelegate accessibilityDelegate = mAccessibilityDelegate;
+        if (accessibilityDelegate != null
+                && AccessibilityUtils.getInstance().isAccessibilityEnabled()) {
+            accessibilityDelegate.onShowMoreKeysKeyboard();
+        }
     }
 
-    private boolean mIsDismissing;
-
-    @Override
-    public boolean dismissMoreKeysPanel() {
-        if (mIsDismissing || mController == null) return false;
-        mIsDismissing = true;
-        final boolean dismissed = mController.dismissMoreKeysPanel();
-        mIsDismissing = false;
-        return dismissed;
+    /**
+     * Returns the default x coordinate for showing this panel.
+     */
+    protected int getDefaultCoordX() {
+        return ((MoreKeysKeyboard)getKeyboard()).getDefaultCoordX();
     }
 
     @Override
-    public int translateX(int x) {
+    public void onDownEvent(final int x, final int y, final int pointerId, final long eventTime) {
+        mActivePointerId = pointerId;
+        mCurrentKey = detectKey(x, y);
+    }
+
+    @Override
+    public void onMoveEvent(final int x, final int y, final int pointerId, final long eventTime) {
+        if (mActivePointerId != pointerId) {
+            return;
+        }
+        final boolean hasOldKey = (mCurrentKey != null);
+        mCurrentKey = detectKey(x, y);
+        if (hasOldKey && mCurrentKey == null) {
+            // A more keys keyboard is canceled when detecting no key.
+            mController.onCancelMoreKeysPanel();
+        }
+    }
+
+    @Override
+    public void onUpEvent(final int x, final int y, final int pointerId, final long eventTime) {
+        if (mActivePointerId != pointerId) {
+            return;
+        }
+        // Calling {@link #detectKey(int,int,int)} here is harmless because the last move event and
+        // the following up event share the same coordinates.
+        mCurrentKey = detectKey(x, y);
+        if (mCurrentKey != null) {
+            updateReleaseKeyGraphics(mCurrentKey);
+            onKeyInput(mCurrentKey, x, y);
+            mCurrentKey = null;
+        }
+    }
+
+    /**
+     * Performs the specific action for this panel when the user presses a key on the panel.
+     */
+    protected void onKeyInput(final Key key, final int x, final int y) {
+        final int code = key.getCode();
+        if (code == Constants.CODE_OUTPUT_TEXT) {
+            mListener.onTextInput(mCurrentKey.getOutputText());
+        } else if (code != Constants.CODE_UNSPECIFIED) {
+            if (getKeyboard().hasProximityCharsCorrection(code)) {
+                mListener.onCodeInput(code, x, y, false /* isKeyRepeat */);
+            } else {
+                mListener.onCodeInput(code, Constants.NOT_A_COORDINATE, Constants.NOT_A_COORDINATE,
+                        false /* isKeyRepeat */);
+            }
+        }
+    }
+
+    private Key detectKey(int x, int y) {
+        final Key oldKey = mCurrentKey;
+        final Key newKey = mKeyDetector.detectHitKey(x, y);
+        if (newKey == oldKey) {
+            return newKey;
+        }
+        // A new key is detected.
+        if (oldKey != null) {
+            updateReleaseKeyGraphics(oldKey);
+            invalidateKey(oldKey);
+        }
+        if (newKey != null) {
+            updatePressKeyGraphics(newKey);
+            invalidateKey(newKey);
+        }
+        return newKey;
+    }
+
+    private void updateReleaseKeyGraphics(final Key key) {
+        key.onReleased();
+        invalidateKey(key);
+    }
+
+    private void updatePressKeyGraphics(final Key key) {
+        key.onPressed();
+        invalidateKey(key);
+    }
+
+    @Override
+    public void dismissMoreKeysPanel() {
+        if (!isShowingInParent()) {
+            return;
+        }
+        final MoreKeysKeyboardAccessibilityDelegate accessibilityDelegate = mAccessibilityDelegate;
+        if (accessibilityDelegate != null
+                && AccessibilityUtils.getInstance().isAccessibilityEnabled()) {
+            accessibilityDelegate.onDismissMoreKeysKeyboard();
+        }
+        mController.onDismissMoreKeysPanel();
+    }
+
+    @Override
+    public int translateX(final int x) {
         return x - mOriginX;
     }
 
     @Override
-    public int translateY(int y) {
+    public int translateY(final int y) {
         return y - mOriginY;
+    }
+
+    @Override
+    public boolean onTouchEvent(final MotionEvent me) {
+        final int action = me.getActionMasked();
+        final long eventTime = me.getEventTime();
+        final int index = me.getActionIndex();
+        final int x = (int)me.getX(index);
+        final int y = (int)me.getY(index);
+        final int pointerId = me.getPointerId(index);
+        switch (action) {
+        case MotionEvent.ACTION_DOWN:
+        case MotionEvent.ACTION_POINTER_DOWN:
+            onDownEvent(x, y, pointerId, eventTime);
+            break;
+        case MotionEvent.ACTION_UP:
+        case MotionEvent.ACTION_POINTER_UP:
+            onUpEvent(x, y, pointerId, eventTime);
+            break;
+        case MotionEvent.ACTION_MOVE:
+            onMoveEvent(x, y, pointerId, eventTime);
+            break;
+        }
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean onHoverEvent(final MotionEvent event) {
+        final MoreKeysKeyboardAccessibilityDelegate accessibilityDelegate = mAccessibilityDelegate;
+        if (accessibilityDelegate != null
+                && AccessibilityUtils.getInstance().isTouchExplorationEnabled()) {
+            return accessibilityDelegate.onHoverEvent(event);
+        }
+        return super.onHoverEvent(event);
+    }
+
+    private View getContainerView() {
+        return (View)getParent();
+    }
+
+    @Override
+    public void showInParent(final ViewGroup parentView) {
+        removeFromParent();
+        parentView.addView(getContainerView());
+    }
+
+    @Override
+    public void removeFromParent() {
+        final View containerView = getContainerView();
+        final ViewGroup currentParent = (ViewGroup)containerView.getParent();
+        if (currentParent != null) {
+            currentParent.removeView(containerView);
+        }
+    }
+
+    @Override
+    public boolean isShowingInParent() {
+        return (getContainerView().getParent() != null);
     }
 }

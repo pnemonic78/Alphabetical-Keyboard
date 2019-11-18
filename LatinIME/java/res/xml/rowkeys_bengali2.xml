@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*
+**
+** Copyright 2014, The Android Open Source Project
+**
+** Licensed under the Apache License, Version 2.0 (the "License");
+** you may not use this file except in compliance with the License.
+** You may obtain a copy of the License at
+**
+**     http://www.apache.org/licenses/LICENSE-2.0
+**
+** Unless required by applicable law or agreed to in writing, software
+** distributed under the License is distributed on an "AS IS" BASIS,
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+** See the License for the specific language governing permissions and
+** limitations under the License.
+*/
+-->
+
+<merge xmlns:latin="http://schemas.android.com/apk/res-auto">
+    <!-- U+0997: "গ" BENGALI LETTER GA
+         U+0998: "ঘ" BENGALI LETTER GHA -->
+    <Key
+        latin:keySpec="&#x0997;"
+        latin:moreKeys="&#x0998;,%" />
+    <!-- U+099A: "চ" BENGALI LETTER CA
+         U+099B: "ছ" BENGALI LETTER CHA -->
+    <Key
+        latin:keySpec="&#x099A;"
+        latin:moreKeys="&#x099B;" />
+    <!-- U+099C: "জ" BENGALI LETTER JA
+         U+099D: "ঝ" BENGALI LETTER JHA
+         U+099C/U+09CD/U+099E: "জ্ঞ" BENGALI LETTER JA/BENGALI SIGN VIRAMA/BENGALI LETTER NYA -->
+    <Key
+        latin:keySpec="&#x099C;"
+        latin:moreKeys="&#x099D;,&#x099C;&#x09CD;&#x099E;,%" />
+    <!-- U+099E: "ঞ" BENGALI LETTER NYA
+         U+0999: "ঙ" BENGALI LETTER NGA
+         U+099E/U+09CD/U+099C: "ঞ্জ" BENGALI LETTER NYA/BENGALI SIGN VIRAMA/BENGALI LETTER JA -->
+    <Key
+        latin:keySpec="&#x099E;"
+        latin:moreKeys="&#x0999;,&#x099E;&#x09CD;&#x099C;" />
+    <!-- U+099F: "ট" BENGALI LETTER TTA
+         U+09A0: "ঠ" BENGALI LETTER TTHA -->
+    <Key
+        latin:keySpec="&#x099F;"
+        latin:moreKeys="&#x09A0;" />
+    <!-- U+09A1: "ড" BENGALI LETTER DDA
+         U+09A1/U+09BC: "ড়" BENGALI LETTER DDA/BENGALI SIGN NUKTA -->
+    <Key
+        latin:keySpec="&#x09A1;"
+        latin:moreKeys="&#x09A1;&#x09BC;" />
+    <!-- U+09A2: "ঢ" BENGALI LETTER DDHA
+         U+09A2/U+09BC: "ঢ়" BENGALI LETTER DDHA/BENGALI SIGN NUKTA -->
+    <Key
+        latin:keySpec="&#x09A2;"
+        latin:moreKeys="&#x09A2;&#x09BC;" />
+    <!-- U+09A4: "ত" BENGALI LETTER TA
+         U+09CE: "ৎ" BENGALI LETTER KHANDA TA
+         U+09A5: "থ" BENGALI LETTER THA
+         U+09A4/U+09CD/U+09A4: "ত্ত" BENGALI LETTER TA/BENGALI SIGN VIRAMA/BENGALI LETTER TA -->
+    <Key
+        latin:keySpec="&#x09A4;"
+        latin:moreKeys="&#x09CE;,&#x09A5;,&#x09A4;&#x09CD;&#x09A4;" />
+    <!-- U+09A6: "দ" BENGALI LETTER DA
+         U+09A7: "ধ" BENGALI LETTER DHA -->
+    <Key
+        latin:keySpec="&#x09A6;"
+        latin:moreKeys="&#x09A7;,%" />
+    <!-- U+09A8: "ন" BENGALI LETTER NA
+         U+09A3: "ণ" BENGALI LETTER NNA -->
+    <Key
+        latin:keySpec="&#x09A8;"
+        latin:moreKeys="&#x09A3;" />
+    <!-- U+09AA: "প" BENGALI LETTER PA
+         U+09AB: "ফ" BENGALI LETTER PHA -->
+    <Key
+        latin:keySpec="&#x09AA;"
+        latin:moreKeys="&#x09AB;" />
+</merge>

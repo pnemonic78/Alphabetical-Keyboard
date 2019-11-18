@@ -24,28 +24,34 @@
     <!-- U+05EA: "ת" HEBREW LETTER TAV
          U+05EA U+05F3: "ת׳" HEBREW LETTER TAV + HEBREW PUNCTUATION GERESH -->
     <Key
-        latin:keyLabel="&#x05EA;"
+        latin:keySpec="&#x05EA;"
         latin:moreKeys="&#x05EA;&#x05F3;" />
     <!-- U+05E9: "ש" HEBREW LETTER SHIN -->
     <Key
-        latin:keyLabel="&#x05E9;" />
+        latin:keySpec="&#x05E9;" />
     <!-- U+05E8: "ר" HEBREW LETTER RESH -->
     <Key
-        latin:keyLabel="&#x05E8;" />
+        latin:keySpec="&#x05E8;" />
     <!-- U+05E7: "ק" HEBREW LETTER QOF -->
     <Key
-        latin:keyLabel="&#x05E7;" />
+        latin:keySpec="&#x05E7;" />
     <!-- U+05E5: "ץ" HEBREW LETTER FINAL TSADI
          U+05E5 U+05F3: "ץ׳" HEBREW LETTER FINAL TSADI + HEBREW PUNCTUATION GERESH -->
     <Key
-        latin:keyLabel="&#x05E5;"
+        latin:keySpec="&#x05E5;"
         latin:moreKeys="&#x05E5;&#x05F3;" />
     <!-- U+05E6: "צ" HEBREW LETTER TSADI
          U+05E6 U+05F3: "צ׳" HEBREW LETTER TSADI + HEBREW PUNCTUATION GERESH -->
     <Key
-        latin:keyLabel="&#x05E6;"
+        latin:keySpec="&#x05E6;"
         latin:moreKeys="&#x05E6;&#x05F3;" />
     <!-- U+05E3: "ף" HEBREW LETTER FINAL PE -->
     <Key
-        latin:keyLabel="&#x05E3;" />
+        latin:keySpec="&#x05E3;" />
+    <!-- U+05E4: "פ" HEBREW LETTER PE -->
+    <Key
+        latin:keySpec="&#x05E4;" />
+    <!-- U+05E2: "ע" HEBREW LETTER AYIN -->
+    <Key
+        latin:keySpec="&#x05E2;" />
 </merge>

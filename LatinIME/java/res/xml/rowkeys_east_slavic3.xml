@@ -22,33 +22,21 @@
     xmlns:latin="http://schemas.android.com/apk/res-auto"
 >
     <!-- U+0446: "ц" CYRILLIC SMALL LETTER TSE -->
-    <Key
-        latin:keyLabel="&#x0446;" />
+    <Key latin:keySpec="ц"/>
     <!-- U+0447: "ч" CYRILLIC SMALL LETTER CHE -->
-    <Key
-        latin:keyLabel="&#x0447;" />
+    <Key latin:keySpec="ч"/>
     <!-- U+0448: "ш" CYRILLIC SMALL LETTER SHA -->
-    <Key
-        latin:keyLabel="&#x0448;" />
+    <Key latin:keySpec="ш"/>
     <!-- U+0449: "щ" CYRILLIC SMALL LETTER SHCHA -->
-    <Key
-        latin:keyLabel="&#x0449;" />
+    <Key latin:keySpec="щ"/>
     <!-- U+044B: "ы" CYRILLIC SMALL LETTER YERU -->
-    <Key
-        latin:keyLabel="&#x044B;" />
-    <!-- U+044C: "ь" CYRILLIC SMALL LETTER SOFT SIGN
-         U+044A: "ъ" CYRILLIC SMALL LETTER HARD SIGN -->
-    <Key
-        latin:keyLabel="&#x044C;"
-        latin:moreKeys="&#x044A;"
-        latin:keyHintLabel="&#x044A;" />
+    <Key latin:keySpec="ы"/>
+    <!-- U+044C: "ь" CYRILLIC SMALL LETTER SOFT SIGN -->
+    <Key latin:keySpec="ь" latin:moreKeys="!text/morekeys_cyrillic_soft_sign"/>
     <!-- U+044D: "э" CYRILLIC SMALL LETTER E -->
-    <Key
-        latin:keyLabel="&#x044D;" />
+    <Key latin:keySpec="э"/>
     <!-- U+044E: "ю" CYRILLIC SMALL LETTER YU -->
-    <Key
-        latin:keyLabel="&#x044E;" />
+    <Key latin:keySpec="ю"/>
     <!-- U+044F: "я" CYRILLIC SMALL LETTER YA -->
-    <Key
-        latin:keyLabel="&#x044F;" />
+    <Key latin:keySpec="я"/>
 </merge>

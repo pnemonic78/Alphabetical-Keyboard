@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*
+**
+** Copyright 2014, The Android Open Source Project
+**
+** Licensed under the Apache License, Version 2.0 (the "License");
+** you may not use this file except in compliance with the License.
+** You may obtain a copy of the License at
+**
+**     http://www.apache.org/licenses/LICENSE-2.0
+**
+** Unless required by applicable law or agreed to in writing, software
+** distributed under the License is distributed on an "AS IS" BASIS,
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+** See the License for the specific language governing permissions and
+** limitations under the License.
+*/
+-->
+
+<merge xmlns:latin="http://schemas.android.com/apk/res-auto">
+    <!-- U+09AC: "ব" BENGALI LETTER BA
+         U+09AD: "ভ" BENGALI LETTER BHA -->
+    <Key
+        latin:keySpec="&#x09AC;"
+        latin:moreKeys="&#x09AD;,%" />
+    <!-- U+09AE: "ম" BENGALI LETTER MA -->
+    <Key latin:keySpec="&#x09AE;" />
+    <!-- U+09B0: "র" BENGALI LETTER RA
+         U+09C3: "ৃ" BENGALI VOWEL SIGN VOCALIC R
+         U+098B: "ঋ" BENGALI LETTER VOCALIC R
+         U+09A4/U+09CD/U+09B0: "ত্র" BENGALI LETTER TA/BENGALI SIGN VIRAMA/BENGALI LETTER RA -->
+    <Key
+        latin:keySpec="&#x09B0;"
+        latin:moreKeys="&#x09C3;,&#x098B;,&#x09A4;&#x09CD;&#x09B0;" />
+    <!-- U+09B2: "ল" BENGALI LETTER LA -->
+    <Key latin:keySpec="&#x09B2;" />
+    <!-- U+09B7: "ষ" BENGALI LETTER SSA
+         U+0995/U+09CD/U+09B7: "ক্ষ" BENGALI LETTER KA/BENGALI SIGN VIRAMA/BENGALI LETTER SSA -->
+    <Key
+        latin:keySpec="&#x09B7;"
+        latin:moreKeys="&#x0995;&#x09CD;&#x09B7;" />
+    <!-- U+09B8: "স" BENGALI LETTER SA
+         U+09B6: "শ" BENGALI LETTER SHA -->
+    <Key
+        latin:keySpec="&#x09B8;"
+        latin:moreKeys="&#x09B6;" />
+    <!-- U+09B9: "হ" BENGALI LETTER HA -->
+    <Key
+        latin:keySpec="&#x09B9;" />
+    <!-- U+09DF: "য়" BENGALI LETTER YYA
+         U+09AF: "য" BENGALI LETTER YA -->
+    <Key
+        latin:keySpec="&#x09DF;"
+        latin:moreKeys="&#x09AF;" />
+    <!-- U+0964: "।" DEVANAGARI DANDA
+         U+0965: "॥" DEVANAGARI DOUBLE DANDA -->
+    <Key
+        latin:keySpec="&#x0964;"
+        latin:moreKeys="&#x0965;" />
+    <!-- U+0981: "ঁ" BENGALI SIGN CANDRABINDU
+         U+0983: "ঃ" BENGALI SIGN VISARGA
+         U+0982: "ং" BENGALI SIGN ANUSVARA -->
+    <Key
+        latin:keySpec="&#x0981;"
+        latin:moreKeys="&#x0983;,&#x0982;" />
+</merge>

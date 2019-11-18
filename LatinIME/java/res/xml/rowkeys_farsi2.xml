@@ -18,43 +18,27 @@
 */
 -->
 
-<merge
-    xmlns:latin="http://schemas.android.com/apk/res-auto"
->
+<merge xmlns:latin="http://schemas.android.com/apk/res-auto">
     <!-- U+063A: "غ" ARABIC LETTER GHAIN -->
-    <Key
-        latin:keyLabel="&#x063A;" />
+    <Key latin:keySpec="غ"/>
     <!-- U+0639: "ع" ARABIC LETTER AIN -->
-    <Key
-        latin:keyLabel="&#x0639;" />
+    <Key latin:keySpec="ع"/>
     <!-- U+0638: "ظ" ARABIC LETTER ZAH -->
-    <Key
-        latin:keyLabel="&#x0638;" />
+    <Key latin:keySpec="ظ"/>
     <!-- U+0637: "ط" ARABIC LETTER TAH -->
-    <Key
-        latin:keyLabel="&#x0637;" />
+    <Key latin:keySpec="ط"/>
     <!-- U+0636: "ض" ARABIC LETTER DAD -->
-    <Key
-        latin:keyLabel="&#x0636;" />
+    <Key latin:keySpec="ض"/>
     <!-- U+0635: "ص" ARABIC LETTER SAD -->
-    <Key
-        latin:keyLabel="&#x0635;"
-        latin:moreKeys="%" />
+    <Key latin:keySpec="ص"/>
     <!-- U+0634: "ش" ARABIC LETTER SHEEN -->
-    <Key
-        latin:keyLabel="&#x0634;" />
-    <!-- U+0633: "س" ARABIC LETTER SEEN
-         U+0636: "ض" ARABIC LETTER DAD -->
-    <Key
-        latin:keyLabel="&#x0633;"
-        latin:moreKeys="&#x0636;" />
+    <Key latin:keySpec="ش"/>
+    <!-- U+0633: "س" ARABIC LETTER SEEN -->
+    <Key latin:keySpec="س"/>
     <!-- U+0698: "ژ" ARABIC LETTER JEH -->
-    <Key
-        latin:keyLabel="&#x0698;" />
+    <Key latin:keySpec="ژ"/>
     <!-- U+0632: "ز" ARABIC LETTER ZAIN -->
-    <Key
-        latin:keyLabel="&#x0632;" />
+    <Key latin:keySpec="ز"/>
     <!-- U+0631: "ر" ARABIC LETTER REH -->
-    <Key
-        latin:keyLabel="&#x0631;" />
+    <Key latin:keySpec="ر"/>
 </merge>

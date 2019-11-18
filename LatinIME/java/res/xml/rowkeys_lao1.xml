@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+/*
+**
+** Copyright 2013, The Android Open Source Project
+**
+** Licensed under the Apache License, Version 2.0 (the "License");
+** you may not use this file except in compliance with the License.
+** You may obtain a copy of the License at
+**
+**     http://www.apache.org/licenses/LICENSE-2.0
+**
+** Unless required by applicable law or agreed to in writing, software
+** distributed under the License is distributed on an "AS IS" BASIS,
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+** See the License for the specific language governing permissions and
+** limitations under the License.
+*/
+-->
+
+<merge xmlns:latin="http://schemas.android.com/apk/res-auto">
+    <!-- U+0E81: "ກ" LAO LETTER KO
+         U+0ED1: "໑" LAO DIGIT ONE -->
+    <Key latin:additionalMoreKeys="1,໑" latin:keyHintLabel="1" latin:keySpec="ກ"/>
+    <!-- U+0E82: "ຂ" LAO LETTER KHO SUNG
+         U+0ED2: "໒" LAO DIGIT TWO -->
+    <Key latin:additionalMoreKeys="2,໒" latin:keyHintLabel="2" latin:keySpec="ຂ"/>
+    <!-- U+0E84: "ຄ" LAO LETTER KHO TAM
+         U+0ED3: "໓" LAO DIGIT THREE -->
+    <Key latin:additionalMoreKeys="3໓" latin:keyHintLabel="3" latin:keySpec="ຄ"/>
+    <!-- U+0E87: "ງ" LAO LETTER NGO
+         U+0ED4: "໔" LAO DIGIT FOUR -->
+    <Key latin:additionalMoreKeys="4,໔" latin:keyHintLabel="4" latin:keySpec="ງ"/>
+    <!-- U+0E88: "ຈ" LAO LETTER CO
+         U+0ED5: "໕" LAO DIGIT FIVE -->
+    <Key latin:additionalMoreKeys="5,໕" latin:keyHintLabel="5" latin:keySpec="ຈ"/>
+    <!-- U+0E8A: "ຊ" LAO LETTER SO TAM
+         U+0ED6: "໖" LAO DIGIT SIX -->
+    <Key latin:additionalMoreKeys="6,໖" latin:keyHintLabel="6" latin:keySpec="ຊ"/>
+    <!-- U+0E8D: "ຍ" LAO LETTER NYO
+         U+0ED7: "໗" LAO DIGIT SEVEN -->
+    <Key latin:additionalMoreKeys="7,໗" latin:keyHintLabel="7" latin:keySpec="ຍ"/>
+    <!-- U+0E94: "ດ" LAO LETTER DO
+         U+0ED8: "໘" LAO DIGIT EIGHT -->
+    <Key latin:additionalMoreKeys="8,໘" latin:keyHintLabel="8" latin:keySpec="ດ"/>
+    <!-- U+0E95: "ຕ" LAO LETTER TO
+         U+0ED9: "໙" LAO DIGIT NINE -->
+    <Key latin:additionalMoreKeys="9,໙" latin:keyHintLabel="9" latin:keySpec="ຕ"/>
+    <!-- U+0E96: "ຖ" LAO LETTER THO SUNG
+         U+0ED0: "໐" LAO DIGIT ZERO -->
+    <Key latin:additionalMoreKeys="0,໐" latin:keyHintLabel="0" latin:keySpec="ຖ"/>
+    <!-- U+0E97: "ທ" LAO LETTER THO TAM -->
+    <Key latin:keySpec="ທ"/>
+    <!-- U+0E99: "ນ" LAO LETTER NO
+         U+0EDC: "ໜ" LAO HO NO -->
+    <Key latin:keySpec="ນ" latin:moreKeys="ໜ"/>
+</merge>

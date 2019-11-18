@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*
+**
+** Copyright 2014, The Android Open Source Project
+**
+** Licensed under the Apache License, Version 2.0 (the "License");
+** you may not use this file except in compliance with the License.
+** You may obtain a copy of the License at
+**
+**     http://www.apache.org/licenses/LICENSE-2.0
+**
+** Unless required by applicable law or agreed to in writing, software
+** distributed under the License is distributed on an "AS IS" BASIS,
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+** See the License for the specific language governing permissions and
+** limitations under the License.
+*/
+-->
+
+<merge xmlns:latin="http://schemas.android.com/apk/res-auto">
+    <!-- U+0CBF: "ಿ" KANNADA VOWEL SIGN I
+         U+0C87: "ಇ" KANNADA LETTER I -->
+    <Key latin:keySpec="ಿ" latin:moreKeys="ಇ"/>
+    <!-- U+0CC0: "ೀ" KANNADA VOWEL SIGN II
+         U+0C88: "ಈ" KANNADA LETTER II -->
+    <Key latin:keySpec="ೀ" latin:moreKeys="ಈ,%"/>
+    <!-- U+0CC1: "ು" KANNADA VOWEL SIGN U
+         U+0C89: "ಉ" KANNADA LETTER U -->
+    <Key latin:keySpec="ು" latin:moreKeys="ಉ"/>
+    <!-- U+0CC2: "ೂ" KANNADA VOWEL SIGN UU
+         U+0C8A: "ಊ" KANNADA LETTER UU -->
+    <Key latin:keySpec="ೂ" latin:moreKeys="ಊ,%"/>
+    <!-- U+0CC6: "ೆ" KANNADA VOWEL SIGN E
+         U+0C92: "ಒ" KANNADA LETTER O -->
+    <Key latin:keySpec="ೆ" latin:moreKeys="ಒ"/>
+    <!-- U+0CC7: "ೇ" KANNADA VOWEL SIGN EE
+         U+0C8F: "ಏ" KANNADA LETTER EE -->
+    <Key latin:keySpec="ೇ" latin:moreKeys="ಏ"/>
+    <!-- U+0CC8: "ೈ" KANNADA VOWEL SIGN AI
+         U+0C90: "ಐ" KANNADA LETTER AI -->
+    <Key latin:keySpec="ೈ" latin:moreKeys="ಐ,%"/>
+    <!-- U+0CCB: "ೋ" KANNADA VOWEL SIGN OO
+         U+0C93: "ಓ" KANNADA LETTER OO -->
+    <Key latin:keySpec="ೋ" latin:moreKeys="ಓ"/>
+    <!-- U+0CCC: "ೌ" KANNADA VOWEL SIGN AU
+         U+0C94: "ಔ" KANNADA LETTER AU -->
+    <Key latin:keySpec="ೌ" latin:moreKeys="ಔ,%"/>
+    <!-- U+0CCD: "್" KANNADA SIGN VIRAMA
+         U+0C85: "ಅ" KANNADA LETTER A -->
+    <Key latin:keySpec="್" latin:moreKeys="ಅ"/>
+</merge>

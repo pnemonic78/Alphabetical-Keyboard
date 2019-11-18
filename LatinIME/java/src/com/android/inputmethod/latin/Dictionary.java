@@ -1,91 +1,135 @@
 /*
  * Copyright (C) 2008 The Android Open Source Project
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.android.inputmethod.latin;
 
-import com.android.inputmethod.keyboard.ProximityInfo;
+import com.android.inputmethod.annotations.UsedForTesting;
+import com.android.inputmethod.latin.SuggestedWords.SuggestedWordInfo;
+import com.android.inputmethod.latin.common.ComposedData;
+import com.android.inputmethod.latin.settings.SettingsValuesForSuggestion;
+
+import java.util.ArrayList;
+import java.util.Locale;
+import java.util.Arrays;
+import java.util.HashSet;
 
 /**
  * Abstract base class for a dictionary that can do a fuzzy search for words based on a set of key
  * strokes.
  */
 public abstract class Dictionary {
-    /**
-     * The weight to give to a word if it's length is the same as the number of typed characters.
-     */
-    protected static final int FULL_WORD_SCORE_MULTIPLIER = 2;
-
-    public static final int UNIGRAM = 0;
-    public static final int BIGRAM = 1;
-
     public static final int NOT_A_PROBABILITY = -1;
+    public static final float NOT_A_WEIGHT_OF_LANG_MODEL_VS_SPATIAL_MODEL = -1.0f;
+
+    // The following types do not actually come from real dictionary instances, so we create
+    // corresponding instances.
+    public static final String TYPE_USER_TYPED = "user_typed";
+    public static final PhonyDictionary DICTIONARY_USER_TYPED = new PhonyDictionary(TYPE_USER_TYPED);
+
+    public static final String TYPE_USER_SHORTCUT = "user_shortcut";
+    public static final PhonyDictionary DICTIONARY_USER_SHORTCUT =
+            new PhonyDictionary(TYPE_USER_SHORTCUT);
+
+    public static final String TYPE_APPLICATION_DEFINED = "application_defined";
+    public static final PhonyDictionary DICTIONARY_APPLICATION_DEFINED =
+            new PhonyDictionary(TYPE_APPLICATION_DEFINED);
+
+    public static final String TYPE_HARDCODED = "hardcoded"; // punctuation signs and such
+    public static final PhonyDictionary DICTIONARY_HARDCODED =
+            new PhonyDictionary(TYPE_HARDCODED);
+
+    // Spawned by resuming suggestions. Comes from a span that was in the TextView.
+    public static final String TYPE_RESUMED = "resumed";
+    public static final PhonyDictionary DICTIONARY_RESUMED = new PhonyDictionary(TYPE_RESUMED);
+
+    // The following types of dictionary have actual functional instances. We don't need final
+    // phony dictionary instances for them.
+    public static final String TYPE_MAIN = "main";
+    public static final String TYPE_CONTACTS = "contacts";
+    // User dictionary, the system-managed one.
+    public static final String TYPE_USER = "user";
+    // User history dictionary internal to LatinIME.
+    public static final String TYPE_USER_HISTORY = "history";
+    public final String mDictType;
+    // The locale for this dictionary. May be null if unknown (phony dictionary for example).
+    public final Locale mLocale;
+
     /**
-     * Interface to be implemented by classes requesting words to be fetched from the dictionary.
-     * @see #getWords(WordComposer, CharSequence, WordCallback, ProximityInfo)
+     * Set out of the dictionary types listed above that are based on data specific to the user,
+     * e.g., the user's contacts.
      */
-    public interface WordCallback {
-        /**
-         * Adds a word to a list of suggestions. The word is expected to be ordered based on
-         * the provided score.
-         * @param word the character array containing the word
-         * @param wordOffset starting offset of the word in the character array
-         * @param wordLength length of valid characters in the character array
-         * @param score the score of occurrence. This is normalized between 1 and 255, but
-         * can exceed those limits
-         * @param dicTypeId of the dictionary where word was from
-         * @param dataType tells type of this data, either UNIGRAM or BIGRAM
-         * @return true if the word was added, false if no more words are required
-         */
-        boolean addWord(char[] word, int wordOffset, int wordLength, int score, int dicTypeId,
-                int dataType);
+    private static final HashSet<String> sUserSpecificDictionaryTypes = new HashSet<>(Arrays.asList(
+            TYPE_USER_TYPED,
+            TYPE_USER,
+            TYPE_CONTACTS,
+            TYPE_USER_HISTORY));
+
+    public Dictionary(final String dictType, final Locale locale) {
+        mDictType = dictType;
+        mLocale = locale;
     }
 
     /**
-     * Searches for words in the dictionary that match the characters in the composer. Matched
-     * words are added through the callback object.
-     * @param composer the key sequence to match
-     * @param prevWordForBigrams the previous word, or null if none
-     * @param callback the callback object to send matched words to as possible candidates
-     * @param proximityInfo the object for key proximity. May be ignored by some implementations.
-     * @see WordCallback#addWord(char[], int, int, int, int, int)
+     * Searches for suggestions for a given context.
+     * @param composedData the key sequence to match with coordinate info
+     * @param ngramContext the context for n-gram.
+     * @param proximityInfoHandle the handle for key proximity. Is ignored by some implementations.
+     * @param settingsValuesForSuggestion the settings values used for the suggestion.
+     * @param sessionId the session id.
+     * @param weightForLocale the weight given to this locale, to multiply the output scores for
+     * multilingual input.
+     * @param inOutWeightOfLangModelVsSpatialModel the weight of the language model as a ratio of
+     * the spatial model, used for generating suggestions. inOutWeightOfLangModelVsSpatialModel is
+     * a float array that has only one element. This can be updated when a different value is used.
+     * @return the list of suggestions (possibly null if none)
      */
-    abstract public void getWords(final WordComposer composer,
-            final CharSequence prevWordForBigrams, final WordCallback callback,
-            final ProximityInfo proximityInfo);
+    abstract public ArrayList<SuggestedWordInfo> getSuggestions(final ComposedData composedData,
+            final NgramContext ngramContext, final long proximityInfoHandle,
+            final SettingsValuesForSuggestion settingsValuesForSuggestion,
+            final int sessionId, final float weightForLocale,
+            final float[] inOutWeightOfLangModelVsSpatialModel);
 
     /**
-     * Searches for pairs in the bigram dictionary that matches the previous word and all the
-     * possible words following are added through the callback object.
-     * @param composer the key sequence to match
-     * @param previousWord the word before
-     * @param callback the callback object to send possible word following previous word
-     */
-    public void getBigrams(final WordComposer composer, final CharSequence previousWord,
-            final WordCallback callback) {
-        // empty base implementation
-    }
-
-    /**
-     * Checks if the given word occurs in the dictionary
+     * Checks if the given word has to be treated as a valid word. Please note that some
+     * dictionaries have entries that should be treated as invalid words.
      * @param word the word to search for. The search should be case-insensitive.
-     * @return true if the word exists, false otherwise
+     * @return true if the word is valid, false otherwise
      */
-    abstract public boolean isValidWord(CharSequence word);
+    public boolean isValidWord(final String word) {
+        return isInDictionary(word);
+    }
 
-    public int getFrequency(CharSequence word) {
+    /**
+     * Checks if the given word is in the dictionary regardless of it being valid or not.
+     */
+    abstract public boolean isInDictionary(final String word);
+
+    /**
+     * Get the frequency of the word.
+     * @param word the word to get the frequency of.
+     */
+    public int getFrequency(final String word) {
+        return NOT_A_PROBABILITY;
+    }
+
+    /**
+     * Get the maximum frequency of the word.
+     * @param word the word to get the maximum frequency of.
+     */
+    public int getMaxFrequencyOfExactMatches(final String word) {
         return NOT_A_PROBABILITY;
     }
 
@@ -97,7 +141,7 @@ public abstract class Dictionary {
      * @param typedWord the word to compare with
      * @return true if they are the same, false otherwise.
      */
-    protected boolean same(final char[] word, final int length, final CharSequence typedWord) {
+    protected boolean same(final char[] word, final int length, final String typedWord) {
         if (typedWord.length() != length) {
             return false;
         }
@@ -114,5 +158,59 @@ public abstract class Dictionary {
      */
     public void close() {
         // empty base implementation
+    }
+
+    /**
+     * Subclasses may override to indicate that this Dictionary is not yet properly initialized.
+     */
+    public boolean isInitialized() {
+        return true;
+    }
+
+    /**
+     * Whether we think this suggestion should trigger an auto-commit. prevWord is the word
+     * before the suggestion, so that we can use n-gram frequencies.
+     * @param candidate The candidate suggestion, in whole (not only the first part).
+     * @return whether we should auto-commit or not.
+     */
+    public boolean shouldAutoCommit(final SuggestedWordInfo candidate) {
+        // If we don't have support for auto-commit, or if we don't know, we return false to
+        // avoid auto-committing stuff. Implementations of the Dictionary class that know to
+        // determine whether we should auto-commit will override this.
+        return false;
+    }
+
+    /**
+     * Whether this dictionary is based on data specific to the user, e.g., the user's contacts.
+     * @return Whether this dictionary is specific to the user.
+     */
+    public boolean isUserSpecific() {
+        return sUserSpecificDictionaryTypes.contains(mDictType);
+    }
+
+    /**
+     * Not a true dictionary. A placeholder used to indicate suggestions that don't come from any
+     * real dictionary.
+     */
+    @UsedForTesting
+    static class PhonyDictionary extends Dictionary {
+        @UsedForTesting
+        PhonyDictionary(final String type) {
+            super(type, null);
+        }
+
+        @Override
+        public ArrayList<SuggestedWordInfo> getSuggestions(final ComposedData composedData,
+                final NgramContext ngramContext, final long proximityInfoHandle,
+                final SettingsValuesForSuggestion settingsValuesForSuggestion,
+                final int sessionId, final float weightForLocale,
+                final float[] inOutWeightOfLangModelVsSpatialModel) {
+            return null;
+        }
+
+        @Override
+        public boolean isInDictionary(String word) {
+            return false;
+        }
     }
 }

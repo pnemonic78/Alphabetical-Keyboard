@@ -21,31 +21,15 @@
 <merge
     xmlns:latin="http://schemas.android.com/apk/res-auto"
 >
-    <Key
-        latin:keyLabel="k"
-        latin:moreKeys="!text/more_keys_for_k" />
-    <Key
-        latin:keyLabel="l"
-        latin:moreKeys="!text/more_keys_for_l" />
-    <Key
-        latin:keyLabel="m" />
-    <Key
-        latin:keyLabel="n"
-        latin:moreKeys="!text/more_keys_for_n" />
+    <Key latin:keySpec="k" latin:moreKeys="!text/morekeys_k"/>
+    <Key latin:keySpec="l" latin:moreKeys="!text/morekeys_l"/>
+    <Key latin:keySpec="m"/>
+    <Key latin:keySpec="n" latin:moreKeys="!text/morekeys_n"/>
     <!-- U+00F1: "ñ" LATIN SMALL LETTER N WITH TILDE -->
-    <Key
-        latin:keyLabel="&#x00F1;" />
-    <Key
-        latin:keyLabel="o"
-        latin:moreKeys="!text/more_keys_for_o" />
-    <Key
-        latin:keyLabel="p" />
-    <Key
-        latin:keyLabel="q" />
-    <Key
-        latin:keyLabel="r"
-        latin:moreKeys="!text/more_keys_for_r" />
-    <Key
-        latin:keyLabel="s"
-        latin:moreKeys="!text/more_keys_for_s" />
- </merge>
+    <Key latin:keySpec="ñ"/>
+    <Key latin:keySpec="o" latin:moreKeys="!text/morekeys_o"/>
+    <Key latin:keySpec="p"/>
+    <Key latin:keySpec="!text/keyspec_q" latin:moreKeys="!text/morekeys_q"/>
+    <Key latin:keySpec="r" latin:moreKeys="!text/morekeys_r"/>
+    <Key latin:keySpec="s" latin:moreKeys="!text/morekeys_s"/>
+</merge>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*
+**
+** Copyright 2014, The Android Open Source Project
+**
+** Licensed under the Apache License, Version 2.0 (the "License");
+** you may not use this file except in compliance with the License.
+** You may obtain a copy of the License at
+**
+**     http://www.apache.org/licenses/LICENSE-2.0
+**
+** Unless required by applicable law or agreed to in writing, software
+** distributed under the License is distributed on an "AS IS" BASIS,
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+** See the License for the specific language governing permissions and
+** limitations under the License.
+*/
+-->
+
+<merge xmlns:latin="http://schemas.android.com/apk/res-auto">
+    <!-- U+0C82: "ಂ" KANNADA SIGN ANUSVARA
+         U+0C8E: "ಎ" KANNADA LETTER E
+         U+0CE7: "೧" KANNADA DIGIT ONE -->
+    <Key latin:keySpec="ಂ" latin:moreKeys="ಎ" latin:additionalMoreKeys="೧,1" latin:keyHintLabel="1"/>
+    <!-- U+0C8B: "ಋ" KANNADA LETTER VOCALIC R
+         U+0CCD/U+0CB0: "್ರ" KANNADA SIGN VIRAMA/KANNADA LETTER RA
+         U+0CE8: "೨" KANNADA DIGIT TWO -->
+    <Key latin:keySpec="ಋ" latin:moreKeys="್ರ" latin:additionalMoreKeys="೨,2" latin:keyHintLabel="2"/>
+    <!-- U+0C95: "ಕ" KANNADA LETTER KA
+         U+0C96: "ಖ" KANNADA LETTER KHA
+         U+0CE9: "೩" KANNADA DIGIT THREE -->
+    <Key latin:keySpec="ಕ" latin:moreKeys="ಖ" latin:additionalMoreKeys="೩,3" latin:keyHintLabel="3"/>
+    <!-- U+0C97: "ಗ" KANNADA LETTER GA
+         U+0C98: "ಘ" KANNADA LETTER GHA
+         U+0CEA: "೪" KANNADA DIGIT FOUR -->
+    <Key latin:keySpec="ಗ" latin:moreKeys="ಘ,%" latin:additionalMoreKeys="೪,4" latin:keyHintLabel="4"/>
+    <!-- U+0C9A: "ಚ" KANNADA LETTER CA
+         U+0C9B: "ಛ" KANNADA LETTER CHA
+         U+0CEB: "೫" KANNADA DIGIT FIVE -->
+    <Key latin:keySpec="ಚ" latin:moreKeys="ಛ" latin:additionalMoreKeys="೫,5" latin:keyHintLabel="5"/>
+    <!-- U+0C9C: "ಜ" KANNADA LETTER JA
+         U+0C9D: "ಝ" KANNADA LETTER JHA
+         U+0CEC: "೬" KANNADA DIGIT SIX -->
+    <Key latin:keySpec="ಜ" latin:moreKeys="ಝ,%" latin:additionalMoreKeys="೬,6" latin:keyHintLabel="6"/>
+    <!-- U+0C9F: "ಟ" KANNADA LETTER TTA
+         U+0CA0: "ಠ" KANNADA LETTER TTHA
+         U+0CED: "೭" KANNADA DIGIT SEVEN -->
+    <Key latin:keySpec="ಟ" latin:moreKeys="ಠ" latin:additionalMoreKeys="೭,7" latin:keyHintLabel="7"/>
+    <!-- U+0CA1: "ಡ" KANNADA LETTER DDA
+         U+0CA2: "ಢ" KANNADA LETTER DDHA
+         U+0CEE: "೮" KANNADA DIGIT EIGHT -->
+    <Key latin:keySpec="ಡ" latin:moreKeys="ಢ" latin:additionalMoreKeys="೮,8" latin:keyHintLabel="8"/>
+    <!-- U+0CA4: "ತ" KANNADA LETTER TA
+         U+0CA5: "ಥ" KANNADA LETTER THA
+         U+0CEF: "೯" KANNADA DIGIT NINE -->
+    <Key latin:keySpec="ತ" latin:moreKeys="ಥ" latin:additionalMoreKeys="೯,9" latin:keyHintLabel="9"/>
+    <!-- U+0CA6: "ದ" KANNADA LETTER DA
+         U+0CA7: "ಧ" KANNADA LETTER DHA
+         U+0CE6: "೦" KANNADA DIGIT ZERO -->
+    <Key latin:keySpec="ದ" latin:moreKeys="ಧ,%" latin:additionalMoreKeys="೦,0" latin:keyHintLabel="0"/>
+    <!-- U+0CA8: "ನ" KANNADA LETTER NA
+         U+0CA3: "ಣ" KANNADA LETTER NNA -->
+    <Key latin:keySpec="ನ" latin:moreKeys="ಣ"/>
+</merge>

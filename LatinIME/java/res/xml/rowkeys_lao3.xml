@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+/*
+**
+** Copyright 2013, The Android Open Source Project
+**
+** Licensed under the Apache License, Version 2.0 (the "License");
+** you may not use this file except in compliance with the License.
+** You may obtain a copy of the License at
+**
+**     http://www.apache.org/licenses/LICENSE-2.0
+**
+** Unless required by applicable law or agreed to in writing, software
+** distributed under the License is distributed on an "AS IS" BASIS,
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+** See the License for the specific language governing permissions and
+** limitations under the License.
+*/
+-->
+
+<merge xmlns:latin="http://schemas.android.com/apk/res-auto">
+    <!-- U+0EB1: "ັ" LAO VOWEL SIGN MAI KAN
+         U+0EB1/U+0EC9: "ັ້" LAO VOWEL SIGN MAI KAN/LAO TONE MAI THO -->
+    <Key latin:keyLabelFlags="followKeyLetterRatio" latin:keySpec="ັ" latin:moreKeys="ັ້"/>
+    <!-- U+0EB2: "າ" LAO VOWEL SIGN AA -->
+    <Key latin:keySpec="າ"/>
+    <!-- U+0EB3: "ຳ" LAO VOWEL SIGN AM
+         U+0EB3/U+0EC9: "ຳ້" LAO VOWEL SIGN AM/LAO TONE MAI THO -->
+    <Key latin:keyLabelFlags="followKeyLetterRatio" latin:keySpec="ຳ" latin:moreKeys="ຳ້"/>
+    <!-- U+0EB4: "ິ" LAO VOWEL SIGN I
+         U+0EB4/U+0EC9: "ິ້" LAO VOWEL SIGN I/LAO TONE MAI THO -->
+    <Key latin:keyLabelFlags="followKeyLetterRatio" latin:keySpec="ິ" latin:moreKeys="ິ້"/>
+    <!-- U+0EB5: "ີ" LAO VOWEL SIGN II
+         U+0EB5/U+0EC9: "ີ້" LAO VOWEL SIGN II/LAO TONE MAI THO -->
+    <Key latin:keyLabelFlags="followKeyLetterRatio" latin:keySpec="ີ" latin:moreKeys="ີ້"/>
+    <!-- U+0EB6: "ຶ" LAO VOWEL SIGN Y
+         U+0EB6/U+0EC9: "ຶ້" LAO VOWEL SIGN Y/LAO TONE MAI THO -->
+    <Key latin:keyLabelFlags="followKeyLetterRatio" latin:keySpec="ຶ" latin:moreKeys="ຶ້"/>
+    <!-- U+0EB7: "ື" LAO VOWEL SIGN YY
+         U+0EB7/U+0EC9: "ື້" LAO VOWEL SIGN YY/LAO TONE MAI THO -->
+    <Key latin:keyLabelFlags="followKeyLetterRatio" latin:keySpec="ື" latin:moreKeys="ື້"/>
+    <!-- U+0EB8: "ຸ" LAO VOWEL SIGN U
+         U+0EB9: "ູ" LAO VOWEL SIGN UU
+         U+0ECC: "໌" LAO CANCELLATION MARK -->
+    <Key latin:keySpec="ຸ" latin:moreKeys="ູ,໌"/>
+    <!-- U+0EC6: "ໆ" LAO KO LA -->
+    <Key latin:keySpec="ໆ"/>
+    <!-- U+0EC8: "່" LAO TONE MAI EK
+         U+0ECB: "໋" LAO TONE MAI CATAWA -->
+    <Key latin:keySpec="່" latin:moreKeys="໋"/>
+    <!-- U+0EC9: "້" LAO TONE MAI THO
+         U+0ECA: "໊" LAO TONE MAI TI -->
+    <Key latin:keySpec="້" latin:moreKeys="໊"/>
+    <!-- U+0EBB: "ົ" LAO VOWEL SIGN MAI KON
+         U+0EBB/U+0EC9: "ົ້" LAO VOWEL SIGN MAI KON/LAO TONE MAI THO -->
+    <Key latin:keyLabelFlags="followKeyLetterRatio" latin:keySpec="ົ" latin:moreKeys="ົ້"/>
+</merge>

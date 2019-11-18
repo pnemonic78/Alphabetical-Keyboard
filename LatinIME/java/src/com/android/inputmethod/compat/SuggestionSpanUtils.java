@@ -16,62 +16,37 @@
 
 package com.android.inputmethod.compat;
 
-import com.android.inputmethod.latin.LatinImeLogger;
-import com.android.inputmethod.latin.SuggestedWords;
-import com.android.inputmethod.latin.SuggestionSpanPickedNotificationReceiver;
-
 import android.content.Context;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
-import android.util.Log;
+import android.text.style.SuggestionSpan;
 
-import java.lang.reflect.Constructor;
+import com.android.inputmethod.annotations.UsedForTesting;
+import com.android.inputmethod.latin.SuggestedWords;
+import com.android.inputmethod.latin.SuggestedWords.SuggestedWordInfo;
+import com.android.inputmethod.latin.common.LocaleUtils;
+import com.android.inputmethod.latin.define.DebugFlags;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class SuggestionSpanUtils {
-    private static final String TAG = SuggestionSpanUtils.class.getSimpleName();
-    // TODO: Use reflection to get field values
-    public static final String ACTION_SUGGESTION_PICKED =
-            "android.text.style.SUGGESTION_PICKED";
-    public static final String SUGGESTION_SPAN_PICKED_AFTER = "after";
-    public static final String SUGGESTION_SPAN_PICKED_BEFORE = "before";
-    public static final String SUGGESTION_SPAN_PICKED_HASHCODE = "hashcode";
-    public static final boolean SUGGESTION_SPAN_IS_SUPPORTED;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-    private static final Class<?> CLASS_SuggestionSpan = CompatUtils
-            .getClass("android.text.style.SuggestionSpan");
-    private static final Class<?>[] INPUT_TYPE_SuggestionSpan = new Class<?>[] {
-            Context.class, Locale.class, String[].class, int.class, Class.class };
-    private static final Constructor<?> CONSTRUCTOR_SuggestionSpan = CompatUtils
-            .getConstructor(CLASS_SuggestionSpan, INPUT_TYPE_SuggestionSpan);
-    public static final Field FIELD_FLAG_EASY_CORRECT =
-            CompatUtils.getField(CLASS_SuggestionSpan, "FLAG_EASY_CORRECT");
-    public static final Field FIELD_FLAG_MISSPELLED =
-            CompatUtils.getField(CLASS_SuggestionSpan, "FLAG_MISSPELLED");
-    public static final Field FIELD_FLAG_AUTO_CORRECTION =
-            CompatUtils.getField(CLASS_SuggestionSpan, "FLAG_AUTO_CORRECTION");
-    public static final Field FIELD_SUGGESTIONS_MAX_SIZE
-            = CompatUtils.getField(CLASS_SuggestionSpan, "SUGGESTIONS_MAX_SIZE");
-    public static final Integer OBJ_FLAG_EASY_CORRECT = (Integer) CompatUtils
-            .getFieldValue(null, null, FIELD_FLAG_EASY_CORRECT);
-    public static final Integer OBJ_FLAG_MISSPELLED = (Integer) CompatUtils
-            .getFieldValue(null, null, FIELD_FLAG_MISSPELLED);
-    public static final Integer OBJ_FLAG_AUTO_CORRECTION = (Integer) CompatUtils
-            .getFieldValue(null, null, FIELD_FLAG_AUTO_CORRECTION);
-    public static final Integer OBJ_SUGGESTIONS_MAX_SIZE = (Integer) CompatUtils
-            .getFieldValue(null, null, FIELD_SUGGESTIONS_MAX_SIZE);
+public final class SuggestionSpanUtils {
+    // Note that SuggestionSpan.FLAG_AUTO_CORRECTION has been introduced
+    // in API level 15 (Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1).
+    private static final Field FIELD_FLAG_AUTO_CORRECTION = CompatUtils.getField(
+            SuggestionSpan.class, "FLAG_AUTO_CORRECTION");
+    private static final Integer OBJ_FLAG_AUTO_CORRECTION = (Integer) CompatUtils.getFieldValue(
+            null /* receiver */, null /* defaultValue */, FIELD_FLAG_AUTO_CORRECTION);
 
     static {
-        SUGGESTION_SPAN_IS_SUPPORTED =
-                CLASS_SuggestionSpan != null && CONSTRUCTOR_SuggestionSpan != null;
-        if (LatinImeLogger.sDBG) {
-            if (SUGGESTION_SPAN_IS_SUPPORTED
-                    && (OBJ_FLAG_AUTO_CORRECTION == null || OBJ_SUGGESTIONS_MAX_SIZE == null
-                            || OBJ_FLAG_MISSPELLED == null || OBJ_FLAG_EASY_CORRECT == null)) {
+        if (DebugFlags.DEBUG_ENABLED) {
+            if (OBJ_FLAG_AUTO_CORRECTION == null) {
                 throw new RuntimeException("Field is accidentially null.");
             }
         }
@@ -81,68 +56,66 @@ public class SuggestionSpanUtils {
         // This utility class is not publicly instantiable.
     }
 
+    @UsedForTesting
     public static CharSequence getTextWithAutoCorrectionIndicatorUnderline(
-            Context context, CharSequence text) {
-        if (TextUtils.isEmpty(text) || CONSTRUCTOR_SuggestionSpan == null
-                || OBJ_FLAG_AUTO_CORRECTION == null || OBJ_SUGGESTIONS_MAX_SIZE == null
-                || OBJ_FLAG_MISSPELLED == null || OBJ_FLAG_EASY_CORRECT == null) {
+            final Context context, final String text, @Nonnull final Locale locale) {
+        if (TextUtils.isEmpty(text) || OBJ_FLAG_AUTO_CORRECTION == null) {
             return text;
         }
-        final Spannable spannable = text instanceof Spannable
-                ? (Spannable) text : new SpannableString(text);
-        final Object[] args =
-                { context, null, new String[] {}, (int)OBJ_FLAG_AUTO_CORRECTION,
-                        (Class<?>) SuggestionSpanPickedNotificationReceiver.class };
-        final Object ss = CompatUtils.newInstance(CONSTRUCTOR_SuggestionSpan, args);
-        if (ss == null) {
-            Log.w(TAG, "Suggestion span was not created.");
-            return text;
-        }
-        spannable.setSpan(ss, 0, text.length(),
+        final Spannable spannable = new SpannableString(text);
+        final SuggestionSpan suggestionSpan = new SuggestionSpan(context, locale,
+                new String[] {} /* suggestions */, OBJ_FLAG_AUTO_CORRECTION, null);
+        spannable.setSpan(suggestionSpan, 0, text.length(),
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE | Spanned.SPAN_COMPOSING);
         return spannable;
     }
 
-    public static CharSequence getTextWithSuggestionSpan(Context context,
-            CharSequence pickedWord, SuggestedWords suggestedWords, boolean dictionaryAvailable) {
-        if (!dictionaryAvailable || TextUtils.isEmpty(pickedWord)
-                || CONSTRUCTOR_SuggestionSpan == null
-                || suggestedWords == null || suggestedWords.size() == 0
-                || suggestedWords.mIsPrediction || suggestedWords.mIsPunctuationSuggestions
-                || OBJ_SUGGESTIONS_MAX_SIZE == null) {
+    @UsedForTesting
+    public static CharSequence getTextWithSuggestionSpan(final Context context,
+            final String pickedWord, final SuggestedWords suggestedWords, final Locale locale) {
+        if (TextUtils.isEmpty(pickedWord) || suggestedWords.isEmpty()
+                || suggestedWords.isPrediction() || suggestedWords.isPunctuationSuggestions()) {
             return pickedWord;
         }
 
-        final Spannable spannable;
-        if (pickedWord instanceof Spannable) {
-            spannable = (Spannable) pickedWord;
-        } else {
-            spannable = new SpannableString(pickedWord);
-        }
-        final ArrayList<String> suggestionsList = new ArrayList<String>();
-        boolean sameAsTyped = false;
+        final ArrayList<String> suggestionsList = new ArrayList<>();
         for (int i = 0; i < suggestedWords.size(); ++i) {
-            if (suggestionsList.size() >= OBJ_SUGGESTIONS_MAX_SIZE) {
+            if (suggestionsList.size() >= SuggestionSpan.SUGGESTIONS_MAX_SIZE) {
                 break;
             }
-            final CharSequence word = suggestedWords.getWord(i);
+            final SuggestedWordInfo info = suggestedWords.getInfo(i);
+            if (info.isKindOf(SuggestedWordInfo.KIND_PREDICTION)) {
+                continue;
+            }
+            final String word = suggestedWords.getWord(i);
             if (!TextUtils.equals(pickedWord, word)) {
                 suggestionsList.add(word.toString());
-            } else if (i == 0) {
-                sameAsTyped = true;
             }
         }
-
-        // TODO: We should avoid adding suggestion span candidates that came from the bigram
-        // prediction.
-        final Object[] args =
-                { context, null, suggestionsList.toArray(new String[suggestionsList.size()]), 0,
-                        (Class<?>) SuggestionSpanPickedNotificationReceiver.class };
-        final Object ss = CompatUtils.newInstance(CONSTRUCTOR_SuggestionSpan, args);
-        if (ss == null) {
-            return pickedWord;
-        }
-        spannable.setSpan(ss, 0, pickedWord.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        final SuggestionSpan suggestionSpan = new SuggestionSpan(context, locale,
+                suggestionsList.toArray(new String[suggestionsList.size()]), 0 /* flags */, null);
+        final Spannable spannable = new SpannableString(pickedWord);
+        spannable.setSpan(suggestionSpan, 0, pickedWord.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         return spannable;
+    }
+
+    /**
+     * Returns first {@link Locale} found in the given array of {@link SuggestionSpan}.
+     * @param suggestionSpans the array of {@link SuggestionSpan} to be examined.
+     * @return the first {@link Locale} found in {@code suggestionSpans}. {@code null} when not
+     * found.
+     */
+    @UsedForTesting
+    @Nullable
+    public static Locale findFirstLocaleFromSuggestionSpans(
+            final SuggestionSpan[] suggestionSpans) {
+        for (final SuggestionSpan suggestionSpan : suggestionSpans) {
+            final String localeString = suggestionSpan.getLocale();
+            if (TextUtils.isEmpty(localeString)) {
+                continue;
+            }
+            return LocaleUtils.constructLocaleFromString(localeString);
+        }
+        return null;
     }
 }

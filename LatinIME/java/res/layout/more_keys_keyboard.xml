@@ -17,17 +17,16 @@
 ** limitations under the License.
 */
 -->
+
 <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+>
+    <com.android.inputmethod.keyboard.MoreKeysKeyboardView
+        android:id="@+id/more_keys_keyboard_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        style="?attr/moreKeysKeyboardPanelStyle"
-        >
-
-    <com.android.inputmethod.keyboard.MoreKeysKeyboardView
-            android:id="@+id/more_keys_keyboard_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
+        style="?attr/moreKeysKeyboardViewStyle" />
 </LinearLayout>

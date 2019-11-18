@@ -22,58 +22,25 @@
     xmlns:latin="http://schemas.android.com/apk/res-auto"
 >
     <!-- U+0430: "а" CYRILLIC SMALL LETTER A -->
-    <Key
-        latin:keyLabel="&#x0430;"
-        latin:keyHintLabel="1"
-        latin:additionalMoreKeys="1" />
+    <Key latin:keySpec="а" latin:moreKeys="!text/morekeys_cyrillic_a" latin:additionalMoreKeys="1" latin:keyHintLabel="1"/>
     <!-- U+0431: "б" CYRILLIC SMALL LETTER BE -->
-    <Key
-        latin:keyLabel="&#x0431;"
-        latin:keyHintLabel="2"
-        latin:additionalMoreKeys="2" />
+    <Key latin:keySpec="б" latin:additionalMoreKeys="2" latin:keyHintLabel="2"/>
     <!-- U+0432: "в" CYRILLIC SMALL LETTER VE -->
-    <Key
-        latin:keyLabel="&#x0432;"
-        latin:keyHintLabel="3"
-        latin:additionalMoreKeys="3" />
+    <Key latin:keySpec="в" latin:additionalMoreKeys="3" latin:keyHintLabel="3"/>
     <!-- U+0433: "г" CYRILLIC SMALL LETTER GHE -->
-    <Key
-        latin:keyLabel="&#x0433;"
-        latin:keyHintLabel="4"
-        latin:additionalMoreKeys="4" />
+    <Key latin:keySpec="г" latin:moreKeys="!text/morekeys_cyrillic_ghe" latin:additionalMoreKeys="4" latin:keyHintLabel="4"/>
     <!-- U+0434: "д" CYRILLIC SMALL LETTER DE -->
-    <Key
-        latin:keyLabel="&#x0434;"
-        latin:keyHintLabel="5"
-        latin:additionalMoreKeys="5" />
-    <!-- U+0435: "е" CYRILLIC SMALL LETTER IE
-         U+0451: "ё" CYRILLIC SMALL LETTER IO -->
-    <Key
-        latin:keyLabel="&#x0435;"
-        latin:moreKeys="&#x0451;"
-        latin:keyHintLabel="6"
-        latin:additionalMoreKeys="6" />
+    <Key latin:keySpec="д" latin:additionalMoreKeys="5" latin:keyHintLabel="5"/>
+    <!-- U+0435: "е" CYRILLIC SMALL LETTER IE -->
+    <Key latin:keySpec="е" latin:moreKeys="!text/morekeys_cyrillic_ie" latin:additionalMoreKeys="6" latin:keyHintLabel="6"/>
     <!-- U+0436: "ж" CYRILLIC SMALL LETTER ZHE -->
-    <Key
-        latin:keyLabel="&#x0436;"
-        latin:keyHintLabel="7"
-        latin:additionalMoreKeys="7" />
+    <Key latin:keySpec="ж" latin:additionalMoreKeys="7" latin:keyHintLabel="7"/>
     <!-- U+0437: "з" CYRILLIC SMALL LETTER ZE -->
-    <Key
-        latin:keyLabel="&#x0437;"
-        latin:keyHintLabel="8"
-        latin:additionalMoreKeys="8" />
+    <Key latin:keySpec="з" latin:additionalMoreKeys="8" latin:keyHintLabel="8"/>
     <!-- U+0456: "і" CYRILLIC SMALL LETTER BYELORUSSIAN-UKRAINIAN I -->
-    <Key
-        latin:keyLabel="&#x0456;"
-        latin:keyHintLabel="9"
-        latin:additionalMoreKeys="9" />
+    <Key latin:keySpec="і" latin:additionalMoreKeys="9" latin:keyHintLabel="9"/>
     <!-- U+0439: "й" CYRILLIC SMALL LETTER SHORT I -->
-    <Key
-        latin:keyLabel="&#x0439;"
-        latin:keyHintLabel="0"
-        latin:additionalMoreKeys="0" />
+    <Key latin:keySpec="й" latin:additionalMoreKeys="0" latin:keyHintLabel="0"/>
     <!-- U+043A: "к" CYRILLIC SMALL LETTER KA -->
-    <Key
-        latin:keyLabel="&#x043A;" />
+    <Key latin:keySpec="к" latin:moreKeys="!text/morekeys_cyrillic_ka"/>
 </merge>

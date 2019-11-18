@@ -45,8 +45,6 @@
             latin:visualInsetsRight="1%p" />
         <include
             latin:keyboardLayout="@xml/rowkeys_greek3" />
-        <include
-            latin:keyboardLayout="@xml/key_greek_semicolon" />
         <Key
             latin:keyStyle="deleteKeyStyle"
             latin:keyWidth="fillRight"

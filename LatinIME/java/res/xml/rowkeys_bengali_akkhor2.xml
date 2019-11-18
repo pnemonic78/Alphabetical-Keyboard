@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*
+**
+** Copyright 2014, The Android Open Source Project
+**
+** Licensed under the Apache License, Version 2.0 (the "License");
+** you may not use this file except in compliance with the License.
+** You may obtain a copy of the License at
+**
+**     http://www.apache.org/licenses/LICENSE-2.0
+**
+** Unless required by applicable law or agreed to in writing, software
+** distributed under the License is distributed on an "AS IS" BASIS,
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+** See the License for the specific language governing permissions and
+** limitations under the License.
+*/
+-->
+
+<merge xmlns:latin="http://schemas.android.com/apk/res-auto">
+    <switch>
+        <case latin:keyboardLayoutSetElement="alphabetManualShifted|alphabetShiftLocked|alphabetShiftLockShifted">
+            <!-- U+099E: "ঞ" BENGALI LETTER NYA
+                 U+099E/U+09CD/U+099A: "ঞ্চ" BENGALI LETTER NYA/BENGALI SIGN VIRAMA/BENGALI LETTER CA
+                 U+099E/U+09CD/U+099B: "ঞ্ছ" BENGALI LETTER NYA/BENGALI SIGN VIRAMA/BENGALI LETTER CHA
+                 U+099E/U+09CD/U+099C: "ঞ্জ" BENGALI LETTER NYA/BENGALI SIGN VIRAMA/BENGALI LETTER JA -->
+            <Key latin:keySpec="ঞ" latin:moreKeys="ঞ্চ,ঞ্ছ,ঞ্জ"/>
+            <!-- U+099F: "ট" BENGALI LETTER TTA
+                 U+09F3: "৳" BENGALI RUPEE SIGN
+                 U+099F/U+09CD/U+099F: "ট্ট" BENGALI LETTER TTA/BENGALI SIGN VIRAMA/BENGALI LETTER TTA
+                 U+099F/U+09CD/U+09AC: "ট্ব" BENGALI LETTER TTA/BENGALI SIGN VIRAMA/BENGALI LETTER BA
+                 U+099F/U+09CD/U+09AE: "ট্ম" BENGALI LETTER TTA/BENGALI SIGN VIRAMA/BENGALI LETTER MA -->
+            <Key latin:keySpec="ট" latin:moreKeys="৳,ট্ট,ট্ব,ট্ম"/>
+            <!-- U+09A0: "ঠ" BENGALI LETTER TTHA -->
+            <Key latin:keySpec="ঠ"/>
+            <!-- U+09A1: "ড" BENGALI LETTER DDA
+                 U+09A1/U+09CD/U+09A1: "ড্ড" BENGALI LETTER DDA/BENGALI SIGN VIRAMA/BENGALI LETTER DDA-->
+            <Key latin:keySpec="ড" latin:moreKeys="ড্ড"/>
+            <!-- U+09A2: "ঢ" BENGALI LETTER DDHA -->
+            <Key latin:keySpec="ঢ"/>
+            <!-- U+09A3: "ণ" BENGALI LETTER NNA
+                 U+09A3/U+09CD/U+099F: "ণ্ট" BENGALI LETTER NNA/BENGALI SIGN VIRAMA/BENGALI LETTER TTA
+                 U+09A3/U+09CD/U+09A1: "ণ্ড" BENGALI LETTER NNA/BENGALI SIGN VIRAMA/BENGALI LETTER DDA
+                 U+09A3/U+09CD/U+09A3: "ণ্ণ" BENGALI LETTER NNA/BENGALI SIGN VIRAMA/BENGALI LETTER NNA -->
+            <Key latin:keySpec="ণ" latin:moreKeys="ণ্ট,ণ্ড,ণ্ণ"/>
+            <!-- U+09AB: "ফ" BENGALI LETTER PHA
+                 U+09AB/U+09CD/U+099F: "ফ্ট" BENGALI LETTER PHA/BENGALI SIGN VIRAMA/BENGALI LETTER TTA
+                 U+09AB/U+09CD/U+09AF: "ফ্য" BENGALI LETTER PHA/BENGALI SIGN VIRAMA/BENGALI LETTER YA
+                 U+09AB/U+09CD/U+09B0: "ফ্র" BENGALI LETTER PHA/BENGALI SIGN VIRAMA/BENGALI LETTER RA
+                 U+09AB/U+09CD/U+09B2: "ফ্ল" BENGALI LETTER PHA/BENGALI SIGN VIRAMA/BENGALI LETTER LA -->
+            <Key latin:keySpec="ফ" latin:moreKeys="ফ্ট,ফ্য,ফ্র,ফ্ল"/>
+            <!-- U+09B6: "শ" BENGALI LETTER SHA
+                 U+09B6/U+09CD/U+099A: "শ্চ" BENGALI LETTER SHA/BENGALI SIGN VIRAMA/BENGALI LETTER CA
+                 U+09B6/U+09CD/U+099B: "শ্ছ" BENGALI LETTER SHA/BENGALI SIGN VIRAMA/BENGALI LETTER CHA
+                 U+09B6/U+09CD/U+09A4: "শ্ত" BENGALI LETTER SHA/BENGALI SIGN VIRAMA/BENGALI LETTER TA
+                 U+09B6/U+09CD/U+09A8: "শ্ন" BENGALI LETTER SHA/BENGALI SIGN VIRAMA/BENGALI LETTER NA
+                 U+09B6/U+09CD/U+09AC: "শ্ব" BENGALI LETTER SHA/BENGALI SIGN VIRAMA/BENGALI LETTER BA
+                 U+09B6/U+09CD/U+09AE: "শ্ম" BENGALI LETTER SHA/BENGALI SIGN VIRAMA/BENGALI LETTER MA
+                 U+09B6/U+09CD/U+09B0: "শ্র" BENGALI LETTER SHA/BENGALI SIGN VIRAMA/BENGALI LETTER RA
+                 U+09B6/U+09CD/U+09B2: "শ্ল" BENGALI LETTER SHA/BENGALI SIGN VIRAMA/BENGALI LETTER LA -->
+            <Key latin:keySpec="শ" latin:moreKeys="শ্চ,শ্ছ,শ্ত,শ্ন,শ্ব,শ্ম,শ্র,শ্ল"/>
+            <!-- U+09B9: "হ" BENGALI LETTER HA
+                 U+09BD: "ঽ" BENGALI SIGN AVAGRAHA
+                 U+09B9/U+09CD/U+09A3: "হ্ণ" BENGALI LETTER HA/BENGALI SIGN VIRAMA/BENGALI LETTER NNA
+                 U+09B9/U+09CD/U+09A8: "হ্ন" BENGALI LETTER HA/BENGALI SIGN VIRAMA/BENGALI LETTER NA
+                 U+09B9/U+09CD/U+09AC: "হ্ব" BENGALI LETTER HA/BENGALI SIGN VIRAMA/BENGALI LETTER BA
+                 U+09B9/U+09CD/U+09AE: "হ্ম" BENGALI LETTER HA/BENGALI SIGN VIRAMA/BENGALI LETTER MA
+                 U+09B9/U+09CD/U+09B0: "হ্র" BENGALI LETTER HA/BENGALI SIGN VIRAMA/BENGALI LETTER RA
+                 U+09B9/U+09CD/U+09B2: "হ্ল" BENGALI LETTER HA/BENGALI SIGN VIRAMA/BENGALI LETTER LA -->
+            <Key latin:keySpec="হ" latin:moreKeys="ঽ,হ্ণ,হ্ন,হ্ব,হ্ম,হ্র,হ্ল"/>
+            <!-- U+09C0: "ী" BENGALI VOWEL SIGN II
+                 U+0988: "ঈ" BENGALI LETTER II -->
+            <Key latin:keySpec="ী" latin:moreKeys="ঈ"/>
+            <!-- U+09C2: "ূ" BENGALI VOWEL SIGN UU
+                 U+098A: "ঊ" BENGALI LETTER UU -->
+            <Key latin:keySpec="ূ" latin:moreKeys="ঊ"/>
+        </case>
+        <default>
+            <!-- U+09A6: "দ" BENGALI LETTER DA
+                 U+09A6/U+09CD/U+09A6: "দ্দ" BENGALI LETTER DA/BENGALI SIGN VIRAMA/BENGALI LETTER DA
+                 U+09A6/U+09CD/U+09A7: "দ্ধ" BENGALI LETTER DA/BENGALI SIGN VIRAMA/BENGALI LETTER DHA
+                 U+09A6/U+09CD/U+09AC: "দ্ব" BENGALI LETTER DA/BENGALI SIGN VIRAMA/BENGALI LETTER BA
+                 U+09A6/U+09CD/U+09AD: "দ্ভ" BENGALI LETTER DA/BENGALI SIGN VIRAMA/BENGALI LETTER BHA
+                 U+09A6/U+09CD/U+09AE: "দ্ম" BENGALI LETTER DA/BENGALI SIGN VIRAMA/BENGALI LETTER MA
+                 U+09A6/U+09CD/U+09AF: "দ্য" BENGALI LETTER DA/BENGALI SIGN VIRAMA/BENGALI LETTER YA
+                 U+09A6/U+09CD/U+09B0: "দ্র" BENGALI LETTER DA/BENGALI SIGN VIRAMA/BENGALI LETTER RA -->
+            <Key latin:keySpec="দ" latin:moreKeys="দ্দ,দ্ধ,দ্ব,দ্ভ,দ্ম,দ্য,দ্র" />
+            <!-- U+09A7: "ধ" BENGALI LETTER DHA
+                 U+09A7/U+09CD/U+09AC: "ধ্ব্র" BENGALI LETTER DHA/BENGALI SIGN VIRAMA/BENGALI LETTER BA
+                 U+09A7/U+09CD/U+09AF: "ধ্য্র" BENGALI LETTER DHA/BENGALI SIGN VIRAMA/BENGALI LETTER YA
+                 U+09A7/U+09CD/U+09B0: "ধ্র" BENGALI LETTER DHA/BENGALI SIGN VIRAMA/BENGALI LETTER RA -->
+            <Key latin:keySpec="ধ"
+                latin:moreKeys="ধ্ব,ধ্য,ধ্র" />
+            <!-- U+09A8: "ন" BENGALI LETTER NA
+                 U+09A8/U+09CD/U+09A4: "ন্ত" BENGALI LETTER NA/BENGALI SIGN VIRAMA/BENGALI LETTER TA
+                 U+09A8/U+09CD/U+09A5: "ন্থ" BENGALI LETTER NA/BENGALI SIGN VIRAMA/BENGALI LETTER THA
+                 U+09A8/U+09CD/U+099F: "ন্ট" BENGALI LETTER NA/BENGALI SIGN VIRAMA/BENGALI LETTER TTA
+                 U+09A8/U+09CD/U+09A6: "ন্দ" BENGALI LETTER NA/BENGALI SIGN VIRAMA/BENGALI LETTER DA
+                 U+09A8/U+09CD/U+09A7: "ন্ধ" BENGALI LETTER NA/BENGALI SIGN VIRAMA/BENGALI LETTER DHA
+                 U+09A8/U+09CD/U+09A1: "ন্ড" BENGALI LETTER NA/BENGALI SIGN VIRAMA/BENGALI LETTER DDA
+                 U+09A8/U+09CD/U+09A8: "ন্ন" BENGALI LETTER NA/BENGALI SIGN VIRAMA/BENGALI LETTER NA
+                 U+09A8/U+09CD/U+09AC: "ন্ব" BENGALI LETTER NA/BENGALI SIGN VIRAMA/BENGALI LETTER BA
+                 U+09A8/U+09CD/U+09AE: "ন্ম" BENGALI LETTER NA/BENGALI SIGN VIRAMA/BENGALI LETTER MA
+                 U+09A8/U+09CD/U+09B8: "ন্স" BENGALI LETTER NA/BENGALI SIGN VIRAMA/BENGALI LETTER SA -->
+            <Key latin:keySpec="ন" latin:moreKeys="ন্ত,ন্থ,ন্ট,ন্দ,ন্ধ,ন্ড,ন্ন,ন্ব,ন্ম,ন্স" />
+            <!-- U+09AA: "প" BENGALI LETTER PA
+                 U+09AA/U+09CD/U+09A4: "প্ত" BENGALI LETTER PA/BENGALI SIGN VIRAMA/BENGALI LETTER TA
+                 U+09AA/U+09CD/U+09A8: "প্ন" BENGALI LETTER PA/BENGALI SIGN VIRAMA/BENGALI LETTER NA
+                 U+09AA/U+09CD/U+09AA: "প্প" BENGALI LETTER PA/BENGALI SIGN VIRAMA/BENGALI LETTER PA
+                 U+09AA/U+09CD/U+09AF: "প্য" BENGALI LETTER PA/BENGALI SIGN VIRAMA/BENGALI LETTER YA
+                 U+09AA/U+09CD/U+09B0: "প্র" BENGALI LETTER PA/BENGALI SIGN VIRAMA/BENGALI LETTER RA
+                 U+09AA/U+09CD/U+09B2: "প্ল" BENGALI LETTER PA/BENGALI SIGN VIRAMA/BENGALI LETTER LA
+                 U+09AA/U+09CD/U+09B8: "প্স" BENGALI LETTER PA/BENGALI SIGN VIRAMA/BENGALI LETTER SA -->
+            <Key latin:keySpec="প"
+                latin:moreKeys="প্ত,প্ন,প্প,প্য,প্র,প্ল,প্স" />
+            <!-- U+09AC: "ব" BENGALI LETTER BA
+                 U+09CD/U+09AC: "্ব" BENGALI SIGN VIRAMA/BENGALI LETTER BA
+                 U+09AC/U+09CD/U+09B0: "ব্র" BENGALI LETTER BA/BENGALI SIGN VIRAMA/BENGALI LETTER RA
+                 U+09AC/U+09CD/U+099C: "ব্জ" BENGALI LETTER BA/BENGALI SIGN VIRAMA/BENGALI LETTER JA
+                 U+09AC/U+09CD/U+09A6: "ব্দ" BENGALI LETTER BA/BENGALI SIGN VIRAMA/BENGALI LETTER DA
+                 U+09AC/U+09CD/U+09A7: "ব্ধ" BENGALI LETTER BA/BENGALI SIGN VIRAMA/BENGALI LETTER DHA
+                 U+09AC/U+09CD/U+09AC: "ব্ব" BENGALI LETTER BA/BENGALI SIGN VIRAMA/BENGALI LETTER BA
+                 U+09AC/U+09CD/U+09B2: "ব্ল" BENGALI LETTER BA/BENGALI SIGN VIRAMA/BENGALI LETTER LA
+                 U+09F1: "ৱ" BENGALI LETTER RA WITH MIDDLE DIAGONAL
+                 U+09F0: "ৰ" BENGALI LETTER RA WITH LOWER DIAGONAL -->
+            <Key latin:keySpec="ব" latin:moreKeys="্ব,ব্র,ব্জ,ব্দ,ব্ধ,ব্ব,ব্ল,ৱ,ৰ" />
+            <!-- U+09AD: "ভ" BENGALI LETTER BHA
+                 U+09AD/U+09CD/U+09AF: "ভ্" BENGALI LETTER BHA/BENGALI SIGN VIRAMA/BENGALI LETTER YA
+                 U+09AD/U+09CD/U+09B0: "ভ্র" BENGALI LETTER BHA/BENGALI SIGN VIRAMA/BENGALI LETTER RA
+                 U+09AD/U+09CD/U+09B2: "ভ্ল" BENGALI LETTER BHA/BENGALI SIGN VIRAMA/BENGALI LETTER LA -->
+            <Key latin:keySpec="ভ" latin:moreKeys="ভ্য,ভ্র,ভ্ল" />
+            <!-- U+09AE: "ম" BENGALI LETTER MA
+                 U+09AE/U+09CD/U+09A8: "ম্ন" BENGALI LETTER MA/BENGALI SIGN VIRAMA/BENGALI LETTER NA
+                 U+09AE/U+09CD/U+09AA: "ম্প" BENGALI LETTER MA/BENGALI SIGN VIRAMA/BENGALI LETTER PA
+                 U+09AE/U+09CD/U+09AC: "ম্ব" BENGALI LETTER MA/BENGALI SIGN VIRAMA/BENGALI LETTER BA
+                 U+09AE/U+09CD/U+09AD: "ম্ভ" BENGALI LETTER MA/BENGALI SIGN VIRAMA/BENGALI LETTER BHA
+                 U+09AE/U+09CD/U+09AE: "ম্ম" BENGALI LETTER MA/BENGALI SIGN VIRAMA/BENGALI LETTER MA
+                 U+09AE/U+09CD/U+09B0: "ম্র" BENGALI LETTER MA/BENGALI SIGN VIRAMA/BENGALI LETTER RA
+                 U+09AE/U+09CD/U+09B2: "ম্ল" BENGALI LETTER MA/BENGALI SIGN VIRAMA/BENGALI LETTER LA -->
+            <Key latin:keySpec="ম" latin:moreKeys=",ম্ন,ম্প,ম্ব,ম্ভ,ম্ম,ম্র,ম্ল" />
+            <!-- U+09AF: "য" BENGALI LETTER YA
+                 U+09CD/U+09AF: "্য" BENGALI SIGN VIRAMA/BENGALI LETTER YA -->
+            <Key latin:keySpec="য" latin:moreKeys="্য" />
+            <!-- U+09B0: "র" BENGALI LETTER RA -->
+            <Key latin:keySpec="র" />
+            <!-- U+09B2: "ল" BENGALI LETTER LA
+                 U+09B2/U+09CD/U+0995: "ল্ক" BENGALI LETTER LA/BENGALI SIGN VIRAMA/BENGALI LETTER KA
+                 U+09B2/U+09CD/U+0997: "ল্গ" BENGALI LETTER LA/BENGALI SIGN VIRAMA/BENGALI LETTER GA
+                 U+09B2/U+09CD/U+099F: "ল্ট" BENGALI LETTER LA/BENGALI SIGN VIRAMA/BENGALI LETTER TTA
+                 U+09B2/U+09CD/U+09A1: "ল্ড" BENGALI LETTER LA/BENGALI SIGN VIRAMA/BENGALI LETTER DDA
+                 U+09B2/U+09CD/U+09A4: "ল্ত" BENGALI LETTER LA/BENGALI SIGN VIRAMA/BENGALI LETTER TA
+                 U+09B2/U+09CD/U+09A6: "ল্দ" BENGALI LETTER LA/BENGALI SIGN VIRAMA/BENGALI LETTER DA
+                 U+09B2/U+09CD/U+09A7: "ল্ধ" BENGALI LETTER LA/BENGALI SIGN VIRAMA/BENGALI LETTER DHA
+                 U+09B2/U+09CD/U+09AA: "ল্প" BENGALI LETTER LA/BENGALI SIGN VIRAMA/BENGALI LETTER PA
+                 U+09B2/U+09CD/U+09AB: "ল্ফ" BENGALI LETTER LA/BENGALI SIGN VIRAMA/BENGALI LETTER PHA
+                 U+09B2/U+09CD/U+09AC: "ল্ব" BENGALI LETTER LA/BENGALI SIGN VIRAMA/BENGALI LETTER BA
+                 U+09B2/U+09CD/U+09AE: "ল্ম" BENGALI LETTER LA/BENGALI SIGN VIRAMA/BENGALI LETTER MA
+                 U+09B2/U+09CD/U+09B2: "ল্ল" BENGALI LETTER LA/BENGALI SIGN VIRAMA/BENGALI LETTER LA -->
+            <Key latin:keySpec="ল" latin:moreKeys="ল্ক,ল্গ,ল্ট,ল্ড,ল্ত,ল্দ,ল্ধ,ল্প,ল্ফ,ল্ব,ল্ম,ল্ল" />
+            <!-- U+09B7: "ষ" BENGALI LETTER SSA
+                 U+09B7/U+09CD/U+0995: "ষ্ক" BENGALI LETTER SSA/BENGALI SIGN VIRAMA/BENGALI LETTER KA
+                 U+09B7/U+09CD/U+099F: "ষ্ট" BENGALI LETTER SSA/BENGALI SIGN VIRAMA/BENGALI LETTER TTA
+                 U+09B7/U+09CD/U+09A0: "ষ্ঠ" BENGALI LETTER SSA/BENGALI SIGN VIRAMA/BENGALI LETTER TTHA
+                 U+09B7/U+09CD/U+09A3: "ষ্ণ" BENGALI LETTER SSA/BENGALI SIGN VIRAMA/BENGALI LETTER NNA
+                 U+09B7/U+09CD/U+09AA: "ষ্প" BENGALI LETTER SSA/BENGALI SIGN VIRAMA/BENGALI LETTER PA
+                 U+09B7/U+09CD/U+09AB: "ষ্ফ" BENGALI LETTER SSA/BENGALI SIGN VIRAMA/BENGALI LETTER PHA
+                 U+09B7/U+09CD/U+09AE: "ষ্ম" BENGALI LETTER SSA/BENGALI SIGN VIRAMA/BENGALI LETTER MA -->
+            <Key latin:keySpec="ষ" latin:moreKeys="ষ্ক,ষ্ট,ষ্ঠ,ষ্ণ,ষ্প,ষ্ফ,ষ্ম" />
+        </default>
+    </switch>
+</merge>
