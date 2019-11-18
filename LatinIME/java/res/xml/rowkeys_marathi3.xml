@@ -19,37 +19,19 @@
 -->
 
 <merge xmlns:latin="http://schemas.android.com/apk/res-auto">
-    <!-- U+0911: "ऑ" DEVANAGARI LETTER CANDRA O -->
-    <key-style
-        latin:styleName="moreKeysDevanagariVowelSignCandraO"
-        latin:moreKeys="&#x0911;" />
-    <!-- U+0949: "ॉ" DEVANAGARI VOWEL SIGN CANDRA O -->
-    <key-style
-        latin:styleName="baseKeyDevanagariVowelSignCandraO"
-        latin:parentStyle="moreKeysDevanagariVowelSignCandraO"
+    <!-- U+0911: "ऑ" DEVANAGARI LETTER CANDRA O
+         U+0949: "ॉ" DEVANAGARI VOWEL SIGN CANDRA O -->
+    <Key latin:moreKeys="&#x0911;"
         latin:keySpec="&#x0949;" />
-    <Key latin:keyStyle="baseKeyDevanagariVowelSignCandraO" />
-    <!-- U+090D: "ऍ" DEVANAGARI LETTER CANDRA E -->
-    <key-style
-        latin:styleName="moreKeysDevanagariVowelSignCandraE"
-        latin:moreKeys="&#x090D;" />
-    <!-- U+0945: "ॅ" DEVANAGARI VOWEL SIGN CANDRA E -->
-    <key-style
-        latin:styleName="baseKeyDevanagariVowelSignCandraE"
-        latin:parentStyle="moreKeysDevanagariVowelSignCandraE"
+    <!-- U+090D: "ऍ" DEVANAGARI LETTER CANDRA E
+         U+0945: "ॅ" DEVANAGARI VOWEL SIGN CANDRA E -->
+    <Key latin:moreKeys="&#x090D;"
         latin:keySpec="&#x0945;" />
-    <Key latin:keyStyle="baseKeyDevanagariVowelSignCandraE" />
-    <!-- U+0903: "ः‍" DEVANAGARI SIGN VISARGA
-         U+0901: "ँ" DEVANAGARI SIGN CANDRABINDU -->
-    <key-style
-        latin:styleName="moreKeysDevanagariSignAnusvara"
-        latin:moreKeys="&#x0903;,&#x0901;" />
-    <!-- U+0902: "ं" DEVANAGARI SIGN ANUSVARA -->
-    <key-style
-        latin:styleName="baseKeyDevanagariSignAnusvara"
-        latin:parentStyle="moreKeysDevanagariSignAnusvara"
+    <!-- U+0901: "ँ" DEVANAGARI SIGN CANDRABINDU
+         U+0902: "ं" DEVANAGARI SIGN ANUSVARA
+         U+0903: "ः‍" DEVANAGARI SIGN VISARGA -->
+    <Key latin:moreKeys="&#x0903;,&#x0901;"
         latin:keySpec="&#x0902;" />
-    <Key latin:keyStyle="baseKeyDevanagariSignAnusvara" />
     <!-- U+092E: "म" DEVANAGARI LETTER MA -->
     <Key latin:keySpec="&#x092E;" />
     <!-- U+0928: "न" DEVANAGARI LETTER NA
