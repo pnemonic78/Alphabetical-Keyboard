@@ -25,4 +25,6 @@
     <string name="keylabel_to_alpha">&#x1780;&#x1781;&#x1782;</string>
     <!-- U+17DB: "៛" KHMER CURRENCY SYMBOL RIEL -->
     <string name="morekeys_currency_dollar">&#x17DB;,&#x00A2;,&#x00A3;,&#x20AC;,&#x00A5;,&#x20B1;</string>
+    <!-- U+17D6: "៖" KHMER SIGN CAMNUC PII KUUH -->
+    <string name="morekeys_symbols_percent">&#x17D6;</string>
 </resources>

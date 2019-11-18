@@ -168,31 +168,31 @@ public final class KeyboardTextsTable {
         /*  82: 3 */ "morekeys_tablet_comma",
         /*  83: 3 */ "keyhintlabel_period",
         /*  84: 3 */ "morekeys_question",
-        /*  85: 2 */ "morekeys_h",
-        /*  86: 2 */ "morekeys_w",
-        /*  87: 2 */ "morekeys_east_slavic_row2_2",
-        /*  88: 2 */ "morekeys_cyrillic_u",
-        /*  89: 2 */ "morekeys_cyrillic_en",
-        /*  90: 2 */ "morekeys_cyrillic_ghe",
-        /*  91: 2 */ "morekeys_cyrillic_o",
-        /*  92: 2 */ "morekeys_cyrillic_i",
-        /*  93: 2 */ "keyspec_south_slavic_row1_6",
-        /*  94: 2 */ "keyspec_south_slavic_row2_11",
-        /*  95: 2 */ "keyspec_south_slavic_row3_1",
-        /*  96: 2 */ "keyspec_south_slavic_row3_8",
-        /*  97: 2 */ "morekeys_tablet_punctuation",
-        /*  98: 2 */ "keyspec_spanish_row2_10",
-        /*  99: 2 */ "morekeys_bullet",
-        /* 100: 2 */ "morekeys_left_parenthesis",
-        /* 101: 2 */ "morekeys_right_parenthesis",
-        /* 102: 2 */ "morekeys_arabic_diacritics",
-        /* 103: 2 */ "keyhintlabel_tablet_comma",
-        /* 104: 2 */ "keyhintlabel_tablet_period",
-        /* 105: 2 */ "keyspec_symbols_question",
-        /* 106: 2 */ "keyspec_symbols_semicolon",
-        /* 107: 2 */ "keyspec_symbols_percent",
-        /* 108: 2 */ "morekeys_symbols_semicolon",
-        /* 109: 2 */ "morekeys_symbols_percent",
+        /*  85: 3 */ "morekeys_symbols_percent",
+        /*  86: 2 */ "morekeys_h",
+        /*  87: 2 */ "morekeys_w",
+        /*  88: 2 */ "morekeys_east_slavic_row2_2",
+        /*  89: 2 */ "morekeys_cyrillic_u",
+        /*  90: 2 */ "morekeys_cyrillic_en",
+        /*  91: 2 */ "morekeys_cyrillic_ghe",
+        /*  92: 2 */ "morekeys_cyrillic_o",
+        /*  93: 2 */ "morekeys_cyrillic_i",
+        /*  94: 2 */ "keyspec_south_slavic_row1_6",
+        /*  95: 2 */ "keyspec_south_slavic_row2_11",
+        /*  96: 2 */ "keyspec_south_slavic_row3_1",
+        /*  97: 2 */ "keyspec_south_slavic_row3_8",
+        /*  98: 2 */ "morekeys_tablet_punctuation",
+        /*  99: 2 */ "keyspec_spanish_row2_10",
+        /* 100: 2 */ "morekeys_bullet",
+        /* 101: 2 */ "morekeys_left_parenthesis",
+        /* 102: 2 */ "morekeys_right_parenthesis",
+        /* 103: 2 */ "morekeys_arabic_diacritics",
+        /* 104: 2 */ "keyhintlabel_tablet_comma",
+        /* 105: 2 */ "keyhintlabel_tablet_period",
+        /* 106: 2 */ "keyspec_symbols_question",
+        /* 107: 2 */ "keyspec_symbols_semicolon",
+        /* 108: 2 */ "keyspec_symbols_percent",
+        /* 109: 2 */ "morekeys_symbols_semicolon",
         /* 110: 2 */ "label_go_key",
         /* 111: 2 */ "label_send_key",
         /* 112: 2 */ "label_next_key",
@@ -343,6 +343,8 @@ public final class KeyboardTextsTable {
         /* keyhintlabel_period */ EMPTY,
         // U+00BF: "¿" INVERTED QUESTION MARK
         /* morekeys_question */ "\u00BF",
+        // U+2030: "‰" PER MILLE SIGN
+        /* morekeys_symbols_percent */ "\u2030",
         /* morekeys_h ~ */
         EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
         /* ~ keyspec_south_slavic_row3_8 */
@@ -364,8 +366,6 @@ public final class KeyboardTextsTable {
         /* keyspec_symbols_semicolon */ ";",
         /* keyspec_symbols_percent */ "%",
         /* morekeys_symbols_semicolon */ EMPTY,
-        // U+2030: "‰" PER MILLE SIGN
-        /* morekeys_symbols_percent */ "\u2030",
         /* label_go_key */ "!string/label_go_key",
         /* label_send_key */ "!string/label_send_key",
         /* label_next_key */ "!string/label_next_key",
@@ -630,6 +630,8 @@ public final class KeyboardTextsTable {
         /* keyhintlabel_period */ "\u0651",
         // U+00BF: "¿" INVERTED QUESTION MARK
         /* morekeys_question */ "?,\u00BF",
+        // U+2030: "‰" PER MILLE SIGN
+        /* morekeys_symbols_percent */ "\\%,\u2030",
         /* morekeys_h ~ */
         null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         /* ~ keyspec_spanish_row2_10 */
@@ -665,8 +667,6 @@ public final class KeyboardTextsTable {
         // U+066A: "٪" ARABIC PERCENT SIGN
         /* keyspec_symbols_percent */ "\u066A",
         /* morekeys_symbols_semicolon */ ";",
-        // U+2030: "‰" PER MILLE SIGN
-        /* morekeys_symbols_percent */ "\\%,\u2030",
     };
 
     /* Locale az: Azerbaijani */
@@ -884,7 +884,7 @@ public final class KeyboardTextsTable {
         /* keyspec_tablet_comma ~ */
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-        null, null, null, null, null, null, null, null, null, null, null,
+        null, null, null, null, null, null, null, null, null, null, null, null,
         /* ~ keyspec_south_slavic_row3_8 */
         /* morekeys_tablet_punctuation */ "!autoColumnOrder!8,\\,,',\u00B7,#,),(,/,;,@,:,-,\",+,\\%,&",
         // U+00E7: "ç" LATIN SMALL LETTER C WITH CEDILLA
@@ -1291,8 +1291,8 @@ public final class KeyboardTextsTable {
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-        null, null, null,
-        /* ~ morekeys_question */
+        null, null, null, null,
+        /* ~ morekeys_symbols_percent */
         // U+0125: "ĥ" LATIN SMALL LETTER H WITH CIRCUMFLEX
         // U+0127: "ħ" LATIN SMALL LETTER H WITH STROKE
         /* morekeys_h */ "\u0125,\u0127",
@@ -1305,7 +1305,7 @@ public final class KeyboardTextsTable {
         /* keyspec_spanish_row2_10 */ "\u0135",
         /* morekeys_bullet ~ */
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-        null, null, null, null,
+        null, null, null,
         /* ~ label_wait_key */
         // U+0175: "ŵ" LATIN SMALL LETTER W WITH CIRCUMFLEX
         /* morekeys_v */ "w,\u0175",
@@ -1635,6 +1635,8 @@ public final class KeyboardTextsTable {
         /* keyhintlabel_period */ "\u064B",
         // U+00BF: "¿" INVERTED QUESTION MARK
         /* morekeys_question */ "?,\u00BF",
+        // U+2030: "‰" PER MILLE SIGN
+        /* morekeys_symbols_percent */ "\\%,\u2030",
         /* morekeys_h ~ */
         null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         /* ~ keyspec_spanish_row2_10 */
@@ -1670,8 +1672,6 @@ public final class KeyboardTextsTable {
         // U+066A: "٪" ARABIC PERCENT SIGN
         /* keyspec_symbols_percent */ "\u066A",
         /* morekeys_symbols_semicolon */ ";",
-        // U+2030: "‰" PER MILLE SIGN
-        /* morekeys_symbols_percent */ "\\%,\u2030",
         /* label_go_key ~ */
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         null, null, null, null, null, null,
@@ -1946,7 +1946,7 @@ public final class KeyboardTextsTable {
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null,
-        /* ~ morekeys_symbols_percent */
+        /* ~ morekeys_symbols_semicolon */
         /* label_go_key */ "Go",
         /* label_send_key */ "Send",
         /* label_next_key */ "Next",
@@ -2095,7 +2095,7 @@ public final class KeyboardTextsTable {
         // U+055E: "՞" ARMENIAN QUESTION MARK
         // U+00BF: "¿" INVERTED QUESTION MARK
         /* morekeys_question */ "\u055E,\u00BF",
-        /* morekeys_h ~ */
+        /* morekeys_symbols_percent ~ */
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
@@ -2338,7 +2338,7 @@ public final class KeyboardTextsTable {
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-        null, null, null, null, null, null, null, null, null, null,
+        null, null, null, null, null, null, null, null, null, null, null,
         /* ~ morekeys_w */
         // U+0456: "і" CYRILLIC SMALL LETTER BYELORUSSIAN-UKRAINIAN I
         /* morekeys_east_slavic_row2_2 */ "\u0456",
@@ -2354,7 +2354,7 @@ public final class KeyboardTextsTable {
         /* morekeys_cyrillic_i ~ */
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-        null, null, null, null,
+        null, null, null,
         /* ~ keyspec_x */
         // U+04BB: "һ" CYRILLIC SMALL LETTER SHHA
         /* morekeys_east_slavic_row2_11 */ "\u04BB",
@@ -2380,10 +2380,14 @@ public final class KeyboardTextsTable {
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+        null, null, null, null, null,
+        /* ~ morekeys_question */
+        // U+17D6: "៖" KHMER SIGN CAMNUC PII KUUH
+        /* morekeys_symbols_percent */ "\u17D6",
+        /* morekeys_h ~ */
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-        null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-        null, null, null, null,
+        null, null, null, null, null, null, null, null, null, null, null, null, null,
         /* ~ morekeys_cyrillic_a */
         // U+17DB: "៛" KHMER CURRENCY SYMBOL RIEL
         /* morekeys_currency_dollar */ "\u17DB,\u00A2,\u00A3,\u20AC,\u00A5,\u20B1",
@@ -2439,7 +2443,7 @@ public final class KeyboardTextsTable {
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-        null, null, null, null, null, null, null, null, null, null, null,
+        null, null, null, null, null, null, null, null, null, null, null, null,
         /* ~ morekeys_east_slavic_row2_2 */
         // U+04AF: "ү" CYRILLIC SMALL LETTER STRAIGHT U
         /* morekeys_cyrillic_u */ "\u04AF",
@@ -2682,7 +2686,7 @@ public final class KeyboardTextsTable {
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-        null, null, null, null, null, null, null, null, null,
+        null, null, null, null, null, null, null, null, null, null,
         /* ~ morekeys_cyrillic_o */
         // U+045D: "ѝ" CYRILLIC SMALL LETTER I WITH GRAVE
         /* morekeys_cyrillic_i */ "\u045D",
@@ -2811,7 +2815,7 @@ public final class KeyboardTextsTable {
         /* morekeys_tablet_comma */ "\\,",
         /* keyhintlabel_period */ "\u104A",
         /* morekeys_question ~ */
-        null, null, null, null, null, null, null, null, null, null, null, null, null,
+        null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         /* ~ keyspec_south_slavic_row3_8 */
         /* morekeys_tablet_punctuation */ "!autoColumnOrder!8,.,',#,),(,/,;,@,...,:,-,\",+,\\%,&",
     };
@@ -3352,7 +3356,7 @@ public final class KeyboardTextsTable {
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-        null, null, null, null, null, null, null, null, null,
+        null, null, null, null, null, null, null, null, null, null,
         /* ~ morekeys_cyrillic_o */
         // U+045D: "ѝ" CYRILLIC SMALL LETTER I WITH GRAVE
         /* morekeys_cyrillic_i */ "\u045D",
@@ -3416,7 +3420,7 @@ public final class KeyboardTextsTable {
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         null, null, null, null, null,
-        /* ~ morekeys_symbols_percent */
+        /* ~ morekeys_symbols_semicolon */
         /* label_go_key */ "Idi",
         /* label_send_key */ "\u0160alji",
         /* label_next_key */ "Sled",
@@ -3801,7 +3805,7 @@ public final class KeyboardTextsTable {
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-        null, null, null, null, null, null, null, null, null, null,
+        null, null, null, null, null, null, null, null, null, null, null,
         /* ~ morekeys_w */
         // U+0457: "ї" CYRILLIC SMALL LETTER YI
         /* morekeys_east_slavic_row2_2 */ "\u0457",
@@ -4130,8 +4134,8 @@ public final class KeyboardTextsTable {
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-        null, null, null,
-        /* ~ morekeys_question */
+        null, null, null, null,
+        /* ~ morekeys_symbols_percent */
         // U+0125: "ĥ" LATIN SMALL LETTER H WITH CIRCUMFLEX
         /* morekeys_h */ "\u0125",
         // U+0175: "ŵ" LATIN SMALL LETTER W WITH CIRCUMFLEX
@@ -4139,7 +4143,7 @@ public final class KeyboardTextsTable {
         /* morekeys_east_slavic_row2_2 ~ */
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-        null, null,
+        null,
         /* ~ morekeys_v */
         // U+0135: "ĵ" LATIN SMALL LETTER J WITH CIRCUMFLEX
         /* morekeys_j */ "\u0135",
@@ -4155,7 +4159,7 @@ public final class KeyboardTextsTable {
         "bg"     , TEXTS_bg,    /*   2/  9 Bulgarian */
         "bn_BD"  , TEXTS_bn_BD, /*   2/ 12 Bengali (Bangladesh) */
         "bn_IN"  , TEXTS_bn_IN, /*   2/ 12 Bengali (India) */
-        "ca"     , TEXTS_ca,    /*  11/ 99 Catalan */
+        "ca"     , TEXTS_ca,    /*  11/100 Catalan */
         "cs"     , TEXTS_cs,    /*  17/ 21 Czech */
         "da"     , TEXTS_da,    /*  19/ 55 Danish */
         "de"     , TEXTS_de,    /*  16/ 66 German */
@@ -4179,17 +4183,17 @@ public final class KeyboardTextsTable {
         "iw"     , TEXTS_iw,    /*  20/131 Hebrew */
         "ka"     , TEXTS_ka,    /*   3/ 11 Georgian */
         "kk"     , TEXTS_kk,    /*  15/129 Kazakh */
-        "km"     , TEXTS_km,    /*   2/130 Khmer */
+        "km"     , TEXTS_km,    /*   3/130 Khmer */
         "kn"     , TEXTS_kn,    /*   2/ 12 Kannada */
-        "ky"     , TEXTS_ky,    /*  10/ 92 Kirghiz */
+        "ky"     , TEXTS_ky,    /*  10/ 93 Kirghiz */
         "lo"     , TEXTS_lo,    /*   2/ 12 Lao */
         "lt"     , TEXTS_lt,    /*  18/ 22 Lithuanian */
         "lv"     , TEXTS_lv,    /*  18/ 22 Latvian */
-        "mk"     , TEXTS_mk,    /*   9/ 97 Macedonian */
+        "mk"     , TEXTS_mk,    /*   9/ 98 Macedonian */
         "ml"     , TEXTS_ml,    /*   2/ 12 Malayalam */
         "mn"     , TEXTS_mn,    /*   2/ 12 Mongolian */
         "mr"     , TEXTS_mr,    /*  23/ 53 Marathi */
-        "my"     , TEXTS_my,    /*   8/ 98 Burmese */
+        "my"     , TEXTS_my,    /*   8/ 99 Burmese */
         "nb"     , TEXTS_nb,    /*  11/ 55 Norwegian Bokmål */
         "ne"     , TEXTS_ne,    /*  27/ 60 Nepali */
         "nl"     , TEXTS_nl,    /*   9/ 13 Dutch */
@@ -4201,7 +4205,7 @@ public final class KeyboardTextsTable {
         "si"     , TEXTS_si,    /*   2/ 12 Sinhalese */
         "sk"     , TEXTS_sk,    /*  20/ 22 Slovak */
         "sl"     , TEXTS_sl,    /*   8/ 20 Slovenian */
-        "sr"     , TEXTS_sr,    /*  11/ 97 Serbian */
+        "sr"     , TEXTS_sr,    /*  11/ 98 Serbian */
         "sr_ZZ"  , TEXTS_sr_ZZ, /*  14/118 Serbian (ZZ) */
         "sv"     , TEXTS_sv,    /*  21/ 55 Swedish */
         "sw"     , TEXTS_sw,    /*   9/ 18 Swahili */
@@ -4212,7 +4216,7 @@ public final class KeyboardTextsTable {
         "th"     , TEXTS_th,    /*   2/ 12 Thai */
         "tl"     , TEXTS_tl,    /*   7/  8 Tagalog */
         "tr"     , TEXTS_tr,    /*  11/ 18 Turkish */
-        "uk"     , TEXTS_uk,    /*  11/ 91 Ukrainian */
+        "uk"     , TEXTS_uk,    /*  11/ 92 Ukrainian */
         "uz"     , TEXTS_uz,    /*  11/ 18 Uzbek */
         "vi"     , TEXTS_vi,    /*   8/ 15 Vietnamese */
         "zu"     , TEXTS_zu,    /*   8/ 10 Zulu */
