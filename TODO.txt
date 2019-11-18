@@ -1,5 +1,3 @@
-nepali_romanized
-
 tall screens: separate row of numbers above alphabet
 Amharic
 Korean

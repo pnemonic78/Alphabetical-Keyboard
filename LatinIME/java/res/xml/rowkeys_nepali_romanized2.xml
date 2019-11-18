@@ -41,17 +41,17 @@
             <Key latin:keySpec="&#x0965;" />
             <!-- U+0910: "ऐ" DEVANAGARI LETTER AI -->
             <Key latin:keySpec="&#x0910;" />
-            <!-- Because the font rendering system prior to API version 16 can't automatically
-                 render dotted circle for incomplete combining letter of some scripts, different
-                 set of Key definitions are needed based on the API version. -->
-            <include latin:keyboardLayout="@xml/keystyle_devanagari_sign_visarga" />
+            <!-- U+0903: "ः" DEVANAGARI SIGN VISARGA -->
+            <key-style
+                latin:styleName="baseKeyDevanagariSignVisarga"
+                latin:keySpec="&#x0903;" />
             <Key latin:keyStyle="baseKeyDevanagariSignVisarga" />
         </case>
         <default>
-            <!-- Because the font rendering system prior to API version 16 can't automatically
-                 render dotted circle for incomplete combining letter of some scripts, different
-                 set of Key definitions are needed based on the API version. -->
-            <include latin:keyboardLayout="@xml/keystyle_devanagari_vowel_sign_aa" />
+            <!-- U+093E: "ा" DEVANAGARI VOWEL SIGN AA -->
+            <key-style
+                latin:styleName="baseKeyDevanagariVowelSignAa"
+                latin:keySpec="&#x093E;" />
             <Key latin:keyStyle="baseKeyDevanagariVowelSignAa" />
             <!-- U+0938: "स" DEVANAGARI LETTER SA -->
             <Key latin:keySpec="&#x0938;" />
