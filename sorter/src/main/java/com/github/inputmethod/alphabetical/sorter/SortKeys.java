@@ -107,6 +107,7 @@ public class SortKeys {
             }
         }
 
+        System.out.println(pairs.size() + " nodes");
         Comparator<KeyPair> comparator = new KeyPairComparator();
         Collections.sort(pairs, comparator);
         if (reverse) {
@@ -141,7 +142,8 @@ public class SortKeys {
             this.comment1 = comment1;
             this.comment2 = comment2;
             this.key = key;
-            this.comparable = key.getAttributes().getNamedItem(ATTRIBUTE_TO_SORT).getNodeValue();
+            Node keySpec = key.getAttributes().getNamedItem(ATTRIBUTE_TO_SORT);
+            this.comparable = (keySpec != null) ? keySpec.getNodeValue() : "";
         }
 
         @Override

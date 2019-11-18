@@ -21,151 +21,52 @@
 <merge xmlns:latin="http://schemas.android.com/apk/res-auto">
     <switch>
         <case latin:keyboardLayoutSetElement="alphabetManualShifted|alphabetShiftLocked|alphabetShiftLockShifted">
-            <Spacer />
-            <!-- U+17D7: "ៗ" KHMER SIGN LEK TOO -->
-            <Key
-                latin:keySpec="&#x17D7;"
-                latin:moreKeys="" />
-            <!-- U+17D1: "៑" KHMER SIGN VIRIAM -->
-            <Key
-                latin:keySpec="&quot;"
-                latin:keyHintLabel="&#x17D1;"
-                latin:moreKeys="&#x17D1;"
-                latin:keyLabelFlags="fontDefault" />
-            <!-- U+17DB: "៛" KHMER CURRENCY SYMBOL RIEL
-                 U+20AC: "€" EURO SIGN -->
-            <Key
-                latin:keySpec="&#x17DB;"
-                latin:keyHintLabel="$"
-                latin:moreKeys="$,&#x20AC;" />
-            <!-- U+17D6: "៖" KHMER SIGN CAMNUC PII KUUH -->
-            <Key
-                latin:keySpec="%"
-                latin:keyHintLabel="&#x17D6;"
-                latin:moreKeys="&#x17D6;"
-                latin:keyLabelFlags="fontDefault" />
-            <!-- U+17CD: "៍" KHMER SIGN TOANDAKHIAT
-                 U+17D9: "៙" KHMER SIGN PHNAEK MUAN -->
-            <Key
-                latin:keySpec="&#x17CD;"
-                latin:keyHintLabel="&#x17D9;"
-                latin:moreKeys="&#x17D9;" />
-            <!-- U+17D0: "័" KHMER SIGN SAMYOK SANNYA
-                 U+17DA: "៚" KHMER SIGN KOOMUUT -->
-            <Key
-                latin:keySpec="&#x17D0;"
-                latin:keyHintLabel="&#x17DA;"
-                latin:keyHintLabelVerticalAdjustment="-30%"
-                latin:moreKeys="&#x17DA;" />
-            <!-- U+17CF: "៏" KHMER SIGN AHSDA -->
-            <Key
-                latin:keySpec="&#x17CF;"
-                latin:keyHintLabel="*"
-                latin:moreKeys="*" />
-            <!-- U+00AB: "«" LEFT-POINTING DOUBLE ANGLE QUOTATION MARK -->
-            <Key
-                latin:keySpec="("
-                latin:keyHintLabel="{"
-                latin:moreKeys="{,&#x00AB;"
-                latin:keyLabelFlags="fontDefault" />
-            <!-- U+00BB: "»" RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK -->
-            <Key
-                latin:keySpec=")"
-                latin:keyHintLabel="}"
-                latin:moreKeys="},&#x00BB;"
-                latin:keyLabelFlags="fontDefault" />
-            <!-- U+17CC: "៌" KHMER SIGN ROBAT
-                 U+00D7: "×" MULTIPLICATION SIGN -->
-            <Key
-                latin:keySpec="&#x17CC;"
-                latin:keyHintLabel="&#x00D7;"
-                latin:moreKeys="&#x00D7;" />
-            <!-- U+17CE: "៎" KHMER SIGN KAKABAT -->
-            <Key latin:keySpec="&#x17CE;" />
-        </case>
-        <default>
-            <!-- U+17E1: "១" KHMER DIGIT ONE
-                 U+17F1: "៱" KHMER SYMBOL LEK ATTAK MUOY -->
-            <Key
-                latin:keySpec="&#x17E1;"
-                latin:keyHintLabel="1"
-                latin:additionalMoreKeys="1"
-                latin:moreKeys="&#x17F1;" />
-            <!-- U+17E2: "២" KHMER DIGIT TWO
-                 U+17F2: "៲" KHMER SYMBOL LEK ATTAK PII -->
-            <Key
-                latin:keySpec="&#x17E2;"
-                latin:keyHintLabel="2"
-                latin:additionalMoreKeys="2"
-                latin:moreKeys="&#x17F2;" />
-            <!-- U+17E3: "៣" KHMER DIGIT THREE
-                 U+17F3: "៳" KHMER SYMBOL LEK ATTAK BEI -->
-            <Key
-                latin:keySpec="&#x17E3;"
-                latin:keyHintLabel="3"
-                latin:additionalMoreKeys="3"
-                latin:moreKeys="&#x17F3;" />
-            <!-- U+17E4: "៤" KHMER DIGIT FOUR
-                 U+17F4: "៴" KHMER SYMBOL LEK ATTAK BUON -->
-            <Key
-                latin:keySpec="&#x17E4;"
-                latin:keyHintLabel="4"
-                latin:additionalMoreKeys="4"
-                latin:moreKeys="&#x17F4;" />
-            <!-- U+17E5: "៥" KHMER DIGIT FIVE
-                 U+17F5: "៵" KHMER SYMBOL LEK ATTAK PRAM -->
-            <Key
-                latin:keySpec="&#x17E5;"
-                latin:keyHintLabel="5"
-                latin:additionalMoreKeys="5"
-                latin:moreKeys="&#x17F5;" />
-            <!-- U+17E6: "៦" KHMER DIGIT SIX
-                 U+17F6: "៶" KHMER SYMBOL LEK ATTAK PRAM-MUOY -->
-            <Key
-                latin:keySpec="&#x17E6;"
-                latin:keyHintLabel="6"
-                latin:additionalMoreKeys="6"
-                latin:moreKeys="&#x17F6;" />
-            <!-- U+17E7: "៧" KHMER DIGIT SEVEN
-                 U+17F7: "៷" KHMER SYMBOL LEK ATTAK PRAM-PII -->
-            <Key
-                latin:keySpec="&#x17E7;"
-                latin:keyHintLabel="7"
-                latin:additionalMoreKeys="7"
-                latin:moreKeys="&#x17F7;" />
-            <!-- U+17E8: "៨" KHMER DIGIT EIGHT
-                 U+17F8: "៸" KHMER SYMBOL LEK ATTAK PRAM-BEI -->
-            <Key
-                latin:keySpec="&#x17E8;"
-                latin:keyHintLabel="8"
-                latin:additionalMoreKeys="8"
-                latin:moreKeys="&#x17F8;" />
-            <!-- U+17E9: "៩" KHMER DIGIT NINE
-                 U+17F9: "៹" KHMER SYMBOL LEK ATTAK PRAM-BUON -->
-            <Key
-                latin:keySpec="&#x17E9;"
-                latin:keyHintLabel="9"
-                latin:additionalMoreKeys="9"
-                latin:moreKeys="&#x17F9;" />
-            <!-- U+17E0: "០" KHMER DIGIT ZERO
-                 U+17F0: "៰" KHMER SYMBOL LEK ATTAK SON -->
-            <Key
-                latin:keySpec="&#x17E0;"
-                latin:keyHintLabel="0"
-                latin:additionalMoreKeys="0"
-                latin:moreKeys="&#x17F0;" />
-            <!-- U+17A5: "ឥ" KHMER INDEPENDENT VOWEL QI
-                 U+17A6: "ឦ" KHMER INDEPENDENT VOWEL QII -->
-            <Key
-                latin:keySpec="&#x17A5;"
-                latin:keyHintLabel="&#x17A6;"
-                latin:moreKeys=",&#x17A6;" />
             <!-- U+17B2: "ឲ" KHMER INDEPENDENT VOWEL QOO TYPE TWO
                  U+17B1: "ឱ" KHMER INDEPENDENT VOWEL QOO TYPE ONE -->
-            <Key
-                latin:keySpec="&#x17B2;"
-                latin:keyHintLabel="&#x17B1;"
-                latin:moreKeys="&#x17B1;" />
+            <Key latin:keyHintLabel="ឱ" latin:keySpec="ឲ" latin:moreKeys="ឱ"/>
+            <!-- U+17B6: "ា" KHMER VOWEL SIGN AA -->
+            <Key latin:keySpec="ា"/>
+            <!-- U+17B6/U+17C6: "ាំ" KHMER VOWEL SIGN AA/KHMER SIGN NIKAHIT -->
+            <Key latin:keyLabelFlags="followKeyLetterRatio" latin:keySpec="ាំ"/>
+            <!-- U+17B7: "ិ" KHMER VOWEL SIGN I -->
+            <Key latin:keySpec="ិ"/>
+            <!-- U+17B8: "ី" KHMER VOWEL SIGN II -->
+            <Key latin:keySpec="ី"/>
+            <!-- U+17B9: "ឹ" KHMER VOWEL SIGN Y -->
+            <Key latin:keySpec="ឹ"/>
+            <!-- U+17BA: "ឺ" KHMER VOWEL SIGN YY
+                 U+17DD: "៝" KHMER SIGN ATTHACAN -->
+            <Key latin:keyHintLabel="៝" latin:keyHintLabelVerticalAdjustment="40%" latin:keySpec="ឺ" latin:moreKeys="៝"/>
+            <!-- U+17BB: "ុ" KHMER VOWEL SIGN U -->
+            <Key latin:keySpec="ុ"/>
+            <!-- U+17BB/U+17C6: "ុំ" KHMER VOWEL SIGN U/KHMER SIGN NIKAHIT -->
+            <Key latin:keyLabelFlags="followKeyLetterRatio" latin:keySpec="ុំ"/>
+            <!-- U+17BB/U+17C7: "ុះ" KHMER VOWEL SIGN U/KHMER SIGN REAHMUK -->
+            <Key latin:keyLabelFlags="followKeyLetterRatio" latin:keySpec="ុះ"/>
+        </case>
+        <default>
+            <!-- U+1780: "ក" KHMER LETTER KA -->
+            <Key latin:keySpec="ក"/>
+            <!-- U+1781: "ខ" KHMER LETTER KHA -->
+            <Key latin:keySpec="ខ"/>
+            <!-- U+1782: "គ" KHMER LETTER KO
+                 U+179D: "ឝ" KHMER LETTER SHA -->
+            <Key latin:keyHintLabel="ឝ" latin:keySpec="គ" latin:moreKeys="ឝ"/>
+            <!-- U+1783: "ឃ" KHMER LETTER KHO -->
+            <Key latin:keySpec="ឃ"/>
+            <!-- U+1784: "ង" KHMER LETTER NGO -->
+            <Key latin:keySpec="ង"/>
+            <!-- U+1785: "ច" KHMER LETTER CA -->
+            <Key latin:keySpec="ច"/>
+            <!-- U+1786: "ឆ" KHMER LETTER CHA -->
+            <Key latin:keySpec="ឆ"/>
+            <!-- U+1787: "ជ" KHMER LETTER CO -->
+            <Key latin:keySpec="ជ"/>
+            <!-- U+1788: "ឈ" KHMER LETTER CHO
+                 U+17DC: "ៜ" KHMER SIGN AVAKRAHASANYA -->
+            <Key latin:keyHintLabel="ៜ" latin:keySpec="ឈ" latin:moreKeys="ៜ"/>
+            <!-- U+1789: "ញ" KHMER LETTER NYO -->
+            <Key latin:keySpec="ញ"/>
         </default>
     </switch>
 </merge>
