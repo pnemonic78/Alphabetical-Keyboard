@@ -43,16 +43,12 @@
             >
             <Key
                 latin:keySpec=":"
-                latin:keyHintLabel="1"
-                latin:moreKeys=";"
-                latin:additionalMoreKeys="1" />
+                latin:moreKeys=";" />
         </case>
         <default>
             <Key
                 latin:keySpec=";"
-                latin:keyHintLabel="1"
-                latin:moreKeys=":"
-                latin:additionalMoreKeys="1" />
+                latin:moreKeys=":" />
         </default>
     </switch>
 </merge>
