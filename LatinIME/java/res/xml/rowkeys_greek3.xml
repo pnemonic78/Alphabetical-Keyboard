@@ -21,8 +21,6 @@
 <merge
     xmlns:latin="http://schemas.android.com/apk/res-auto"
 >
-    <!-- U+03C3: "σ" GREEK SMALL LETTER SIGMA -->
-    <Key latin:keySpec="σ"/>
     <!-- U+03C4: "τ" GREEK SMALL LETTER TAU -->
     <Key latin:keySpec="τ"/>
     <!-- U+03C5: "υ" GREEK SMALL LETTER UPSILON
@@ -39,4 +37,18 @@
     <!-- U+03C9: "ω" GREEK SMALL LETTER OMEGA
          U+03CE: "ώ" GREEK SMALL LETTER OMEGA WITH TONOS -->
     <Key latin:keySpec="ω" latin:moreKeys="ώ"/>
+    <switch>
+        <case
+            latin:keyboardLayoutSetElement="alphabetManualShifted|alphabetShiftLockShifted"
+            >
+            <Key
+                latin:keySpec=":"
+                latin:moreKeys=";" />
+        </case>
+        <default>
+            <Key
+                latin:keySpec=";"
+                latin:moreKeys=":" />
+        </default>
+    </switch>
 </merge>

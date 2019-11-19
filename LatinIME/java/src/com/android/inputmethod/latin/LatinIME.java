@@ -100,6 +100,7 @@ import com.android.inputmethod.latin.utils.StatsUtils;
 import com.android.inputmethod.latin.utils.StatsUtilsManager;
 import com.android.inputmethod.latin.utils.SubtypeLocaleUtils;
 import com.android.inputmethod.latin.utils.ViewLayoutUtils;
+import com.github.inputmethod.alphabetical.BuildConfig;
 import com.github.inputmethod.alphabetical.R;
 
 import java.io.FileDescriptor;
@@ -131,13 +132,13 @@ public class LatinIME extends InputMethodService implements KeyboardActionListen
      * A broadcast intent action to hide the software keyboard.
      */
     static final String ACTION_HIDE_SOFT_INPUT =
-            "com.android.inputmethod.latin.HIDE_SOFT_INPUT";
+            BuildConfig.APPLICATION_ID + ".HIDE_SOFT_INPUT";
 
     /**
      * A custom permission for external apps to send {@link #ACTION_HIDE_SOFT_INPUT}.
      */
     static final String PERMISSION_HIDE_SOFT_INPUT =
-            "com.android.inputmethod.latin.HIDE_SOFT_INPUT";
+            BuildConfig.APPLICATION_ID + ".HIDE_SOFT_INPUT";
 
     /**
      * The name of the scheme used by the Package Manager to warn of a new package installation,

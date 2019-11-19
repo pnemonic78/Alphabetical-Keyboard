@@ -21,46 +21,30 @@
 <merge
     xmlns:latin="http://schemas.android.com/apk/res-auto"
 >
-    <switch>
-        <case
-            latin:keyboardLayoutSetElement="alphabetManualShifted|alphabetShiftLockShifted"
-        >
-            <Key
-                latin:keySpec=":"
-                latin:keyHintLabel="1"
-                latin:moreKeys=";"
-                latin:additionalMoreKeys="1" />
-        </case>
-        <default>
-            <Key
-                latin:keySpec=";"
-                latin:keyHintLabel="1"
-                latin:moreKeys=":"
-                latin:additionalMoreKeys="1" />
-        </default>
-    </switch>
     <!-- U+03B1: "α" GREEK SMALL LETTER ALPHA
          U+03AC: "ά" GREEK SMALL LETTER ALPHA WITH TONOS -->
-    <Key latin:keySpec="α" latin:moreKeys="ά" latin:additionalMoreKeys="2" latin:keyHintLabel="2"/>
+    <Key latin:keySpec="α" latin:moreKeys="ά" latin:additionalMoreKeys="1" latin:keyHintLabel="1"/>
     <!-- U+03B2: "β" GREEK SMALL LETTER BETA -->
-    <Key latin:keySpec="β" latin:additionalMoreKeys="3" latin:keyHintLabel="3"/>
+    <Key latin:keySpec="β" latin:additionalMoreKeys="2" latin:keyHintLabel="2"/>
     <!-- U+03B3: "γ" GREEK SMALL LETTER GAMMA -->
-    <Key latin:keySpec="γ" latin:additionalMoreKeys="4" latin:keyHintLabel="4"/>
+    <Key latin:keySpec="γ" latin:additionalMoreKeys="3" latin:keyHintLabel="3"/>
     <!-- U+03B4: "δ" GREEK SMALL LETTER DELTA -->
-    <Key latin:keySpec="δ" latin:additionalMoreKeys="5" latin:keyHintLabel="5"/>
+    <Key latin:keySpec="δ" latin:additionalMoreKeys="4" latin:keyHintLabel="4"/>
     <!-- U+03B5: "ε" GREEK SMALL LETTER EPSILON
          U+03AD: "έ" GREEK SMALL LETTER EPSILON WITH TONOS -->
-    <Key latin:keySpec="ε" latin:moreKeys="έ,%" latin:additionalMoreKeys="6" latin:keyHintLabel="6"/>
+    <Key latin:keySpec="ε" latin:moreKeys="έ,%" latin:additionalMoreKeys="5" latin:keyHintLabel="5"/>
     <!-- U+03B6: "ζ" GREEK SMALL LETTER ZETA -->
-    <Key latin:keySpec="ζ" latin:additionalMoreKeys="7" latin:keyHintLabel="7"/>
+    <Key latin:keySpec="ζ" latin:additionalMoreKeys="6" latin:keyHintLabel="6"/>
     <!-- U+03B7: "η" GREEK SMALL LETTER ETA
          U+03AE: "ή" GREEK SMALL LETTER ETA WITH TONOS -->
-    <Key latin:keySpec="η" latin:moreKeys="ή" latin:additionalMoreKeys="8" latin:keyHintLabel="8"/>
+    <Key latin:keySpec="η" latin:moreKeys="ή" latin:additionalMoreKeys="7" latin:keyHintLabel="7"/>
     <!-- U+03B8: "θ" GREEK SMALL LETTER THETA -->
-    <Key latin:keySpec="θ" latin:additionalMoreKeys="9" latin:keyHintLabel="9"/>
+    <Key latin:keySpec="θ" latin:additionalMoreKeys="8" latin:keyHintLabel="8"/>
     <!-- U+03B9: "ι" GREEK SMALL LETTER IOTA
          U+03AF: "ί" GREEK SMALL LETTER IOTA WITH TONOS
          U+03CA: "ϊ" GREEK SMALL LETTER IOTA WITH DIALYTIKA
          U+0390: "ΐ" GREEK SMALL LETTER IOTA WITH DIALYTIKA AND TONOS -->
-    <Key latin:keySpec="ι" latin:moreKeys="ί,%,ϊ,ΐ" latin:additionalMoreKeys="0" latin:keyHintLabel="0"/>
+    <Key latin:keySpec="ι" latin:moreKeys="ί,%,ϊ,ΐ" latin:additionalMoreKeys="9" latin:keyHintLabel="9"/>
+    <!-- U+03BA: "κ" GREEK SMALL LETTER KAPPA -->
+    <Key latin:keySpec="κ" latin:additionalMoreKeys="0" latin:keyHintLabel="0"/>
 </merge>
