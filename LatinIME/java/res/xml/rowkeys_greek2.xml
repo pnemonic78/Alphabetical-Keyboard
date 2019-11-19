@@ -21,8 +21,6 @@
 <merge
     xmlns:latin="http://schemas.android.com/apk/res-auto"
 >
-    <!-- U+03BA: "κ" GREEK SMALL LETTER KAPPA -->
-    <Key latin:keySpec="κ"/>
     <!-- U+03BB: "λ" GREEK SMALL LETTER LAMDA -->
     <Key latin:keySpec="λ"/>
     <!-- U+03BC: "μ" GREEK SMALL LETTER MU -->
@@ -41,4 +39,6 @@
     <!-- U+03C2: "ς" GREEK SMALL LETTER FINAL SIGMA
          U+0385: "΅" GREEK DIALYTIKA TONOS -->
     <Key latin:keyLabelFlags="preserveCase" latin:keySpec="ς" latin:moreKeys="΅"/>
+    <!-- U+03C3: "σ" GREEK SMALL LETTER SIGMA -->
+    <Key latin:keySpec="σ"/>
 </merge>
