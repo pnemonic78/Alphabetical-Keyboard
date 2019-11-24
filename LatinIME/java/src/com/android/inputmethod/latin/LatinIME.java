@@ -1821,6 +1821,10 @@ public class LatinIME extends InputMethodService implements KeyboardActionListen
         final int currentDisplayId = ((WindowManager) getSystemService(Context.WINDOW_SERVICE))
                 .getDefaultDisplay().getDisplayId();
 
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            startActivity(intent);
+            return;
+        }
         startActivity(intent,
                 ActivityOptions.makeBasic().setLaunchDisplayId(currentDisplayId).toBundle());
     }
