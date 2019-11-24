@@ -441,9 +441,9 @@ final class EmojiCategory {
     private static boolean canShowFlagEmoji() {
         Paint paint = new Paint();
         String switzerland = "\uD83C\uDDE8\uD83C\uDDED"; //  U+1F1E8 U+1F1ED Flag for Switzerland
-        try {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             return paint.hasGlyph(switzerland);
-        } catch (NoSuchMethodError e) {
+        }
             // Compare display width of single-codepoint emoji to width of flag emoji to determine
             // whether flag is rendered as single glyph or two adjacent regional indicator symbols.
             float flagWidth = paint.measureText(switzerland);
@@ -451,20 +451,18 @@ final class EmojiCategory {
             return flagWidth < standardWidth * 1.25;
             // This assumes that a valid glyph for the flag emoji must be less than 1.25 times
             // the width of the penguin.
-        }
     }
 
     private static boolean canShowUnicodeEightEmoji() {
         Paint paint = new Paint();
         String cheese = "\uD83E\uDDC0"; //  U+1F9C0 Cheese wedge
-        try {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             return paint.hasGlyph(cheese);
-        } catch (NoSuchMethodError e) {
+        }
             float cheeseWidth = paint.measureText(cheese);
             float tofuWidth = paint.measureText("\uFFFE");
             return cheeseWidth > tofuWidth;
             // This assumes that a valid glyph for the cheese wedge must be greater than the width
             // of the noncharacter.
-        }
     }
 }

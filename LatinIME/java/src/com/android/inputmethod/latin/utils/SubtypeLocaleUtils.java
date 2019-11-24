@@ -322,7 +322,7 @@ public final class SubtypeLocaleUtils {
 
     @Nonnull
     public static String getKeyboardLayoutSetDisplayName(@Nonnull final String layoutName) {
-        return sKeyboardLayoutToDisplayNameMap.get(layoutName);
+        return "";
     }
 
     @Nonnull

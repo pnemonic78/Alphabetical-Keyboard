@@ -29,9 +29,9 @@ android {
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 202
-        versionName "2.02"
+        targetSdkVersion 29
+        versionCode 203
+        versionName "2.03"
 
         applicationId 'com.github.inputmethod.alphabetical'
         testApplicationId 'com.github.inputmethod.alphabetical.tests'
@@ -110,7 +110,7 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test:rules:1.2.0'
     androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'
-    androidTestImplementation "androidx.annotation:annotation:1.1.0"
+    androidTestImplementation "androidx.annotation:annotation:1.0.0"
 
     // Logging
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'

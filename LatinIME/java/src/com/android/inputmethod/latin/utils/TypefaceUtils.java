@@ -100,6 +100,9 @@ public final class TypefaceUtils {
     private static final Rect sStringWidthBounds = new Rect();
 
     public static float getStringWidth(final String string, final Paint paint) {
+        if (string == null) {
+            return 0;
+        }
         synchronized (sStringWidthBounds) {
             paint.getTextBounds(string, 0, string.length(), sStringWidthBounds);
             return sStringWidthBounds.width();

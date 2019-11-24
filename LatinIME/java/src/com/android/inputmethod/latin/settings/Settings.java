@@ -452,7 +452,7 @@ public final class Settings implements SharedPreferences.OnSharedPreferenceChang
             } else {
                 editor.putBoolean(PREF_AUTO_CORRECTION, true);
             }
-            editor.commit();
+            editor.apply();
         }
     }
 }

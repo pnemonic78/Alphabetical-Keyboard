@@ -52,6 +52,6 @@ public final class BackupAgent extends BackupAgentHelper {
             prefEditor.remove(key);
         }
         // Flush the changes to disk.
-        prefEditor.commit();
+        prefEditor.apply();
     }
 }
