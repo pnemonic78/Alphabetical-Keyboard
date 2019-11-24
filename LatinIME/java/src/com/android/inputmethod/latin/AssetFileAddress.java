@@ -19,6 +19,7 @@ package com.android.inputmethod.latin;
 import com.android.inputmethod.latin.common.FileUtils;
 
 import java.io.File;
+import java.util.Locale;
 
 /**
  * Immutable class to hold the address of an asset.
@@ -65,6 +66,6 @@ public final class AssetFileAddress {
 
     @Override
     public String toString() {
-        return String.format("%s (offset=%d, length=%d)", mFilename, mOffset, mLength);
+        return String.format(Locale.US, "%s (offset=%d, length=%d)", mFilename, mOffset, mLength);
     }
 }

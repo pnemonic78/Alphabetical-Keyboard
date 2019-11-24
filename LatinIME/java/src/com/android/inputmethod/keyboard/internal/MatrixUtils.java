@@ -21,6 +21,7 @@ import com.android.inputmethod.annotations.UsedForTesting;
 import android.util.Log;
 
 import java.util.Arrays;
+import java.util.Locale;
 
 /**
  * Utilities for matrix operations. Don't instantiate objects inside this class to prevent
@@ -157,7 +158,7 @@ public class MatrixUtils {
         for (int i = 0; i < row; ++i) {
             sb.setLength(0);
             for (int j = 0; j < column; ++j) {
-                sb.append(String.format("%4f", a[i][j])).append(' ');
+                sb.append(String.format(Locale.US, "%4f", a[i][j])).append(' ');
             }
             Log.d(TAG, sb.toString());
         }
