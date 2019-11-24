@@ -16,12 +16,14 @@
 
 package com.android.inputmethod.latin.about;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 
 /**
  * Dummy class of AboutPreferences. Never use this.
  */
 public final class AboutPreferences extends Fragment {
+    @SuppressLint("ValidFragment")
     private AboutPreferences() {
         // Prevents this from being instantiated
     }
