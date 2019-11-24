@@ -605,7 +605,7 @@ public class LatinIME extends InputMethodService implements KeyboardActionListen
         AudioAndHapticFeedbackManager.init(this);
         AccessibilityUtils.init(this);
         mStatsUtilsManager.onCreate(this /* context */, mDictionaryFacilitator);
-        final WindowManager wm = getSystemService(WindowManager.class);
+        final WindowManager wm = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) ? getSystemService(WindowManager.class) : (WindowManager) getSystemService(WINDOW_SERVICE);
         mDisplayContext = createDisplayContext(wm.getDefaultDisplay());
         mCurDisplayId = wm.getDefaultDisplay().getDisplayId();
         KeyboardSwitcher.init(this);
@@ -803,7 +803,7 @@ public class LatinIME extends InputMethodService implements KeyboardActionListen
         // Context doesn't well updated when moving to external display.
         // Currently we do a workaround is to check if IME is moving to new display, if so,
         // create new display context and re-init keyboard layout with this context.
-        final WindowManager wm = getSystemService(WindowManager.class);
+        final WindowManager wm = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) ? getSystemService(WindowManager.class) : (WindowManager) getSystemService(WINDOW_SERVICE);
         final int newDisplayId = wm.getDefaultDisplay().getDisplayId();
         if (mCurDisplayId != newDisplayId) {
             mCurDisplayId = newDisplayId;
