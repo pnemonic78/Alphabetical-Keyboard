@@ -16,7 +16,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
 
     // Required if using classes in android.test.runner
     useLibrary 'android.test.runner'
@@ -30,8 +30,8 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 203
-        versionName "2.03"
+        versionCode 204
+        versionName "2.04"
 
         applicationId 'com.github.inputmethod.alphabetical'
         testApplicationId 'com.github.inputmethod.alphabetical.tests'
