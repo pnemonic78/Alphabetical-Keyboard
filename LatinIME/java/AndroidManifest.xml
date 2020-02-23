@@ -47,6 +47,7 @@
                 android:protectionLevel="signature" />
 
     <application android:label="@string/english_ime_name"
+            android:name="com.android.inputmethod.latin.LatinIMEApplication"
             android:icon="@drawable/ic_launcher_keyboard"
             android:supportsRtl="true"
             android:allowBackup="true"
