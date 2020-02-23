@@ -28,13 +28,13 @@ import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Typeface;
 import android.preference.PreferenceManager;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 
 import com.android.inputmethod.accessibility.AccessibilityUtils;
 import com.android.inputmethod.accessibility.MainKeyboardAccessibilityDelegate;
@@ -60,7 +60,6 @@ import com.android.inputmethod.latin.settings.DebugSettings;
 import com.android.inputmethod.latin.utils.LanguageOnSpacebarUtils;
 import com.android.inputmethod.latin.utils.TypefaceUtils;
 
-import java.util.Locale;
 import java.util.WeakHashMap;
 
 import javax.annotation.Nonnull;
@@ -452,13 +451,20 @@ public final class MainKeyboardView extends KeyboardView implements DrawingProxy
             Log.w(TAG, "Cannot find root view");
             return;
         }
-        final ViewGroup windowContentView = (ViewGroup)rootView.findViewById(android.R.id.content);
+        final ViewGroup windowContentView = rootView.findViewById(android.R.id.content);
         // Note: It'd be very weird if we get null by android.R.id.content.
         if (windowContentView == null) {
             Log.w(TAG, "Cannot find android.R.id.content view to add DrawingPreviewPlacerView");
             return;
         }
-        windowContentView.addView(mDrawingPreviewPlacerView);
+        ViewParent parent = mDrawingPreviewPlacerView.getParent();
+        if (windowContentView != parent) {
+            if ((parent != null) && (parent instanceof ViewGroup)) {
+                ViewGroup group = (ViewGroup) parent;
+                group.removeView(mDrawingPreviewPlacerView);
+            }
+            windowContentView.addView(mDrawingPreviewPlacerView);
+        }
     }
 
     // Implements {@link DrawingProxy#onKeyPressed(Key,boolean)}.
