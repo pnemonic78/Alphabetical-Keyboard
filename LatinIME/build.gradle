@@ -1,19 +1,6 @@
-buildscript {
-    repositories {
-        maven { url 'https://maven.fabric.io/public' }
-    }
-
-    dependencies {
-        classpath 'io.fabric.tools:gradle:1.31.2'
-    }
-}
-
-repositories {
-    maven { url 'https://maven.fabric.io/public' }
-}
-
 apply plugin: 'com.android.application'
-apply plugin: 'io.fabric'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
 
 android {
     compileSdkVersion 29
@@ -44,6 +31,10 @@ android {
     signingConfigs {
         debug {
             storeFile file("java/shared.keystore")
+
+            firebaseCrashlytics {
+                mappingFileUploadEnabled false
+            }
         }
         release {
             storeFile file("../release.keystore")
@@ -113,5 +104,5 @@ dependencies {
     androidTestImplementation 'androidx.annotation:annotation:1.1.0'
 
     // Logging
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+    implementation 'com.google.firebase:firebase-crashlytics:17.0.1'
 }
