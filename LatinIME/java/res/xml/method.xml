@@ -480,6 +480,14 @@
     />
     <subtype android:icon="@drawable/ic_ime_switcher_dark"
             android:label="@string/subtype_generic"
+            android:subtypeId="0x2e391c05"
+            android:imeSubtypeLocale="ky_TR"
+            android:imeSubtypeMode="keyboard"
+            android:imeSubtypeExtraValue="KeyboardLayoutSet=qwerty,AsciiCapable,EmojiCapable"
+            android:isAsciiCapable="true"
+    />
+    <subtype android:icon="@drawable/ic_ime_switcher_dark"
+            android:label="@string/subtype_generic"
             android:subtypeId="0x8315772c"
             android:imeSubtypeLocale="lo_LA"
             android:imeSubtypeMode="keyboard"
