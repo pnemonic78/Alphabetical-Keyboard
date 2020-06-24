@@ -30,7 +30,7 @@
                 latin:keyStyle="languageSwitchKeyStyle" />
             <Key
                 latin:keyStyle="spaceKeyStyle"
-                latin:keyWidth="30%p" />
+                latin:keyWidth="20%p" />
             <Key
                 latin:keyStyle="zwnjKeyStyle" />
         </case>
@@ -40,7 +40,7 @@
         >
             <Key
                 latin:keyStyle="spaceKeyStyle"
-                latin:keyWidth="40%p" />
+                latin:keyWidth="30%p" />
             <Key
                 latin:keyStyle="zwnjKeyStyle" />
         </case>
@@ -51,13 +51,13 @@
                 latin:keyStyle="languageSwitchKeyStyle" />
             <Key
                 latin:keyStyle="spaceKeyStyle"
-                latin:keyWidth="40%p" />
+                latin:keyWidth="30%p" />
         </case>
         <!-- languageSwitchKeyEnabled="false" -->
         <default>
             <Key
                 latin:keyStyle="spaceKeyStyle"
-                latin:keyWidth="50%p" />
+                latin:keyWidth="40%p" />
         </default>
     </switch>
 </merge>
