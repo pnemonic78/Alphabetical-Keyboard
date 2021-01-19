@@ -2,14 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Alphabetical-Keyboard.iml" filepath="$PROJECT_DIR$/Alphabetical-Keyboard.iml" />
-      <module fileurl="file://$PROJECT_DIR$/LatinIME/Alphabetical-Keyboard-LatinIME.iml" filepath="$PROJECT_DIR$/LatinIME/Alphabetical-Keyboard-LatinIME.iml" group="Alphabetical-Keyboard/LatinIME" />
-      <module fileurl="file://$PROJECT_DIR$/LatinIME/LatinIME.iml" filepath="$PROJECT_DIR$/LatinIME/LatinIME.iml" />
-      <module fileurl="file://$PROJECT_DIR$/LatinIME/tools/LatinIME-tools.iml" filepath="$PROJECT_DIR$/LatinIME/tools/LatinIME-tools.iml" group="Alphabetical-Keyboard/LatinIME/tools" />
-      <module fileurl="file://$PROJECT_DIR$/LatinIME/tools/make-keyboard-text/make-keyboard-text.iml" filepath="$PROJECT_DIR$/LatinIME/tools/make-keyboard-text/make-keyboard-text.iml" group="Alphabetical-Keyboard/LatinIME/tools/make-keyboard-text" />
-      <module fileurl="file://$PROJECT_DIR$/pnemonic78-Alphabetical-Keyboard.iml" filepath="$PROJECT_DIR$/pnemonic78-Alphabetical-Keyboard.iml" group="Alphabetical-Keyboard" />
-      <module fileurl="file://$PROJECT_DIR$/sorter/sorter.iml" filepath="$PROJECT_DIR$/sorter/sorter.iml" group="Alphabetical-Keyboard/sorter" />
-      <module fileurl="file://$PROJECT_DIR$/LatinIME/tools/tools.iml" filepath="$PROJECT_DIR$/LatinIME/tools/tools.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Alphabetical-Keyboard.iml" filepath="$PROJECT_DIR$/.idea/modules/Alphabetical-Keyboard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/LatinIME/Alphabetical-Keyboard.LatinIME.iml" filepath="$PROJECT_DIR$/.idea/modules/LatinIME/Alphabetical-Keyboard.LatinIME.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/LatinIME/tools/Alphabetical-Keyboard.LatinIME.tools.iml" filepath="$PROJECT_DIR$/.idea/modules/LatinIME/tools/Alphabetical-Keyboard.LatinIME.tools.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/LatinIME/tools/make-keyboard-text/Alphabetical-Keyboard.LatinIME.tools.make-keyboard-text.iml" filepath="$PROJECT_DIR$/.idea/modules/LatinIME/tools/make-keyboard-text/Alphabetical-Keyboard.LatinIME.tools.make-keyboard-text.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sorter/Alphabetical-Keyboard.sorter.iml" filepath="$PROJECT_DIR$/.idea/modules/sorter/Alphabetical-Keyboard.sorter.iml" />
     </modules>
   </component>
 </project>
