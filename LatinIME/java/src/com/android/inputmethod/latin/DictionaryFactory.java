@@ -19,6 +19,7 @@ package com.android.inputmethod.latin;
 import android.content.ContentProviderClient;
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
+import android.content.res.Resources;
 import android.util.Log;
 
 import com.android.inputmethod.latin.utils.DictionaryInfoUtils;
@@ -146,7 +147,7 @@ public final class DictionaryFactory {
             }
             return new ReadOnlyBinaryDictionary(sourceDir, afd.getStartOffset(), afd.getLength(),
                     false /* useFullEditDistance */, locale, Dictionary.TYPE_MAIN);
-        } catch (android.content.res.Resources.NotFoundException e) {
+        } catch (Resources.NotFoundException e) {
             Log.e(TAG, "Could not find the resource");
             return null;
         } finally {

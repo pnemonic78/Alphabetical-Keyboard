@@ -81,7 +81,7 @@ public final class DictionaryPackInstallBroadcastReceiver extends BroadcastRecei
             final PackageInfo packageInfo;
             try {
                 packageInfo = manager.getPackageInfo(packageName, PackageManager.GET_PROVIDERS);
-            } catch (android.content.pm.PackageManager.NameNotFoundException e) {
+            } catch (PackageManager.NameNotFoundException e) {
                 return; // No package info : we can't do anything
             }
             final ProviderInfo[] providers = packageInfo.providers;

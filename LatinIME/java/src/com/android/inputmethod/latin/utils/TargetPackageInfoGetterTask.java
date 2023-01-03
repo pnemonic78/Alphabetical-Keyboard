@@ -55,7 +55,7 @@ public final class TargetPackageInfoGetterTask extends
             final PackageInfo packageInfo = pm.getPackageInfo(packageName[0], 0 /* flags */);
             sCache.put(packageName[0], packageInfo);
             return packageInfo;
-        } catch (android.content.pm.PackageManager.NameNotFoundException e) {
+        } catch (PackageManager.NameNotFoundException | NullPointerException e) {
             return null;
         }
     }
