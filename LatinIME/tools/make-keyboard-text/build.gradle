@@ -1,4 +1,4 @@
-apply plugin: 'application'
+apply plugin: "application"
 
 application {
     sourceCompatibility = JavaVersion.VERSION_1_8
@@ -6,8 +6,8 @@ application {
 
     sourceSets {
         main {
-            java.srcDirs = ['src']
-            resources.srcDirs = ['res']
+            java.srcDirs = ["src"]
+            resources.srcDirs = ["res"]
         }
     }
 
@@ -16,6 +16,6 @@ application {
 
 jar {
     manifest {
-        attributes += ['Main-Class': "com.android.inputmethod.keyboard.tools.MakeKeyboardText"]
+        attributes += ["Main-Class": "com.android.inputmethod.keyboard.tools.MakeKeyboardText"]
     }
 }
