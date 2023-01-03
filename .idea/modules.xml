@@ -4,9 +4,16 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Alphabetical-Keyboard.iml" filepath="$PROJECT_DIR$/.idea/modules/Alphabetical-Keyboard.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/LatinIME/Alphabetical-Keyboard.LatinIME.iml" filepath="$PROJECT_DIR$/.idea/modules/LatinIME/Alphabetical-Keyboard.LatinIME.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/LatinIME/Alphabetical-Keyboard.LatinIME.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/LatinIME/Alphabetical-Keyboard.LatinIME.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/LatinIME/Alphabetical-Keyboard.LatinIME.main.iml" filepath="$PROJECT_DIR$/.idea/modules/LatinIME/Alphabetical-Keyboard.LatinIME.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/LatinIME/tools/Alphabetical-Keyboard.LatinIME.tools.iml" filepath="$PROJECT_DIR$/.idea/modules/LatinIME/tools/Alphabetical-Keyboard.LatinIME.tools.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/LatinIME/tools/make-keyboard-text/Alphabetical-Keyboard.LatinIME.tools.make-keyboard-text.iml" filepath="$PROJECT_DIR$/.idea/modules/LatinIME/tools/make-keyboard-text/Alphabetical-Keyboard.LatinIME.tools.make-keyboard-text.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/LatinIME/tools/make-keyboard-text/Alphabetical-Keyboard.LatinIME.tools.make-keyboard-text.main.iml" filepath="$PROJECT_DIR$/.idea/modules/LatinIME/tools/make-keyboard-text/Alphabetical-Keyboard.LatinIME.tools.make-keyboard-text.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/LatinIME/tools/make-keyboard-text/Alphabetical-Keyboard.LatinIME.tools.make-keyboard-text.test.iml" filepath="$PROJECT_DIR$/.idea/modules/LatinIME/tools/make-keyboard-text/Alphabetical-Keyboard.LatinIME.tools.make-keyboard-text.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/LatinIME/Alphabetical-Keyboard.LatinIME.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/LatinIME/Alphabetical-Keyboard.LatinIME.unitTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/sorter/Alphabetical-Keyboard.sorter.iml" filepath="$PROJECT_DIR$/.idea/modules/sorter/Alphabetical-Keyboard.sorter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sorter/Alphabetical-Keyboard.sorter.main.iml" filepath="$PROJECT_DIR$/.idea/modules/sorter/Alphabetical-Keyboard.sorter.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sorter/Alphabetical-Keyboard.sorter.test.iml" filepath="$PROJECT_DIR$/.idea/modules/sorter/Alphabetical-Keyboard.sorter.test.iml" />
     </modules>
   </component>
 </project>
