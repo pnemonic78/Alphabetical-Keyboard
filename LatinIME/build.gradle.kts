@@ -19,8 +19,8 @@ android {
     defaultConfig {
         minSdk = 21
         targetSdk = 33
-        versionCode = 208
-        versionName = "2.08"
+        versionCode = 209
+        versionName = "2.09"
 
         applicationId = "com.github.inputmethod.alphabetical"
         testApplicationId = "com.github.inputmethod.alphabetical.tests"
