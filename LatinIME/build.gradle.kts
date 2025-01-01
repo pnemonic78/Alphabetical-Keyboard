@@ -5,7 +5,8 @@ plugins {
 }
 
 android {
-    compileSdk = 33
+    compileSdk = 34
+    namespace = "com.github.inputmethod.alphabetical"
 
     // Required if using classes in android.test.runner
     useLibrary("android.test.runner")
@@ -18,7 +19,7 @@ android {
 
     defaultConfig {
         minSdk = 21
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 210
         versionName = "2.10"
 
@@ -91,6 +92,10 @@ android {
         checkReleaseBuilds = false
     }
     ndkVersion = "25.2.9519653"
+
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 dependencies {
@@ -101,11 +106,11 @@ dependencies {
     androidTestImplementation("org.mockito:mockito-core:3.10.0")
     androidTestImplementation("com.google.dexmaker:dexmaker:1.2")
     androidTestImplementation("com.google.dexmaker:dexmaker-mockito:1.2")
-    androidTestImplementation("androidx.test:runner:1.5.1")
+    androidTestImplementation("androidx.test:runner:1.6.2")
     androidTestImplementation("androidx.test:rules:1.5.0")
-    androidTestImplementation("androidx.test.uiautomator:uiautomator:2.2.0")
+    androidTestImplementation("androidx.test.uiautomator:uiautomator:2.3.0")
     androidTestImplementation("androidx.annotation:annotation:1.5.0")
 
     // Logging
-    implementation("com.google.firebase:firebase-crashlytics:18.4.0")
+    implementation("com.google.firebase:firebase-crashlytics:19.3.0")
 }
