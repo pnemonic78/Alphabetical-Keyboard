@@ -117,9 +117,9 @@ dependencies {
     androidTestImplementation("com.google.dexmaker:dexmaker:1.2")
     androidTestImplementation("com.google.dexmaker:dexmaker-mockito:1.2")
     androidTestImplementation("androidx.test:runner:1.6.2")
-    androidTestImplementation("androidx.test:rules:1.5.0")
+    androidTestImplementation("androidx.test:rules:1.6.1")
     androidTestImplementation("androidx.test.uiautomator:uiautomator:2.3.0")
-    androidTestImplementation("androidx.annotation:annotation:1.5.0")
+    androidTestImplementation("androidx.annotation:annotation:1.9.1")
 
     // Logging
     implementation("com.google.firebase:firebase-crashlytics:19.3.0")
