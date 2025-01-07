@@ -781,9 +781,13 @@ public class LatinIME extends InputMethodService implements KeyboardActionListen
     }
 
     private boolean isImeSuppressedByHardwareKeyboard() {
+        return isImeSuppressedByHardwareKeyboard(mSettings.getCurrent());
+    }
+
+    private boolean isImeSuppressedByHardwareKeyboard(SettingsValues settingsValues) {
         final KeyboardSwitcher switcher = KeyboardSwitcher.getInstance();
         return !onEvaluateInputViewShown() && switcher.isImeSuppressedByHardwareKeyboard(
-                mSettings.getCurrent(), switcher.getKeyboardSwitchState());
+                settingsValues, switcher.getKeyboardSwitchState());
     }
 
     @Override
@@ -791,7 +795,7 @@ public class LatinIME extends InputMethodService implements KeyboardActionListen
         SettingsValues settingsValues = mSettings.getCurrent();
         if (settingsValues.mDisplayOrientation != conf.orientation) {
             mHandler.startOrientationChanging();
-            mInputLogic.onOrientationChange(mSettings.getCurrent());
+            mInputLogic.onOrientationChange(settingsValues);
         }
         if (settingsValues.mHasHardwareKeyboard != Settings.readHasHardwareKeyboard(conf)) {
             // If the state of having a hardware keyboard changed, then we want to reload the
@@ -799,8 +803,7 @@ public class LatinIME extends InputMethodService implements KeyboardActionListen
             // TODO: we should probably do this unconditionally here, rather than only when we
             // have a change in hardware keyboard configuration.
             loadSettings();
-            settingsValues = mSettings.getCurrent();
-            if (isImeSuppressedByHardwareKeyboard()) {
+            if (isImeSuppressedByHardwareKeyboard(settingsValues)) {
                 // We call cleanupInternalStateForFinishInput() because it's the right thing to do;
                 // however, it seems at the moment the framework is passing us a seemingly valid
                 // but actually non-functional InputConnection object. So if this bug ever gets
@@ -989,7 +992,7 @@ public class LatinIME extends InputMethodService implements KeyboardActionListen
         // can go into the correct mode, so we need to do some housekeeping here.
         final boolean needToCallLoadKeyboardLater;
         final Suggest suggest = mInputLogic.mSuggest;
-        if (!isImeSuppressedByHardwareKeyboard()) {
+        if (!isImeSuppressedByHardwareKeyboard(currentSettingsValues)) {
             // The app calling setText() has the effect of clearing the composing
             // span, so we should reset our state unconditionally, even if restarting is true.
             // We also tell the input logic about the combining rules for the current subtype, so
@@ -1234,7 +1237,6 @@ public class LatinIME extends InputMethodService implements KeyboardActionListen
         if (mInputView == null) {
             return;
         }
-        final SettingsValues settingsValues = mSettings.getCurrent();
         final View visibleKeyboardView = mKeyboardSwitcher.getVisibleKeyboardView();
         if (visibleKeyboardView == null || !hasSuggestionStripView()) {
             return;
@@ -1300,7 +1302,6 @@ public class LatinIME extends InputMethodService implements KeyboardActionListen
 
     @Override
     public boolean onEvaluateFullscreenMode() {
-        final SettingsValues settingsValues = mSettings.getCurrent();
         if (isImeSuppressedByHardwareKeyboard()) {
             // If there is a hardware keyboard, disable full screen mode.
             return false;
