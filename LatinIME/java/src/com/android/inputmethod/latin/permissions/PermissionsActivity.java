@@ -77,6 +77,10 @@ public final class PermissionsActivity
         // Only do request when there is no pending request to avoid duplicated requests.
         if (mPendingRequestCode == INVALID_REQUEST_CODE) {
             final Bundle extras = getIntent().getExtras();
+            if (extras == null) {
+                finish();
+                return;
+            }
             final String[] permissionsToRequest =
                     extras.getStringArray(EXTRA_PERMISSION_REQUESTED_PERMISSIONS);
             mPendingRequestCode = extras.getInt(EXTRA_PERMISSION_REQUEST_CODE);
