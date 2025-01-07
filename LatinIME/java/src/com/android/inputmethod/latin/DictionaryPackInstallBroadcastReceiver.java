@@ -135,7 +135,7 @@ public final class DictionaryPackInstallBroadcastReceiver extends BroadcastRecei
             final String wantedClientId =
                     intent.getStringExtra(DictionaryPackConstants.DICTIONARY_PROVIDER_CLIENT_EXTRA);
             final String myClientId = context.getString(R.string.dictionary_pack_client_id);
-            if (!wantedClientId.equals(myClientId)) return; // Not for us
+            if ((wantedClientId == null) || !wantedClientId.equals(myClientId)) return; // Not for us
             BinaryDictionaryFileDumper.initializeClientRecordHelper(context, myClientId);
         }
     }
