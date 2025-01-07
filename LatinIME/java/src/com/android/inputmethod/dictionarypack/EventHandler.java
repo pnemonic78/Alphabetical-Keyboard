@@ -16,9 +16,11 @@
 
 package com.android.inputmethod.dictionarypack;
 
+import android.app.BackgroundServiceStartNotAllowedException;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 
 public final class EventHandler extends BroadcastReceiver {
     /**
@@ -41,6 +43,17 @@ public final class EventHandler extends BroadcastReceiver {
     @Override
     public void onReceive(final Context context, final Intent intent) {
         intent.setClass(context, DictionaryService.class);
-        context.startService(intent);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            try {
+                context.startService(intent);
+            } catch (BackgroundServiceStartNotAllowedException e) {
+                DictionaryService service = new DictionaryService();
+                service.attach(context);
+                service.onCreate();
+                service.onStartCommand(intent, 0, 0);
+            }
+        } else {
+            context.startService(intent);
+        }
     }
 }

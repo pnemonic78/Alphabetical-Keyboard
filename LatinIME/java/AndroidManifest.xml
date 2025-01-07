@@ -87,6 +87,7 @@
 
         <service
             android:name="com.android.inputmethod.dictionarypack.DictionaryService"
+            android:exported="false"
             android:label="@string/dictionary_service_name" />
 
         <!-- Activities -->

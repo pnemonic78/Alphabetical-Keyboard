@@ -26,6 +26,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.android.inputmethod.latin.BinaryDictionaryFileDumper;
+import com.github.inputmethod.alphabetical.BuildConfig;
 import com.github.inputmethod.alphabetical.R;
 import com.android.inputmethod.latin.common.LocaleUtils;
 
@@ -60,7 +61,7 @@ public final class DictionaryService extends Service {
     /**
      * The package name, to use in the intent actions.
      */
-    private static final String PACKAGE_NAME = "com.android.inputmethod.latin";
+    private static final String PACKAGE_NAME = BuildConfig.APPLICATION_ID;
 
     /**
      * The action of the date changing, used to schedule a periodic freshness check
@@ -189,6 +190,10 @@ public final class DictionaryService extends Service {
             });
         }
         return Service.START_REDELIVER_INTENT;
+    }
+
+    public void attach(Context context) {
+        attachBaseContext(context);
     }
 
     static void dispatchBroadcast(final Context context, final Intent intent) {
