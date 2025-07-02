@@ -16,7 +16,6 @@
 
 package com.android.inputmethod.latin.setup;
 
-import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -35,17 +34,18 @@ import android.widget.VideoView;
 
 import com.android.inputmethod.compat.TextViewCompatUtils;
 import com.android.inputmethod.compat.ViewCompatUtils;
-import com.github.inputmethod.alphabetical.R;
+import com.android.inputmethod.latin.LatinImeActivity;
 import com.android.inputmethod.latin.settings.SettingsActivity;
 import com.android.inputmethod.latin.utils.LeakGuardHandlerWrapper;
 import com.android.inputmethod.latin.utils.UncachedInputMethodManagerUtils;
+import com.github.inputmethod.alphabetical.R;
 
 import java.util.ArrayList;
 
 import javax.annotation.Nonnull;
 
 // TODO: Use Fragment to implement welcome screen and setup steps.
-public final class SetupWizardActivity extends Activity implements View.OnClickListener {
+public final class SetupWizardActivity extends LatinImeActivity implements View.OnClickListener {
     static final String TAG = SetupWizardActivity.class.getSimpleName();
 
     // For debugging purpose.

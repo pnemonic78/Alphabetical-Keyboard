@@ -18,13 +18,14 @@ package com.android.inputmethodcommon;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
+
+import com.android.inputmethod.latin.LatinImePreferenceActivity;
 
 /**
  * This is a helper class for an IME's settings preference activity. It's recommended for every
  * IME to have its own settings preference activity which inherits this class.
  */
-public abstract class InputMethodSettingsActivity extends PreferenceActivity
+public abstract class InputMethodSettingsActivity extends LatinImePreferenceActivity
         implements InputMethodSettingsInterface {
     private final InputMethodSettingsImpl mSettings = new InputMethodSettingsImpl();
     @SuppressWarnings("deprecation")

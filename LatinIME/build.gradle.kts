@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    compileSdk = 34
+    compileSdk = 36
     namespace = "com.github.inputmethod.alphabetical"
 
     // Required if using classes in android.test.runner
@@ -19,7 +19,7 @@ android {
 
     defaultConfig {
         minSdk = 21
-        targetSdk = 34
+        targetSdk = 36
         versionCode = 212
         versionName = "2.12"
 
@@ -111,6 +111,7 @@ android {
 dependencies {
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("com.google.code.findbugs:jsr305:3.0.2")
+    implementation("androidx.core:core-ktx:1.16.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("org.mockito:mockito-core:3.10.0")
@@ -122,5 +123,5 @@ dependencies {
     androidTestImplementation("androidx.annotation:annotation:1.9.1")
 
     // Logging
-    implementation("com.google.firebase:firebase-crashlytics:19.3.0")
+    implementation("com.google.firebase:firebase-crashlytics:19.4.4")
 }

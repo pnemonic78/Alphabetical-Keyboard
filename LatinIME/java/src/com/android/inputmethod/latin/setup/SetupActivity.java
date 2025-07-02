@@ -20,7 +20,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-public final class SetupActivity extends Activity {
+import com.android.inputmethod.latin.LatinImeActivity;
+
+public final class SetupActivity extends LatinImeActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

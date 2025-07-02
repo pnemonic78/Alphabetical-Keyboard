@@ -16,20 +16,21 @@
 
 package com.android.inputmethod.latin.spellcheck;
 
-import com.android.inputmethod.latin.permissions.PermissionsManager;
-import com.android.inputmethod.latin.utils.FragmentUtils;
-
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
+
 import androidx.core.app.ActivityCompat;
+
+import com.android.inputmethod.latin.LatinImePreferenceActivity;
+import com.android.inputmethod.latin.permissions.PermissionsManager;
+import com.android.inputmethod.latin.utils.FragmentUtils;
 
 /**
  * Spell checker preference screen.
  */
-public final class SpellCheckerSettingsActivity extends PreferenceActivity
+public final class SpellCheckerSettingsActivity extends LatinImePreferenceActivity
         implements ActivityCompat.OnRequestPermissionsResultCallback {
     private static final String DEFAULT_FRAGMENT = SpellCheckerSettingsFragment.class.getName();
 

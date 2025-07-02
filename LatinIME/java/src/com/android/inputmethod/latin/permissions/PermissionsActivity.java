@@ -17,19 +17,21 @@
 package com.android.inputmethod.latin.permissions;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+
+import com.android.inputmethod.latin.LatinImeActivity;
 
 /**
  * An activity to help request permissions. It's used when no other activity is available, e.g. in
  * InputMethodService. This activity assumes that all permissions are not granted yet.
  */
 public final class PermissionsActivity
-        extends Activity implements ActivityCompat.OnRequestPermissionsResultCallback {
+        extends LatinImeActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
 
     /**
      * Key to retrieve requested permissions from the intent.

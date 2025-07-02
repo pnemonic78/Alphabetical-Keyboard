@@ -16,7 +16,6 @@
 
 package com.android.inputmethod.dictionarypack;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
@@ -25,8 +24,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.inputmethod.annotations.ExternallyReferenced;
-import com.github.inputmethod.alphabetical.R;
+import com.android.inputmethod.latin.LatinImeActivity;
 import com.android.inputmethod.latin.common.LocaleUtils;
+import com.github.inputmethod.alphabetical.R;
 
 import javax.annotation.Nullable;
 
@@ -34,7 +34,7 @@ import javax.annotation.Nullable;
  * This implements the dialog for asking the user whether it's okay to download dictionaries over
  * a metered connection or not (e.g. their mobile data plan).
  */
-public final class DownloadOverMeteredDialog extends Activity {
+public final class DownloadOverMeteredDialog extends LatinImeActivity {
     final public static String CLIENT_ID_KEY = "client_id";
     final public static String WORDLIST_TO_DOWNLOAD_KEY = "wordlist_to_download";
     final public static String SIZE_KEY = "size";
