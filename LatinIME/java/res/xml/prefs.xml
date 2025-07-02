@@ -20,27 +20,33 @@
     android:key="english_ime_settings">
     <PreferenceScreen
         android:fragment="com.android.inputmethod.latin.settings.PreferencesSettingsFragment"
-        android:title="@string/settings_screen_preferences"
-        android:key="screen_preferences" />
+        android:icon="@drawable/ic_settings"
+        android:key="screen_preferences"
+        android:title="@string/settings_screen_preferences" />
     <PreferenceScreen
         android:fragment="com.android.inputmethod.latin.settings.AccountsSettingsFragment"
-        android:title="@string/settings_screen_accounts"
-        android:key="screen_accounts" />
+        android:icon="@drawable/ic_manage_accounts"
+        android:key="screen_accounts"
+        android:title="@string/settings_screen_accounts" />
     <PreferenceScreen
         android:fragment="com.android.inputmethod.latin.settings.AppearanceSettingsFragment"
-        android:title="@string/settings_screen_appearance"
-        android:key="screen_appearance" />
+        android:icon="@drawable/ic_palette"
+        android:key="screen_appearance"
+        android:title="@string/settings_screen_appearance" />
     <PreferenceScreen
         android:enabled="false"
         android:fragment="com.android.inputmethod.latin.settings.GestureSettingsFragment"
-        android:title="@string/settings_screen_gesture"
-        android:key="screen_gesture" />
+        android:icon="@drawable/ic_gesture"
+        android:key="screen_gesture"
+        android:title="@string/settings_screen_gesture" />
     <PreferenceScreen
         android:fragment="com.android.inputmethod.latin.settings.CorrectionSettingsFragment"
-        android:title="@string/settings_screen_correction"
-        android:key="screen_correction" />
+        android:icon="@drawable/ic_text_correct"
+        android:key="screen_correction"
+        android:title="@string/settings_screen_correction" />
     <PreferenceScreen
         android:fragment="com.android.inputmethod.latin.settings.AdvancedSettingsFragment"
-        android:title="@string/settings_screen_advanced"
-        android:key="screen_advanced" />
+        android:icon="@drawable/ic_speed"
+        android:key="screen_advanced"
+        android:title="@string/settings_screen_advanced" />
 </PreferenceScreen>

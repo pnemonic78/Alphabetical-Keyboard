@@ -28,6 +28,8 @@ import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
 
+import com.github.inputmethod.alphabetical.R;
+
 import java.util.List;
 
 /* package private */ class InputMethodSettingsImpl implements InputMethodSettingsInterface {
@@ -60,6 +62,7 @@ import java.util.List;
                 | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         mSubtypeEnablerPreference = new Preference(context);
         mSubtypeEnablerPreference.setIntent(intent);
+        mSubtypeEnablerPreference.setIcon(R.drawable.ic_language);
         prefScreen.addPreference(mSubtypeEnablerPreference);
         updateSubtypeEnabler();
         return true;
