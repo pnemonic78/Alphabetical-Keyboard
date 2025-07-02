@@ -16,6 +16,7 @@
 
 package com.android.inputmethod.latin;
 
+import android.app.ActivityManager;
 import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -31,12 +32,14 @@ import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
 
-import com.android.inputmethod.dictionarypack.DictionaryPackConstants;
 import com.android.inputmethod.dictionarypack.DownloadManagerWrapper;
 import com.android.inputmethod.keyboard.KeyboardLayoutSet;
 import com.android.inputmethod.latin.settings.Settings;
 import com.android.inputmethod.latin.setup.SetupActivity;
 import com.android.inputmethod.latin.utils.UncachedInputMethodManagerUtils;
+import com.github.inputmethod.alphabetical.BuildConfig;
+
+import java.util.List;
 
 /**
  * This class detects the {@link Intent#ACTION_MY_PACKAGE_REPLACED} broadcast intent when this IME
@@ -103,7 +106,14 @@ public final class SystemBroadcastReceiver extends BroadcastReceiver {
                 !imm.getInputMethodList().isEmpty();
         final boolean isCurrentImeOfCurrentUser = isInputMethodManagerValidForUserOfThisProcess
                 && UncachedInputMethodManagerUtils.isThisImeCurrent(context, imm);
-        if (!isCurrentImeOfCurrentUser) {
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        String packageName = "";
+        List<ActivityManager.RunningTaskInfo> taskInfo = activityManager.getRunningTasks(1);
+        if (taskInfo != null) {
+            ComponentName componentInfo = taskInfo.get(0).topActivity;
+            packageName = componentInfo.getPackageName();
+        }
+        if (!isCurrentImeOfCurrentUser && !BuildConfig.APPLICATION_ID.equals(packageName)) {
             final int myPid = Process.myPid();
             Log.i(TAG, "Killing my process: pid=" + myPid);
             Process.killProcess(myPid);
@@ -125,7 +135,7 @@ public final class SystemBroadcastReceiver extends BroadcastReceiver {
             if (c != null) {
                 for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
                     final long downloadId = c
-                            .getLong(c.getColumnIndex(DownloadManager.COLUMN_ID));
+                        .getLong(c.getColumnIndexOrThrow(DownloadManager.COLUMN_ID));
                     downloadManagerWrapper.remove(downloadId);
                     Log.i(TAG, "Removed the download with Id: " + downloadId);
                 }
@@ -136,11 +146,11 @@ public final class SystemBroadcastReceiver extends BroadcastReceiver {
         }
     }
 
-    private void downloadLatestDictionaries(Context context) {
-        final Intent updateIntent = new Intent(
-                DictionaryPackConstants.INIT_AND_UPDATE_NOW_INTENT_ACTION);
-        context.sendBroadcast(updateIntent);
-    }
+//    private void downloadLatestDictionaries(Context context) {
+//        final Intent updateIntent = new Intent(
+//                DictionaryPackConstants.INIT_AND_UPDATE_NOW_INTENT_ACTION);
+//        context.sendBroadcast(updateIntent);
+//    }
 
     public static void toggleAppIcon(final Context context) {
         final int appInfoFlags = context.getApplicationInfo().flags;
