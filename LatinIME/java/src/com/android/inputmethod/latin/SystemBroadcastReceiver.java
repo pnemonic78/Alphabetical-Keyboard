@@ -109,7 +109,7 @@ public final class SystemBroadcastReceiver extends BroadcastReceiver {
         ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         String packageName = "";
         List<ActivityManager.RunningTaskInfo> taskInfo = activityManager.getRunningTasks(1);
-        if (taskInfo != null) {
+        if (taskInfo != null && !taskInfo.isEmpty()) {
             ComponentName componentInfo = taskInfo.get(0).topActivity;
             packageName = componentInfo.getPackageName();
         }
