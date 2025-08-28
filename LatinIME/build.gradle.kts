@@ -24,7 +24,6 @@ android {
         versionName = "2.14"
 
         applicationId = "com.github.inputmethod.alphabetical"
-        testApplicationId = "com.github.inputmethod.alphabetical.tests"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = false
 
@@ -34,10 +33,6 @@ android {
     signingConfigs {
         getByName("debug") {
             storeFile = file("java/shared.keystore")
-
-//            firebaseCrashlytics {
-//                mappingFileUploadEnabled = false
-//            }
         }
         create("release") {
             storeFile = file("../release.keystore")
@@ -48,10 +43,10 @@ android {
     }
 
     buildTypes {
-        getByName("debug") {
+        debug {
             isMinifyEnabled = false
         }
-        getByName("release") {
+        release {
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard.flags")
             signingConfig = signingConfigs.getByName("release")
         }
@@ -91,7 +86,7 @@ android {
     lint {
         checkReleaseBuilds = false
     }
-    ndkVersion = "25.2.9519653"
+    ndkVersion = "28.0.12433566"
 
     buildFeatures {
         buildConfig = true
@@ -111,16 +106,16 @@ android {
 dependencies {
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("com.google.code.findbugs:jsr305:3.0.2")
-    implementation("androidx.core:core-ktx:1.16.0")
+    implementation("androidx.core:core-ktx:1.17.0")
+    implementation("androidx.annotation:annotation:1.9.1")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("org.mockito:mockito-core:3.10.0")
     androidTestImplementation("com.google.dexmaker:dexmaker:1.2")
     androidTestImplementation("com.google.dexmaker:dexmaker-mockito:1.2")
-    androidTestImplementation("androidx.test:runner:1.6.2")
-    androidTestImplementation("androidx.test:rules:1.6.1")
+    androidTestImplementation("androidx.test:runner:1.7.0")
+    androidTestImplementation("androidx.test:rules:1.7.0")
     androidTestImplementation("androidx.test.uiautomator:uiautomator:2.3.0")
-    androidTestImplementation("androidx.annotation:annotation:1.9.1")
 
     // Logging
     implementation("com.google.firebase:firebase-crashlytics:19.4.4")
