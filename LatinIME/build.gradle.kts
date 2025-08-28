@@ -20,8 +20,8 @@ android {
     defaultConfig {
         minSdk = 21
         targetSdk = 36
-        versionCode = 214
-        versionName = "2.14"
+        versionCode = 215
+        versionName = "2.15"
 
         applicationId = "com.github.inputmethod.alphabetical"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
