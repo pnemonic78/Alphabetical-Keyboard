@@ -18,6 +18,7 @@ package com.android.inputmethod.keyboard;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.os.Build;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -25,6 +26,10 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 
 import androidx.annotation.NonNull;
+import androidx.core.graphics.Insets;
+import androidx.core.view.OnApplyWindowInsetsListener;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import com.android.inputmethod.compat.InputMethodServiceCompatUtils;
 import com.android.inputmethod.event.Event;
@@ -468,6 +473,7 @@ public final class KeyboardSwitcher implements KeyboardState.SwitchActions {
                 displayContext, KeyboardTheme.getKeyboardTheme(displayContext /* context */));
         mCurrentInputView = (InputView)LayoutInflater.from(mThemeContext).inflate(
                 R.layout.input_view, null);
+        initPadding(mCurrentInputView);
         mMainKeyboardFrame = mCurrentInputView.findViewById(R.id.main_keyboard_frame);
         mEmojiPalettesView = (EmojiPalettesView)mCurrentInputView.findViewById(
                 R.id.emoji_palettes_view);
@@ -504,5 +510,19 @@ public final class KeyboardSwitcher implements KeyboardState.SwitchActions {
             return ScriptUtils.SCRIPT_UNKNOWN;
         }
         return mKeyboardLayoutSet.getScriptId();
+    }
+
+    private void initPadding(View view) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+            return;
+        }
+        ViewCompat.setOnApplyWindowInsetsListener(view, new OnApplyWindowInsetsListener() {
+            @Override
+            public @NonNull WindowInsetsCompat onApplyWindowInsets(@NonNull View v, @NonNull WindowInsetsCompat insets) {
+                Insets navInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars());
+                view.setPadding(navInsets.left, navInsets.top, navInsets.right, navInsets.bottom);
+                return WindowInsetsCompat.CONSUMED;
+            }
+        });
     }
 }
