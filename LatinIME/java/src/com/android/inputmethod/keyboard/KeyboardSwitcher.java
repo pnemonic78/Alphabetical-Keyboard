@@ -23,6 +23,7 @@ import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 
 import androidx.annotation.NonNull;
@@ -39,7 +40,6 @@ import com.android.inputmethod.keyboard.internal.KeyboardState;
 import com.android.inputmethod.keyboard.internal.KeyboardTextsSet;
 import com.android.inputmethod.latin.InputView;
 import com.android.inputmethod.latin.LatinIME;
-import com.github.inputmethod.alphabetical.R;
 import com.android.inputmethod.latin.RichInputMethodManager;
 import com.android.inputmethod.latin.WordComposer;
 import com.android.inputmethod.latin.define.ProductionFlags;
@@ -50,6 +50,7 @@ import com.android.inputmethod.latin.utils.LanguageOnSpacebarUtils;
 import com.android.inputmethod.latin.utils.RecapitalizeStatus;
 import com.android.inputmethod.latin.utils.ResourceUtils;
 import com.android.inputmethod.latin.utils.ScriptUtils;
+import com.github.inputmethod.alphabetical.R;
 
 import javax.annotation.Nonnull;
 
@@ -512,7 +513,7 @@ public final class KeyboardSwitcher implements KeyboardState.SwitchActions {
         return mKeyboardLayoutSet.getScriptId();
     }
 
-    private void initPadding(View view) {
+    private void initPadding(@NonNull final View view) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.VANILLA_ICE_CREAM) {
             return;
         }
@@ -520,7 +521,17 @@ public final class KeyboardSwitcher implements KeyboardState.SwitchActions {
             @Override
             public @NonNull WindowInsetsCompat onApplyWindowInsets(@NonNull View v, @NonNull WindowInsetsCompat insets) {
                 Insets navInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars());
-                view.setPadding(navInsets.left, navInsets.top, navInsets.right, navInsets.bottom);
+                ViewGroup.LayoutParams lp = v.getLayoutParams();
+                if (lp instanceof ViewGroup.MarginLayoutParams) {
+                    ViewGroup.MarginLayoutParams mlp = ((ViewGroup.MarginLayoutParams) lp);
+                    mlp.leftMargin = navInsets.left;
+                    mlp.topMargin = navInsets.top;
+                    mlp.rightMargin = navInsets.right;
+                    mlp.bottomMargin = navInsets.bottom;
+                    v.setLayoutParams(lp);
+                } else {
+                    v.setPadding(navInsets.left, navInsets.top, navInsets.right, navInsets.bottom);
+                }
                 return WindowInsetsCompat.CONSUMED;
             }
         });
