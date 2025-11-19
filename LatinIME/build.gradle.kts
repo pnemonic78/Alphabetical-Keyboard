@@ -110,7 +110,7 @@ dependencies {
     implementation("androidx.annotation:annotation:1.9.1")
 
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("org.mockito:mockito-core:3.10.0")
+    androidTestImplementation("org.mockito:mockito-core:5.20.0")
     androidTestImplementation("com.google.dexmaker:dexmaker:1.2")
     androidTestImplementation("com.google.dexmaker:dexmaker-mockito:1.2")
     androidTestImplementation("androidx.test:runner:1.7.0")

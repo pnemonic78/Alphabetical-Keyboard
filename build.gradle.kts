@@ -6,11 +6,11 @@ buildscript {
         google()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:8.10.1")
+        classpath("com.android.tools.build:gradle:8.13.1")
 
         // Crashlytics
-        classpath("com.google.gms:google-services:4.4.2")
-        classpath("com.google.firebase:firebase-crashlytics-gradle:3.0.2")
+        classpath("com.google.gms:google-services:4.4.4")
+        classpath("com.google.firebase:firebase-crashlytics-gradle:3.0.6")
     }
 }
 
