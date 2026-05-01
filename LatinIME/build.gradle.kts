@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    compileSdk = 36
+    compileSdk = 37
     namespace = "com.github.inputmethod.alphabetical"
 
     // Required if using classes in android.test.runner
@@ -18,8 +18,8 @@ android {
     useLibrary("android.test.mock")
 
     defaultConfig {
-        minSdk = 21
-        targetSdk = 36
+        minSdk = 23
+        targetSdk = 37
         versionCode = 218
         versionName = "2.18"
 
@@ -47,7 +47,7 @@ android {
             isMinifyEnabled = false
         }
         release {
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard.flags")
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard.flags")
             signingConfig = signingConfigs.getByName("release")
         }
     }
@@ -106,11 +106,11 @@ android {
 dependencies {
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("com.google.code.findbugs:jsr305:3.0.2")
-    implementation("androidx.core:core-ktx:1.17.0")
-    implementation("androidx.annotation:annotation:1.9.1")
+    implementation("androidx.core:core-ktx:1.18.0")
+    implementation("androidx.annotation:annotation:1.10.0")
 
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("org.mockito:mockito-core:5.20.0")
+    androidTestImplementation("org.mockito:mockito-core:5.23.0")
     androidTestImplementation("com.google.dexmaker:dexmaker:1.2")
     androidTestImplementation("com.google.dexmaker:dexmaker-mockito:1.2")
     androidTestImplementation("androidx.test:runner:1.7.0")
@@ -118,5 +118,5 @@ dependencies {
     androidTestImplementation("androidx.test.uiautomator:uiautomator:2.3.0")
 
     // Logging
-    implementation("com.google.firebase:firebase-crashlytics:19.4.4")
+    implementation("com.google.firebase:firebase-crashlytics:20.0.5")
 }
