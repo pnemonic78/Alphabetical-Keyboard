@@ -357,6 +357,9 @@ public class MetadataDbHelper extends SQLiteOpenHelper {
      */
     public static String getMetadataUriAsString(final Context context, final String clientId) {
         SQLiteDatabase defaultDb = MetadataDbHelper.getDb(context, null);
+        if (clientId == null) {
+            return null;
+        }
         final Cursor cursor = defaultDb.query(MetadataDbHelper.CLIENT_TABLE_NAME,
                 new String[] { MetadataDbHelper.CLIENT_METADATA_URI_COLUMN },
                 MetadataDbHelper.CLIENT_CLIENT_ID_COLUMN + " = ?", new String[] { clientId },
