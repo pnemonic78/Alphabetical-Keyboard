@@ -20,7 +20,7 @@
     android:key="english_ime_settings">
     <PreferenceScreen
         android:fragment="com.android.inputmethod.latin.settings.PreferencesSettingsFragment"
-        android:icon="@drawable/ic_settings"
+        android:icon="@drawable/ic_tune"
         android:key="screen_preferences"
         android:title="@string/settings_screen_preferences" />
     <PreferenceScreen
