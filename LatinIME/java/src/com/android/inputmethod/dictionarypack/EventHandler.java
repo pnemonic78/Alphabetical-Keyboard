@@ -16,11 +16,9 @@
 
 package com.android.inputmethod.dictionarypack;
 
-import android.app.BackgroundServiceStartNotAllowedException;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 
 public final class EventHandler extends BroadcastReceiver {
     /**
@@ -42,18 +40,15 @@ public final class EventHandler extends BroadcastReceiver {
      */
     @Override
     public void onReceive(final Context context, final Intent intent) {
+        // FIXME migrate to use work manager.
         intent.setClass(context, DictionaryService.class);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            try {
-                context.startService(intent);
-            } catch (BackgroundServiceStartNotAllowedException e) {
-                DictionaryService service = new DictionaryService();
-                service.attach(context);
-                service.onCreate();
-                service.onStartCommand(intent, 0, 0);
-            }
-        } else {
+        try {
             context.startService(intent);
+        } catch (IllegalStateException e) { // Not allowed to start service
+            DictionaryService service = new DictionaryService();
+            service.attach(context);
+            service.onCreate();
+            service.onStartCommand(intent, 0, 0);
         }
     }
 }
