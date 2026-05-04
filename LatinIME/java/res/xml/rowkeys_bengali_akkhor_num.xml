@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:latin="http://schemas.android.com/apk/res-auto">
+    <switch>
+        <case latin:keyboardLayoutSetElement="alphabetManualShifted|alphabetShiftLocked|alphabetShiftLockShifted">
+            <!-- U+09E7: "১" BENGALI DIGIT ONE -->
+            <Key
+                latin:additionalMoreKeys="1,১"
+                latin:keySpec="১" />
+            <!-- U+0987: "ই" BENGALI LETTER I
+                 U+09E8: "২" BENGALI DIGIT TWO -->
+            <Key
+                latin:additionalMoreKeys="2,২"
+                latin:keySpec="২" />
+            <!-- U+09E9: "৩" BENGALI DIGIT THREE -->
+            <Key
+                latin:additionalMoreKeys="3,৩"
+                latin:keySpec="৩" />
+            <!-- U+09EA: "৪" BENGALI DIGIT FOUR -->
+            <Key
+                latin:additionalMoreKeys="4,৪"
+                latin:keySpec="৪" />
+            <!-- U+09EB: "৫" BENGALI DIGIT FIVE -->
+            <Key
+                latin:additionalMoreKeys="5,৫"
+                latin:keySpec="৫" />
+            <!-- U+09EC: "৬" BENGALI DIGIT SIX -->
+            <Key
+                latin:additionalMoreKeys="6,৬"
+                latin:keySpec="৬" />
+            <!-- U+09ED: "৭" BENGALI DIGIT SEVEN -->
+            <Key
+                latin:additionalMoreKeys="7,৭"
+                latin:keySpec="৭" />
+            <!-- U+09EE: "৮" BENGALI DIGIT EIGHT -->
+            <Key
+                latin:additionalMoreKeys="8,৮"
+                latin:keySpec="৮" />
+            <!-- U+09EF: "৯" BENGALI DIGIT NINE -->
+            <Key
+                latin:additionalMoreKeys="9,৯"
+                latin:keySpec="৯" />
+            <!-- U+09E6: "০" BENGALI DIGIT ZERO -->
+            <Key
+                latin:additionalMoreKeys="0,০"
+                latin:keySpec="০" />
+        </case>
+        <default>
+            <!-- U+09E7: "১" BENGALI DIGIT ONE -->
+            <Key
+                latin:additionalMoreKeys="1,১"
+                latin:keySpec="1" />
+            <!-- U+0987: "ই" BENGALI LETTER I
+                 U+09E8: "২" BENGALI DIGIT TWO -->
+            <Key
+                latin:additionalMoreKeys="2,২"
+                latin:keySpec="2" />
+            <!-- U+09E9: "৩" BENGALI DIGIT THREE -->
+            <Key
+                latin:additionalMoreKeys="3,৩"
+                latin:keySpec="3" />
+            <!-- U+09EA: "৪" BENGALI DIGIT FOUR -->
+            <Key
+                latin:additionalMoreKeys="4,৪"
+                latin:keySpec="4" />
+            <!-- U+09EB: "৫" BENGALI DIGIT FIVE -->
+            <Key
+                latin:additionalMoreKeys="5,৫"
+                latin:keySpec="5" />
+            <!-- U+09EC: "৬" BENGALI DIGIT SIX -->
+            <Key
+                latin:additionalMoreKeys="6,৬"
+                latin:keySpec="6" />
+            <!-- U+09ED: "৭" BENGALI DIGIT SEVEN -->
+            <Key
+                latin:additionalMoreKeys="7,৭"
+                latin:keySpec="7" />
+            <!-- U+09EE: "৮" BENGALI DIGIT EIGHT -->
+            <Key
+                latin:additionalMoreKeys="8,৮"
+                latin:keySpec="8" />
+            <!-- U+09EF: "৯" BENGALI DIGIT NINE -->
+            <Key
+                latin:additionalMoreKeys="9,৯"
+                latin:keySpec="9" />
+            <!-- U+09E6: "০" BENGALI DIGIT ZERO -->
+            <Key
+                latin:additionalMoreKeys="0,০"
+                latin:keySpec="0" />
+        </default>
+    </switch>
+</merge>

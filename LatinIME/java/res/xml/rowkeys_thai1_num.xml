@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:latin="http://schemas.android.com/apk/res-auto">
+    <!-- U+0E01: "ก" THAI CHARACTER KO KAI -->
+    <Key latin:keySpec="ก" />
+    <!-- U+0E02: "ข" THAI CHARACTER KHO KHAI -->
+    <Key latin:keySpec="ข" />
+    <!-- U+0E03: "ฃ" THAI CHARACTER KHO KHUAT -->
+    <Key latin:keySpec="ฃ" />
+    <!-- U+0E04: "ค" THAI CHARACTER KHO KHWAI -->
+    <Key latin:keySpec="ค" />
+    <!-- U+0E07: "ง" THAI CHARACTER NGO NGU -->
+    <Key latin:keySpec="ง" />
+    <!-- U+0E08: "จ" THAI CHARACTER CHO CHAN -->
+    <Key latin:keySpec="จ" />
+    <!-- U+0E0A: "ช" THAI CHARACTER CHO CHANG -->
+    <Key latin:keySpec="ช" />
+    <!-- U+0E14: "ด" THAI CHARACTER DO DEK -->
+    <Key latin:keySpec="ด" />
+    <!-- U+0E15: "ต" THAI CHARACTER TO TAO -->
+    <Key latin:keySpec="ต" />
+    <!-- U+0E16: "ถ" THAI CHARACTER THO THUNG -->
+    <Key latin:keySpec="ถ" />
+    <!-- U+0E17: "ท" THAI CHARACTER THO THAHAN -->
+    <Key latin:keySpec="ท" />
+</merge>

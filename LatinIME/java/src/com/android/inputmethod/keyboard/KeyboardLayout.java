@@ -16,6 +16,8 @@
 
 package com.android.inputmethod.keyboard;
 
+import androidx.annotation.NonNull;
+
 import com.android.inputmethod.annotations.UsedForTesting;
 
 import java.util.ArrayList;
@@ -106,6 +108,7 @@ public class KeyboardLayout {
     /**
      * Factory method to create {@link KeyboardLayout} objects.
      */
+    @NonNull
     public static KeyboardLayout newKeyboardLayout(@Nonnull final List<Key> sortedKeys,
             int mostCommonKeyWidth, int mostCommonKeyHeight,
             int occupiedWidth, int occupiedHeight) {

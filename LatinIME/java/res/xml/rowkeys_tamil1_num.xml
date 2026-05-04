@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:latin="http://schemas.android.com/apk/res-auto">
+    <!-- U+0B85: "அ" TAMIL LETTER A
+         U+0B83: "ஃ" TAMIL SIGN VISARGA -->
+    <Key latin:keySpec="அ" latin:moreKeys="ஃ" />
+    <!-- U+0B86: "ஆ" TAMIL LETTER AA
+         U+0BBE: "ா" TAMIL VOWEL SIGN AA -->
+    <Key latin:keySpec="ஆ" latin:moreKeys="ா,%" />
+    <!-- U+0B87: "இ" TAMIL LETTER I
+         U+0BBF: "ி" TAMIL VOWEL SIGN I -->
+    <Key latin:keySpec="இ" latin:moreKeys="ி" />
+    <!-- U+0B88: "ஈ" TAMIL LETTER II
+         U+0BC0: "ீ" TAMIL VOWEL SIGN II -->
+    <Key latin:keySpec="ஈ" latin:moreKeys="ீ,%" />
+    <!-- U+0B89: "உ" TAMIL LETTER U
+         U+0BC1: "ு" TAMIL VOWEL SIGN U -->
+    <Key latin:keySpec="உ" latin:moreKeys="ு" />
+    <!-- U+0B8A: "ஊ" TAMIL LETTER UU
+         U+0BC2: "ூ" TAMIL VOWEL SIGN UU -->
+    <Key latin:keySpec="ஊ" latin:moreKeys="ூ,%" />
+    <!-- U+0B8E: "எ" TAMIL LETTER E
+         U+0BC6: "ெ" TAMIL VOWEL SIGN E -->
+    <Key latin:keySpec="எ" latin:moreKeys="ெ" />
+    <!-- U+0B8F: "ஏ" TAMIL LETTER EE
+         U+0BC7: "ே" TAMIL VOWEL SIGN EE -->
+    <Key latin:keySpec="ஏ" latin:moreKeys="ே" />
+    <!-- U+0B90: "ஐ" TAMIL LETTER AI
+         U+0BC8: "ை" TAMIL VOWEL SIGN AI -->
+    <Key latin:keySpec="ஐ" latin:moreKeys="ை,%" />
+    <!-- U+0B92: "ஒ" TAMIL LETTER O
+         U+0BCA: "ொ" TAMIL VOWEL SIGN O -->
+    <Key latin:keySpec="ஒ" latin:moreKeys="ொ" />
+    <!-- U+0B93: "ஓ" TAMIL LETTER OO
+         U+0BCB: "ோ" TAMIL VOWEL SIGN OO
+         U+0BD0: "ௐ" TAMIL OM -->
+    <Key latin:keySpec="ஓ" latin:moreKeys="ோ,ௐ"/>
+</merge>

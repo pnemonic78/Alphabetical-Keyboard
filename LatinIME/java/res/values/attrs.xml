@@ -561,6 +561,7 @@
             <enum name="emojiCategory16" value="26" />
         </attr>
         <attr name="elementKeyboard" format="reference"/>
+        <attr name="elementKeyboardNumberRow" format="reference"/>
         <!-- Enable proximity characters correction. Disabled by default. -->
         <attr name="enableProximityCharsCorrection" format="boolean" />
         <!-- Indicates if the keyboard layout supports being split or not. false by default -->

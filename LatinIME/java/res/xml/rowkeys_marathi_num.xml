@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:latin="http://schemas.android.com/apk/res-auto">
+    <!-- U+0967: "१" DEVANAGARI DIGIT ONE -->
+    <Key latin:additionalMoreKeys="१,1" latin:keySpec="1" />
+    <!-- U+0968: "२" DEVANAGARI DIGIT TWO -->
+    <Key latin:additionalMoreKeys="२,2" latin:keySpec="2" />
+    <!-- U+0969: "३" DEVANAGARI DIGIT THREE -->
+    <Key latin:additionalMoreKeys="३,3" latin:keySpec="3" />
+    <!-- U+096A: "४" DEVANAGARI DIGIT FOUR -->
+    <Key latin:additionalMoreKeys="४,4" latin:keySpec="4" />
+    <!-- U+096B: "५" DEVANAGARI DIGIT FIVE -->
+    <Key latin:additionalMoreKeys="५,5" latin:keySpec="5" />
+    <!-- U+096C: "६" DEVANAGARI DIGIT SIX -->
+    <Key latin:additionalMoreKeys="६,6" latin:keySpec="6" />
+    <!-- U+096D: "७" DEVANAGARI DIGIT SEVEN -->
+    <Key latin:additionalMoreKeys="७,7" latin:keySpec="7" />
+    <!-- U+096E: "८" DEVANAGARI DIGIT EIGHT -->
+    <Key latin:additionalMoreKeys="८,8" latin:keySpec="8" />
+    <!-- U+096F: "९" DEVANAGARI DIGIT NINE -->
+    <Key latin:additionalMoreKeys="९,9" latin:keySpec="9" />
+    <!-- U+0966: "०" DEVANAGARI DIGIT ZERO -->
+    <Key latin:additionalMoreKeys="०,0" latin:keySpec="0" />
+</merge>

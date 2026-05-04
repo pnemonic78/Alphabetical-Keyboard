@@ -89,6 +89,7 @@ public class SettingsValues {
     // Use split layout for keyboard.
     public final boolean mIsSplitKeyboardEnabled;
     public final int mScreenMetrics;
+    public final boolean isNumberRowVisible;
 
     // From the input box
     @Nonnull
@@ -177,6 +178,7 @@ public class SettingsValues {
         mPlausibilityThreshold = Settings.readPlausibilityThreshold(res);
         mGestureInputEnabled = Settings.readGestureInputEnabled(prefs, res);
         mGestureTrailEnabled = prefs.getBoolean(Settings.PREF_GESTURE_PREVIEW_TRAIL, true);
+        isNumberRowVisible = prefs.getBoolean(Settings.PREF_NUMBER_ROW, true);
         mCloudSyncEnabled = prefs.getBoolean(LocalSettingsConstants.PREF_ENABLE_CLOUD_SYNC, false);
         mAccount = prefs.getString(LocalSettingsConstants.PREF_ACCOUNT_NAME,
                 null /* default */);
@@ -447,6 +449,8 @@ public class SettingsValues {
         sb.append("" + mKeyPreviewDismissEndXScale);
         sb.append("\n   mKeyPreviewDismissEndScaleY = ");
         sb.append("" + mKeyPreviewDismissEndYScale);
+        sb.append("\n   isNumberRowVisible = ");
+        sb.append("" + isNumberRowVisible);
         return sb.toString();
     }
 }

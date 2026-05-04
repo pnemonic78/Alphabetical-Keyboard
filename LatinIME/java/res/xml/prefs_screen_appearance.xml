@@ -32,4 +32,10 @@
         android:title="@string/enable_split_keyboard"
         android:persistent="true"
         android:defaultValue="false" />
+    <SwitchPreference
+        android:key="number_row"
+        android:title="@string/number_row_title"
+        android:summary="@string/number_row_summary"
+        android:defaultValue="true"
+        android:persistent="true" />
 </PreferenceScreen>

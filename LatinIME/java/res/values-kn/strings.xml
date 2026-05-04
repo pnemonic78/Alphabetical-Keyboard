@@ -209,4 +209,7 @@
     <string name="user_dict_settings_more_languages" msgid="7131268499685180461">"ಇನ್ನಷ್ಟು ಭಾಷೆಗಳು…"</string>
     <string name="user_dict_settings_delete" msgid="110413335187193859">"ಅಳಿಸಿ"</string>
     <string name="user_dict_fast_scroll_alphabet" msgid="5431919401558285473">" ABCDEFGHIJKLMNOPQRSTUVWXYZ"</string>
+
+    <string name="number_row_title">"ಸಂಖ್ಯೆ ಸಾಲು"</string>
+    <string name="number_row_summary">ಯಾವಾಗಲೂ ವರ್ಣಮಾಲೆಯ ವಿನ್ಯಾಸಗಳಲ್ಲಿ ತೋರಿಸಿ</string>
 </resources>

@@ -209,4 +209,7 @@
     <string name="user_dict_settings_more_languages" msgid="7131268499685180461">"Rohkem keeli ..."</string>
     <string name="user_dict_settings_delete" msgid="110413335187193859">"Kustuta"</string>
     <string name="user_dict_fast_scroll_alphabet" msgid="5431919401558285473">" ABCDEFGHIJKLMNOPQRSŠZŽTUVWÕÄÖÜXY"</string>
+
+    <string name="number_row_title">"Numbririda"</string>
+    <string name="number_row_summary">Kuva alati tähestikulises paigutuses</string>
 </resources>

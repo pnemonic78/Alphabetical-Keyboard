@@ -25,23 +25,28 @@
     <Element
         latin:elementName="alphabet"
         latin:elementKeyboard="@xml/kbd_thai"
+        latin:elementKeyboardNumberRow="@xml/kbd_thai_num"
         latin:enableProximityCharsCorrection="true" />
     <Element
         latin:elementName="alphabetAutomaticShifted"
         latin:elementKeyboard="@xml/kbd_thai"
+        latin:elementKeyboardNumberRow="@xml/kbd_thai_num"
         latin:enableProximityCharsCorrection="true" />
     <!-- On these shifted alphabet layouts the proximity characters correction should be disabled
          because the letters on these layouts aren't the ones in different case of the above
          unshifted layouts. -->
     <Element
         latin:elementName="alphabetManualShifted"
-        latin:elementKeyboard="@xml/kbd_thai" />
+        latin:elementKeyboard="@xml/kbd_thai"
+        latin:elementKeyboardNumberRow="@xml/kbd_thai_num" />
     <Element
         latin:elementName="alphabetShiftLocked"
-        latin:elementKeyboard="@xml/kbd_thai" />
+        latin:elementKeyboard="@xml/kbd_thai"
+        latin:elementKeyboardNumberRow="@xml/kbd_thai_num" />
     <Element
         latin:elementName="alphabetShiftLockShifted"
-        latin:elementKeyboard="@xml/kbd_thai" />
+        latin:elementKeyboard="@xml/kbd_thai"
+        latin:elementKeyboardNumberRow="@xml/kbd_thai_num" />
     <Element
         latin:elementName="symbols"
         latin:elementKeyboard="@xml/kbd_symbols" />

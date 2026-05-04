@@ -23,6 +23,7 @@
     <Element
         latin:elementName="alphabet"
         latin:elementKeyboard="@xml/kbd_swiss"
+        latin:elementKeyboardNumberRow="@xml/kbd_swiss_num"
         latin:enableProximityCharsCorrection="true"
         latin:allowRedundantMoreKeys="true" />
     <Element

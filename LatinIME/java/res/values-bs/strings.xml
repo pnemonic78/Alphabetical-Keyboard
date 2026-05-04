@@ -209,4 +209,7 @@
     <string name="user_dict_settings_more_languages" msgid="7131268499685180461">"Više jezika…"</string>
     <string name="user_dict_settings_delete" msgid="110413335187193859">"Izbriši"</string>
     <string name="user_dict_fast_scroll_alphabet" msgid="5431919401558285473">" ABCDEFGHIJKLMNOPQRSTUVWXYZ"</string>
+
+    <string name="number_row_title">"Red s brojevima"</string>
+    <string name="number_row_summary">Uvijek prikaži na abecednim rasporedima</string>
 </resources>

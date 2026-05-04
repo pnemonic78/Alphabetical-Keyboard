@@ -39,7 +39,6 @@ import com.android.inputmethod.keyboard.internal.UniqueKeysCache;
 import com.android.inputmethod.latin.InputAttributes;
 import com.github.inputmethod.alphabetical.R;
 import com.android.inputmethod.latin.RichInputMethodSubtype;
-import com.android.inputmethod.latin.define.DebugFlags;
 import com.android.inputmethod.latin.utils.InputTypeUtils;
 import com.android.inputmethod.latin.utils.ScriptUtils;
 import com.android.inputmethod.latin.utils.SubtypeLocaleUtils;
@@ -103,6 +102,7 @@ public final class KeyboardLayoutSet {
 
     private static final class ElementParams {
         int mKeyboardXmlId;
+        int mKeyboardNumberRowXmlId;
         boolean mProximityCharsCorrectionEnabled;
         boolean mSupportsSplitLayout;
         boolean mAllowRedundantMoreKeys;
@@ -133,6 +133,7 @@ public final class KeyboardLayoutSet {
         // Sparse array of KeyboardLayoutSet element parameters indexed by element's id.
         final SparseArray<ElementParams> mKeyboardLayoutSetElementIdToParamsMap =
                 new SparseArray<>();
+        boolean isNumberRow = true;
     }
 
     public static void onSystemLocaleChanged() {
@@ -224,7 +225,13 @@ public final class KeyboardLayoutSet {
         sUniqueKeysCache.setEnabled(id.isAlphabetKeyboard());
         builder.setAllowRedundantMoreKes(elementParams.mAllowRedundantMoreKeys);
         final int keyboardXmlId = elementParams.mKeyboardXmlId;
-        builder.load(keyboardXmlId, id);
+        final int keyboardNumberRowXmlId = elementParams.mKeyboardNumberRowXmlId;
+        final boolean isNumberRowVisible = mParams.isNumberRow;
+        if (isNumberRowVisible && keyboardNumberRowXmlId != 0) {
+            builder.load(keyboardNumberRowXmlId, id);
+        } else {
+            builder.load(keyboardXmlId, id);
+        }
         if (mParams.mDisableTouchPositionCorrectionDataForTest) {
             builder.disableTouchPositionCorrectionDataForTest();
         }
@@ -334,6 +341,11 @@ public final class KeyboardLayoutSet {
 
         public Builder setSplitLayoutEnabledByUser(final boolean enabled) {
             mParams.mIsSplitLayoutEnabledByUser = enabled;
+            return this;
+        }
+
+        public Builder setNumberRow(final boolean visible) {
+            mParams.isNumberRow = visible;
             return this;
         }
 
@@ -457,6 +469,8 @@ public final class KeyboardLayoutSet {
                         R.styleable.KeyboardLayoutSet_Element_elementName, 0);
                 elementParams.mKeyboardXmlId = a.getResourceId(
                         R.styleable.KeyboardLayoutSet_Element_elementKeyboard, 0);
+                elementParams.mKeyboardNumberRowXmlId = a.getResourceId(
+                        R.styleable.KeyboardLayoutSet_Element_elementKeyboardNumberRow, 0);
                 elementParams.mProximityCharsCorrectionEnabled = a.getBoolean(
                         R.styleable.KeyboardLayoutSet_Element_enableProximityCharsCorrection,
                         false);

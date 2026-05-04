@@ -209,4 +209,7 @@
     <string name="user_dict_settings_more_languages" msgid="7131268499685180461">"Ko‘proq tillar…"</string>
     <string name="user_dict_settings_delete" msgid="110413335187193859">"O‘chirish"</string>
     <string name="user_dict_fast_scroll_alphabet" msgid="5431919401558285473">" ABDEFGHIJKLMNOPQRSTUVXYZO‘G‘SHCH"</string>
+
+    <string name="number_row_title">"Raqamlar qatori"</string>
+    <string name="number_row_summary">"Har doim alifbo tartibida ko'rsatiladi"</string>
 </resources>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:latin="http://schemas.android.com/apk/res-auto"
+>
+    <!-- U+10D0: "ა" GEORGIAN LETTER AN
+         U+10FA: "ჺ" GEORGIAN LETTER AIN -->
+    <Key latin:keySpec="ა" latin:moreKeys="ჺ" />
+    <!-- U+10D1: "ბ" GEORGIAN LETTER BAN -->
+    <Key latin:keySpec="ბ" />
+    <!-- U+10D2: "გ" GEORGIAN LETTER GAN
+         U+10F9: "ჹ" GEORGIAN LETTER TURNED GAN -->
+    <Key latin:keySpec="გ" latin:moreKeys="ჹ" />
+    <!-- U+10D3: "დ" GEORGIAN LETTER DON -->
+    <Key latin:keySpec="დ" />
+    <!-- U+10D4: "ე" GEORGIAN LETTER EN
+         U+10F1: "ჱ" GEORGIAN LETTER HE -->
+    <Key latin:keySpec="ე" latin:moreKeys="ჱ" />
+    <!-- U+10D5: "ვ" GEORGIAN LETTER VIN
+         U+10F3: "ჳ" GEORGIAN LETTER WE -->
+    <Key latin:keySpec="ვ" latin:moreKeys="ჳ" />
+    <!-- U+10D6: "ზ" GEORGIAN LETTER ZEN -->
+    <Key latin:keySpec="ზ" />
+    <!-- U+10D7: "თ" GEORGIAN LETTER TAN -->
+    <Key latin:keySpec="თ" />
+    <!-- U+10D8: "ი" GEORGIAN LETTER IN
+         U+10F2: "ჲ" GEORGIAN LETTER HIE -->
+    <Key latin:keySpec="ი" latin:moreKeys="ჲ" />
+    <!-- U+10D9: "კ" GEORGIAN LETTER KAN -->
+    <Key latin:keySpec="კ" />
+    <!-- U+10DA: "ლ" GEORGIAN LETTER LAS -->
+    <Key latin:keySpec="ლ"/>
+</merge>

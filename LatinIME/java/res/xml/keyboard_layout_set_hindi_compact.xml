@@ -25,6 +25,7 @@
     <Element
         latin:elementName="alphabet"
         latin:elementKeyboard="@xml/kbd_hindi_compact"
+        latin:elementKeyboardNumberRow="@xml/kbd_hindi_compact_num"
         latin:enableProximityCharsCorrection="true" />
     <Element
         latin:elementName="symbols"

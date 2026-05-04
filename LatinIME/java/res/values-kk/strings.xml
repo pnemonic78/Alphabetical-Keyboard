@@ -209,4 +209,7 @@
     <string name="user_dict_settings_more_languages" msgid="7131268499685180461">"Қосымша тілдер…"</string>
     <string name="user_dict_settings_delete" msgid="110413335187193859">"Жою"</string>
     <string name="user_dict_fast_scroll_alphabet" msgid="5431919401558285473">" АӘБВГҒДЕЁЖЗИЙКҚЛМНҢОӨПРСТУҰҮФХҺЦЧШЩЪЫІЬЭЮЯ"</string>
+
+    <string name="number_row_title">"Сандар жолы"</string>
+    <string name="number_row_summary">Әрқашан алфавиттік ретпен орналасуларда көрсету</string>
 </resources>

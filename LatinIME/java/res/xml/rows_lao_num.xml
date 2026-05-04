@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:latin="http://schemas.android.com/apk/res-auto">
+    <include latin:keyboardLayout="@xml/key_styles_common" />
+    <Row
+        latin:keyWidth="10%p"
+        latin:keyLabelFlags="fontNormal"
+    >
+        <include latin:keyboardLayout="@xml/rowkeys_lao_num" />
+    </Row>
+    <Row
+        latin:keyWidth="8.3333%p"
+        latin:keyLabelFlags="fontNormal"
+    >
+        <include latin:keyboardLayout="@xml/rowkeys_lao1_num" />
+    </Row>
+    <Row
+        latin:keyWidth="8.3333%p"
+        latin:keyLabelFlags="fontNormal"
+    >
+        <include latin:keyboardLayout="@xml/rowkeys_lao2" />
+    </Row>
+    <Row
+        latin:keyWidth="8.3333%p"
+        latin:keyLabelFlags="fontNormal"
+    >
+        <include latin:keyboardLayout="@xml/rowkeys_lao3" />
+    </Row>
+    <Row
+        latin:keyWidth="8.3333%p"
+        latin:keyLabelFlags="fontNormal"
+    >
+        <include latin:keyboardLayout="@xml/rowkeys_lao4" />
+        <Key latin:keyStyle="deleteKeyStyle" />
+    </Row>
+    <include latin:keyboardLayout="@xml/row_qwerty4" />
+</merge>

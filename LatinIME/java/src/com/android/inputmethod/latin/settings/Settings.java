@@ -96,6 +96,7 @@ public final class Settings implements SharedPreferences.OnSharedPreferenceChang
     public static final String PREF_GESTURE_FLOATING_PREVIEW_TEXT =
             "pref_gesture_floating_preview_text";
     public static final String PREF_SHOW_SETUP_WIZARD_ICON = "pref_show_setup_wizard_icon";
+    public static final String PREF_NUMBER_ROW = "number_row";
 
     public static final String PREF_KEY_IS_INTERNAL = "pref_key_is_internal";
 

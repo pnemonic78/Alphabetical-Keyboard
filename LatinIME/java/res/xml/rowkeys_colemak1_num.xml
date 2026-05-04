@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:latin="http://schemas.android.com/apk/res-auto"
+>
+    <Key
+        latin:keySpec="q" />
+    <Key
+        latin:keySpec="w"
+        latin:moreKeys="!text/morekeys_w" />
+    <Key
+        latin:keySpec="f" />
+    <Key
+        latin:keySpec="p" />
+    <Key
+        latin:keySpec="g"
+        latin:moreKeys="!text/morekeys_g" />
+    <Key
+        latin:keySpec="j"
+        latin:moreKeys="!text/morekeys_j" />
+    <Key
+        latin:keySpec="l"
+        latin:moreKeys="!text/morekeys_l" />
+    <Key
+        latin:keySpec="u"
+        latin:moreKeys="!text/morekeys_u" />
+    <Key
+        latin:keySpec="y"
+        latin:moreKeys="!text/morekeys_y" />
+    <switch>
+        <case
+            latin:keyboardLayoutSetElement="alphabetManualShifted|alphabetShiftLockShifted"
+        >
+            <Key
+                latin:keySpec=":" />
+        </case>
+        <default>
+            <Key
+                latin:keySpec=";"
+                latin:moreKeys=":" />
+        </default>
+    </switch>
+</merge>

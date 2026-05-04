@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:latin="http://schemas.android.com/apk/res-auto">
+    <!-- U+0E81: "ກ" LAO LETTER KO -->
+    <Key latin:keySpec="ກ"/>
+    <!-- U+0E82: "ຂ" LAO LETTER KHO SUNG -->
+    <Key latin:keySpec="ຂ"/>
+    <!-- U+0E84: "ຄ" LAO LETTER KHO TAM -->
+    <Key latin:keySpec="ຄ"/>
+    <!-- U+0E87: "ງ" LAO LETTER NGO -->
+    <Key latin:keySpec="ງ"/>
+    <!-- U+0E88: "ຈ" LAO LETTER CO -->
+    <Key latin:keySpec="ຈ"/>
+    <!-- U+0E8A: "ຊ" LAO LETTER SO TAM -->
+    <Key latin:keySpec="ຊ"/>
+    <!-- U+0E8D: "ຍ" LAO LETTER NYO -->
+    <Key latin:keySpec="ຍ"/>
+    <!-- U+0E94: "ດ" LAO LETTER DO -->
+    <Key latin:keySpec="ດ"/>
+    <!-- U+0E95: "ຕ" LAO LETTER TO -->
+    <Key latin:keySpec="ຕ"/>
+    <!-- U+0E96: "ຖ" LAO LETTER THO SUNG -->
+    <Key latin:keySpec="ຖ"/>
+    <!-- U+0E97: "ທ" LAO LETTER THO TAM -->
+    <Key latin:keySpec="ທ"/>
+    <!-- U+0E99: "ນ" LAO LETTER NO
+         U+0EDC: "ໜ" LAO HO NO -->
+    <Key latin:keySpec="ນ" latin:moreKeys="ໜ"/>
+</merge>

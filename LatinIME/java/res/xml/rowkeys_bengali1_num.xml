@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:latin="http://schemas.android.com/apk/res-auto">
+    <!-- U+0985: "অ" BENGALI LETTER A
+         U+09CD: "্" BENGALI SIGN VIRAMA -->
+    <Key
+        latin:keySpec="&#x0985;"
+        latin:moreKeys="&#x09CD;" />
+    <!-- U+0986: "আ" BENGALI LETTER AA
+         U+09BE: "া" BENGALI VOWEL SIGN AA -->
+    <Key
+        latin:keySpec="&#x0986;"
+        latin:moreKeys="&#x09BE;" />
+    <!-- U+0987: "ই" BENGALI LETTER I
+         U+09BF: "ি" BENGALI VOWEL SIGN I -->
+    <Key
+        latin:keySpec="&#x0987;"
+        latin:moreKeys="&#x09BF;" />
+    <!-- U+0988: "ঈ" BENGALI LETTER II
+         U+09C0: "ী" BENGALI VOWEL SIGN II -->
+    <Key
+        latin:keySpec="&#x0988;"
+        latin:moreKeys="&#x09C0;" />
+    <!-- U+0989: "উ" BENGALI LETTER U
+         U+09C1: "ু" BENGALI VOWEL SIGN U -->
+    <Key
+        latin:keySpec="&#x0989;"
+        latin:moreKeys="&#x09C1;" />
+    <!-- U+098A: "ঊ" BENGALI LETTER UU
+         U+09C2: "ূ" BENGALI VOWEL SIGN UU -->
+    <Key
+        latin:keySpec="&#x098A;"
+        latin:moreKeys="&#x09C2;" />
+    <!-- U+098F: "এ" BENGALI LETTER E
+         U+09C7: "ে" BENGALI VOWEL SIGN E -->
+    <Key
+        latin:keySpec="&#x098F;"
+        latin:moreKeys="&#x09C7;" />
+    <!-- U+0990: "ঐ" BENGALI LETTER AI
+         U+09C8: "ৈ" BENGALI VOWEL SIGN AI -->
+    <Key
+        latin:keySpec="&#x0990;"
+        latin:moreKeys="&#x09C8;,&#x09E8;" />
+    <!-- U+0993: "ও" BENGALI LETTER O
+         U+09CB: "ো" BENGALI VOWEL SIGN O -->
+    <Key
+        latin:keySpec="&#x0993;"
+        latin:moreKeys="&#x09CB;" />
+    <!-- U+0994: "ঔ" BENGALI LETTER AU
+         U+09CC: "ৌ" BENGALI VOWEL SIGN AU -->
+    <Key
+        latin:keySpec="&#x0994;"
+        latin:moreKeys="&#x09CC;" />
+    <!-- U+0995: "ক" BENGALI LETTER KA
+         U+0996: "খ" BENGALI LETTER KHA -->
+    <Key
+        latin:keySpec="&#x0995;"
+        latin:moreKeys="&#x0996;" />
+</merge>

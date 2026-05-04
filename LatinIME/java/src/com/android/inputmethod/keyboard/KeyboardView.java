@@ -89,6 +89,7 @@ public class KeyboardView extends View {
     private final float mKeyShiftedLetterHintPadding;
     private final float mKeyTextShadowRadius;
     private final float mVerticalCorrection;
+    private boolean isNumberRowVisible;
     private final Drawable mKeyBackground;
     private final Drawable mFunctionalKeyBackground;
     private final Drawable mSpacebarBackground;
@@ -586,5 +587,30 @@ public class KeyboardView extends View {
 
     public void deallocateMemory() {
         freeOffscreenBuffer();
+    }
+
+    public boolean isNumberRowVisible() {
+        return isNumberRowVisible;
+    }
+
+    public void setNumberRowVisible(boolean visible) {
+        final Keyboard keyboard = getKeyboard();
+        if (keyboard == null) return;
+        final KeyboardId id = keyboard.mId;
+        final int elementId = id.mElementId;
+        switch (elementId) {
+            case KeyboardId.ELEMENT_ALPHABET:
+            case KeyboardId.ELEMENT_ALPHABET_AUTOMATIC_SHIFTED:
+            case KeyboardId.ELEMENT_ALPHABET_MANUAL_SHIFTED:
+            case KeyboardId.ELEMENT_ALPHABET_SHIFT_LOCKED:
+            case KeyboardId.ELEMENT_ALPHABET_SHIFT_LOCK_SHIFTED:
+                isNumberRowVisible = visible;
+                invalidateAllKeys();
+                requestLayout();
+                break;
+            default:
+                isNumberRowVisible = false;
+                break;
+        }
     }
 }

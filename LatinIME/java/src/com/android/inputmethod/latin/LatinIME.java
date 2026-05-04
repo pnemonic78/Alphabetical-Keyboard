@@ -1076,6 +1076,7 @@ public class LatinIME extends InputMethodService implements KeyboardActionListen
                 currentSettingsValues.mGestureInputEnabled,
                 currentSettingsValues.mGestureTrailEnabled,
                 currentSettingsValues.mGestureFloatingPreviewTextEnabled);
+        mainKeyboardView.setNumberRowVisible(currentSettingsValues.isNumberRowVisible);
 
         if (TRACE) Debug.startMethodTracing("/data/trace/latinime");
     }

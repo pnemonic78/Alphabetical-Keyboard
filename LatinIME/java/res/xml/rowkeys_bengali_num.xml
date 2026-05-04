@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:latin="http://schemas.android.com/apk/res-auto">
+    <!-- U+09E7: "১" BENGALI DIGIT ONE -->
+    <Key
+        latin:keySpec="&#x09E7;"
+        latin:additionalMoreKeys="1,&#x09E7;" />
+    <!-- U+09E8: "২" BENGALI DIGIT TWO -->
+    <Key
+        latin:keySpec="&#x09E8;"
+        latin:additionalMoreKeys="2,&#x09E8;" />
+    <!-- U+09E9: "৩" BENGALI DIGIT THREE -->
+    <Key
+        latin:keySpec="&#x09E9;"
+        latin:additionalMoreKeys="3,&#x09E9;" />
+    <!-- U+09EA: "৪" BENGALI DIGIT FOUR -->
+    <Key
+        latin:keySpec="&#x09EA;"
+        latin:additionalMoreKeys="4,&#x09EA;" />
+    <!-- U+09EB: "৫" BENGALI DIGIT FIVE -->
+    <Key
+        latin:keySpec="&#x09EB;"
+        latin:additionalMoreKeys="5,&#x09EB;" />
+    <!-- U+09EC: "৬" BENGALI DIGIT SIX -->
+    <Key
+        latin:keySpec="&#x09EC;"
+        latin:additionalMoreKeys="6,&#x09EC;" />
+    <!-- U+09ED: "৭" BENGALI DIGIT SEVEN -->
+    <Key
+        latin:keySpec="&#x09ED;"
+        latin:additionalMoreKeys="7,&#x09ED;" />
+    <!-- U+09EE: "৮" BENGALI DIGIT EIGHT -->
+    <Key
+        latin:keySpec="&#x09EE;"
+        latin:additionalMoreKeys="8,&#x09EE;" />
+    <!-- U+09EF: "৯" BENGALI DIGIT NINE -->
+    <Key
+        latin:keySpec="&#x09EF;"
+        latin:additionalMoreKeys="9,&#x09EF;" />
+    <!-- U+09E6: "০" BENGALI DIGIT ZERO -->
+    <Key
+        latin:keySpec="&#x09E6;"
+        latin:additionalMoreKeys="0,&#x09E6;" />
+</merge>

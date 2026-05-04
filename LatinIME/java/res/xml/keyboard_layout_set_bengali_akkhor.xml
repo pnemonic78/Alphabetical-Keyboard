@@ -22,10 +22,12 @@
     <Feature latin:supportedScript="bengali" />
     <Element
         latin:elementKeyboard="@xml/kbd_bengali_akkhor"
+        latin:elementKeyboardNumberRow="@xml/kbd_bengali_akkhor_num"
         latin:elementName="alphabet"
         latin:enableProximityCharsCorrection="true" />
     <Element
         latin:elementKeyboard="@xml/kbd_bengali_akkhor"
+        latin:elementKeyboardNumberRow="@xml/kbd_bengali_akkhor_num"
         latin:elementName="alphabetAutomaticShifted"
         latin:enableProximityCharsCorrection="true" />
     <!-- On these shifted alphabet layouts the proximity characters correction should be disabled
@@ -33,12 +35,15 @@
          unshifted layouts.-->
     <Element
         latin:elementKeyboard="@xml/kbd_bengali_akkhor"
+        latin:elementKeyboardNumberRow="@xml/kbd_bengali_akkhor_num"
         latin:elementName="alphabetManualShifted" />
     <Element
         latin:elementKeyboard="@xml/kbd_bengali_akkhor"
+        latin:elementKeyboardNumberRow="@xml/kbd_bengali_akkhor_num"
         latin:elementName="alphabetShiftLocked" />
     <Element
         latin:elementKeyboard="@xml/kbd_bengali_akkhor"
+        latin:elementKeyboardNumberRow="@xml/kbd_bengali_akkhor_num"
         latin:elementName="alphabetShiftLockShifted" />
     <Element
         latin:elementKeyboard="@xml/kbd_symbols"

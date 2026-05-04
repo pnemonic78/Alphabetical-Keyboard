@@ -25,6 +25,7 @@
     <Element
         latin:elementName="alphabet"
         latin:elementKeyboard="@xml/kbd_east_slavic_kk"
+        latin:elementKeyboardNumberRow="@xml/kbd_east_slavic_kk_num"
         latin:enableProximityCharsCorrection="true" />
     <Element
         latin:elementName="symbols"

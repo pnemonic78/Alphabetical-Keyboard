@@ -23,6 +23,7 @@
     <Element
         latin:elementName="alphabet"
         latin:elementKeyboard="@xml/kbd_nordic"
+        latin:elementKeyboardNumberRow="@xml/kbd_nordic_num"
         latin:enableProximityCharsCorrection="true"
         latin:allowRedundantMoreKeys="false" />
     <Element

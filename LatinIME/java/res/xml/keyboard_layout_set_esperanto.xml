@@ -23,6 +23,7 @@
     <Element
         latin:elementName="alphabet"
         latin:elementKeyboard="@xml/kbd_esperanto"
+        latin:elementKeyboardNumberRow="@xml/kbd_esperanto_num"
         latin:enableProximityCharsCorrection="true" />
     <Element
         latin:elementName="symbols"

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:latin="http://schemas.android.com/apk/res-auto">
+    <!-- U+0630: "ذ" ARABIC LETTER THAL -->
+    <Key latin:keySpec="ذ" />
+    <!-- U+062F: "د" ARABIC LETTER DAL -->
+    <Key latin:keySpec="د" />
+    <!-- U+062E: "خ" ARABIC LETTER KHAH -->
+    <Key latin:keySpec="خ" />
+    <!-- U+062D: "ح" ARABIC LETTER HAH -->
+    <Key latin:keySpec="ح" />
+    <!-- U+0686: "چ" ARABIC LETTER TCHEH -->
+    <Key latin:keySpec="چ" />
+    <!-- U+062C: "ج" ARABIC LETTER JEEM -->
+    <Key latin:keySpec="ج" />
+    <!-- U+062B: "ث" ARABIC LETTER THEH -->
+    <Key latin:keySpec="ث" />
+    <!-- U+062A: "ت" ARABIC LETTER TEH
+         U+0629: "ة": ARABIC LETTER TEH MARBUTA -->
+    <Key latin:keySpec="ت" latin:moreKeys="ة" />
+    <!-- U+067E: "پ" ARABIC LETTER PEH -->
+    <Key latin:keySpec="پ" />
+    <!-- U+0628: "ب" ARABIC LETTER BEH -->
+    <Key latin:keySpec="ب" />
+    <!-- U+0627: "ا" ARABIC LETTER ALEF
+         U+0671: "ٱ" ARABIC LETTER ALEF WASLA
+         U+0621: "ء" ARABIC LETTER HAMZA
+         U+0622: "آ" ARABIC LETTER ALEF WITH MADDA ABOVE
+         U+0623: "أ" ARABIC LETTER ALEF WITH HAMZA ABOVE
+         U+0625: "إ" ARABIC LETTER ALEF WITH HAMZA BELOW -->
+    <Key latin:keySpec="ا" latin:moreKeys="!fixedColumnOrder!5,ٱ,ء,آ,أ,إ"/>
+</merge>

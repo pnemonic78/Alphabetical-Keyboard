@@ -22,6 +22,7 @@
     <Element
         latin:allowRedundantMoreKeys="false"
         latin:elementKeyboard="@xml/kbd_serbian_qwertz"
+        latin:elementKeyboardNumberRow="@xml/kbd_serbian_qwertz_num"
         latin:elementName="alphabet"
         latin:enableProximityCharsCorrection="true" />
     <Element

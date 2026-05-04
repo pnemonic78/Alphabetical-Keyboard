@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:latin="http://schemas.android.com/apk/res-auto"
+>
+    <!-- a,b,c,d,e -->
+    <include
+        latin:keyboardLayout="@xml/rowkeys_qwerty1_num_left5" />
+    <!-- f,g,h,i,j -->
+    <include
+        latin:keyboardLayout="@xml/rowkeys_qwerty1_num_right5" />
+</merge>

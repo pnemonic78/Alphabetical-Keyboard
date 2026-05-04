@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:latin="http://schemas.android.com/apk/res-auto">
+    <switch>
+        <case latin:keyboardLayoutSetElement="alphabetManualShifted|alphabetShiftLocked|alphabetShiftLockShifted">
+            <!-- U+0985: "অ" BENGALI LETTER A -->
+            <Key latin:keySpec="অ"/>
+            <!-- U+0988: "ঈ" BENGALI LETTER II -->
+            <Key latin:keySpec="ঈ"/>
+            <!-- U+098A: "ঊ" BENGALI LETTER UU -->
+            <Key latin:keySpec="ঊ"/>
+            <!-- U+098B: "ঋ" BENGALI LETTER VOCALIC R
+                 U+098C: "ঌ" BENGALI LETTER VOCALIC L
+                 U+09E1: "ৡ" BENGALI LETTER VOCALIC LL
+                 U+09F4: "৴" BENGALI CURRENCY NUMERATOR ONE
+                 U+09F5: "৵" BENGALI CURRENCY NUMERATOR TWO
+                 U+09F6: "৶" BENGALI CURRENCY NUMERATOR THREE
+                 U+09E2: " ৢ" BENGALI VOWEL SIGN VOCALIC L
+                 U+09E3: " ৣ" BENGALI VOWEL SIGN VOCALIC LL -->
+            <Key latin:keySpec="ঋ" latin:moreKeys="ঌ,ৡ,৴,৵,৶,ৢ,ৣ"/>
+            <!-- U+0990: "ঐ" BENGALI LETTER AI -->
+            <Key latin:keySpec="ঐ"/>
+            <!-- U+0994: "ঔ" BENGALI LETTER AU -->
+            <Key latin:keySpec="ঔ"/>
+            <!-- U+0996: "খ" BENGALI LETTER KHA -->
+            <Key latin:keySpec="খ"/>
+            <!-- U+0998: "ঘ" BENGALI LETTER GHA -->
+            <Key latin:keySpec="ঘ"/>
+            <!-- U+0999: "ঙ BENGALI LETTER NGA
+                 U+0999/U+09CD/U+0995: "ঙ্ক"
+                 U+0999/U+09CD/U+0996: "ঙ্খ"
+                 U+0999/U+09CD/U+0997: "ঙ্গ" -->
+            <Key latin:keySpec="ঙ" latin:moreKeys="ঙ্ক,ঙ্খ,ঙ্গ"/>
+            <!-- U+099B: "ছ" BENGALI LETTER CHA -->
+            <Key latin:keySpec="ছ"/>
+            <!-- U+099D: "ঝ" BENGALI LETTER JHA -->
+            <Key latin:keySpec="ঝ"/>
+        </case>
+        <default>
+            <!-- U+0986: "আ" BENGALI LETTER AA -->
+            <Key latin:keySpec="আ" />
+            <!-- U+0987: "ই" BENGALI LETTER I -->
+            <Key latin:keySpec="ই" />
+            <!-- U+0989: "উ" BENGALI LETTER U -->
+            <Key latin:keySpec="উ" />
+            <!-- U+098F: "এ" BENGALI LETTER E -->
+            <Key latin:keySpec="এ" />
+            <!-- U+0993: "ও" BENGALI LETTER O -->
+            <Key latin:keySpec="ও" />
+            <!-- U+0995: "ক" BENGALI LETTER KA
+                 U+0995/U+09CD/U+09B7: "ক্ষ" BENGALI LETTER KA/BENGALI SIGN VIRAMA/BENGALI LETTER SSA
+                 U+0995/U+09CD/U+0995: "ক্ক" BENGALI LETTER KA/BENGALI SIGN VIRAMA/BENGALI LETTER KA
+                 U+0995/U+09CD/U+099F: "ক্ট" BENGALI LETTER KA/BENGALI SIGN VIRAMA/BENGALI LETTER TTA
+                 U+0995/U+09CD/U+09A4: "ক্ত" BENGALI LETTER KA/BENGALI SIGN VIRAMA/BENGALI LETTER TA
+                 U+0995/U+09CD/U+09B0: "ক্র" BENGALI LETTER KA/BENGALI SIGN VIRAMA/BENGALI LETTER RA
+                 U+0995/U+09CD/U+09B8: "ক্স" BENGALI LETTER KA/BENGALI SIGN VIRAMA/BENGALI LETTER SA
+                 U+0995/U+09CD/U+09B2: "ক্ল" BENGALI LETTER KA/BENGALI SIGN VIRAMA/BENGALI LETTER LA -->
+            <Key latin:keySpec="ক"
+                latin:moreKeys="ক্ষ,ক্ক,ক্ট,ক্ত,ক্র,ক্স,ক্ল" />
+            <!-- U+0997: "গ" BENGALI LETTER GA
+                 U+0997/U+09CD/U+09A7: "গ্ধ" BENGALI LETTER GA/BENGALI SIGN VIRAMA/BENGALI LETTER DHA
+                 U+0997/U+09CD/U+09B0: "গ্র" BENGALI LETTER GA/BENGALI SIGN VIRAMA/BENGALI LETTER RA
+                 U+0997/U+09CD/U+09B2: "গ্ল" BENGALI LETTER GA/BENGALI SIGN VIRAMA/BENGALI LETTER LA
+                 U+0997/U+09CD/U+09A8: "গ্ন" BENGALI LETTER GA/BENGALI SIGN VIRAMA/BENGALI LETTER NA -->
+            <Key latin:keySpec="গ"
+                latin:moreKeys="গ্ধ,গ্র,গ্ল,গ্ন" />
+            <!-- U+099A: "চ" BENGALI LETTER CA
+                 U+099A/U+09CD/U+099A: "চ্চ" BENGALI LETTER CA/BENGALI SIGN VIRAMA/BENGALI LETTER CA
+                 U+099A/U+09CD/U+099B: "চ্ছ" BENGALI LETTER CA/BENGALI SIGN VIRAMA/BENGALI LETTER CHA -->
+            <Key latin:keySpec="চ"
+                latin:moreKeys="চ্চ,চ্ছ" />
+            <!-- U+099C: "জ" BENGALI LETTER JA
+                 U+099C/U+09CD/U+099E: "জ্ঞ" BENGALI LETTER JA/BENGALI SIGN VIRAMA/BENGALI LETTER NYA
+                 U+099C/U+09CD/U+099C: "জ্জ" BENGALI LETTER JA/BENGALI SIGN VIRAMA/BENGALI LETTER JA
+                 U+099C/U+09CD/U+09AF: "জ্ব" BENGALI LETTER JA/BENGALI SIGN VIRAMA/BENGALI LETTER YA
+                 U+099C/U+09CD/U+09AC: "জ্য" BENGALI LETTER JA/BENGALI SIGN VIRAMA/BENGALI LETTER BA
+                 U+099C/U+09CD/U+09B0: "জ্র" BENGALI LETTER JA/BENGALI SIGN VIRAMA/BENGALI LETTER RA -->
+            <Key latin:keySpec="জ"
+                latin:moreKeys="জ্ঞ,জ্জ,জ্য,জ্ব,জ্র" />
+            <!-- U+09A4: "ত" BENGALI LETTER TA
+                 U+09CE: "ৎ" BENGALI LETTER KHANDA TA
+                 U+09A4/U+09CD/U+09A4: "ত্ত" BENGALI LETTER TA/BENGALI SIGN VIRAMA/BENGALI LETTER TA
+                 U+09A4/U+09CD/U+09A8: "ত্ন" BENGALI LETTER TA/BENGALI SIGN VIRAMA/BENGALI LETTER NA
+                 U+09A4/U+09CD/U+09AC: "ত্ব" BENGALI LETTER TA/BENGALI SIGN VIRAMA/BENGALI LETTER BA
+                 U+09A4/U+09CD/U+09AE: "ত্ম" BENGALI LETTER TA/BENGALI SIGN VIRAMA/BENGALI LETTER MA -->
+            <Key latin:keySpec="ত"
+                latin:moreKeys="ৎ,ত্ত,ত্ন,ত্ব,ত্ম" />
+            <!-- U+09A5: "থ" BENGALI LETTER THA
+                 U+09A5/U+09CD/U+09AF: "থ্য" BENGALI LETTER THA/BENGALI SIGN VIRAMA/BENGALI LETTER YA
+                 U+09A5/U+09CD/U+09B0: "থ্র" BENGALI LETTER THA/BENGALI SIGN VIRAMA/BENGALI LETTER RA -->
+            <Key latin:keySpec="থ"
+                latin:moreKeys="থ্য,থ্র" />
+        </default>
+    </switch>
+</merge>

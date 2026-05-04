@@ -209,4 +209,7 @@
     <string name="user_dict_settings_more_languages" msgid="7131268499685180461">"अधिक भाषाएं…"</string>
     <string name="user_dict_settings_delete" msgid="110413335187193859">"मिटाएं"</string>
     <string name="user_dict_fast_scroll_alphabet" msgid="5431919401558285473">" ABCDEFGHIJKLMNOPQRSTUVWXYZ"</string>
+
+    <string name="number_row_title">"संख्या की पंक्ति"</string>
+    <string name="number_row_summary">हमेशा अल्फाबेटिकल लेआउट पर दिखाएं</string>
 </resources>

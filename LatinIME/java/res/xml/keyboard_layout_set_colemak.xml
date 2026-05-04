@@ -23,6 +23,7 @@
     <Element
         latin:elementName="alphabet"
         latin:elementKeyboard="@xml/kbd_colemak"
+        latin:elementKeyboardNumberRow="@xml/kbd_colemak_num"
         latin:enableProximityCharsCorrection="true" />
     <Element
         latin:elementName="symbols"

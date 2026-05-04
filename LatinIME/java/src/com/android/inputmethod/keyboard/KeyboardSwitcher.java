@@ -119,18 +119,18 @@ public final class KeyboardSwitcher implements KeyboardState.SwitchActions {
 
     public void loadKeyboard(final EditorInfo editorInfo, final SettingsValues settingsValues,
             final int currentAutoCapsState, final int currentRecapitalizeState) {
-        final KeyboardLayoutSet.Builder builder = new KeyboardLayoutSet.Builder(
-                mThemeContext, editorInfo);
         final Resources res = mThemeContext.getResources();
         final int keyboardWidth = ResourceUtils.getDefaultKeyboardWidth(res);
         final int keyboardHeight = ResourceUtils.getKeyboardHeight(res, settingsValues);
-        builder.setKeyboardGeometry(keyboardWidth, keyboardHeight);
-        builder.setSubtype(mRichImm.getCurrentSubtype());
-        builder.setVoiceInputKeyEnabled(settingsValues.mShowsVoiceInputKey);
-        builder.setLanguageSwitchKeyEnabled(mLatinIME.shouldShowLanguageSwitchKey());
-        builder.setSplitLayoutEnabledByUser(ProductionFlags.IS_SPLIT_KEYBOARD_SUPPORTED
-                && settingsValues.mIsSplitKeyboardEnabled);
-        mKeyboardLayoutSet = builder.build();
+        mKeyboardLayoutSet = new KeyboardLayoutSet.Builder(mThemeContext, editorInfo)
+            .setKeyboardGeometry(keyboardWidth, keyboardHeight)
+            .setSubtype(mRichImm.getCurrentSubtype())
+            .setVoiceInputKeyEnabled(settingsValues.mShowsVoiceInputKey)
+            .setLanguageSwitchKeyEnabled(mLatinIME.shouldShowLanguageSwitchKey())
+            .setSplitLayoutEnabledByUser(ProductionFlags.IS_SPLIT_KEYBOARD_SUPPORTED
+                && settingsValues.mIsSplitKeyboardEnabled)
+            .setNumberRow(settingsValues.isNumberRowVisible)
+            .build();
         try {
             mState.onLoadKeyboard(currentAutoCapsState, currentRecapitalizeState);
             mKeyboardTextsSet.setLocale(mRichImm.getCurrentSubtypeLocale(), mThemeContext);

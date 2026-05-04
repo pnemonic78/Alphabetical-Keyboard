@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:latin="http://schemas.android.com/apk/res-auto">
+    <switch>
+        <case latin:keyboardLayoutSetElement="alphabetManualShifted|alphabetShiftLocked|alphabetShiftLockShifted">
+            <!-- U+17E1: "១" KHMER DIGIT ONE -->
+            <Key
+                latin:additionalMoreKeys="1,១,៱"
+                latin:keySpec="១" />
+            <!-- U+17E2: "២" KHMER DIGIT TWO -->
+            <Key
+                latin:additionalMoreKeys="2,២,៲"
+                latin:keySpec="២" />
+            <!-- U+17E3: "៣" KHMER DIGIT THREE -->
+            <Key
+                latin:additionalMoreKeys="3,៣,៳"
+                latin:keySpec="៣" />
+            <!-- U+17E4: "៤" KHMER DIGIT FOUR -->
+            <Key
+                latin:additionalMoreKeys="4,៤,៴"
+                latin:keySpec="៤" />
+            <!-- U+17E5: "៥" KHMER DIGIT FIVE -->
+            <Key
+                latin:additionalMoreKeys="5,៥,៵"
+                latin:keySpec="៥" />
+            <!-- U+17E6: "៦" KHMER DIGIT SIX -->
+            <Key
+                latin:additionalMoreKeys="6,៦,៶"
+                latin:keySpec="៦" />
+            <!-- U+17E7: "៧" KHMER DIGIT SEVEN -->
+            <Key
+                latin:additionalMoreKeys="7,៧,៷"
+                latin:keySpec="៧" />
+            <!-- U+17E8: "៨" KHMER DIGIT EIGHT -->
+            <Key
+                latin:additionalMoreKeys="8,៨,៸"
+                latin:keySpec="៨" />
+            <!-- U+17E9: "៩" KHMER DIGIT NINE -->
+            <Key
+                latin:additionalMoreKeys="9,៩,៹"
+                latin:keySpec="៩" />
+            <!-- U+17E0: "០" KHMER DIGIT ZERO -->
+            <Key
+                latin:additionalMoreKeys="0,០,៰"
+                latin:keySpec="០" />
+        </case>
+        <default>
+            <!-- U+17E1: "១" KHMER DIGIT ONE -->
+            <Key
+                latin:additionalMoreKeys="1,១,៱"
+                latin:keySpec="1" />
+            <!-- U+17E2: "២" KHMER DIGIT TWO -->
+            <Key
+                latin:additionalMoreKeys="2,២,៲"
+                latin:keySpec="2" />
+            <!-- U+17E3: "៣" KHMER DIGIT THREE -->
+            <Key
+                latin:additionalMoreKeys="3,៣,៳"
+                latin:keySpec="3" />
+            <!-- U+17E4: "៤" KHMER DIGIT FOUR -->
+            <Key
+                latin:additionalMoreKeys="4,៤,៴"
+                latin:keySpec="4" />
+            <!-- U+17E5: "៥" KHMER DIGIT FIVE -->
+            <Key
+                latin:additionalMoreKeys="5,៥,៵"
+                latin:keySpec="5" />
+            <!-- U+17E6: "៦" KHMER DIGIT SIX -->
+            <Key
+                latin:additionalMoreKeys="6,៦,៶"
+                latin:keySpec="6" />
+            <!-- U+17E7: "៧" KHMER DIGIT SEVEN -->
+            <Key
+                latin:additionalMoreKeys="7,៧,៷"
+                latin:keySpec="7" />
+            <!-- U+17E8: "៨" KHMER DIGIT EIGHT -->
+            <Key
+                latin:additionalMoreKeys="8,៨,៸"
+                latin:keySpec="8" />
+            <!-- U+17E9: "៩" KHMER DIGIT NINE -->
+            <Key
+                latin:additionalMoreKeys="9,៩,៹"
+                latin:keySpec="9" />
+            <!-- U+17E0: "០" KHMER DIGIT ZERO -->
+            <Key
+                latin:additionalMoreKeys="0,០,៰"
+                latin:keySpec="0" />
+        </default>
+    </switch>
+</merge>

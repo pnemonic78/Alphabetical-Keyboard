@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:latin="http://schemas.android.com/apk/res-auto">
+    <!-- U+0C82: "ಂ" KANNADA SIGN ANUSVARA
+         U+0C8E: "ಎ" KANNADA LETTER E -->
+    <Key latin:keySpec="ಂ" latin:moreKeys="ಎ" />
+    <!-- U+0C8B: "ಋ" KANNADA LETTER VOCALIC R
+         U+0CCD/U+0CB0: "್ರ" KANNADA SIGN VIRAMA/KANNADA LETTER RA -->
+    <Key latin:keySpec="ಋ" latin:moreKeys="್ರ" />
+    <!-- U+0C95: "ಕ" KANNADA LETTER KA
+         U+0C96: "ಖ" KANNADA LETTER KHA -->
+    <Key latin:keySpec="ಕ" latin:moreKeys="ಖ" />
+    <!-- U+0C97: "ಗ" KANNADA LETTER GA
+         U+0C98: "ಘ" KANNADA LETTER GHA -->
+    <Key latin:keySpec="ಗ" latin:moreKeys="ಘ,%" />
+    <!-- U+0C9A: "ಚ" KANNADA LETTER CA
+         U+0C9B: "ಛ" KANNADA LETTER CHA -->
+    <Key latin:keySpec="ಚ" latin:moreKeys="ಛ" />
+    <!-- U+0C9C: "ಜ" KANNADA LETTER JA
+         U+0C9D: "ಝ" KANNADA LETTER JHA -->
+    <Key latin:keySpec="ಜ" latin:moreKeys="ಝ,%" />
+    <!-- U+0C9F: "ಟ" KANNADA LETTER TTA
+         U+0CA0: "ಠ" KANNADA LETTER TTHA -->
+    <Key latin:keySpec="ಟ" latin:moreKeys="ಠ" />
+    <!-- U+0CA1: "ಡ" KANNADA LETTER DDA
+         U+0CA2: "ಢ" KANNADA LETTER DDHA -->
+    <Key latin:keySpec="ಡ" latin:moreKeys="ಢ" />
+    <!-- U+0CA4: "ತ" KANNADA LETTER TA
+         U+0CA5: "ಥ" KANNADA LETTER THA -->
+    <Key latin:keySpec="ತ" latin:moreKeys="ಥ" />
+    <!-- U+0CA6: "ದ" KANNADA LETTER DA
+         U+0CA7: "ಧ" KANNADA LETTER DHA -->
+    <Key latin:keySpec="ದ" latin:moreKeys="ಧ,%" />
+    <!-- U+0CA8: "ನ" KANNADA LETTER NA
+         U+0CA3: "ಣ" KANNADA LETTER NNA -->
+    <Key latin:keySpec="ನ" latin:moreKeys="ಣ"/>
+</merge>

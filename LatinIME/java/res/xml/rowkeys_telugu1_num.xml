@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:latin="http://schemas.android.com/apk/res-auto">
+    <!-- U+0C4D: "్" TELUGU SIGN VIRAMA
+         U+0C05: "అ" TELUGU LETTER A -->
+    <Key latin:keySpec="్" latin:moreKeys="అ" />
+    <!-- U+0C3F: "ి" TELUGU VOWEL SIGN I
+         U+0C07: "ఇ" TELUGU LETTER I -->
+    <Key latin:keySpec="ి" latin:moreKeys="ఇ" />
+    <!-- U+0C41: "ు" TELUGU VOWEL SIGN U
+         U+0C09: "ఉ" TELUGU LETTER U -->
+    <Key latin:keySpec="ు" latin:moreKeys="ఉ" />
+    <!-- U+0C0B: "ఋ" TELUGU LETTER VOCALIC R
+         U+0C43: "ృ" TELUGU VOWEL SIGN VOCALIC R -->
+    <Key latin:keySpec="ఋ" latin:moreKeys="ృ" />
+    <!-- U+0C46: "ె" TELUGU VOWEL SIGN E
+         U+0C0E: "ఎ" TELUGU LETTER E -->
+    <Key latin:keySpec="ె" latin:moreKeys="ఎ" />
+    <!-- U+0C48: "ై" TELUGU VOWEL SIGN AI
+         U+0C10: "ఐ" TELUGU LETTER AI -->
+    <Key latin:keySpec="ై" latin:moreKeys="ఐ,%" />
+    <!-- U+0C4B: "ో" TELUGU VOWEL SIGN OO
+         U+0C13: "ఓ" TELUGU LETTER OO -->
+    <Key latin:keySpec="ో" latin:moreKeys="ఓ" />
+    <!-- U+0C3E: "ా" TELUGU VOWEL SIGN AA
+         U+0C06: "ఆ" TELUGU LETTER AA -->
+    <Key latin:keySpec="ా" latin:moreKeys="ఆ,%" />
+    <!-- U+0C40: "ీ" TELUGU VOWEL SIGN II
+         U+0C08: "ఈ" TELUGU LETTER II -->
+    <Key latin:keySpec="ీ" latin:moreKeys="ఈ,%" />
+    <!-- U+0C42: "ూ" TELUGU VOWEL SIGN UU
+         U+0C0A: "ఊ" TELUGU LETTER UU -->
+    <Key latin:keySpec="ూ" latin:moreKeys="ఊ,%" />
+    <!-- U+0C47: "ే" TELUGU VOWEL SIGN EE
+         U+0C0F: "ఏ" TELUGU LETTER EE -->
+    <Key latin:keySpec="ే" latin:moreKeys="ఏ"/>
+</merge>
