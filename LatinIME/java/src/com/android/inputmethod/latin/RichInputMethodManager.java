@@ -247,11 +247,15 @@ public class RichInputMethodManager {
             if (mCachedThisImeInfo != null) {
                 return mCachedThisImeInfo;
             }
-            for (final InputMethodInfo imi : mImm.getInputMethodList()) {
-                if (imi.getPackageName().equals(mImePackageName)) {
-                    mCachedThisImeInfo = imi;
-                    return imi;
+            try {
+                for (final InputMethodInfo imi : mImm.getInputMethodList()) {
+                    if (imi.getPackageName().equals(mImePackageName)) {
+                        mCachedThisImeInfo = imi;
+                        return imi;
+                    }
                 }
+            } catch (Exception e) {
+                Log.e(TAG, e.getMessage(), e);
             }
             throw new RuntimeException("Input method id for " + mImePackageName + " not found.");
         }
