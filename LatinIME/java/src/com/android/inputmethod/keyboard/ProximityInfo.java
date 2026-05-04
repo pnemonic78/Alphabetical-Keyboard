@@ -218,11 +218,16 @@ public class ProximityInfo {
             }
         }
 
-        // TODO: Stop passing proximityCharsArray
-        return setProximityInfoNative(mKeyboardMinWidth, mKeyboardHeight, mGridWidth, mGridHeight,
+        try {
+            // TODO: Stop passing proximityCharsArray
+            return setProximityInfoNative(mKeyboardMinWidth, mKeyboardHeight, mGridWidth, mGridHeight,
                 mMostCommonKeyWidth, mMostCommonKeyHeight, proximityCharsArray, keyCount,
                 keyXCoordinates, keyYCoordinates, keyWidths, keyHeights, keyCharCodes,
                 sweetSpotCenterXs, sweetSpotCenterYs, sweetSpotRadii);
+        } catch (UnsatisfiedLinkError e) {
+            Log.e(TAG, e.getMessage(), e);
+            return 0L;
+        }
     }
 
     public long getNativeProximityInfo() {
