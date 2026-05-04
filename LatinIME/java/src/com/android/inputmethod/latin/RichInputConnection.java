@@ -409,7 +409,7 @@ public final class RichInputConnection implements PrivateCommandPerformer {
         // test for this explicitly)
         if (INVALID_CURSOR_POSITION != mExpectedSelStart
                 && (cachedLength >= n || cachedLength >= mExpectedSelStart)) {
-            final StringBuilder s = new StringBuilder(mCommittedTextBeforeComposingText);
+            String s = mCommittedTextBeforeComposingText.toString();
             // We call #toString() here to create a temporary object.
             // In some situations, this method is called on a worker thread, and it's possible
             // the main thread touches the contents of mComposingText while this worker thread
@@ -417,9 +417,9 @@ public final class RichInputConnection implements PrivateCommandPerformer {
             // so we call #toString() on it. That will result in the return value being strictly
             // speaking wrong, but since this is used for basing bigram probability off, and
             // it's only going to matter for one getSuggestions call, it's fine in the practice.
-            s.append(mComposingText.toString());
+            s += mComposingText.toString();
             if (s.length() > n) {
-                s.delete(0, s.length() - n);
+                return s.substring(s.length() - n);
             }
             return s;
         }
