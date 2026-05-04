@@ -19,6 +19,7 @@ package com.android.inputmethod.latin;
 import android.content.Context;
 import android.media.AudioManager;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.HapticFeedbackConstants;
 import android.view.View;
 
@@ -32,6 +33,7 @@ import com.android.inputmethod.latin.settings.SettingsValues;
  * complexity of settings and the like.
  */
 public final class AudioAndHapticFeedbackManager {
+    private static final String TAG = AudioAndHapticFeedbackManager.class.getSimpleName();
     private AudioManager mAudioManager;
     private Vibrator mVibrator;
 
@@ -118,9 +120,13 @@ public final class AudioAndHapticFeedbackManager {
         }
         // Go ahead with the system default
         if (viewToPerformHapticFeedbackOn != null) {
-            viewToPerformHapticFeedbackOn.performHapticFeedback(
+            try {
+                viewToPerformHapticFeedbackOn.performHapticFeedback(
                     HapticFeedbackConstants.KEYBOARD_TAP,
                     HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
+            } catch (Exception e) {
+                Log.e(TAG, "Perform haptic feedback on view", e);
+            }
         }
     }
 
