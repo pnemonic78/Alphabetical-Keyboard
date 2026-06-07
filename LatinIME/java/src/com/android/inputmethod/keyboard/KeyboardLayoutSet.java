@@ -37,6 +37,7 @@ import com.android.inputmethod.keyboard.internal.KeyboardBuilder;
 import com.android.inputmethod.keyboard.internal.KeyboardParams;
 import com.android.inputmethod.keyboard.internal.UniqueKeysCache;
 import com.android.inputmethod.latin.InputAttributes;
+import com.github.inputmethod.alphabetical.BuildConfig;
 import com.github.inputmethod.alphabetical.R;
 import com.android.inputmethod.latin.RichInputMethodSubtype;
 import com.android.inputmethod.latin.utils.InputTypeUtils;
@@ -63,7 +64,7 @@ import javax.annotation.Nullable;
  */
 public final class KeyboardLayoutSet {
     private static final String TAG = KeyboardLayoutSet.class.getSimpleName();
-    private static final boolean DEBUG_CACHE = false;
+    private static final boolean DEBUG_CACHE = BuildConfig.DEBUG;
 
     private static final String TAG_KEYBOARD_SET = "KeyboardLayoutSet";
     private static final String TAG_ELEMENT = "Element";

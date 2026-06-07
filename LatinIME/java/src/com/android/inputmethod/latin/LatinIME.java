@@ -61,7 +61,6 @@ import com.android.inputmethod.annotations.UsedForTesting;
 import com.android.inputmethod.compat.BuildCompatUtils;
 import com.android.inputmethod.compat.EditorInfoCompatUtils;
 import com.android.inputmethod.compat.InputMethodServiceCompatUtils;
-import com.android.inputmethod.compat.InputMethodSubtypeCompatUtils;
 import com.android.inputmethod.compat.ViewOutlineProviderCompatUtils;
 import com.android.inputmethod.compat.ViewOutlineProviderCompatUtils.InsetsUpdater;
 import com.android.inputmethod.dictionarypack.DictionaryPackConstants;
@@ -792,6 +791,9 @@ public class LatinIME extends InputMethodService implements KeyboardActionListen
 
     @Override
     public void onConfigurationChanged(final Configuration conf) {
+        final WindowManager wm = getSystemService(WindowManager.class);
+        mDisplayContext = createDisplayContext(wm.getDefaultDisplay());
+
         SettingsValues settingsValues = mSettings.getCurrent();
         if (settingsValues.mDisplayOrientation != conf.orientation) {
             mHandler.startOrientationChanging();

@@ -476,10 +476,9 @@ public final class KeyboardSwitcher implements KeyboardState.SwitchActions {
                 R.layout.input_view, null);
         initPadding(mCurrentInputView);
         mMainKeyboardFrame = mCurrentInputView.findViewById(R.id.main_keyboard_frame);
-        mEmojiPalettesView = (EmojiPalettesView)mCurrentInputView.findViewById(
-                R.id.emoji_palettes_view);
+        mEmojiPalettesView = mCurrentInputView.findViewById(R.id.emoji_palettes_view);
 
-        mKeyboardView = (MainKeyboardView) mCurrentInputView.findViewById(R.id.keyboard_view);
+        mKeyboardView = mCurrentInputView.findViewById(R.id.keyboard_view);
         mKeyboardView.setHardwareAcceleratedDrawingEnabled(isHardwareAcceleratedDrawingEnabled);
         mKeyboardView.setKeyboardActionListener(mLatinIME);
         mEmojiPalettesView.setHardwareAcceleratedDrawingEnabled(
